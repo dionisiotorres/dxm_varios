@@ -12,13 +12,24 @@ class ProductTemplate(models.Model):
                   'x_studio_modelo',
                   'x_studio_part_number',
                   'x_studio_field_t1rly',
-                  'x_studio_field_3tFsU')
+                  'x_studio_field_3tFsU',
+                  'categ_id')
     def change_product_name(self):
-        name_prefix = 'Teléfono'
-        brand = self.x_studio_field_LBIjI.x_name or ''
-        model = self.x_studio_modelo or ''
-        part_number = self.x_studio_part_number or ''
-        capacity = self.x_studio_field_t1rly.display_name or ''
-        grade = self.x_studio_field_3tFsU.display_name or ''
-        if brand and model and part_number and capacity and grade:
-            self.name = name_prefix + ' ' + brand + ' ' + model + ' / ' + part_number + ' / ' + capacity + ' - ' + grade
+        if self.categ_id.name == 'Teléfonos':
+            name = 'Teléfono'
+            brand = self.x_studio_field_LBIjI.x_name or ''
+            if brand:
+                name += ' ' + brand
+            model = self.x_studio_modelo or ''
+            if model:
+                name = name + ' ' + model
+            part_number = self.x_studio_part_number or ''
+            if part_number:
+                name += ' / ' + part_number
+            capacity = self.x_studio_field_t1rly.display_name or ''
+            if capacity:
+                name += ' / ' + capacity
+            grade = self.x_studio_field_3tFsU.display_name or ''
+            if grade:
+                name += ' - ' + grade
+            self.name = name
