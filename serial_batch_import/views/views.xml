@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="action_serial_batch_import" model="ir.actions.act_window">
+            <field name="name">Serial Batch Import</field>
+            <field name="res_model">serial.import.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="serial_batch_import_form" model="ir.ui.view">
+            <field name="name">serial.batch.import.form</field>
+            <field name="model">serial.import.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Import Serial Batch" >
+                      <sheet>
+                        <group>
+                            <group>
+                                 <field name='serial_file'/>
+                                 <field name='product_id' widget='selection'/>
+                                 <field name='company_id' widget='selection'/>
+                            </group>
+                            <group name='extra_info'>
+                                <field name='color' widget='selection'/>
+                                <field name='lock_status' widget='selection'/>
+                                <field name='logo' widget='selection'/>
+                                <field name='charger' widget='selection'/>
+                                <field name='network_type' widget='selection'/>
+                                <field name='lang' widget='selection'/>
+                                <field name='memory' widget='selection'/>
+                                <field name='sim_type' widget='selection'/>
+                                <field name='display' widget='selection'/>
+                                <field name='release' widget='selection'/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <separator colspan="6"/>
+                    <footer>
+                        <button special="cancel" name='cancel' string="Cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>
