@@ -77,9 +77,11 @@ class SerialBatchImport(models.TransientModel):
                 serial_by_moveline[1].write({'lot_id': lot_id.id, 'qty_done': serial_by_moveline[1].product_uom_qty})
             self._cr.commit()
             message_popup = self.env['message.popup']
-            return message_popup.popup(message="%s lines imported successfully" % len(serial_values))
+            return message_popup.popup(message=_(
+                "%s serial(s) imported successfully to product %s" % (len(serial_values), self.product_id.name)))
 
         else:
-            raise UserError(_(
-                "The quantity (%s) of serial numbers don't match with the quantity (%s) of move lines to process" %
-                (len(serial_values), len(move_lines))))
+            raise UserError(
+                _("The quantity (%s) of serial numbers don't match with the quantity (%s) of move lines to process. "
+                  "You must provide the same or less number of serial as movement lines" % (len(serial_values),
+                                                                                            len(move_lines))))

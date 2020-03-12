@@ -1,0 +1,162 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* serial_batch_import
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-12 16:03+0000\n"
+"PO-Revision-Date: 2020-03-12 16:03+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: serial_batch_import
+#: code:addons/serial_batch_import/models/.ipynb_checkpoints/models-checkpoint.py:0
+#: code:addons/serial_batch_import/models/models.py:0
+#, python-format
+msgid "%s serial(s) imported successfully to product %s"
+msgstr "%s seriales importados satisfactoriamente para el producto %s"
+
+#. module: serial_batch_import
+#: model_terms:ir.ui.view,arch_db:serial_batch_import.serial_batch_import_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: serial_batch_import
+#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__charger
+msgid "Charger"
+msgstr "Cargador"
+
+#. module: serial_batch_import
+#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__color
+msgid "Color"
+msgstr "Color"
+
+#. module: serial_batch_import
+#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__company_id
+msgid "Company"
+msgstr "Empresa"
+
+#. module: serial_batch_import
+#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: serial_batch_import
+#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: serial_batch_import
+#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__display
+msgid "Display"
+msgstr "Pantalla"
+
+#. module: serial_batch_import
+#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__display_name
+msgid "Display Name"
+msgstr "Nombre"
+
+#. module: serial_batch_import
+#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__serial_file
+msgid "File"
+msgstr "Fichero"
+
+#. module: serial_batch_import
+#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__id
+msgid "ID"
+msgstr "ID"
+
+#. module: serial_batch_import
+#: model_terms:ir.ui.view,arch_db:serial_batch_import.serial_batch_import_form
+msgid "Import"
+msgstr "Importar"
+
+#. module: serial_batch_import
+#: model_terms:ir.ui.view,arch_db:serial_batch_import.serial_batch_import_form
+msgid "Import Serial Batch"
+msgstr "Importar Seriales en Masa"
+
+#. module: serial_batch_import
+#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__lang
+msgid "Language"
+msgstr "Lenguaje"
+
+#. module: serial_batch_import
+#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard____last_update
+msgid "Last Modified on"
+msgstr "Última modificación"
+
+#. module: serial_batch_import
+#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: serial_batch_import
+#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__write_date
+msgid "Last Updated on"
+msgstr "Última actualización"
+
+#. module: serial_batch_import
+#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__lock_status
+msgid "Lock Status"
+msgstr "Bloqueo"
+
+#. module: serial_batch_import
+#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__logo
+msgid "Logo"
+msgstr "Logo"
+
+#. module: serial_batch_import
+#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__memory
+msgid "Memory"
+msgstr "Memoria"
+
+#. module: serial_batch_import
+#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__network_type
+msgid "Network Type"
+msgstr "Red"
+
+#. module: serial_batch_import
+#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__product_id
+msgid "Product"
+msgstr "Producto"
+
+#. module: serial_batch_import
+#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__release
+msgid "Release"
+msgstr "Lanzamiento"
+
+#. module: serial_batch_import
+#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__sim_type
+msgid "SIM Type"
+msgstr "Tipo de SIM"
+
+#. module: serial_batch_import
+#: model:ir.actions.act_window,name:serial_batch_import.act_serial_batch_import
+#: model:ir.actions.act_window,name:serial_batch_import.action_serial_batch_import
+msgid "Serial Batch Import"
+msgstr "Importar Seriales en Masa"
+
+#. module: serial_batch_import
+#: code:addons/serial_batch_import/models/.ipynb_checkpoints/models-checkpoint.py:0
+#: code:addons/serial_batch_import/models/models.py:0
+#, python-format
+msgid ""
+"The quantity (%s) of serial numbers don't match with the quantity (%s) of "
+"move lines to process. You must provide the same or less number of serial as"
+" movement lines"
+msgstr ""
+"La cantidad (%s) de seriales no coincide con la cantidad (%s) de "
+"lineas de movimiento a procesar. Debes proveer la misma cantidad o menos de seriales que de "
+" lineas de movimiento"
+
+#. module: serial_batch_import
+#: model:ir.model,name:serial_batch_import.model_serial_import_wizard
+msgid "serial.import.wizard"
+msgstr ""
