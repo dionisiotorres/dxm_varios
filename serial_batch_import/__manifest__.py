@@ -17,13 +17,11 @@
     'category': 'productivity',
     'version': '0.1',
 
-    'depends': ['base', 'stock'],
+    'depends': ['base', 'stock', 'popup_message'],
 
     'data': [
         # 'security/ir.model.access.csv',
-        'views/actions.xml',
         'views/views.xml',
-        'views/templates.xml',
     ],
     'installable': True,
     'application': False,
