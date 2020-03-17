@@ -84,7 +84,7 @@
     <record id="qc_team_config_action" model="ir.actions.act_window">
         <field name="name">Quality Control Teams</field>
         <field name="res_model">qc.team</field>
-        <field name="view_type">form</field>
+        <!-- <field name="view_type">form</field> -->
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 {
-    "name": "Popup Message",
+    "name": "Message Popup",
 
     "author": "Heyner Roque | Octupus Technologies SL",
 
@@ -9,10 +9,10 @@
 
     "category": "Tools",
 
-    "summary": "Success, warnings, alert message popup",
+    "summary": "Success, warnings, info, error message popup",
 
     "description": """
-        Create custom message popup. Easy way to create success, warnings, alert message popup.
+        Custom success, warnings, info, error message popup.
         """,
 
     "version": "0.1",

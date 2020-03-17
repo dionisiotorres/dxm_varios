@@ -37,7 +37,7 @@
         <field name="name">Problem groups</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">qc.problem.group</field>
-        <field name="view_type">form</field>
+        <!-- <field name="view_type">form</field> -->
     </record>
 
     <menuitem id="menu_qc_problem_group"

@@ -23,7 +23,7 @@
     <record model="ir.actions.act_window" id="action_qc_test_category">
         <field name="name">Test categories</field>
         <field name="res_model">qc.test.category</field>
-        <field name="view_type">form</field>
+        <!-- <field name="view_type">form</field> -->
         <field name="view_mode">tree,form</field>
     </record>
 

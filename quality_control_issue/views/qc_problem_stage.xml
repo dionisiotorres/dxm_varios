@@ -19,7 +19,7 @@
     <record id="qc_problem_stage_config_action" model="ir.actions.act_window">
         <field name="name">Quality Control Problem Stages</field>
         <field name="res_model">qc.stage</field>
-        <field name="view_type">form</field>
+        <!-- <field name="view_type">form</field> -->
         <field name="view_mode">tree,form</field>
     </record>
 

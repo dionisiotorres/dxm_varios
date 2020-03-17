@@ -63,7 +63,7 @@
     <record model="ir.actions.act_window" id="action_qc_test">
         <field name="name">Tests</field>
         <field name="res_model">qc.test</field>
-        <field name="view_type">form</field>
+        <!-- <!-- <field name="view_type">form</field> --> -->
         <field name="view_mode">tree,form</field>
     </record>
 
