@@ -7,8 +7,7 @@
 
 from odoo.tests.common import TransactionCase
 from odoo import exceptions
-from ..models.qc_trigger_line import\
-    _filter_trigger_lines
+from ..models.qc_trigger_line import _filter_trigger_lines
 
 
 class TestQualityControl(TransactionCase):

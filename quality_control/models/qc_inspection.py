@@ -20,7 +20,6 @@ class QcInspection(models.Model):
         for i in self:
             i.success = all([x.success for x in i.inspection_lines])
 
-
     def object_selection_values(self):
         """
         Overridable method for adding more object models to an inspection.
@@ -98,7 +97,6 @@ class QcInspection(models.Model):
                     .next_by_code('qc.inspection')
         return super(QcInspection, self).create(vals)
 
-
     def unlink(self):
         for inspection in self:
             if inspection.auto_generated:
@@ -110,10 +108,8 @@ class QcInspection(models.Model):
                       "state."))
         return super(QcInspection, self).unlink()
 
-
     def action_draft(self):
         self.write({'state': 'draft'})
-
 
     def action_todo(self):
         for inspection in self:
@@ -121,7 +117,6 @@ class QcInspection(models.Model):
                 raise exceptions.UserError(
                     _("You must first set the test to perform."))
         self.write({'state': 'ready'})
-
 
     def action_confirm(self):
         for inspection in self:
@@ -141,7 +136,6 @@ class QcInspection(models.Model):
             else:
                 inspection.state = 'waiting'
 
-
     def action_approve(self):
         for inspection in self:
             if inspection.success:
@@ -149,10 +143,8 @@ class QcInspection(models.Model):
             else:
                 inspection.state = 'failed'
 
-
     def action_cancel(self):
         self.write({'state': 'canceled'})
-
 
     def set_test(self, trigger_line, force_fill=False):
         for inspection in self:
@@ -166,7 +158,6 @@ class QcInspection(models.Model):
             inspection.inspection_lines = inspection._prepare_inspection_lines(
                 trigger_line.test, force_fill=force_fill)
 
-
     def _make_inspection(self, object_ref, trigger_line):
         """Overridable hook method for creating inspection from test.
         :param object_ref: Object instance
@@ -177,7 +168,6 @@ class QcInspection(models.Model):
             object_ref, trigger_line))
         inspection.set_test(trigger_line)
         return inspection
-
 
     def _prepare_inspection_header(self, object_ref, trigger_line):
         """Overridable hook method for preparing inspection header.
@@ -194,7 +184,6 @@ class QcInspection(models.Model):
             'auto_generated': True,
         }
 
-
     def _prepare_inspection_lines(self, test, force_fill=False):
         new_data = []
         for line in test.test_lines:
@@ -202,7 +191,6 @@ class QcInspection(models.Model):
                 test, line, fill=test.fill_correct_values or force_fill)
             new_data.append((0, 0, data))
         return new_data
-
 
     def _prepare_inspection_line(self, test, line, fill=None):
         data = {

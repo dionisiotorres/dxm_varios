@@ -12,7 +12,6 @@ class QualityControlIssue(models.Model):
     _description = "Quality Control Issue"
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
-    @api.multi
     def _compute_stock_scrap_qty(self):
         for rec in self:
             rec.stock_scrap_qty = sum(
@@ -24,7 +23,6 @@ class QualityControlIssue(models.Model):
             'qc.issue') or ''
         return super(QualityControlIssue, self).create(vals)
 
-    @api.one
     def _get_uom(self):
         self.product_uom = self.product_id.product_tmpl_id.uom_id
 
@@ -42,7 +40,6 @@ class QualityControlIssue(models.Model):
             return warehouse.lot_stock_id.id
         return None
 
-    @api.multi
     def _read_group_stage_ids(self, stages, domain, order=None):
         search_domain = []
         qc_team_id = self.env.context.get('default_qc_team_id') or False
@@ -111,8 +108,7 @@ class QualityControlIssue(models.Model):
     )
     qc_team_id = fields.Many2one(
         comodel_name='qc.team', string='QC Team',
-        default=lambda self: self.env[
-            'qc.team'].sudo()._get_default_qc_team_id(user_id=self.env.uid),
+        default=lambda self: self.env['qc.team'].sudo()._get_default_qc_team_id(user_id=self.env.uid),
         index=True, track_visibility='onchange')
     company_id = fields.Many2one(
         comodel_name='res.company', string='Company', required=True,
@@ -153,7 +149,6 @@ class QualityControlIssue(models.Model):
             search_domain, order=order, limit=1)
         return stage
 
-    @api.multi
     def write(self, vals):
         stage_obj = self.env['qc.issue.stage']
         state = vals.get('state')
@@ -180,15 +175,12 @@ class QualityControlIssue(models.Model):
                 vals.update({'state': state})
         return super(QualityControlIssue, self).write(vals)
 
-    @api.multi
     def action_confirm(self):
         self.write({'state': 'progress'})
 
-    @api.multi
     def action_done(self):
         self.write({'state': 'done'})
 
-    @api.multi
     def action_cancel(self):
         self.write({'state': 'cancel'})
 
@@ -209,7 +201,6 @@ class QualityControlIssue(models.Model):
             self.product_id = product
             self.product_uom = product.product_tmpl_id.uom_id
 
-    @api.multi
     def scrap_products(self):
         self.ensure_one()
         return {
@@ -230,7 +221,6 @@ class QualityControlIssue(models.Model):
             'target': 'new',
         }
 
-    @api.multi
     def action_view_stock_scrap(self):
         action = self.env.ref('stock.action_stock_scrap')
         result = action.read()[0]

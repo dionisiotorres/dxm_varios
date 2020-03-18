@@ -41,7 +41,6 @@ class StockPicking(models.Model):
             picking.done_inspections = \
                 (picking.passed_inspections + picking.failed_inspections)
 
-    @api.multi
     def action_done(self):
         res = super(StockPicking, self).action_done()
         inspection_model = self.env['qc.inspection']

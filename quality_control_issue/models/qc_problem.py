@@ -24,7 +24,6 @@ class QcProblem(models.Model):
             user_id=self.env.uid)
         return self.stage_find([], team, [('fold', '=', False)])
 
-    @api.multi
     def _read_group_stage_ids(self, stages, domain, order=None):
         search_domain = []
         qc_team_id = self.env.context.get('default_qc_team_id') or False
@@ -40,7 +39,6 @@ class QcProblem(models.Model):
             search_domain, order=order, access_rights_uid=SUPERUSER_ID)
         return stages.browse(stage_ids)
 
-    @api.one
     @api.depends('issue_ids')
     def _compute_count(self):
         self.issue_count = len(self.issue_ids)
@@ -72,8 +70,7 @@ class QcProblem(models.Model):
     )
     qc_team_id = fields.Many2one(
         comodel_name='qc.team', string='QC Team',
-        default=lambda self: self.env[
-            'qc.team'].sudo()._get_default_qc_team_id(user_id=self.env.uid),
+        default=lambda self: self.env['qc.team'].sudo()._get_default_qc_team_id(user_id=self.env.uid),
         index=True, track_visibility='onchange')
     company_id = fields.Many2one(
         comodel_name='res.company', string='Company', required=True,

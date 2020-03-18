@@ -12,7 +12,6 @@ class QcTestTemplateCategory(models.Model):
     _name = 'qc.test.category'
     _description = 'Test category'
 
-
     @api.depends('name', 'parent_id')
     def _compute_get_complete_name(self):
         for record in self:
