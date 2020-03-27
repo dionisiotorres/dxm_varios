@@ -29,11 +29,11 @@ class SerialBatchImport(models.TransientModel):
     logo = fields.Many2one(comodel_name='x_logo', string="Logo")
     charger = fields.Many2one(comodel_name='x_cargador', string="Charger")
     network_type = fields.Many2one(comodel_name='x_red', string="Network Type")
-    lang = fields.Many2one(comodel_name='x_idioma', string="Language")
-    memory = fields.Many2one(comodel_name='x_memoria', string="Memory")
+    lang = fields.Many2one(comodel_name='x_idioma_terminal', string="Language")
+    memory = fields.Many2one(comodel_name='x_memoria.ram', string="Memory")
     sim_type = fields.Many2one(comodel_name='x_tipo_de_sim', string="SIM Type")
     display = fields.Many2one(comodel_name='x_pantalla', string="Display")
-    release = fields.Many2one(comodel_name='x_lanzamiento', string="Release")
+    release = fields.Many2one(comodel_name='x_lanzamiento.terminal', string="Release")
 
     serial_file = fields.Binary(string="File")
 
@@ -60,18 +60,18 @@ class SerialBatchImport(models.TransientModel):
                     'product_id': self.product_id.id,
                     'company_id': self.company_id.id,
                     'x_studio_part_number': self.product_id.x_studio_part_number,  # Part Number
-                    'x_studio_capacidad': self.product_id.x_studio_field_t1rly.id,  # Capacidad
-                    'x_studio_grado_1': self.product_id.x_studio_field_3tFsU.id,  # Grado
-                    'x_studio_field_gbwaa': self.color.id,  # Color
-                    'x_studio_field_U3Pu0': self.lock_status.id,  # Bloqueo
-                    'x_studio_field_gkS77': self.logo.id,  # Logo
-                    'x_studio_field_ECCOa': self.charger.id,  # Cargador
-                    'x_studio_field_EG4gq': self.network_type.id,  # Red
-                    'x_studio_field_BbPXI': self.lang.id,  # Idioma
-                    'x_studio_field_nHYLs': self.memory.id,  # Memoria
-                    'x_studio_field_XnKq7': self.sim_type.id,  # Tipo de SIM
-                    'x_studio_field_7B6PV': self.display.id,  # Pantalla
-                    'x_studio_field_Knbhr': self.release.id  # Lanzamiento
+                    'x_studio_capacidad': self.product_id.x_studio_capacidad.id,  # Capacidad
+                    'x_studio_grado_preliminar': self.product_id.x_studio_grado_preliminar.id,  # Grado
+                    'x_studio_color': self.color.id,  # Color
+                    'x_studio_bloqueo': self.lock_status.id,  # Bloqueo
+                    'x_studio_logo': self.logo.id,  # Logo
+                    'x_studio_cargador': self.charger.id,  # Cargador
+                    'x_studio_red': self.network_type.id,  # Red
+                    'x_studio_idioma': self.lang.id,  # Idioma
+                    'x_studio_memoria_ram': self.memory.id,  # Memoria
+                    'x_studio_tipo_de_sim': self.sim_type.id,  # Tipo de SIM
+                    'x_studio_tamao_de_pantalla': self.display.id,  # Pantalla
+                    'x_studio_fecha_de_lanzamiento': self.release.id  # Lanzamiento
                 }
                 lot_id = lot_obj.create(lot_values)
                 serial_by_moveline[1].write({'lot_id': lot_id.id, 'qty_done': serial_by_moveline[1].product_uom_qty})
