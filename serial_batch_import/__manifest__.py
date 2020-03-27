@@ -17,7 +17,7 @@
     'category': 'productivity',
     'version': '0.1',
 
-    'depends': ['base', 'stock', 'popup_message'],
+    'depends': ['base', 'stock', 'message_popup'],
 
     'data': [
         # 'security/ir.model.access.csv',
