@@ -31,7 +31,7 @@ class SerialBatchImport(models.TransientModel):
     network_type = fields.Many2one(comodel_name='x_red', string="Network Type")
     lang = fields.Many2one(comodel_name='x_idioma_terminal', string="Language")
     memory = fields.Many2one(comodel_name='x_memoria.ram', string="Memory")
-    sim_type = fields.Many2one(comodel_name='x_tipo_de_sim', string="SIM Type")
+    sim_type = fields.Many2one(comodel_name='x_sim', string="SIM Type")
     display = fields.Many2one(comodel_name='x_pantalla', string="Display")
     release = fields.Many2one(comodel_name='x_lanzamiento.terminal', string="Release")
 
@@ -60,8 +60,8 @@ class SerialBatchImport(models.TransientModel):
                     'product_id': self.product_id.id,
                     'company_id': self.company_id.id,
                     'x_studio_part_number': self.product_id.x_studio_part_number,  # Part Number
-                    'x_studio_capacidad': self.product_id.x_studio_capacidad.id,  # Capacidad
-                    'x_studio_grado_preliminar': self.product_id.x_studio_grado_preliminar.id,  # Grado
+                    'x_studio_capacidad': self.product_id.x_studio_capacidad_de_almacenamiento.id,  # Capacidad
+                    'x_studio_grado': self.product_id.x_studio_grado.id,  # Grado
                     'x_studio_color': self.color.id,  # Color
                     'x_studio_bloqueo': self.lock_status.id,  # Bloqueo
                     'x_studio_logo': self.logo.id,  # Logo
