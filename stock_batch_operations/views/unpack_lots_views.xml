@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <record model="ir.ui.view" id="stock_picking_unpack_lots">
+        <field name="name">stock.picking.unpack.lots</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="unpack_lots"
+                        attrs="{'invisible': [('state', '!=', ('assigned'))]}"
+                        string="Unpack"
+                        groups="base.group_user"
+                        type="object"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
 {
-    'name': "Serial Batch Import",
+    'name': "Stock Batch Operations",
 
     'summary': """
-        Import serial numbers from excel file.
+        Stock Batch Operations.
         """,
 
     'description': """
-        Import serial numbers from excel file on stock operations.
+        Stock batch operations like import serial numbers, unpack lots.
     """,
 
     'author': "Heyner Roque | Octupus Technologies SL",
@@ -21,7 +21,8 @@
 
     'data': [
         # 'security/ir.model.access.csv',
-        'views/views.xml',
+        'views/serial_import_views.xml',
+        'views/unpack_lots_views.xml',
     ],
     'installable': True,
     'application': False,
