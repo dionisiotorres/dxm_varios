@@ -1,13 +1,13 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* serial_batch_import
+# 	* stock_batch_operations
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-12 16:03+0000\n"
-"PO-Revision-Date: 2020-03-12 16:03+0000\n"
+"POT-Creation-Date: 2020-04-01 01:02+0000\n"
+"PO-Revision-Date: 2020-04-01 01:02+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,148 +15,196 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: serial_batch_import
-#: code:addons/serial_batch_import/models/.ipynb_checkpoints/models-checkpoint.py:0
-#: code:addons/serial_batch_import/models/models.py:0
+#. module: stock_batch_operations
+#: code:addons/stock_batch_operations/models/serial_import.py:0
 #, python-format
 msgid "%s serial(s) imported successfully to product %s"
 msgstr "%s seriales importados satisfactoriamente para el producto %s"
 
-#. module: serial_batch_import
-#: model_terms:ir.ui.view,arch_db:serial_batch_import.serial_batch_import_form
+#. module: stock_batch_operations
+#: code:addons/stock_batch_operations/models/.ipynb_checkpoints/stock_picking-checkpoint.py:0
+#: code:addons/stock_batch_operations/models/stock_picking.py:0
+#, python-format
+msgid "%s unpacked from %s"
+msgstr "%s desempacados de %s"
+
+#. module: stock_batch_operations
+#: model_terms:ir.ui.view,arch_db:stock_batch_operations.serial_batch_import_form
 msgid "Cancel"
 msgstr "Cancelar"
 
-#. module: serial_batch_import
-#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__charger
+#. module: stock_batch_operations
+#: model:ir.model.fields,field_description:stock_batch_operations.field_serial_import_wizard__charger
 msgid "Charger"
 msgstr "Cargador"
 
-#. module: serial_batch_import
-#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__color
+#. module: stock_batch_operations
+#: model:ir.model.fields,field_description:stock_batch_operations.field_serial_import_wizard__color
 msgid "Color"
 msgstr "Color"
 
-#. module: serial_batch_import
-#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__company_id
+#. module: stock_batch_operations
+#: model:ir.model.fields,field_description:stock_batch_operations.field_serial_import_wizard__company_id
 msgid "Company"
 msgstr "Empresa"
 
-#. module: serial_batch_import
-#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__create_uid
+#. module: stock_batch_operations
+#: model:ir.model.fields,field_description:stock_batch_operations.field_serial_import_wizard__create_uid
 msgid "Created by"
-msgstr "Creado por"
+msgstr ""
 
-#. module: serial_batch_import
-#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__create_date
+#. module: stock_batch_operations
+#: model:ir.model.fields,field_description:stock_batch_operations.field_serial_import_wizard__create_date
 msgid "Created on"
-msgstr "Creado el"
+msgstr ""
 
-#. module: serial_batch_import
-#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__display
+#. module: stock_batch_operations
+#: model:ir.model.fields,field_description:stock_batch_operations.field_serial_import_wizard__display
 msgid "Display"
 msgstr "Pantalla"
 
-#. module: serial_batch_import
-#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__display_name
+#. module: stock_batch_operations
+#: model:ir.model.fields,field_description:stock_batch_operations.field_serial_import_wizard__display_name
 msgid "Display Name"
-msgstr "Nombre"
+msgstr ""
 
-#. module: serial_batch_import
-#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__serial_file
+#. module: stock_batch_operations
+#: model:ir.model.fields,field_description:stock_batch_operations.field_serial_import_wizard__serial_file
 msgid "File"
-msgstr "Fichero"
+msgstr "Archivo"
 
-#. module: serial_batch_import
-#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__id
+#. module: stock_batch_operations
+#: model:ir.model.fields,field_description:stock_batch_operations.field_serial_import_wizard__id
 msgid "ID"
 msgstr "ID"
 
-#. module: serial_batch_import
-#: model_terms:ir.ui.view,arch_db:serial_batch_import.serial_batch_import_form
+#. module: stock_batch_operations
+#: model_terms:ir.ui.view,arch_db:stock_batch_operations.serial_batch_import_form
 msgid "Import"
 msgstr "Importar"
 
-#. module: serial_batch_import
-#: model_terms:ir.ui.view,arch_db:serial_batch_import.serial_batch_import_form
+#. module: stock_batch_operations
+#: model_terms:ir.ui.view,arch_db:stock_batch_operations.serial_batch_import_form
 msgid "Import Serial Batch"
 msgstr "Importar Seriales en Masa"
 
-#. module: serial_batch_import
-#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__lang
+#. module: stock_batch_operations
+#: model:ir.model.fields,field_description:stock_batch_operations.field_serial_import_wizard__lang
 msgid "Language"
-msgstr "Lenguaje"
+msgstr "Idioma"
 
-#. module: serial_batch_import
-#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard____last_update
+#. module: stock_batch_operations
+#: model:ir.model.fields,field_description:stock_batch_operations.field_serial_import_wizard____last_update
 msgid "Last Modified on"
-msgstr "Última modificación"
+msgstr ""
 
-#. module: serial_batch_import
-#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__write_uid
+#. module: stock_batch_operations
+#: model:ir.model.fields,field_description:stock_batch_operations.field_serial_import_wizard__write_uid
 msgid "Last Updated by"
-msgstr "Última actualización por"
+msgstr ""
 
-#. module: serial_batch_import
-#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__write_date
+#. module: stock_batch_operations
+#: model:ir.model.fields,field_description:stock_batch_operations.field_serial_import_wizard__write_date
 msgid "Last Updated on"
-msgstr "Última actualización"
+msgstr ""
 
-#. module: serial_batch_import
-#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__lock_status
+#. module: stock_batch_operations
+#: model:ir.model.fields,field_description:stock_batch_operations.field_serial_import_wizard__lock_status
 msgid "Lock Status"
 msgstr "Bloqueo"
 
-#. module: serial_batch_import
-#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__logo
+#. module: stock_batch_operations
+#: model:ir.model.fields,field_description:stock_batch_operations.field_serial_import_wizard__logo
 msgid "Logo"
-msgstr "Logo"
+msgstr "Logotipo"
 
-#. module: serial_batch_import
-#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__memory
+#. module: stock_batch_operations
+#: model:ir.model.fields,field_description:stock_batch_operations.field_serial_import_wizard__memory
 msgid "Memory"
 msgstr "Memoria"
 
-#. module: serial_batch_import
-#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__network_type
+#. module: stock_batch_operations
+#: model:ir.model.fields,field_description:stock_batch_operations.field_stock_picking__need_unpack
+msgid "Need Unpack"
+msgstr "Necesita Desempaque"
+
+#. module: stock_batch_operations
+#: model:ir.model.fields,field_description:stock_batch_operations.field_serial_import_wizard__network_type
 msgid "Network Type"
 msgstr "Red"
 
-#. module: serial_batch_import
-#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__product_id
+#. module: stock_batch_operations
+#: model:ir.model.fields,field_description:stock_batch_operations.field_serial_import_wizard__product_id
 msgid "Product"
 msgstr "Producto"
 
-#. module: serial_batch_import
-#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__release
+#. module: stock_batch_operations
+#: model:ir.model.fields,field_description:stock_batch_operations.field_serial_import_wizard__release
 msgid "Release"
 msgstr "Lanzamiento"
 
-#. module: serial_batch_import
-#: model:ir.model.fields,field_description:serial_batch_import.field_serial_import_wizard__sim_type
+#. module: stock_batch_operations
+#: model:ir.model.fields,field_description:stock_batch_operations.field_serial_import_wizard__sim_type
 msgid "SIM Type"
 msgstr "Tipo de SIM"
 
-#. module: serial_batch_import
-#: model:ir.actions.act_window,name:serial_batch_import.act_serial_batch_import
-#: model:ir.actions.act_window,name:serial_batch_import.action_serial_batch_import
+#. module: stock_batch_operations
+#: model:ir.actions.act_window,name:stock_batch_operations.act_serial_batch_import
+#: model:ir.actions.act_window,name:stock_batch_operations.action_serial_batch_import
 msgid "Serial Batch Import"
 msgstr "Importar Seriales en Masa"
 
-#. module: serial_batch_import
-#: code:addons/serial_batch_import/models/.ipynb_checkpoints/models-checkpoint.py:0
-#: code:addons/serial_batch_import/models/models.py:0
+#. module: stock_batch_operations
+#: code:addons/stock_batch_operations/models/serial_import.py:0
 #, python-format
 msgid ""
 "The quantity (%s) of serial numbers don't match with the quantity (%s) of "
 "move lines to process. You must provide the same or less number of serial as"
 " movement lines"
 msgstr ""
-"La cantidad (%s) de seriales no coincide con la cantidad (%s) de "
-"lineas de movimiento a procesar. Debes proveer la misma cantidad o menos de seriales que de "
-" lineas de movimiento"
+"La cantidad (%s) de seriales no coincide con la cantidad (%s) de lineas de "
+"movimiento a procesar. Debes proveer la misma cantidad o menos de seriales "
+"que de  lineas de movimiento"
 
-#. module: serial_batch_import
-#: model:ir.model,name:serial_batch_import.model_serial_import_wizard
+#. module: stock_batch_operations
+#: model:ir.model,name:stock_batch_operations.model_stock_picking
+msgid "Transfer"
+msgstr "Albarán"
+
+#. module: stock_batch_operations
+#: model_terms:ir.ui.view,arch_db:stock_batch_operations.stock_picking_unpack_lots
+msgid "Unpack"
+msgstr "Desempacar"
+
+#. module: stock_batch_operations
+#: code:addons/stock_batch_operations/models/.ipynb_checkpoints/stock_picking-checkpoint.py:0
+#: code:addons/stock_batch_operations/models/stock_picking.py:0
+#, python-format
+msgid "package"
+msgstr "paquete"
+
+#. module: stock_batch_operations
+#: code:addons/stock_batch_operations/models/.ipynb_checkpoints/stock_picking-checkpoint.py:0
+#: code:addons/stock_batch_operations/models/stock_picking.py:0
+#, python-format
+msgid "packages"
+msgstr "paquetes"
+
+#. module: stock_batch_operations
+#: code:addons/stock_batch_operations/models/.ipynb_checkpoints/stock_picking-checkpoint.py:0
+#: code:addons/stock_batch_operations/models/stock_picking.py:0
+#, python-format
+msgid "product"
+msgstr "producto"
+
+#. module: stock_batch_operations
+#: code:addons/stock_batch_operations/models/.ipynb_checkpoints/stock_picking-checkpoint.py:0
+#: code:addons/stock_batch_operations/models/stock_picking.py:0
+#, python-format
+msgid "products"
+msgstr "productos"
+
+#. module: stock_batch_operations
+#: model:ir.model,name:stock_batch_operations.model_serial_import_wizard
 msgid "serial.import.wizard"
 msgstr ""

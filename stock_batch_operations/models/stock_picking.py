@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, _
 from odoo.exceptions import UserError
 
 import logging
@@ -30,6 +30,6 @@ class StockPicking(models.Model):
                 qties += move.product_qty
         number_of_packages = len(set(packages))
         message = self.env['message.popup']
-        product_term = message.pluralize(qties, 'product', 'products')
+        product_term = message.pluralize(int(qties), _('product'), _('products'))
         packages_term = message.pluralize(number_of_packages, 'package', 'packages')
-        return message.popup(message="%s unpacked from %s" % (product_term, packages_term))
+        return message.popup(message=_("%s unpacked from %s" % (product_term, packages_term)))
