@@ -7,8 +7,9 @@
         <field name="inherit_id" ref="stock.view_picking_form"/>
         <field name="arch" type="xml">
             <xpath expr="//header" position="inside">
+                <field name="need_unpack" invisible="1"/>
                 <button name="unpack_lots"
-                        attrs="{'invisible': [('state', '!=', ('assigned'))]}"
+                        attrs="{'invisible': [('need_unpack', '=', False)]}"
                         string="Unpack"
                         groups="base.group_user"
                         type="object"/>

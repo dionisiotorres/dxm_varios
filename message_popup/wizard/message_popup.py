@@ -30,6 +30,13 @@ class MessagePopup(models.TransientModel):
             'target': 'new',
         }
 
+    @staticmethod
+    def pluralize(number, singular, plural):
+        if 1 != number >= 0:
+            return str(number) + ' ' + plural
+        else:
+            return str(number) + ' ' + singular
+
 
 class ResConfig(models.TransientModel):
     _inherit = 'res.config.settings'
