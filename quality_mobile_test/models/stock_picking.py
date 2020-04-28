@@ -104,10 +104,13 @@ class Picking(models.Model):
 
                 move_map = {}
                 for move_line in move_lines_to_workshop:
-                    if move_line.move_id.id in move_map.keys():
-                        move_map.update({move_line.move_id.id: move_map.get(move_line.move_id.id).append(move_line.id)})
+                    move_id = move_line.move_id.id
+                    if move_id in move_map.keys():
+                        map_ids = move_map.get(move_id)
+                        map_ids.append(move_line.id)
+                        move_map.update({move_id: map_ids})
                     else:
-                        move_map[move_line.move_id.id] = [move_line.id]
+                        move_map[move_id] = [move_line.id]
                 for move in move_map:
                     picking_move = picking.move_lines.filtered(lambda m: m.id == move)
                     workshop_move_id = picking_move._split(len(move_map.get(move)))
@@ -117,18 +120,6 @@ class Picking(models.Model):
                         'location_dest_id': ws_picking.location_dest_id.id,
                         'state': 'assigned'
                     })
-
-                    # workshop_move = picking_move.copy({
-                    #     'move_line_ids': [],
-                    #     'picking_id': ws_picking.id,
-                    #     'location_id': ws_picking.location_id.id,
-                    #     'location_dest_id': ws_picking.location_dest_id.id,
-                    #     'product_uom_qty': len(move_map.get(move))
-                    # })
-                    # picking_move.write({
-                    #     # 'product_qty': picking_move.product_qty - len(move_map.get(move)),
-                    #     'product_uom_qty': picking_move.product_uom_qty - len(move_map.get(move)),
-                    # })
                     workshop_lines = move_lines_to_workshop.filtered(lambda m: m.id in move_map.get(move))
                     workshop_lines.write({
                         'move_id': workshop_move.id,
