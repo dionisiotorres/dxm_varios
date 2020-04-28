@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_run_functional_test" model="ir.actions.act_window">
+        <field name="name">Run Functional Test</field>
+        <field name="res_model">mobile.functional.test.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="mobile_functional_test_wizard" model="ir.ui.view">
+        <field name="name">mobile.functional.test.wizard</field>
+        <field name="model">mobile.functional.test.wizard</field>
+        <field name="arch" type="xml">
+            <form string=" Mobile Functional Test">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="power_on"/>
+                            <field name="speaker"/>
+                            <field name="buttons"/>
+                            <field name="fingerprint_reader"/>
+                            <field name="torch"/>
+                            <field name="bluetooth"/>
+                            <field name="wifi"/>
+                            <field name="proximity_sensor"/>
+                        </group>
+                        <group>
+                            <field name="touch_screen"/>
+                            <field name="display_bright"/>
+                            <field name="call_test"/>
+                            <field name="ring_tone"/>
+                            <field name="camera"/>
+                            <field name="mobile_os"/>
+                            <field name="user_account"/>
+                            <field name="security_pattern"/>
+                            <field name="humidity"/>
+                        </group>
+
+                    </group>
+                    <notebook>
+                        <page string="Lots to Apply This Test">
+                            <label for="lot_id" string="Search Lot ID"/>
+                             <field name="lot_id" style="width: 30%%"/>
+                             <field name="serial_file" style="width: 30%%; margin-left: 20px;" string="Select Lots File"/>
+                            <field name="move_ids">
+                                <tree>
+                                    <field name="lot_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <footer>
+                    <button name="process_test"
+                                string="Process Test"
+                                type="object"
+                                class="oe_highlight" />
+                    <button special="cancel" name='cancel' string="Cancel Test" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

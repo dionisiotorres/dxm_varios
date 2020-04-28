@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+test_f_manager,test_f_manager,quality_mobile_test.model_functional_quality_test,base.group_system,1,1,1,1
+test_fw_manager,test_fw_manager,quality_mobile_test.model_mobile_functional_test_wizard,base.group_system,1,1,1,1
+test_e_manager,test_e_manager,quality_mobile_test.model_esthetic_quality_test,base.group_system,1,1,1,1
+test_ew_manager,test_ew_manager,quality_mobile_test.model_mobile_esthetic_test_wizard,base.group_system,1,1,1,1
