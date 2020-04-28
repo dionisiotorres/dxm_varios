@@ -10,7 +10,7 @@ class ProductTemplate(models.Model):
     _inherit = "product.template"
 
     @api.onchange('product_brand_id', 'x_studio_capacidad_de_almacenamiento', 'x_studio_modelo',
-                  'x_studio_part_number', 'categ_id')
+                  'x_studio_part_number', 'categ_id', 'x_studio_condition')
     def change_product_name(self):
         _logger.info("CHANGED PARAMETER")
         if self.categ_id.name == 'Teléfonos':
@@ -27,4 +27,7 @@ class ProductTemplate(models.Model):
             capacity = self.x_studio_capacidad_de_almacenamiento.x_name or ''
             if capacity:
                 name += ' / ' + capacity
+            condition = self.x_studio_condition or ''
+            if condition:
+                name += ' / ' + condition
             self['name'] = name
