@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_run_quality_test" model="ir.actions.act_window">
+        <field name="name">Run Quality Test</field>
+        <field name="res_model">mobile.quality.test.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="mobile_functional_test_wizard" model="ir.ui.view">
+        <field name="name">mobile.quality.test.wizard</field>
+        <field name="model">mobile.quality.test.wizard</field>
+        <field name="arch" type="xml">
+            <form string=" Mobile Quality Test">
+                <sheet>
+                    <group string="Lot Information">
+                        <group>
+                            <field name='product_id'/>
+                            <field name='company_id' widget='selection' context="{'search_default_company_id': company_id}"/>
+                        </group>
+                        <group name='extra_info'>
+                            <field name='color'/>
+                            <field name='lock_status'/>
+                            <field name='logo'/>
+                            <field name='charger'/>
+                            <field name='network_type'/>
+                            <field name='lang'/>
+                        </group>
+                    </group>
+                    <group string="Grade">
+                        <group>
+                            <field name="display_test"/>
+                            <field name="case_test"/>
+                        </group>
+                        <group>
+                            <field name="device_case" attrs='{"invisible": ["|", ("display_test", "!=", "10"), ("case_test", "!=", "10")]}'/>
+                            <field name="device_charger" attrs='{"invisible": ["|", ("display_test", "!=", "10"), ("case_test", "!=", "10")]}'/>
+                            <field name="cables" attrs='{"invisible": ["|", ("display_test", "!=", "10"), ("case_test", "!=", "10")]}'/>
+                            <field name="headset" attrs='{"invisible": ["|", ("display_test", "!=", "10"), ("case_test", "!=", "10")]}'/>
+                        </group>
+                    </group>
+                    <group string="Functional Test">
+                        <group>
+                            <field name="power_on"/>
+                            <field name="speaker"/>
+                            <field name="buttons"/>
+                            <field name="fingerprint_reader"/>
+                            <field name="torch"/>
+                            <field name="bluetooth"/>
+                            <field name="wifi"/>
+                            <field name="proximity_sensor"/>
+                        </group>
+                        <group>
+                            <field name="touch_screen"/>
+                            <field name="display_bright"/>
+                            <field name="call_test"/>
+                            <field name="ring_tone"/>
+                            <field name="camera"/>
+                            <field name="mobile_os"/>
+                            <field name="user_account"/>
+                            <field name="security_pattern"/>
+                            <field name="humidity"/>
+                        </group>
+
+                    </group>
+                    <notebook>
+                        <page string="Lots">
+                            <label for="lot_id" string="Create New Lot"/>
+                             <field name="lot_id" style="width: 30%%"/>
+                             <field name="serial_file" style="width: 30%%; margin-left: 20px;"/>
+                            <field name="new_lot_ids" create="0">
+                                <tree>
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <footer>
+                    <button name="process_test"
+                                string="Process Test"
+                                type="object"
+                                class="oe_highlight" />
+                    <button special="cancel" name='cancel' string="Cancel Test" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

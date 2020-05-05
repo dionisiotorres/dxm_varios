@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <act_window id="act_graduation_wizard"
+            name="Re Graduate Lots"
+            res_model="graduation.wizard"
+            view_mode="form"
+            binding_model="stock.picking"
+            binding_views="form"
+            domain="[('show_graduation', '!=', False)]"
+            groups="mobile_device_reception.group_graduation"
+            target="new"/>
+
+    <record id="action_run_graduation_wizard" model="ir.actions.act_window">
+        <field name="name">Run Graduation Wizard</field>
+        <field name="res_model">graduation.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="graduation_wizard_form" model="ir.ui.view">
+        <field name="name">graduation.wizard.form</field>
+        <field name="model">graduation.wizard</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="new_grade" style="width: 30%%"/>
+                    </group>
+                    <notebook>
+                        <page string="Lots">
+                            <label for="lot_id" string="Search Lot"/>
+                            <field name="lot_id" style="width: 30%%"/>
+                            <field name="serial_file" style="width: 30%%; margin-left: 20px;"/>
+                            <field name="lot_ids" create="0">
+                                <tree>
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <footer>
+                    <button name="process_lots"
+                                string="Process Lots"
+                                type="object"
+                                class="oe_highlight" />
+                    <button special="cancel" name='cancel' string="Cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="control_recipient_packages_tree_view" model="ir.ui.view">
+        <field name="name">control.recipient.packages.tree</field>
+        <field name="model">control.recipient.packages</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Control Recipient Packages">
+                <field name="name"/>
+                <field name="date_in"/>
+                <field name="origin"/>
+                <field name="carrier"/>
+            </tree>
+        </field>
+    </record>
+    <record id="control_recipient_packages_calendar" model="ir.ui.view">
+        <field name="name">control.recipient.packages.calendar</field>
+        <field name="model">control.recipient.packages</field>
+        <field name="arch" type="xml">
+            <calendar string="Control Recipient Packages" date_start="date_in">
+                <field name="name"/>
+            </calendar>
+        </field>
+    </record>
+    <record id="control_recipient_packages_kanban" model="ir.ui.view">
+        <field name="name">control.recipient.packages.kanban</field>
+        <field name="model">control.recipient.packages</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <field name="name"/>
+                <field name="date_in"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="o_kanban_record_top">
+                                <div class="o_kanban_record_headings mt4">
+                                    <strong class="o_kanban_record_title"><span><field name="name"/></span></strong>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="control_recipient_packages_form_view" model="ir.ui.view">
+        <field name="name">control.recipient.packages.form</field>
+        <field name="model">control.recipient.packages</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Control Recipient Packages">
+                <header>
+                    <button name="action_create_picking" string="Create incoming" type="object" class="oe_highlight" attrs="{'invisible':[('id','=', False)]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="new,received"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object" name="action_view_picking" class="oe_stat_button" icon="fa-truck" attrs="{'invisible':[('picking_count','=', 0)]}">
+                            <field name="picking_count" widget="statinfo" string="Pickings"/>
+                            <field name="picking_ids" invisible="1"/>
+                        </button>
+                    </div>
+                    <h1 class="hidden-xs">
+                        <field name="name" readonly="1"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="date_in"/>
+                            <field name="origin"/>
+                            <field name="carrier"/>
+                        </group>
+                        <group>
+                            <field name="note"/>
+                            <field name="company_id" invisible="1"/>
+                            <field name="picking_ids" widget="many2many_tags" domain="[('company_id', '=', company_id), ('picking_type_code', '=', 'incoming')]" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Recipient Lines">
+                            <field name="line_ids">
+                                <tree editable="bottom">
+                                    <field name="height"/>
+                                    <field name="width"/>
+                                    <field name="depth"/>
+                                    <field name="uom_id"/>
+                                    <field name="note"/>
+                                    <field name="partner_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_control_recipient_packages" model="ir.actions.act_window">
+        <field name="name">Control Recipient Packages</field>
+        <field name="res_model">control.recipient.packages</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form,calendar,kanban</field>
+    </record>
+
+    <menuitem 
+        id="menu_control_recipient_packages"
+        name="Control Recipient Packages"
+        parent="stock.menu_stock_warehouse_mgmt"
+        action="action_control_recipient_packages"
+        sequence="300"/>
+
+    <record id="view_picking_form_inherit_oct" model="ir.ui.view">
+        <field name="name">stock.picking.form.view.inherit.oct</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <field name="origin" position="after">
+                <field name="recipient_id"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,35 @@
+# -*- coding: utf-8 -*-
+
+{
+    'name': "Mobile Device Reception",
+
+    'summary': """
+        This is module to load lot information and make a quality test for mobile devices in the reception process. 
+        """,
+
+    'description': """
+        This is module to load lot information and make a quality test for mobile devices in the reception process.
+    """,
+
+    'author': "Heyner Roque | Octupus Technologies SL",
+    'website': "https://www.octupus.es",
+
+    'category': 'productivity',
+    'version': '0.1',
+
+    'depends': ['base', 'stock'],
+
+    'data': [
+        'security/ir.model.access.csv',
+        'data/group_data.xml',
+        'views/stock_picking_view.xml',
+        'views/stock_production_lot.xml',
+        'views/res_config.xml',
+        'views/functional_quality_test_view.xml',
+        'views/esthetic_quality_test_view.xml',
+        'wizard/quality_test_view.xml',
+        'wizard/graduation_wizard_view.xml',
+    ],
+    'installable': True,
+    'application': False,
+}

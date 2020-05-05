@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_control_recipient_packages,access_control_recipient_packages,model_control_recipient_packages,base.group_user,1,0,0,0
+access_recipient_lines,access_recipient_lines,model_recipient_lines,base.group_user,1,0,0,0
+
+access_control_recipient_packages_manager,access_control_recipient_packages_manager,model_control_recipient_packages,base.group_system,1,1,1,1
+access_recipient_lines_manager,access_recipient_lines_manager,model_recipient_lines,base.group_system,1,1,1,1

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="mobile_device_reception.group_graduation" model="res.groups">
+            <field name="name">Graduation Team</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_system'))]"/>
+        </record>
+    </data>
+</odoo>
