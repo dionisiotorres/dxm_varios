@@ -44,8 +44,16 @@ class Picking(models.Model):
                 # First check if there is move lines to SAT location.
                 move_to_workshop = self._check_workshop_lines()
                 if move_to_workshop:
-                    self._create_workshop_move()
-                return super(Picking, self).button_validate()
+                    workshop_move = self._create_workshop_move()
+                    if workshop_move:
+                        # Check if still qty to move
+                        still_to_move = self.move_line_ids.filtered(
+                            lambda move_line: move_line.lot_id.x_studio_resultado == 'Sin averia'
+                        )
+                        if still_to_move:
+                            return super(Picking, self).button_validate()
+                        else:
+                            return super(Picking, self).action_cancel()
         else:
             return super(Picking, self).button_validate()
 
@@ -68,6 +76,7 @@ class Picking(models.Model):
             move_lines_to_workshop = picking.move_line_ids.filtered(
                 lambda l: l.lot_id.x_studio_resultado == 'Con averia'
             )
+            _logger.info("MOVE LINES TO WORKSHOP: %r", move_lines_to_workshop)
             if move_lines_to_workshop:
                 ws_picking = picking.copy({
                     'name': '/',
@@ -85,24 +94,10 @@ class Picking(models.Model):
                         move_map.update({move_id: map_ids})
                     else:
                         move_map[move_id] = [move_line.id]
-                _logger.info(move_map)
                 for move in move_map:
                     picking_move = picking.move_lines.filtered(lambda m: m.id == move)
                     split_qty = len(move_map.get(move))
-                    workshop_move_id = picking_move._split(split_qty)
-                    workshop_move = self.env['stock.move'].search([('id', '=', workshop_move_id)])
-                    workshop_move.write({
-                        'picking_id': ws_picking.id,
-                        'location_dest_id': ws_picking.location_dest_id.id,
-                        'state': 'assigned'
-                    })
-                    workshop_lines = move_lines_to_workshop.filtered(lambda m: m.id in move_map.get(move))
-                    _logger.info(workshop_lines)
-                    workshop_lines.write({
-                        'move_id': workshop_move.id,
-                        'location_dest_id': op_type.default_location_dest_id.id,
-                        'picking_id': ws_picking.id
-                    })
+                    picking_move.split_move_to_workshop(split_qty, ws_picking)
                 ws_picking.action_assign()
                 workshop_picking |= ws_picking
         return workshop_picking

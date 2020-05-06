@@ -73,7 +73,8 @@
                         <group>
                             <field name="note"/>
                             <field name="company_id" invisible="1"/>
-                            <field name="picking_ids" widget="many2many_tags" domain="[('company_id', '=', company_id), ('picking_type_code', '=', 'incoming')]" readonly="1"/>
+                            <field name="picking_ids" widget="many2many_tags"
+                                   domain="[('company_id', '=', company_id), ('state', '=', 'assigned'), ('picking_type_code', '=', 'incoming')]"/>
                         </group>
                     </group>
                     <notebook>
