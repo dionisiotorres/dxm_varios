@@ -181,7 +181,8 @@ class FunctionalTest(models.TransientModel):
         for move_by_lot in zip(processing_lot_ids, move_lines_no_lot):
             move_by_lot[1].write({
                     'quality_test_done': True,
-                    'lot_id': move_by_lot[0]
+                    'lot_id': move_by_lot[0],
+                    'qty_done': 1
                 })
 
         message = self.env['message.popup']

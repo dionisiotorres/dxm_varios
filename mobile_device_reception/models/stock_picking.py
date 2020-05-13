@@ -14,6 +14,20 @@ class Picking(models.Model):
 
     show_quality_test = fields.Boolean(compute="_show_quality_test")
 
+    show_inventory_adjustment = fields.Boolean(compute="_show_inventory_adjustment")
+
+    def _show_inventory_adjustment(self):
+        q_test_id = self.env['ir.config_parameter'].sudo().get_param('mobile_device_reception.quality_test_op_type')
+        for picking in self:
+            show_adjustment = False
+            for move in self.move_lines:
+                if move.move_orig_ids:
+                    if move.product_uom_qty != move.move_orig_ids[0].product_uom_qty:
+                        show_adjustment = True
+                elif q_test_id == self.picking_type_id.id:
+                    show_adjustment = True
+            picking['show_inventory_adjustment'] = show_adjustment
+
     def _show_quality_test(self):
         q_test_id = self.env['ir.config_parameter'].sudo().get_param('mobile_device_reception.quality_test_op_type')
         for picking in self:
@@ -54,8 +68,11 @@ class Picking(models.Model):
                             return super(Picking, self).button_validate()
                         else:
                             return super(Picking, self).action_cancel()
+                else:
+                    return super(Picking, self).button_validate()
         else:
             return super(Picking, self).button_validate()
+        # return super(Picking, self).button_validate()
 
     def _check_workshop_lines(self):
         workshop_lines = self.move_line_ids.filtered(
@@ -114,3 +131,97 @@ class Picking(models.Model):
                 'view_id': False,
                 'target': 'new',
             }
+
+    def run_inventory_adjustment(self):
+        _logger.info("ADJUSTING INVENTORY")
+        if not self.is_locked:
+            self.action_toggle_is_locked()
+        if self.state == 'draft':
+            self.action_confirm()
+        products_adjusted = 0
+        for move in self.move_lines:
+            if move.move_orig_ids:
+                last_move_qty = move.move_orig_ids.product_uom_qty
+                now_qty = move.product_uom_qty
+                if last_move_qty != now_qty:
+                    _logger.info("LINE %r CHANGED QTY", move.id)
+                    if self.create_inventory_adjustment(move):
+                        next_move = move.move_dest_ids[0]
+                        if now_qty > 0:
+                            next_move.write({'product_uom_qty': now_qty})
+                            next_move.picking_id.action_assign()
+                        else:
+                            next_move._action_cancel()
+                            # move._action_cancel()
+                            # move.unlink()
+                        products_adjusted += 1
+            else:
+                if self.create_inventory_adjustment(move):
+                    products_adjusted += 1
+                # new line added
+                # next_pickings = self.move_lines.mapped('move_dest_ids').mapped('picking_id').sorted(key='id')
+                # if len(next_pickings) > 1:
+                #     for pick in next_pickings[1:]:
+                #         _logger.info("CANCELING PICKING ID: %r", pick.id)
+                #         pick.action_cancel()
+                #         pick.unlink()
+                # next_picking = next_pickings[0]
+                # if self.create_inventory_adjustment(move):
+                #     # create new move in next picking
+                #     new_move = self.env['stock.move'].create({
+                #         'name': move.product_id.display_name,
+                #         'product_id': move.product_id.id,
+                #         'product_uom_qty': move.product_uom_qty,
+                #         'product_uom': move.product_uom.id,
+                #         'description_picking': move.description_picking,
+                #         'location_id': move.location_id.id,
+                #         'location_dest_id': move.location_dest_id.id,
+                #         'picking_id': next_picking.id,
+                #         'picking_type_id': next_picking.picking_type_id.id,
+                #         'restrict_partner_id': next_picking.owner_id.id,
+                #         'company_id': next_picking.company_id.id,
+                #         'warehouse_id': move.warehouse_id.id
+                #     })
+                #     move.write({'move_dest_ids': [new_move.id]})
+                # next_picking.action_confirm()
+        self.action_assign()
+        message = self.env['message.popup']
+        term = message.pluralize(products_adjusted, 'product', 'products')
+        return message.popup(message="Inventory adjustment successfully for %s" % term)
+
+    def create_inventory_adjustment(self, move):
+        _logger.info("CREATING INVENTORY ADJUSTMENT")
+        inventory_adjustment = self.env['stock.inventory'].create({
+            'name': 'Automatic Adjustment For: ' + move.product_id.name,
+            'company_id': move.company_id.id,
+            'location_ids': [move.location_id.id],
+            'product_ids': [move.product_id.id]
+        })
+        _logger.info("STOCK INVENTORY ID: %r", inventory_adjustment.id)
+        inventory_adjustment._action_start()
+        qty = move.product_uom_qty
+        _logger.info("NOW QTY: %r", qty)
+        if inventory_adjustment.line_ids:
+            _logger.info("ADJUSTMENT WITH LINES")
+            line_id = inventory_adjustment.line_ids.filtered(lambda l: not l.prod_lot_id)
+            _logger.info("LINE ID: %r", line_id.id)
+            if len(line_id) == 1:
+                line_id.write({'product_qty': qty})
+                _logger.info("ONE LINE")
+            else:
+                raise ValidationError(
+                    "The product %s have many adjustments to do, please run the inventory adjustment manually" %
+                    move.product_id.display_name)
+        else:
+            _logger.info("ADJUSTMENT WITH NO LINES, CREATING NEW LINE.....")
+            self.env['stock.inventory.line'].create({
+                'inventory_id': inventory_adjustment.id,
+                'product_id': move.product_id.id,
+                'product_uom_id': move.product_uom.id,
+                'product_qty': qty,
+                'location_id': move.location_id.id,
+                'company_id': move.company_id.id
+            })
+        inventory_adjustment.action_validate()
+        inventory_adjustment._action_done()
+        return True

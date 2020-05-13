@@ -11,10 +11,10 @@ class ControlRecipientPackages(models.Model):
     origin = fields.Char(string="Expedición")
     carrier = fields.Char(string="Transportista")
     note = fields.Char(string="Observaciones")
-    line_ids = fields.One2many('recipient.lines', 'recipient_id')
-    state = fields.Selection([
-        ('new', 'New'),
-        ('received', 'Received')], default='new')
+    # line_ids = fields.One2many('recipient.lines', 'recipient_id')
+    # state = fields.Selection([
+    #     ('new', 'New'),
+    #     ('received', 'Received')], default='new')
     picking_ids = fields.One2many('stock.picking', 'recipient_id', string="Pickings")
     company_id = fields.Many2one('res.company',
                                  string='Company',
@@ -23,6 +23,8 @@ class ControlRecipientPackages(models.Model):
                                  default=lambda self: self.env.user.company_id,
                                  help="Company related to this journal")
     picking_count = fields.Integer(compute='_compute_picking_count')
+    packages = fields.Integer(string="Package Quantity")
+    partner_id = fields.Many2one(comodel_name="res.partner", string="Provider")
 
     def _compute_picking_count(self):
         for package in self:
@@ -34,19 +36,19 @@ class ControlRecipientPackages(models.Model):
             vals['name'] = self.env['ir.sequence'].next_by_code('control.recipient.packages') or _('New')
         return super(ControlRecipientPackages, self).create(vals)
 
-    def action_create_picking(self):
-        view = self.env.ref('stock.view_picking_form')
-        picking_type_id = self.env.ref('stock.picking_type_in').id
-        return {
-            'name': _('Stock Picking'),
-            'view_type': 'form',
-            'view_mode': 'form',
-            'res_model': 'stock.picking',
-            'view_id': view.id,
-            'type': 'ir.actions.act_window',
-            'context': {'default_picking_type_id': picking_type_id,
-                        'default_recipient_id': self.id, 'default_origin': self.name},
-        }
+    # def action_create_picking(self):
+    #     view = self.env.ref('stock.view_picking_form')
+    #     picking_type_id = self.env.ref('stock.picking_type_in').id
+    #     return {
+    #         'name': _('Stock Picking'),
+    #         'view_type': 'form',
+    #         'view_mode': 'form',
+    #         'res_model': 'stock.picking',
+    #         'view_id': view.id,
+    #         'type': 'ir.actions.act_window',
+    #         'context': {'default_picking_type_id': picking_type_id,
+    #                     'default_recipient_id': self.id, 'default_origin': self.name},
+    #     }
 
     def action_view_picking(self):
         action = self.env.ref('stock.action_picking_tree_all').read()[0]
@@ -58,16 +60,16 @@ class ControlRecipientPackages(models.Model):
         return action
 
 
-class RecipientLines(models.Model):
-    _name = "recipient.lines"
-
-    recipient_id = fields.Many2one('control.recipient.packages')
-    height = fields.Float(string="Height")
-    width = fields.Float(string="Width")
-    depth = fields.Float(string="Depth")
-    uom_id = fields.Many2one('uom.uom', string="UoM")
-    note = fields.Char(string='Note')
-    partner_id = fields.Many2one('res.partner', string='Partner')
+# class RecipientLines(models.Model):
+#     _name = "recipient.lines"
+#
+#     recipient_id = fields.Many2one('control.recipient.packages')
+#     height = fields.Float(string="Height")
+#     width = fields.Float(string="Width")
+#     depth = fields.Float(string="Depth")
+#     uom_id = fields.Many2one('uom.uom', string="UoM")
+#     note = fields.Char(string='Note')
+#     partner_id = fields.Many2one('res.partner', string='Partner')
 
 
 class StockPicking(models.Model):
