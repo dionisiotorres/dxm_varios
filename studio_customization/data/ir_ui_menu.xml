@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+  <record id="studio_customization.especificaciones_8de9ab76-2b34-4d0b-a22d-84a0868efaf4" model="ir.ui.menu" context="{'studio': True}">
+    <field name="action" eval="False"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">Especificaciones</field>
+    <field name="parent_id" eval="False"/>
+    <field name="sequence" eval="False"/>
+    <field name="web_icon">fa fa-diamond,#f1c40f,#34495e</field>
+  </record>
+  <record id="studio_customization.especificaciones_esp_3839dd20-15ab-4300-b3d8-24bcd39672a8" model="ir.ui.menu" context="{'studio': True}">
+    <field name="action" ref="studio_customization.especificaciones_65d44464-06e2-421a-bc97-edcd71809c3b"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">Especificaciones</field>
+    <field name="parent_id" ref="studio_customization.especificaciones_8de9ab76-2b34-4d0b-a22d-84a0868efaf4"/>
+    <field name="sequence">1</field>
+    <field name="web_icon" eval="False"/>
+  </record>
+  <record id="studio_customization.especificaciones_col_5ecc7f19-8c8d-4cef-8a07-cbcd8c98af3b" model="ir.ui.menu" context="{'studio': True}">
+    <field name="action" ref="studio_customization.color_703ad22e-288b-45bc-94a5-3806f9fb1330"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">Color</field>
+    <field name="parent_id" ref="studio_customization.especificaciones_esp_3839dd20-15ab-4300-b3d8-24bcd39672a8"/>
+    <field name="sequence">1</field>
+    <field name="web_icon" eval="False"/>
+  </record>
+  <record id="studio_customization.especificaciones_blo_58dbc7db-aa4a-40f7-adc0-f64018fb1908" model="ir.ui.menu" context="{'studio': True}">
+    <field name="action" ref="studio_customization.bloqueo_3f354589-b0bf-4b35-80e9-6f4383036173"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">Bloqueo</field>
+    <field name="parent_id" ref="studio_customization.especificaciones_esp_3839dd20-15ab-4300-b3d8-24bcd39672a8"/>
+    <field name="sequence">2</field>
+    <field name="web_icon" eval="False"/>
+  </record>
+  <record id="studio_customization.especificaciones_red_439e2a38-77d9-4139-b409-e25d73e91852" model="ir.ui.menu" context="{'studio': True}">
+    <field name="action" ref="studio_customization.red_6d87f39a-e9aa-4754-8eab-8db4141a7b10"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">Red</field>
+    <field name="parent_id" ref="studio_customization.especificaciones_esp_3839dd20-15ab-4300-b3d8-24bcd39672a8"/>
+    <field name="sequence">3</field>
+    <field name="web_icon" eval="False"/>
+  </record>
+  <record id="studio_customization.especificaciones_log_3b94a84a-45b8-4a95-8e9a-cfc5c9789f19" model="ir.ui.menu" context="{'studio': True}">
+    <field name="action" ref="studio_customization.logo_b4b9a08a-e8a5-463e-9b13-9e3b8c760c38"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">Welcome Logo</field>
+    <field name="parent_id" ref="studio_customization.especificaciones_esp_3839dd20-15ab-4300-b3d8-24bcd39672a8"/>
+    <field name="sequence">4</field>
+    <field name="web_icon" eval="False"/>
+  </record>
+  <record id="studio_customization.especificaciones_idi_994c561c-1ea3-41e6-93fb-e7fb9ab19bd5" model="ir.ui.menu" context="{'studio': True}">
+    <field name="action" ref="studio_customization.idioma_19e80248-8adf-4ea5-ae05-d62c351c5743"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">Idioma</field>
+    <field name="parent_id" ref="studio_customization.especificaciones_esp_3839dd20-15ab-4300-b3d8-24bcd39672a8"/>
+    <field name="sequence">5</field>
+    <field name="web_icon" eval="False"/>
+  </record>
+  <record id="studio_customization.especificaciones_car_565a2613-1f7f-42de-9ab3-9fd54c895368" model="ir.ui.menu" context="{'studio': True}">
+    <field name="action" ref="studio_customization.cargador_b69b6480-f55b-430a-aa56-539329bc7637"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">Cargador</field>
+    <field name="parent_id" ref="studio_customization.especificaciones_esp_3839dd20-15ab-4300-b3d8-24bcd39672a8"/>
+    <field name="sequence">6</field>
+    <field name="web_icon" eval="False"/>
+  </record>
+  <record id="studio_customization.especificaciones_mem_409e4c5e-4a34-4da7-ac62-b8c39d568b61" model="ir.ui.menu" context="{'studio': True}">
+    <field name="action" ref="studio_customization.memoria_ram_62237afd-acd1-426f-b3d1-4f270a2c3b02"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">Memoria RAM</field>
+    <field name="parent_id" ref="studio_customization.especificaciones_esp_3839dd20-15ab-4300-b3d8-24bcd39672a8"/>
+    <field name="sequence">7</field>
+    <field name="web_icon" eval="False"/>
+  </record>
+  <record id="studio_customization.especificaciones_tip_e96935a8-a228-42e0-85fd-7c53a4d66112" model="ir.ui.menu" context="{'studio': True}">
+    <field name="action" ref="studio_customization.tipo_de_sim_243382f1-e358-4b59-b3dd-b90fa00d28bf"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">Tipo de SIM</field>
+    <field name="parent_id" ref="studio_customization.especificaciones_esp_3839dd20-15ab-4300-b3d8-24bcd39672a8"/>
+    <field name="sequence">8</field>
+    <field name="web_icon" eval="False"/>
+  </record>
+  <record id="studio_customization.especificaciones_fec_2c516a42-7312-4b5b-851d-660044db7e7a" model="ir.ui.menu" context="{'studio': True}">
+    <field name="action" ref="studio_customization.fecha_de_lanzamiento_718cdc1e-2242-42b8-83cc-edcbe1fb0965"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">Fecha de lanzamiento</field>
+    <field name="parent_id" ref="studio_customization.especificaciones_esp_3839dd20-15ab-4300-b3d8-24bcd39672a8"/>
+    <field name="sequence">9</field>
+    <field name="web_icon" eval="False"/>
+  </record>
+  <record id="studio_customization.especificaciones_tam_5349ccdf-577f-404a-b46e-8ed5ed4b6822" model="ir.ui.menu" context="{'studio': True}">
+    <field name="action" ref="studio_customization.tamano_de_pantalla_bf13dc73-eff5-427d-a094-592347eb3c93"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">Tamaño de pantalla</field>
+    <field name="parent_id" ref="studio_customization.especificaciones_esp_3839dd20-15ab-4300-b3d8-24bcd39672a8"/>
+    <field name="sequence">11</field>
+    <field name="web_icon" eval="False"/>
+  </record>
+  <record id="studio_customization.especificaciones_gra_746e19af-208b-4682-99cd-ff003955a96c" model="ir.ui.menu" context="{'studio': True}">
+    <field name="action" ref="studio_customization.grado_d2945b62-688f-4c75-9435-0b5499001dd2"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">Grado</field>
+    <field name="parent_id" ref="studio_customization.especificaciones_esp_3839dd20-15ab-4300-b3d8-24bcd39672a8"/>
+    <field name="sequence" eval="False"/>
+    <field name="web_icon" eval="False"/>
+  </record>
+  <record id="studio_customization.especificaciones_cap_b454b878-00e1-4724-82a6-6a4a014c6635" model="ir.ui.menu" context="{'studio': True}">
+    <field name="action" ref="studio_customization.capacidad_43dcf2d0-6aa5-43e6-99de-eafd7c6e632b"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">Capacidad</field>
+    <field name="parent_id" ref="studio_customization.especificaciones_esp_3839dd20-15ab-4300-b3d8-24bcd39672a8"/>
+    <field name="sequence">10</field>
+    <field name="web_icon" eval="False"/>
+  </record>
+
+  <record id="studio_customization.especificaciones_apl_2453c241-4ccf-44a0-a163-c224812ea827" model="ir.ui.menu" context="{'studio': True}">
+    <field name="action" ref="studio_customization.aplicaciones_d86e8a3e-db96-4779-9fd1-2b51d87c7669"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">Aplicaciones</field>
+    <field name="parent_id" ref="studio_customization.especificaciones_esp_3839dd20-15ab-4300-b3d8-24bcd39672a8"/>
+    <field name="sequence">13</field>
+    <field name="web_icon" eval="False"/>
+  </record>
+</odoo>

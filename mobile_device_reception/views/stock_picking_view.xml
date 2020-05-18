@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_id_name" model="ir.ui.view">
+        <field name="name">view.id.name</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <field name="show_quality_test" invisible="1"/>
+                <field name="quality_test_done" invisible="1"/>
+                <field name="show_inventory_adjustment" invisible="1"/>
+
+                <button name="run_quality_test" type="object" string="Run Quality Test"
+                attrs="{'invisible': [('show_quality_test', '=', False)]}"/>
+
+                <button name="run_inventory_adjustment" type="object" string="Adjust Inventory"
+                attrs="{'invisible': [('show_inventory_adjustment', '=', False)]}"/>
+
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

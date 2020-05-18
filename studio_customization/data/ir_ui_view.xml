@@ -1,0 +1,1076 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+  <record id="studio_customization.default_form_view_fo_73b04268-0bbc-42ea-bf1b-1477682ef698" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <form>
+        <sheet string="Especificaciones">
+          <div class="oe_title">
+            <h1>
+              <field name="x_name" required="1"/>
+            </h1>
+          </div>
+          <group name="studio_group_bdc2b6">
+            <group name="studio_group_bdc2b6_left"/>
+            <group name="studio_group_bdc2b6_right"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" eval="False"/>
+    <field name="key" eval="False"/>
+    <field name="mode">primary</field>
+    <field name="model">x_especificaciones</field>
+    <field name="name">Default form view for x_especificaciones</field>
+    <field name="priority">16</field>
+    <field name="type">form</field>
+  </record>
+  <record id="studio_customization.default_tree_view_fo_818287e3-5d1b-41eb-8651-1b2ea196675b" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <tree string="Especificaciones">
+        <field name="x_name" modifiers="{}"/>
+      </tree>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" eval="False"/>
+    <field name="key" eval="False"/>
+    <field name="mode">primary</field>
+    <field name="model">x_especificaciones</field>
+    <field name="name">Default tree view for x_especificaciones</field>
+    <field name="priority">16</field>
+    <field name="type">tree</field>
+  </record>
+  <record id="studio_customization.default_form_view_fo_997f64d2-49bd-440e-b553-fe8fa2583f9d" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <form>
+        <sheet string="Color">
+          <div class="oe_title">
+            <h1>
+              <field name="x_name" required="1"/>
+            </h1>
+          </div>
+          <group name="studio_group_2be9c0">
+            <group name="studio_group_2be9c0_left"/>
+            <group name="studio_group_2be9c0_right"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" eval="False"/>
+    <field name="key" eval="False"/>
+    <field name="mode">primary</field>
+    <field name="model">x_color</field>
+    <field name="name">Default form view for x_color</field>
+    <field name="priority">16</field>
+    <field name="type">form</field>
+  </record>
+  <record id="studio_customization.default_tree_view_fo_683444ff-5ce8-45cc-b3b3-22e88970282b" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <tree string="Color">
+        <field name="x_name" modifiers="{}"/>
+      </tree>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" eval="False"/>
+    <field name="key" eval="False"/>
+    <field name="mode">primary</field>
+    <field name="model">x_color</field>
+    <field name="name">Default tree view for x_color</field>
+    <field name="priority">16</field>
+    <field name="type">tree</field>
+  </record>
+  <record id="studio_customization.odoo_studio_default__bd6a96d0-8b75-4a4a-8581-db4b18695479" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <data>
+        <xpath expr="//field[@name='x_name']" position="attributes">
+          <attribute name="attrs">{}</attribute>
+          <attribute name="required"/>
+        </xpath>
+      </data>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" ref="studio_customization.default_form_view_fo_997f64d2-49bd-440e-b553-fe8fa2583f9d"/>
+    <field name="key" eval="False"/>
+    <field name="mode">extension</field>
+    <field name="model">x_color</field>
+    <field name="name">Odoo Studio: Default form view for x_color customization</field>
+    <field name="priority">99</field>
+    <field name="type">form</field>
+  </record>
+  <record id="studio_customization.default_form_view_fo_9fe1bf0d-0a68-447d-9cbf-d86c083e5a47" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <form>
+        <sheet string="Bloqueo">
+          <div class="oe_title">
+            <h1>
+              <field name="x_name" required="1"/>
+            </h1>
+          </div>
+          <group name="studio_group_d4969d">
+            <group name="studio_group_d4969d_left"/>
+            <group name="studio_group_d4969d_right"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" eval="False"/>
+    <field name="key" eval="False"/>
+    <field name="mode">primary</field>
+    <field name="model">x_bloqueo</field>
+    <field name="name">Default form view for x_bloqueo</field>
+    <field name="priority">16</field>
+    <field name="type">form</field>
+  </record>
+  <record id="studio_customization.default_tree_view_fo_3170c9cb-d06c-48d9-b177-10e0696b0c43" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <tree string="Bloqueo">
+        <field name="x_name" modifiers="{}"/>
+      </tree>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" eval="False"/>
+    <field name="key" eval="False"/>
+    <field name="mode">primary</field>
+    <field name="model">x_bloqueo</field>
+    <field name="name">Default tree view for x_bloqueo</field>
+    <field name="priority">16</field>
+    <field name="type">tree</field>
+  </record>
+  <record id="studio_customization.default_form_view_fo_a0833136-9623-467a-b4df-09128fddca31" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <form>
+        <sheet string="Red">
+          <div class="oe_title">
+            <h1>
+              <field name="x_name" required="1"/>
+            </h1>
+          </div>
+          <group name="studio_group_a4347d">
+            <group name="studio_group_a4347d_left"/>
+            <group name="studio_group_a4347d_right"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" eval="False"/>
+    <field name="key" eval="False"/>
+    <field name="mode">primary</field>
+    <field name="model">x_red</field>
+    <field name="name">Default form view for x_red</field>
+    <field name="priority">16</field>
+    <field name="type">form</field>
+  </record>
+  <record id="studio_customization.default_form_view_fo_423b6bd9-195e-4887-9879-bcc107fe6d41" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <form>
+        <sheet string="Logo">
+          <div class="oe_title">
+            <h1>
+              <field name="x_name" required="1"/>
+            </h1>
+          </div>
+          <group name="studio_group_54e4fc">
+            <group name="studio_group_54e4fc_left"/>
+            <group name="studio_group_54e4fc_right"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" eval="False"/>
+    <field name="key" eval="False"/>
+    <field name="mode">primary</field>
+    <field name="model">x_logo</field>
+    <field name="name">Default form view for x_logo</field>
+    <field name="priority">16</field>
+    <field name="type">form</field>
+  </record>
+  <record id="studio_customization.default_form_view_fo_bae59b37-5a02-4e35-9864-5ea125a27c72" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <form>
+        <sheet string="Idioma_terminal">
+          <div class="oe_title">
+            <h1>
+              <field name="x_name" required="1"/>
+            </h1>
+          </div>
+          <group name="studio_group_535006">
+            <group name="studio_group_535006_left"/>
+            <group name="studio_group_535006_right"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" eval="False"/>
+    <field name="key" eval="False"/>
+    <field name="mode">primary</field>
+    <field name="model">x_idioma_terminal</field>
+    <field name="name">Default form view for x_idioma_terminal</field>
+    <field name="priority">16</field>
+    <field name="type">form</field>
+  </record>
+  <record id="studio_customization.default_form_view_fo_9e8c60b4-c98f-42f5-ba3e-d398a4b0114c" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <form>
+        <sheet string="Cargador">
+          <div class="oe_title">
+            <h1>
+              <field name="x_name" required="1"/>
+            </h1>
+          </div>
+          <group name="studio_group_dd78a5">
+            <group name="studio_group_dd78a5_left"/>
+            <group name="studio_group_dd78a5_right"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" eval="False"/>
+    <field name="key" eval="False"/>
+    <field name="mode">primary</field>
+    <field name="model">x_cargador</field>
+    <field name="name">Default form view for x_cargador</field>
+    <field name="priority">16</field>
+    <field name="type">form</field>
+  </record>
+  <record id="studio_customization.default_form_view_fo_a09b0d0f-c480-4a9d-aa19-ff23742861b5" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <form>
+        <sheet string="Memoria.ram">
+          <div class="oe_title">
+            <h1>
+              <field name="x_name" required="1"/>
+            </h1>
+          </div>
+          <group name="studio_group_a2ac33">
+            <group name="studio_group_a2ac33_left"/>
+            <group name="studio_group_a2ac33_right"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" eval="False"/>
+    <field name="key" eval="False"/>
+    <field name="mode">primary</field>
+    <field name="model">x_memoria.ram</field>
+    <field name="name">Default form view for x_memoria.ram</field>
+    <field name="priority">16</field>
+    <field name="type">form</field>
+  </record>
+  <record id="studio_customization.default_form_view_fo_c4059861-8580-4f81-aa0f-7d14d78ddfa0" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <form>
+        <sheet string="SIM">
+          <div class="oe_title">
+            <h1>
+              <field name="x_name" required="1"/>
+            </h1>
+          </div>
+          <group name="studio_group_770cb0">
+            <group name="studio_group_770cb0_left"/>
+            <group name="studio_group_770cb0_right"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" eval="False"/>
+    <field name="key" eval="False"/>
+    <field name="mode">primary</field>
+    <field name="model">x_sim</field>
+    <field name="name">Default form view for x_sim</field>
+    <field name="priority">16</field>
+    <field name="type">form</field>
+  </record>
+  <record id="studio_customization.default_form_view_fo_3fb05c00-55d4-4d2f-b558-c738ca19002d" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <form>
+        <sheet string="lanzamiento.terminal">
+          <div class="oe_title">
+            <h1>
+              <field name="x_name" required="1"/>
+            </h1>
+          </div>
+          <group name="studio_group_cf83b3">
+            <group name="studio_group_cf83b3_left"/>
+            <group name="studio_group_cf83b3_right"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" eval="False"/>
+    <field name="key" eval="False"/>
+    <field name="mode">primary</field>
+    <field name="model">x_lanzamiento.terminal</field>
+    <field name="name">Default form view for x_lanzamiento.terminal</field>
+    <field name="priority">16</field>
+    <field name="type">form</field>
+  </record>
+  <record id="studio_customization.default_form_view_fo_6b269fc2-3c2b-4b2e-8070-a4463b112c32" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <form>
+        <sheet string="Pantalla">
+          <div class="oe_title">
+            <h1>
+              <field name="x_name" required="1"/>
+            </h1>
+          </div>
+          <group name="studio_group_7f980a">
+            <group name="studio_group_7f980a_left"/>
+            <group name="studio_group_7f980a_right"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" eval="False"/>
+    <field name="key" eval="False"/>
+    <field name="mode">primary</field>
+    <field name="model">x_pantalla</field>
+    <field name="name">Default form view for x_pantalla</field>
+    <field name="priority">16</field>
+    <field name="type">form</field>
+  </record>
+  <record id="studio_customization.default_tree_view_fo_ea69abd9-5309-4356-a39a-2d2268cde9b8" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <tree string="Pantalla">
+        <field name="x_name" modifiers="{}"/>
+      </tree>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" eval="False"/>
+    <field name="key" eval="False"/>
+    <field name="mode">primary</field>
+    <field name="model">x_pantalla</field>
+    <field name="name">Default tree view for x_pantalla</field>
+    <field name="priority">16</field>
+    <field name="type">tree</field>
+  </record>
+  <record id="studio_customization.default_form_view_fo_6a3b5eff-a61b-4f20-8698-d1c97912cad9" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <form>
+        <sheet string="Grado">
+          <div class="oe_title">
+            <h1>
+              <field name="x_name" required="1"/>
+            </h1>
+          </div>
+          <group name="studio_group_80cab6">
+            <group name="studio_group_80cab6_left"/>
+            <group name="studio_group_80cab6_right"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" eval="False"/>
+    <field name="key" eval="False"/>
+    <field name="mode">primary</field>
+    <field name="model">x_grado</field>
+    <field name="name">Default form view for x_grado</field>
+    <field name="priority">16</field>
+    <field name="type">form</field>
+  </record>
+  <record id="studio_customization.default_tree_view_fo_73e8b88d-e0a2-471c-a695-89f364969158" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <tree string="Grado">
+        <field name="x_name" modifiers="{}"/>
+      </tree>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" eval="False"/>
+    <field name="key" eval="False"/>
+    <field name="mode">primary</field>
+    <field name="model">x_grado</field>
+    <field name="name">Default tree view for x_grado</field>
+    <field name="priority">16</field>
+    <field name="type">tree</field>
+  </record>
+  <record id="studio_customization.odoo_studio_default__46f1dc51-8028-478d-836e-9921f1ed6a06" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <data>
+        <xpath expr="//form[1]/sheet[1]/div[1]" position="after">
+          <group name="studio_group_f0U3B">
+            <group name="studio_group_f0U3B_left">
+              <field name="x_studio_test_value" string="Valor" attrs="{}" required="1"/>
+              <field name="x_studio_is_grade_test" string="Disponible en Test de Grado"/>
+              <field name="x_studio_descripcin_general" string="Descripción general"/>
+            </group>
+          </group>
+          <group name="studio_group_cSP3s">
+            <group name="studio_group_cSP3s_left" string="Pantalla">
+              <field name="x_studio_display_short_description" string="Pantalla Descripción Corta" attrs="{}" required="1"/>
+              <field name="x_studio_estado_de_la_pantalla" string="Estado de la pantalla"/>
+            </group>
+            <group name="studio_group_cSP3s_right" string="Carcasa">
+              <field name="x_studio_case_short_description" string="Carcasa Descripción Corta" attrs="{}" required="1"/>
+              <field name="x_studio_estado_de_la_carcasa" string="Estado de la carcasa"/>
+            </group>
+          </group>
+          <group name="studio_group_2lFl7">
+            <group name="studio_group_2lFl7_left" string="Funcionalidades">
+              <field name="x_studio_estado_funcional" string="Estado funcional"/>
+            </group>
+            <group name="studio_group_2lFl7_right" string="Accesibilidad">
+              <field name="x_studio_nivel_de_accesibilidad" string="Nivel de accesibilidad"/>
+            </group>
+          </group>
+        </xpath>
+      </data>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" ref="studio_customization.default_form_view_fo_6a3b5eff-a61b-4f20-8698-d1c97912cad9"/>
+    <field name="key" eval="False"/>
+    <field name="mode">extension</field>
+    <field name="model">x_grado</field>
+    <field name="name">Odoo Studio: Default form view for x_grado customization</field>
+    <field name="priority">99</field>
+    <field name="type">form</field>
+  </record>
+  <record id="studio_customization.odoo_studio_product__96645f95-1c93-4701-861e-e2bedce9d81c" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <data>
+        <xpath expr="//form[@name='Product Template']/sheet[1]/notebook[1]/page[@name='general_information']/group[1]" position="after">
+          <group name="studio_group_h14eS">
+            <group name="studio_group_h14eS_left" string="Especificaciones">
+              <field name="x_studio_modelo" string="Modelo"/>
+              <field name="x_studio_part_number" string="Part Number"/>
+              <field name="x_studio_capacidad_de_almacenamiento" options="{&quot;no_open&quot;:true,&quot;no_create&quot;:true}"/>
+              <field name="x_studio_fecha_de_lanzamiento" string="Fecha de Lanzamiento"/>
+              <field name="x_studio_memoria_ram" string="Memoria RAM"/>
+              <field name="x_studio_tipo_de_sim" string="Tipo de SIM"/>
+              <field name="x_studio_display"/>
+              <field name="x_studio_condition" string="Condición"/>
+            </group>
+          </group>
+        </xpath>
+      </data>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" ref="product.product_template_only_form_view"/>
+    <field name="key" eval="False"/>
+    <field name="mode">extension</field>
+    <field name="model">product.template</field>
+    <field name="name">Odoo Studio: product.template.product.form customization</field>
+    <field name="priority">99</field>
+    <field name="type">form</field>
+  </record>
+  <record id="studio_customization.odoo_studio_stock_pr_f06d5c6d-0c60-4570-9cda-4fe8344be680" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <data>
+        <xpath expr="//group[@name='main_group']" position="after">
+          <group name="studio_group_AWwSo">
+           <!-- <group name="studio_group_AWwSo_left" string="Especificaciones del producto">
+              <field name="x_studio_part_number" string="Part Number"/>
+              <field name="x_studio_capacidad" string="Capacidad"/>
+              <field name="x_studio_grado" string="Grado Preliminar"/>
+            </group>-->
+            <group name="studio_group_AWwSo_right" string="Revision de grado">
+              <field name="x_studio_revision_funcional" string="Revisión Funcional" force_save="True" attrs="{}" readonly="1"/>
+              <field name="x_studio_resultado" string="Resultado" attrs="{&quot;invisible&quot;: [[&quot;x_studio_revision_funcional&quot;,&quot;=&quot;,False]]}" force_save="True" readonly="1"/>
+              <field name="x_studio_revision_estetica" string="Revisión Estética" force_save="True" attrs="{}" readonly="1"/>
+              <field name="x_studio_revision_grado" force_save="True" attrs="{}" readonly="1"/>
+            </group>
+          </group>
+          <group name="studio_group_3TGcI">
+            <group name="studio_group_3TGcI_left" string="Especificaciones del Número de Serie">
+              <field name="x_studio_color"/>
+              <field name="x_studio_bloqueo"/>
+              <field name="x_studio_red"/>
+              <field name="x_studio_logo" string="Logo"/>
+              <field name="x_studio_idioma" string="Idioma"/>
+              <field name="x_studio_cargador"/>
+              <field name="x_studio_aplicaciones"/>
+<!--              <field name="x_studio_memoria_ram" string="Memoria RAM"/>
+              <field name="x_studio_tipo_de_sim" string="Tipo de SIM"/>
+              <field name="x_studio_fecha_de_lanzamiento" string="Fecha de lanzamiento"/>
+              <field name="x_studio_tamao_de_pantalla" string="Tamaño de pantalla"/>-->
+            </group>
+          </group>
+        </xpath>
+      </data>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" ref="stock.view_production_lot_form"/>
+    <field name="key" eval="False"/>
+    <field name="mode">extension</field>
+    <field name="model">stock.production.lot</field>
+    <field name="name">Odoo Studio: stock.production.lot.form customization</field>
+    <field name="priority">99</field>
+    <field name="type">form</field>
+  </record>
+  <record id="studio_customization.odoo_studio_default__f70b3374-f5e0-4952-98b5-2b66648b538c" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <data>
+        <xpath expr="//field[@name='x_name']" position="after">
+          <field name="x_studio_estado_de_la_pantalla"/>
+          <field name="x_studio_estado_de_la_carcasa"/>
+          <field name="x_studio_estado_funcional"/>
+          <field name="x_studio_nivel_de_accesibilidad"/>
+        </xpath>
+      </data>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" ref="studio_customization.default_tree_view_fo_73e8b88d-e0a2-471c-a695-89f364969158"/>
+    <field name="key" eval="False"/>
+    <field name="mode">extension</field>
+    <field name="model">x_grado</field>
+    <field name="name">Odoo Studio: Default tree view for x_grado customization</field>
+    <field name="priority">99</field>
+    <field name="type">tree</field>
+  </record>
+  <record id="studio_customization.default_tree_view_fo_54c7693d-f59d-4007-bea9-81bc60132efd" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <tree string="Idioma_terminal">
+        <field name="x_name" modifiers="{}"/>
+      </tree>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" eval="False"/>
+    <field name="key" eval="False"/>
+    <field name="mode">primary</field>
+    <field name="model">x_idioma_terminal</field>
+    <field name="name">Default tree view for x_idioma_terminal</field>
+    <field name="priority">16</field>
+    <field name="type">tree</field>
+  </record>
+  <record id="studio_customization.default_tree_view_fo_76551c9e-744a-4884-ae87-c6f8c16e1f47" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <tree string="Cargador">
+        <field name="x_name" modifiers="{}"/>
+      </tree>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" eval="False"/>
+    <field name="key" eval="False"/>
+    <field name="mode">primary</field>
+    <field name="model">x_cargador</field>
+    <field name="name">Default tree view for x_cargador</field>
+    <field name="priority">16</field>
+    <field name="type">tree</field>
+  </record>
+  <record id="studio_customization.default_kanban_view__979d70a1-0455-40bc-9404-c4a945d93a6b" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <kanban string="Grado">
+        <templates>
+          <t t-name="kanban-box">
+            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+              <div class="o_kanban_card_content">
+                <field name="x_name" modifiers="{}"/>
+              </div>
+            </div>
+          </t>
+        </templates>
+      </kanban>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" eval="False"/>
+    <field name="key" eval="False"/>
+    <field name="mode">primary</field>
+    <field name="model">x_grado</field>
+    <field name="name">Default kanban view for x_grado</field>
+    <field name="priority">16</field>
+    <field name="type">kanban</field>
+  </record>
+  <record id="studio_customization.default_form_view_fo_0508f50e-9b3b-4aef-9f0b-98785217727f" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <form>
+        <sheet string="Capacidad">
+          <div class="oe_title">
+            <h1>
+              <field name="x_name" required="1"/>
+            </h1>
+          </div>
+          <group name="studio_group_cebd9b">
+            <group name="studio_group_cebd9b_left"/>
+            <group name="studio_group_cebd9b_right"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" eval="False"/>
+    <field name="key" eval="False"/>
+    <field name="mode">primary</field>
+    <field name="model">x_capacidad</field>
+    <field name="name">Default form view for x_capacidad</field>
+    <field name="priority">16</field>
+    <field name="type">form</field>
+  </record>
+  <record id="studio_customization.default_tree_view_fo_9a5e92fd-efce-4c98-a291-6b61f3ad7af1" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <tree string="Capacidad">
+        <field name="x_name" modifiers="{}"/>
+      </tree>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" eval="False"/>
+    <field name="key" eval="False"/>
+    <field name="mode">primary</field>
+    <field name="model">x_capacidad</field>
+    <field name="name">Default tree view for x_capacidad</field>
+    <field name="priority">16</field>
+    <field name="type">tree</field>
+  </record>
+  <record id="studio_customization.odoo_studio_default__5bff5bb1-2a14-4288-9a26-37b982c17251" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <data>
+        <xpath expr="//field[@name='x_name']" position="after">
+          <field name="create_date"/>
+        </xpath>
+      </data>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" ref="studio_customization.default_tree_view_fo_9a5e92fd-efce-4c98-a291-6b61f3ad7af1"/>
+    <field name="key" eval="False"/>
+    <field name="mode">extension</field>
+    <field name="model">x_capacidad</field>
+    <field name="name">Odoo Studio: Default tree view for x_capacidad customization</field>
+    <field name="priority">99</field>
+    <field name="type">tree</field>
+  </record>
+  <record id="studio_customization.odoo_studio_stock_pr_06f74cfa-4966-4f12-b6ff-45cac0846627" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <data>
+        <xpath expr="//field[@name='company_id']" position="replace"/>
+        <xpath expr="//field[@name='ref']" position="replace"/>
+        <xpath expr="//field[@name='product_id']" position="after">
+          <field name="x_studio_grado_preliminar"/>
+          <field name="x_studio_revision_funcional"/>
+          <field name="x_studio_resultado"/>
+          <field name="x_studio_revision_estetica"/>
+          <field name="x_studio_color"/>
+          <field name="x_studio_idioma"/>
+          <field name="x_studio_cargador"/>
+          <field name="x_studio_logo" string="Welcome Logo"/>
+          <field name="x_studio_aplicaciones"/>
+        </xpath>
+      </data>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" ref="stock.view_production_lot_tree"/>
+    <field name="key" eval="False"/>
+    <field name="mode">extension</field>
+    <field name="model">stock.production.lot</field>
+    <field name="name">Odoo Studio: stock.production.lot.tree customization</field>
+    <field name="priority">99</field>
+    <field name="type">tree</field>
+  </record>
+  <record id="studio_customization.odoo_studio_stock_pi_e3365239-4785-4d38-bfae-a2450f303477" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <data>
+        <xpath expr="//field[@name='move_line_ids_without_package']" position="inside">
+          <tree decoration-muted="state == 'cancel'" decoration-danger="(state not in ('cancel','done'))" string="Move Lines" create="0" default_order="date">
+            <field name="date"/>
+            <field name="reference" string="Reference" invisible="context.get('no_reference', False)"/>
+            <field name="product_id"/>
+            <field name="lot_id" groups="stock.group_production_lot"/>
+           <!-- <field name="x_studio_field_hB5Rq" string="Grado"/> -->
+            <field name="x_studio_grado_1" string="Grado"/>
+            <field name="x_studio_funcional_result" string="Funcional"/>
+            <field name="location_id"/>
+            <field name="location_dest_id"/>
+            <field name="qty_done" string="Quantity Done"/>
+            <field name="product_uom_id" options="{'no_open': True, 'no_create': True}" string="Unit of Measure" groups="uom.group_uom"/>
+            <field name="state"/>
+            <field name="company_id" groups="base.group_multi_company" force_save="1"/>
+          </tree>
+        </xpath>
+        <xpath expr="//form[1]/sheet[1]/notebook[1]/page[3]/field[@name='move_ids_without_package']/tree[1]/field[@name='product_id']" position="after">
+          <field name="x_studio_grado_preliminar" string="Grado Preliminar"/>
+        </xpath>
+      </data>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" ref="stock.view_picking_form"/>
+    <field name="key" eval="False"/>
+    <field name="mode">extension</field>
+    <field name="model">stock.picking</field>
+    <field name="name">Odoo Studio: stock.picking.form customization</field>
+    <field name="priority">99</field>
+    <field name="type">form</field>
+  </record>
+  <record id="studio_customization.odoo_studio_crm_lead_2bef7a27-316d-42e2-bc60-db213f0604a8" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <data>
+        <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
+          <page name="studio_page_VpCVA" string="Vendor Validation">
+            <group name="studio_group_VpCVA">
+              <group name="studio_group_VpCVA_left">
+                <field filename="x_studio_tax_documentation_filename" name="x_studio_tax_documentation" string="Tax Documentation"/>
+                <field invisible="1" name="x_studio_bank_account_info_filename"/>
+                <field filename="x_studio_bank_account_info_filename" name="x_studio_bank_account_info" string="Bank Account Info"/>
+                <field invisible="1" name="x_studio_tax_documentation_filename"/>
+              </group>
+              <group name="studio_group_VpCVA_right">
+                <field name="x_studio_tax_validated" string="Tax Validated"/>
+                <field name="x_studio_bank_info_validated" string="Bank Info Validated"/>
+              </group>
+            </group>
+            <group name="studio_group_L6h5D">
+              <group name="studio_group_L6h5D_left" string="Approval">
+                <field name="x_studio_field_6PU2v" widget="signature" string="Authorizing signature"/>
+              </group>
+              <group name="studio_group_L6h5D_right"/>
+            </group>
+          </page>
+        </xpath>
+      </data>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+    <field name="key" eval="False"/>
+    <field name="mode">extension</field>
+    <field name="model">crm.lead</field>
+    <field name="name">Odoo Studio: crm.lead.form customization</field>
+    <field name="priority">99</field>
+    <field name="type">form</field>
+  </record>
+  <record id="studio_customization.odoo_studio_project__99f445f4-da24-48fa-adb8-38157277656c" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <data>
+        <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
+          <page name="studio_page_1adYX" string="Informacion sobre proveedor">
+            <group name="studio_group_1adYX">
+              <group name="studio_group_1adYX_left"/>
+              <group name="studio_group_1adYX_right"/>
+            </group>
+            <group name="studio_group_8eFM5">
+              <group name="studio_group_8eFM5_left" string="Documentacion">
+                <field filename="x_studio_documentacion_fiscal_filename" name="x_studio_documentacion_fiscal" string="Documentacion fiscal"/>
+                <field invisible="1" name="x_studio_documentacion_bancaria_filename"/>
+                <field filename="x_studio_documentacion_bancaria_filename" name="x_studio_documentacion_bancaria" string="Documentacion bancaria"/>
+                <field invisible="1" name="x_studio_documentacion_fiscal_filename"/>
+              </group>
+              <group name="studio_group_8eFM5_right" string="Validacion">
+                <field name="x_studio_informacion_fiscal_verificada"/>
+                <field name="x_studio_informacion_bancaria_verificada"/>
+              </group>
+            </group>
+            <group name="studio_group_ucB4C">
+        </group>
+          </page>
+          <page name="studio_page_L9sa1" string="Informacion sobre lotes">
+            <group name="studio_group_L9sa1">
+              <group name="studio_group_L9sa1_left"/>
+              <group name="studio_group_L9sa1_right"/>
+            </group>
+            <group name="studio_group_R83DH">
+              <group name="studio_group_R83DH_left" string="Listados">
+                <field filename="x_studio_lote_propuesto_1_filename" name="x_studio_lote_propuesto_1" string="Lote propuesto"/>
+                <field name="x_studio_fotos_del_lote_1" options="{&quot;size&quot;: [0, 90]}" widget="image" string="Fotos del lote"/>
+                <field invisible="1" name="x_studio_fotos_del_lote_filename"/>
+                <field invisible="1" name="x_studio_lote_propuesto_1_filename"/>
+              </group>
+              <group name="studio_group_R83DH_right" string="Validacion">
+                <field name="x_studio_los_terminales_estn_liberados"/>
+                <field name="x_studio_operador" attrs="{&quot;invisible&quot;: [[&quot;x_studio_los_terminales_estn_liberados&quot;,&quot;=&quot;,&quot;No&quot;]]}"/>
+                <field name="x_studio_garantia"/>
+                <field name="x_studio_periodo_de_garantia"/>
+                <field name="x_studio_pas_de_origen_del_lote"/>
+                <field name="x_studio_factura_proveedor"/>
+                <field name="x_studio_grado_estetico" string="Grado estetico segun proveedor"/>
+                <field name="x_studio_logos_o_aplicaciones" string="Logos o aplicaciones?"/>
+                <field name="x_studio_idiomas" string="Idiomas"/>
+              </group>
+            </group>
+          </page>
+          <page name="studio_page_eoUHi" string="Auditoria">
+            <group name="studio_group_eoUHi">
+              <group name="studio_group_eoUHi_left">
+                <field name="x_studio_auditoria_1ra_compra" string="Auditoria 1ra Compra"/>
+                <field name="x_studio_auditoria_2da_compra" string="Auditoria 2da Compra"/>
+              </group>
+              <group name="studio_group_eoUHi_right"/>
+            </group>
+            <group name="studio_group_ufzO3">
+      </group>
+          </page>
+        </xpath>
+      </data>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" ref="project.view_task_form2"/>
+    <field name="key" eval="False"/>
+    <field name="mode">extension</field>
+    <field name="model">project.task</field>
+    <field name="name">Odoo Studio: project.task.form customization</field>
+    <field name="priority">99</field>
+    <field name="type">form</field>
+  </record>
+
+  <!-- Update -->
+
+  <record id="studio_customization.odoo_studio_purchase_6d2dba8a-9066-486c-a5d4-5d2fc75cba7b" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <data>
+        <xpath expr="//form[1]/sheet[1]/notebook[1]/page[1]/field[@name='order_line']/tree[1]/field[@name='name']" position="after">
+          <field name="x_studio_grado_preliminar" string="Grado Preliminar"/>
+        </xpath>
+      </data>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" ref="purchase.purchase_order_form"/>
+    <field name="key" eval="False"/>
+    <field name="mode">extension</field>
+    <field name="model">purchase.order</field>
+    <field name="name">Odoo Studio: purchase.order.form customization</field>
+    <field name="priority">99</field>
+    <field name="type">form</field>
+  </record>
+
+  <record id="studio_customization.default_form_view_fo_12f08fc4-d610-4fe5-8d68-b2925cea8373" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <form>
+        <sheet string="terminal_aplicaciones">
+          <div class="oe_title">
+            <h1>
+              <field name="x_name" required="1"/>
+            </h1>
+          </div>
+          <group name="studio_group_af30d3">
+            <group name="studio_group_af30d3_left"/>
+            <group name="studio_group_af30d3_right"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" eval="False"/>
+    <field name="key" eval="False"/>
+    <field name="mode">primary</field>
+    <field name="model">x_terminal_aplicaciones</field>
+    <field name="name">Default form view for x_terminal_aplicaciones</field>
+    <field name="priority">16</field>
+    <field name="type">form</field>
+  </record>
+
+
+
+<!-- <record id="studio_customization.odoo_studio_default__46f1dc51-8028-478d-836e-9921f1ed6a06" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <data>
+        <xpath expr="//form[1]/sheet[1]/div[1]" position="after">
+          <group name="studio_group_f0U3B">
+            <group name="studio_group_f0U3B_left">
+              <field name="x_studio_test_value" string="Valor" attrs="{}" required="1"/>
+              <field name="x_studio_descripcin_general" string="Descripción general"/>
+            </group>
+          </group>
+          <group name="studio_group_cSP3s">
+            <group name="studio_group_cSP3s_left" string="Pantalla">
+              <field name="x_studio_display_short_description" string="Pantalla Descripción Corta" attrs="{}" required="1"/>
+              <field name="x_studio_estado_de_la_pantalla" string="Estado de la pantalla"/>
+            </group>
+            <group name="studio_group_cSP3s_right" string="Carcasa">
+              <field name="x_studio_case_short_description" string="Carcasa Descripción Corta" attrs="{}" required="1"/>
+              <field name="x_studio_estado_de_la_carcasa" string="Estado de la carcasa"/>
+            </group>
+          </group>
+          <group name="studio_group_2lFl7">
+            <group name="studio_group_2lFl7_left" string="Funcionalidades">
+              <field name="x_studio_estado_funcional" string="Estado funcional"/>
+            </group>
+            <group name="studio_group_2lFl7_right" string="Accesibilidad">
+              <field name="x_studio_nivel_de_accesibilidad" string="Nivel de accesibilidad"/>
+            </group>
+          </group>
+        </xpath>
+      </data>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" ref="studio_customization.default_form_view_fo_6a3b5eff-a61b-4f20-8698-d1c97912cad9"/>
+    <field name="key" eval="False"/>
+    <field name="mode">extension</field>
+    <field name="model">x_grado</field>
+    <field name="name">Odoo Studio: Default form view for x_grado customization</field>
+    <field name="priority">99</field>
+    <field name="type">form</field>
+  </record> -->
+
+ <!-- <record id="studio_customization.odoo_studio_stock_pr_06f74cfa-4966-4f12-b6ff-45cac0846627" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <data>
+        <xpath expr="//field[@name='company_id']" position="replace"/>
+        <xpath expr="//field[@name='ref']" position="replace"/>
+        <xpath expr="//field[@name='product_id']" position="after">
+          <field name="x_studio_part_number"/>
+          <field name="x_studio_grado_preliminar"/>
+          <field name="x_studio_resultado"/>
+          <field name="x_studio_field_kfZxb"/>
+          <field name="x_studio_color"/>
+          <field name="x_studio_tamao_de_pantalla"/>
+          <field name="x_studio_tipo_de_sim"/>
+          <field name="x_studio_idioma"/>
+          <field name="x_studio_cargador"/>
+          <field name="x_studio_logo"/>
+          <field name="x_studio_field_Jwrvk"/>
+          <field name="x_studio_red"/>
+          <field name="x_studio_fecha_de_lanzamiento"/>
+        </xpath>
+      </data>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" ref="stock.view_production_lot_tree"/>
+    <field name="key" eval="False"/>
+    <field name="mode">extension</field>
+    <field name="model">stock.production.lot</field>
+    <field name="name">Odoo Studio: stock.production.lot.tree customization</field>
+    <field name="priority">99</field>
+    <field name="type">tree</field>
+  </record> -->
+ <!-- <record id="studio_customization.odoo_studio_stock_pi_e3365239-4785-4d38-bfae-a2450f303477" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <data>
+        <xpath expr="//field[@name='move_line_ids_without_package']" position="inside">
+          <tree decoration-muted="state == 'cancel'" decoration-danger="(state not in ('cancel','done'))" string="Move Lines" create="0" default_order="date">
+            <field name="date"/>
+            <field name="reference" string="Reference" invisible="context.get('no_reference', False)"/>
+            <field name="product_id"/>
+            <field name="lot_id" groups="stock.group_production_lot"/>
+            <field name="x_studio_grado_1" string="Grado"/>
+            <field name="x_studio_funcional_result" string="Funcional"/>
+            <field name="location_id"/>
+            <field name="location_dest_id"/>
+            <field name="qty_done" string="Quantity Done"/>
+            <field name="product_uom_id" options="{'no_open': True, 'no_create': True}" string="Unit of Measure" groups="uom.group_uom"/>
+            <field name="state"/>
+            <field name="company_id" groups="base.group_multi_company" force_save="1"/>
+          </tree>
+        </xpath>
+      </data>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" ref="stock.view_picking_form"/>
+    <field name="key" eval="False"/>
+    <field name="mode">extension</field>
+    <field name="model">stock.picking</field>
+    <field name="name">Odoo Studio: stock.picking.form customization</field>
+    <field name="priority">99</field>
+    <field name="type">form</field>
+  </record> -->
+ <!-- <record id="studio_customization.studio_report_docume_fc67a044-c099-4aa7-939f-8100edb6988c" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <t t-name="studio_report_document">
+        <t t-call="web.external_layout">
+          <div class="page"/>
+        </t>
+      </t>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" eval="False"/>
+    <field name="key">studio_customization.studio_report_docume_fc67a044-c099-4aa7-939f-8100edb6988c_document</field>
+    <field name="mode">primary</field>
+    <field name="model" eval="False"/>
+    <field name="name">studio_customization.studio_report_docume_fc67a044-c099-4aa7-939f-8100edb6988c_document</field>
+    <field name="priority">16</field>
+    <field name="type">qweb</field>
+  </record> -->
+ <!--  <record id="studio_customization.studio_main_report_639aacb3-f8ee-417e-9a4d-28979acf3de9" model="ir.ui.view" context="{'studio': True}">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <t t-name="studio_main_report">
+        <t t-call="web.html_container">
+          <t t-foreach="docs" t-as="doc">
+            <t t-call="studio_customization.studio_report_docume_fc67a044-c099-4aa7-939f-8100edb6988c_document"/>
+          </t>
+        </t>
+      </t>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" eval="False"/>
+    <field name="key">studio_customization.studio_report_docume_fc67a044-c099-4aa7-939f-8100edb6988c</field>
+    <field name="mode">primary</field>
+    <field name="model" eval="False"/>
+    <field name="name">studio_customization.studio_report_docume_fc67a044-c099-4aa7-939f-8100edb6988c</field>
+    <field name="priority">16</field>
+    <field name="type">qweb</field>
+  </record> -->
+
+  <!-- END Update -->
+
+</odoo>

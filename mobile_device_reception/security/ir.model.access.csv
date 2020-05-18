@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+test_f_manager,test_f_manager,mobile_device_reception.model_functional_quality_test,base.group_system,1,1,1,1
+test_e_manager,test_e_manager,mobile_device_reception.model_esthetic_quality_test,base.group_system,1,1,1,1
+test_ew_manager,test_ew_manager,mobile_device_reception.model_mobile_quality_test_wizard,base.group_system,1,1,1,1

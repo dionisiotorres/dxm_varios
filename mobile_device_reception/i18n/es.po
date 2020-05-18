@@ -1,0 +1,518 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mobile_device_reception
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-18 18:14+0000\n"
+"PO-Revision-Date: 2020-05-18 18:14+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test__bluetooth
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__bluetooth
+msgid "\tBluetooth"
+msgstr ""
+
+#. module: mobile_device_reception
+#: model_terms:ir.ui.view,arch_db:mobile_device_reception.view_id_name
+msgid "Adjust Inventory"
+msgstr "Ajustar Inventario"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_stock_picking__quality_test_done
+msgid "All Quality Test Done"
+msgstr ""
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__applications
+msgid "Applications"
+msgstr "Aplicaciones"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test__buttons
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__buttons
+msgid "Buttons"
+msgstr "Botones"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_esthetic_quality_test__cables
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__cables
+msgid "Cables"
+msgstr "Cables"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test__call_test
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__call_test
+msgid "Call"
+msgstr "Llamada"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test__camera
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__camera
+msgid "Camera"
+msgstr "Cámara"
+
+#. module: mobile_device_reception
+#: model_terms:ir.ui.view,arch_db:mobile_device_reception.graduation_wizard_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: mobile_device_reception
+#: model_terms:ir.ui.view,arch_db:mobile_device_reception.mobile_functional_test_wizard
+msgid "Cancel Test"
+msgstr "Cancelar Prueba"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_esthetic_quality_test__case_test
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__case_test
+msgid "Case Status"
+msgstr "Estado de la Carcasa"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_esthetic_quality_test__device_charger
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__charger
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__device_charger
+msgid "Charger"
+msgstr "Cargador"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__color
+msgid "Color"
+msgstr "Color"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__company_id
+msgid "Company"
+msgstr "Empresa"
+
+#. module: mobile_device_reception
+#: model:ir.model,name:mobile_device_reception.model_res_config_settings
+msgid "Config Settings"
+msgstr "Opciones de Configuración"
+
+#. module: mobile_device_reception
+#: model_terms:ir.ui.view,arch_db:mobile_device_reception.mobile_functional_test_wizard
+msgid "Create New Lot"
+msgstr "Crear Nuevo Lote"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_esthetic_quality_test__create_uid
+#: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test__create_uid
+#: model:ir.model.fields,field_description:mobile_device_reception.field_graduation_wizard__create_uid
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_esthetic_quality_test__create_date
+#: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test__create_date
+#: model:ir.model.fields,field_description:mobile_device_reception.field_graduation_wizard__create_date
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__create_date
+msgid "Created on"
+msgstr "Fecha de creación"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_esthetic_quality_test__device_case
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__device_case
+msgid "Device Case"
+msgstr "Carcasa del Equipo"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test__display_bright
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__display_bright
+msgid "Display Bright"
+msgstr "Brillo de la Pantalla"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_esthetic_quality_test__display_name
+#: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test__display_name
+#: model:ir.model.fields,field_description:mobile_device_reception.field_graduation_wizard__display_name
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_esthetic_quality_test__display_test
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__display_test
+msgid "Display Status"
+msgstr "Estado de la Pantalla"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_stock_production_lot__esthetic_test_id
+msgid "Esthetic Test"
+msgstr "Prueba Estética"
+
+#. module: mobile_device_reception
+#: model:ir.actions.act_window,name:mobile_device_reception.action_esthetic_test_view
+msgid "Esthetic Test View"
+msgstr ""
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_graduation_wizard__serial_file
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__serial_file
+msgid "File"
+msgstr "Fichero"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__lot_id
+msgid "Find Lot"
+msgstr "Buscar Lote"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test__fingerprint_reader
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__fingerprint_reader
+msgid "Fingerprint Reader"
+msgstr "Lector de Huellas"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_stock_production_lot__functional_test_id
+#: model_terms:ir.ui.view,arch_db:mobile_device_reception.esthetic_quality_test_view_form
+#: model_terms:ir.ui.view,arch_db:mobile_device_reception.functional_quality_test_view_form
+#: model_terms:ir.ui.view,arch_db:mobile_device_reception.mobile_functional_test_wizard
+msgid "Functional Test"
+msgstr "Prueba Funcional"
+
+#. module: mobile_device_reception
+#: model:ir.actions.act_window,name:mobile_device_reception.action_functional_test_view
+msgid "Functional Test View"
+msgstr ""
+
+#. module: mobile_device_reception
+#: model_terms:ir.ui.view,arch_db:mobile_device_reception.mobile_functional_test_wizard
+msgid "Grade"
+msgstr "Grado"
+
+#. module: mobile_device_reception
+#: model:res.groups,name:mobile_device_reception.group_graduation
+msgid "Graduation Team"
+msgstr "Grupo de Graduación"
+
+#. module: mobile_device_reception
+#: model:ir.model,name:mobile_device_reception.model_graduation_wizard
+msgid "Graduation wizard"
+msgstr "Asistente de Graduación"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_esthetic_quality_test__headset
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__headset
+msgid "Headset"
+msgstr "Auriculares"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test__humidity
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__humidity
+msgid "Humidity"
+msgstr "Humedad"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_esthetic_quality_test__id
+#: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test__id
+#: model:ir.model.fields,field_description:mobile_device_reception.field_graduation_wizard__id
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__id
+msgid "ID"
+msgstr "ID"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,help:mobile_device_reception.field_res_config_settings__graduation_op_type
+msgid "In which operation type will appear Re Graduation option"
+msgstr "En que tipo de operación aparecerá la opción de regraduación"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,help:mobile_device_reception.field_res_config_settings__quality_test_op_type
+msgid "In which operation type will appear this test"
+msgstr "En que tipo de operación estará disponible esta prueba"
+
+#. module: mobile_device_reception
+#: model_terms:ir.ui.view,arch_db:mobile_device_reception.res_config_settings_view_form
+msgid "In which operation type will this test appear"
+msgstr "En que tipo de operación estará disponible esta prueba"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_stock_picking__inventory_adjusted
+msgid "Inventory Adjustment"
+msgstr "Ajuste de Inventario"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__lang
+msgid "Language"
+msgstr "Lenguaje"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_esthetic_quality_test____last_update
+#: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test____last_update
+#: model:ir.model.fields,field_description:mobile_device_reception.field_graduation_wizard____last_update
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard____last_update
+msgid "Last Modified on"
+msgstr "Última Modificación"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_esthetic_quality_test__write_uid
+#: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test__write_uid
+#: model:ir.model.fields,field_description:mobile_device_reception.field_graduation_wizard__write_uid
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Modificado por"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_esthetic_quality_test__write_date
+#: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test__write_date
+#: model:ir.model.fields,field_description:mobile_device_reception.field_graduation_wizard__write_date
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__lock_status
+msgid "Lock Status"
+msgstr "Bloqueo"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__logo
+msgid "Logo"
+msgstr "Logo"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_esthetic_quality_test__lot_id
+#: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test__lot_id
+#: model:ir.model.fields,field_description:mobile_device_reception.field_graduation_wizard__lot_ids
+msgid "Lot"
+msgstr "Lote"
+
+#. module: mobile_device_reception
+#: model_terms:ir.ui.view,arch_db:mobile_device_reception.mobile_functional_test_wizard
+msgid "Lot Information"
+msgstr "Información de Lote"
+
+#. module: mobile_device_reception
+#: model:ir.model,name:mobile_device_reception.model_stock_production_lot
+msgid "Lot/Serial"
+msgstr "Lote/Número de serie"
+
+#. module: mobile_device_reception
+#: model_terms:ir.ui.view,arch_db:mobile_device_reception.graduation_wizard_form
+#: model_terms:ir.ui.view,arch_db:mobile_device_reception.mobile_functional_test_wizard
+msgid "Lots"
+msgstr "Lotes"
+
+#. module: mobile_device_reception
+#: model_terms:ir.ui.view,arch_db:mobile_device_reception.mobile_functional_test_wizard
+msgid "Mobile Quality Test"
+msgstr "Prueba de Calidad para Equipos Móviles"
+
+#. module: mobile_device_reception
+#: model_terms:ir.ui.view,arch_db:mobile_device_reception.res_config_settings_view_form
+msgid "Mobile Quality Test Options"
+msgstr "Opciones de la Prueba de Calidad para Equipos Móviles"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__network_type
+msgid "Network Type"
+msgstr "Tipo de Red"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_graduation_wizard__new_grade
+msgid "New Grade"
+msgstr "Nuevo Grado"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__new_lot_ids
+msgid "New Lot"
+msgstr "Nuevo Lote"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test__mobile_os
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__mobile_os
+msgid "Operating System"
+msgstr "Sistema Operativo"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test__power_on
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__power_on
+msgid "Power On"
+msgstr "Encendido"
+
+#. module: mobile_device_reception
+#: model_terms:ir.ui.view,arch_db:mobile_device_reception.graduation_wizard_form
+msgid "Process Lots"
+msgstr "Procesar Lotes"
+
+#. module: mobile_device_reception
+#: model_terms:ir.ui.view,arch_db:mobile_device_reception.mobile_functional_test_wizard
+msgid "Process Test"
+msgstr "Procesar Prueba"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__product_id
+msgid "Product"
+msgstr "Producto"
+
+#. module: mobile_device_reception
+#: model:ir.model,name:mobile_device_reception.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr "Movimientos de Producto (Stock Move Line)"
+
+#. module: mobile_device_reception
+#: model:ir.model,name:mobile_device_reception.model_esthetic_quality_test
+#: model:ir.model,name:mobile_device_reception.model_functional_quality_test
+msgid "Product Fucntional Tests"
+msgstr "Prueba Funcional"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test__proximity_sensor
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__proximity_sensor
+msgid "Proximity Sensor"
+msgstr "Sensor de Proximidad"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_stock_move_line__quality_test_done
+msgid "Quality Test Done"
+msgstr "Prueba de Calidad Hecha"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_res_config_settings__quality_test_op_type
+msgid "Quality Test Operation Type"
+msgstr "Tipo de Operacion para la Prueba de Calidad"
+
+#. module: mobile_device_reception
+#: model_terms:ir.ui.view,arch_db:mobile_device_reception.stock_production_lot_quality_test
+msgid "Quality Tests"
+msgstr "Pruebas de Calidad"
+
+#. module: mobile_device_reception
+#: model:ir.model,name:mobile_device_reception.model_mobile_quality_test_wizard
+msgid "Quality test"
+msgstr "Prueba de Calidad"
+
+#. module: mobile_device_reception
+#: model:ir.actions.act_window,name:mobile_device_reception.act_graduation_wizard
+msgid "Re Graduate Lots"
+msgstr "Re Graduar Lotes"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_res_config_settings__graduation_op_type
+msgid "Re Graduation Operation Type"
+msgstr "Tipo de Operación para Re Graduar"
+
+#. module: mobile_device_reception
+#: model_terms:ir.ui.view,arch_db:mobile_device_reception.res_config_settings_view_form
+msgid "Re Graduation operation type"
+msgstr "Tipo de Operación para Re Graduar"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test__ring_tone
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__ring_tone
+msgid "Ring Tone"
+msgstr "Tono de llamada"
+
+#. module: mobile_device_reception
+#: model:ir.actions.act_window,name:mobile_device_reception.action_run_graduation_wizard
+msgid "Run Graduation Wizard"
+msgstr "Asistente de Re Graduación"
+
+#. module: mobile_device_reception
+#: model:ir.actions.act_window,name:mobile_device_reception.action_run_quality_test
+#: model_terms:ir.ui.view,arch_db:mobile_device_reception.view_id_name
+msgid "Run Quality Test"
+msgstr "Prueba de Calidad"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_graduation_wizard__lot_id
+#: model_terms:ir.ui.view,arch_db:mobile_device_reception.graduation_wizard_form
+msgid "Search Lot"
+msgstr "Buscar Lote"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test__security_pattern
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__security_pattern
+msgid "Security Pattern"
+msgstr "Patrón de Seguridad"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_stock_picking__show_inventory_adjustment
+msgid "Show Inventory Adjustment"
+msgstr "Mostrar Ajuste de Inventario"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_stock_picking__show_quality_test
+msgid "Show Quality Test"
+msgstr "Mostrar Prueba de Calidad"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test__speaker
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__speaker
+msgid "Speaker"
+msgstr "Bocina"
+
+#. module: mobile_device_reception
+#: model:ir.model,name:mobile_device_reception.model_stock_move
+msgid "Stock Move"
+msgstr "Movimiento de existencias"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test__test_pass
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__test_pass
+msgid "Test Pass"
+msgstr "Prueba Satisfactoria"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_esthetic_quality_test__test_result
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__test_result
+msgid "Test Result"
+msgstr "Resultado de la Prueba"
+
+#. module: mobile_device_reception
+#: model_terms:ir.ui.view,arch_db:mobile_device_reception.res_config_settings_view_form
+msgid "To send devices to workshop"
+msgstr "Para enviar equipos al taller"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test__torch
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__torch
+msgid "Torch"
+msgstr "Linterna"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test__touch_screen
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__touch_screen
+msgid "Touch Screen"
+msgstr "Pantalla Táctil"
+
+#. module: mobile_device_reception
+#: model:ir.model,name:mobile_device_reception.model_stock_picking
+msgid "Transfer"
+msgstr "Albarán"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test__user_account
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__user_account
+msgid "User Account"
+msgstr "Cuenta de Usuario"
+
+#. module: mobile_device_reception
+#: model_terms:ir.ui.view,arch_db:mobile_device_reception.mobile_functional_test_wizard
+msgid "Welcome Logo"
+msgstr "Logotipo de Bienvenida"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,help:mobile_device_reception.field_res_config_settings__workshop_op_type
+msgid "Which operation type to send devices to workshop"
+msgstr "Tipo de operación para enviar equipos al taller"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test__wifi
+#: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__wifi
+msgid "WiFi"
+msgstr "WiFi"
+
+#. module: mobile_device_reception
+#: model:ir.model.fields,field_description:mobile_device_reception.field_res_config_settings__workshop_op_type
+msgid "Workshop Operation Type"
+msgstr "Tipo de Operación para el Taller"
