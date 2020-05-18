@@ -22,10 +22,11 @@
                         <group name='extra_info'>
                             <field name='color'/>
                             <field name='lock_status'/>
-                            <field name='logo'/>
+                            <field name='logo' string="Welcome Logo"/>
                             <field name='charger'/>
                             <field name='network_type'/>
                             <field name='lang'/>
+                            <field name='applications'/>
                         </group>
                     </group>
                     <group string="Grade">

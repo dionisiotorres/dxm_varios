@@ -16,15 +16,17 @@ class Picking(models.Model):
 
     show_inventory_adjustment = fields.Boolean(compute="_show_inventory_adjustment")
 
+    inventory_adjusted = fields.Boolean(string="Inventory Adjustment")
+
     def _show_inventory_adjustment(self):
         q_test_id = self.env['ir.config_parameter'].sudo().get_param('mobile_device_reception.quality_test_op_type')
         for picking in self:
             show_adjustment = False
             for move in self.move_lines:
                 if move.move_orig_ids:
-                    if move.product_uom_qty != move.move_orig_ids[0].product_uom_qty:
+                    if move.product_uom_qty != move.move_orig_ids[0].product_uom_qty and not picking.inventory_adjusted:
                         show_adjustment = True
-                elif q_test_id == self.picking_type_id.id:
+                elif q_test_id == self.picking_type_id.id and not picking.inventory_adjusted:
                     show_adjustment = True
             picking['show_inventory_adjustment'] = show_adjustment
 
@@ -185,6 +187,7 @@ class Picking(models.Model):
                 #     move.write({'move_dest_ids': [new_move.id]})
                 # next_picking.action_confirm()
         self.action_assign()
+        self.write({'inventory_adjusted': True})
         message = self.env['message.popup']
         term = message.pluralize(products_adjusted, 'product', 'products')
         return message.popup(message="Inventory adjustment successfully for %s" % term)

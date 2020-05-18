@@ -34,6 +34,7 @@ class FunctionalTest(models.TransientModel):
     charger = fields.Many2one(comodel_name='x_cargador', string="Charger")
     network_type = fields.Many2one(comodel_name='x_red', string="Network Type")
     lang = fields.Many2one(comodel_name='x_idioma_terminal', string="Language")
+    applications = fields.Many2one(comodel_name='x_terminal_aplicaciones', string="Applications")
 
     serial_file = fields.Binary(string="File")
     lot_id = fields.Char(string="Find Lot")
@@ -153,6 +154,7 @@ class FunctionalTest(models.TransientModel):
                 'x_studio_logo': self.logo.id,
                 'x_studio_idioma': self.lang.id,
                 'x_studio_cargador': self.charger.id,
+                'x_studio_aplicaciones': self.applications.id,
                 # Test
                 'esthetic_test_id': esthetic_obj.id,
                 'functional_test_id': functional_obj.id,

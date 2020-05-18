@@ -73,7 +73,7 @@ class EstheticQualityTest(models.Model):
 
 class FunctionalQualityTest(models.Model):
     _name = 'functional.quality.test'
-    _description = 'Product Visual Tests'
+    _description = 'Product Fucntional Tests'
 
     # Lot ID
     lot_id = fields.One2many(comodel_name="stock.production.lot", inverse_name="functional_test_id", string="Lot")
