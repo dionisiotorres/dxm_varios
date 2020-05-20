@@ -5,7 +5,7 @@
         <xpath expr="//div[hasclass('o_wsale_product_btn')]/input[1]" position="before">
             <div class="input-group oe_website_spinner" style="float: left;max-width: 50px;" contenteditable="false">
                     <input type="number"
-                           style="font-size: 14px;color: black; font-size: 16px;max-width: 45px;padding-left: 5px;margin-right: 5px;border-radius: 5px;height: 36px; background-color: #fff;"
+                           style="font-size: 14px;color: black; max-width: 45px;padding-left: 5px;margin-right: 5px;border-radius: 5px;height: 36px; background-color: #fff;"
                            placeholder="Qty"
                            data-min="1" name="add_qty" min="1"/>
                 </div>
