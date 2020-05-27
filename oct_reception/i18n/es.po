@@ -1,0 +1,201 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oct_reception
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-27 16:32+0000\n"
+"PO-Revision-Date: 2020-05-27 16:32+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: oct_reception
+#: model_terms:ir.ui.view,arch_db:oct_reception.label_reception_document
+msgid ""
+"<br/>\n"
+"                        <strong>Carrier:</strong>"
+msgstr ""
+"<br/>\n"
+"                        <strong>Transportista:</strong>"
+#. module: oct_reception
+#: model_terms:ir.ui.view,arch_db:oct_reception.label_reception_document
+msgid ""
+"<br/>\n"
+"                        <strong>No. Exp:</strong>"
+msgstr ""
+"<br/>\n"
+"                        <strong>No. Exp:</strong>"
+#. module: oct_reception
+#: model_terms:ir.ui.view,arch_db:oct_reception.label_reception_document
+msgid ""
+"<br/>\n"
+"                        <strong>Note:</strong>"
+msgstr ""
+"<br/>\n"
+"                        <strong>Obs:</strong>"
+#. module: oct_reception
+#: model_terms:ir.ui.view,arch_db:oct_reception.label_reception_document
+msgid ""
+"<br/>\n"
+"                        <strong>Provider:</strong>"
+msgstr ""
+"<br/>\n"
+"                        <strong>Proveedor:</strong>"
+#. module: oct_reception
+#: model_terms:ir.ui.view,arch_db:oct_reception.label_reception_document
+msgid "<strong style=\"margin-left: 10px;\">Time:</strong>"
+msgstr "<strong style=\"margin-left: 10px;\">Hora:</strong>"
+
+#. module: oct_reception
+#: model_terms:ir.ui.view,arch_db:oct_reception.label_reception_document
+msgid "<strong>DXM. Dinero por tu móvil S.L.</strong>"
+msgstr ""
+
+#. module: oct_reception
+#: model_terms:ir.ui.view,arch_db:oct_reception.label_reception_document
+msgid "<strong>Date:</strong>"
+msgstr "<strong>Fecha:</strong>"
+
+#. module: oct_reception
+#: model_terms:ir.ui.view,arch_db:oct_reception.label_reception_document
+msgid "<strong>Package: </strong>"
+msgstr "<strong>Paquete: </strong>"
+
+#. module: oct_reception
+#: model:ir.model.fields,field_description:oct_reception.field_control_recipient_packages__carrier
+msgid "Carrier"
+msgstr "Transportista"
+
+#. module: oct_reception
+#: model:ir.model.fields,field_description:oct_reception.field_control_recipient_packages__company_id
+msgid "Company"
+msgstr "Empresa"
+
+#. module: oct_reception
+#: model:ir.model.fields,help:oct_reception.field_control_recipient_packages__company_id
+msgid "Company related to this reception"
+msgstr "Empresa relacionada con esta recepción"
+
+#. module: oct_reception
+#: model:ir.actions.act_window,name:oct_reception.action_control_recipient_packages
+#: model:ir.ui.menu,name:oct_reception.menu_control_recipient_packages
+#: model_terms:ir.ui.view,arch_db:oct_reception.control_recipient_packages_calendar
+#: model_terms:ir.ui.view,arch_db:oct_reception.control_recipient_packages_form_view
+#: model_terms:ir.ui.view,arch_db:oct_reception.control_recipient_packages_tree_view
+msgid "Control Recipient Packages"
+msgstr "Recepción de Paquetes"
+
+#. module: oct_reception
+#: model:ir.model.fields,field_description:oct_reception.field_control_recipient_packages__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: oct_reception
+#: model:ir.model.fields,field_description:oct_reception.field_control_recipient_packages__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: oct_reception
+#: model:ir.model.fields,field_description:oct_reception.field_control_recipient_packages__date_in
+msgid "Date In"
+msgstr "Fecha de Entrada"
+
+#. module: oct_reception
+#: model:ir.model.fields,field_description:oct_reception.field_control_recipient_packages__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: oct_reception
+#: model:ir.model.fields,field_description:oct_reception.field_control_recipient_packages__origin
+msgid "Expedition"
+msgstr "Expedición"
+
+#. module: oct_reception
+#: model:ir.model.fields,field_description:oct_reception.field_control_recipient_packages__id
+msgid "ID"
+msgstr ""
+
+#. module: oct_reception
+#: model:ir.model.fields,field_description:oct_reception.field_control_recipient_packages____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: oct_reception
+#: model:ir.model.fields,field_description:oct_reception.field_control_recipient_packages__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: oct_reception
+#: model:ir.model.fields,field_description:oct_reception.field_control_recipient_packages__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: oct_reception
+#: model:ir.model.fields,field_description:oct_reception.field_control_recipient_packages__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: oct_reception
+#: code:addons/oct_reception/models/oct_recepcion.py:0
+#: code:addons/oct_reception/models/oct_recepcion.py:0
+#: code:addons/oct_reception/models/oct_recepcion.py:0
+#, python-format
+msgid "New"
+msgstr "Nuevo"
+
+#. module: oct_reception
+#: model:ir.model.fields,field_description:oct_reception.field_control_recipient_packages__note
+msgid "Note"
+msgstr "Observaciónes"
+
+#. module: oct_reception
+#: model:ir.model.fields,field_description:oct_reception.field_control_recipient_packages__packages
+msgid "Package Quantity"
+msgstr "Cantidad de Paquetes"
+
+#. module: oct_reception
+#: model:ir.model.fields,field_description:oct_reception.field_control_recipient_packages__picking_count
+msgid "Picking Count"
+msgstr "Albaranes"
+
+#. module: oct_reception
+#: model:ir.model.fields,field_description:oct_reception.field_control_recipient_packages__picking_ids
+#: model_terms:ir.ui.view,arch_db:oct_reception.control_recipient_packages_form_view
+msgid "Pickings"
+msgstr ""
+
+#. module: oct_reception
+#: model:ir.actions.report,name:oct_reception.action_print_reception_label
+msgid "Print Reception Labels"
+msgstr "Imprimir Etiquetas"
+
+#. module: oct_reception
+#: model:ir.model.fields,field_description:oct_reception.field_control_recipient_packages__partner_id
+msgid "Provider"
+msgstr "Proveedor"
+
+#. module: oct_reception
+#: model:ir.model.fields,field_description:oct_reception.field_stock_picking__recipient_id
+msgid "Recipient"
+msgstr "Recipiente"
+
+#. module: oct_reception
+#: model:ir.model,name:oct_reception.model_stock_picking
+msgid "Transfer"
+msgstr "Albarán"
+
+#. module: oct_reception
+#: model:ir.model,name:oct_reception.model_control_recipient_packages
+msgid "control.recipient.packages"
+msgstr ""
+
+#. module: oct_reception
+#: model:ir.actions.report,print_report_name:oct_reception.action_print_reception_label
+msgid "object.name"
+msgstr ""
