@@ -43,13 +43,13 @@
                         <strong>Date:</strong>
                         <span t-field="doc.date_in" t-options='{"format": "dd/MM/yyyy"}'/>
                         <strong style="margin-left: 10px;">Time:</strong>
-                        <span t-field="doc.date_in" t-options='{"format": "HH:mm"}'/>
+                        <span t-field="doc.date_in" t-options='{"format": "H:mm"}'/>
                         <br/>
                         <strong>Carrier:</strong>
                         <span t-field="doc.carrier"/>
                         <br/>
                         <strong>No. Exp:</strong>
-                        <span t-field="doc.origin" t-options='{"format": "hh:mm"}'/>
+                        <span t-field="doc.origin"/>
                         <br/>
                         <strong>Provider:</strong>
                         <span t-field="doc.partner_id.display_name"/>
