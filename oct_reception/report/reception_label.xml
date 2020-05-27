@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            id="action_print_reception_label"
+            string="Print Reception Labels"
+            model="control.recipient.packages"
+            report_type="qweb-pdf"
+            file="oct_reception.product_reception_label"
+            name="oct_reception.product_reception_label"
+            print_report_name="object.name"
+            paperformat="oct_reception.reception_label_paper_format"
+        />
+    </data>
+</odoo>

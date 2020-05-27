@@ -22,6 +22,7 @@
     'data': [
         'security/ir.model.access.csv',
         'data/group_data.xml',
+        'data/report_paper_format.xml',
         'views/stock_picking_view.xml',
         'views/stock_production_lot.xml',
         'views/res_config.xml',
@@ -29,6 +30,8 @@
         'views/esthetic_quality_test_view.xml',
         'wizard/quality_test_view.xml',
         'wizard/graduation_wizard_view.xml',
+        'report/product_label_template.xml',
+        'report/product_label.xml',
     ],
     'installable': True,
     'application': False,

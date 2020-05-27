@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            id="action_print_product_label"
+            string="Print Labels"
+            model="stock.picking"
+            report_type="qweb-pdf"
+            file="mobile_device_reception.product_label"
+            name="mobile_device_reception.product_label"
+            print_report_name="object.name"
+            paperformat="mobile_device_reception.product_label_paper_format"
+        />
+    </data>
+</odoo>
