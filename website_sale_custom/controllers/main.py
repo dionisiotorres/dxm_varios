@@ -6,6 +6,10 @@ from odoo.addons.website_sale.controllers.main import WebsiteSale
 
 
 class WebsiteSaleCustom(WebsiteSale):
+    
+    @http.route(auth="user")
+    def shop(self, page=0, category=None, search='', ppg=False, **post):
+        return super(WebsiteSaleCustom, self).shop(page=page, category=category, search=search)
 
     @http.route(auth="user")
     def product(self, product, category='', search='', **kwargs):
