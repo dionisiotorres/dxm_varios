@@ -16,13 +16,6 @@ class ResConfigSettings(models.TransientModel):
     workshop_op_type = fields.Many2one(comodel_name='stock.picking.type', string='Workshop Operation Type',
                                        help='Which operation type to send devices to workshop')
 
-    label_paperformat_id = fields.Many2one(related="company_id.label_paper_format",
-                                           string='Product Label Paper format',
-                                           readonly=False)
-    label_template_id = fields.Many2one(related="company_id.label_report_layout_id",
-                                        string='Product Label Template',
-                                        readonly=False)
-
     @api.model
     def get_values(self):
         res = super(ResConfigSettings, self).get_values()

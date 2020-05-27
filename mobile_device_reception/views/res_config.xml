@@ -45,66 +45,10 @@
                             </div>
                         </div>
 
-
-                        <div class="col-xs-12 col-md-4 o_setting_box">
-                            <div>
-                                <label for="label_paperformat_id"/>
-                                <div class="text-muted">
-                                   Format to print product label
-                                </div>
-                            </div>
-                            <div>
-                               <field name="label_paperformat_id"/>
-                            </div>
-                        </div>
-
-
-
-                        <div class="col-xs-12 col-md-4 o_setting_box">
-                            <div>
-                                <label for="label_template_id"/>
-                                <div class="text-muted">
-                                   Product label template
-                                </div>
-                            </div>
-                            <div>
-                               <field name="label_template_id"/>
-                            </div>
-                        </div>
-
-
                 </div>
             </div>
         </field>
     </record>
-
-
-   <!-- <record id="res_config_settings_view_form" model="ir.ui.view">
-        <field name="name">res.config.settings.view.form.inherited.label_format</field>
-        <field name="model">res.config.settings</field>
-        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
-        <field name="arch" type="xml">
-
-            <xpath expr="//div[@id='business_documents']/div[hasclass('o_settings_container')]" position="inside">
-                <div class="col-12 col-lg-6 o_setting_box">
-                    <div class="o_setting_right_pane">
-                        <span class="o_form_label">Format</span>
-                        <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
-                        <div class="text-muted">
-                            Set the paper format of printed documents
-                        </div>
-                        <div class="content-group">
-                            <div class="mt16 row">
-                                <label for="paperformat_id" string="Format" class="col-3 col-lg-3 o_light_label"/>
-                                <field name="paperformat_id" class="oe_inline" required="1"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </xpath>
-
-        </field>
-    </record>-->
 
 
 </odoo>
