@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+
+    <template id="assets_frontend" inherit_id="website.assets_frontend">
+        <xpath expr="script[last()]" position="after">
+            <script type="text/javascript" src="/website_sale_custom/static/src/js/website_sale_inherited.js"></script>
+        </xpath>
+    </template>
+
     <template id="add_to_cart_qty" inherit_id="website_sale.products_item" customize_show="True" name="Add To Cart Qty Column" priority="20">
+        <xpath expr="//div[hasclass('o_wsale_product_btn')]//a[1]" position="replace">
+            <a href="javascript:void(0)" role="button" class="btn btn-secondary js_add_cart_update" aria-label="Shopping cart" title="Shopping cart">
+                <span class="fa fa-shopping-cart"/>
+                <sup class="cart_item_qty" value="0" />
+            </a>
+        </xpath>
         <xpath expr="//div[hasclass('o_wsale_product_btn')]/input[1]" position="before">
             <div class="input-group oe_website_spinner" style="float: left;max-width: 50px;" contenteditable="false">
                     <input type="number"
+                           class="input_add_qty"
                            style="font-size: 14px;color: black; max-width: 45px;padding-left: 5px;margin-right: 5px;border-radius: 5px;height: 36px; background-color: #fff;"
                            placeholder="Qty"
-                           data-min="1" name="add_qty" min="1"/>
+                           data-min="1" name="add_qty" min="1"  t-att-value="add_qty or 1"/>
                 </div>
         </xpath>
+
+
+
     </template>
 
 </odoo>
