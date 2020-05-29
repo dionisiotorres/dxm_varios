@@ -14,15 +14,16 @@ publicWidget.registry.WebsiteSale.include({
     _onClickAddCartUpdate: function (ev) {
         var self = this;
         var $card = $(ev.currentTarget).closest('.card');
+        var product_id = parseInt($card.find('input[name="product_id"]').val());
         this._rpc({
-            route: "/shop/cart/update_json",
+            route: "/shop/cart/update_qty",
             params: {
-                product_id: parseInt($card.find('input[name="product_id"]').val()),
+                product_id: product_id,
                 add_qty: parseInt($card.find('input[name="add_qty"]').val())
             },
         }).then(function (data) {
             wSaleUtils.updateCartNavBar(data);
-            $card.find('.cart_item_qty').val(data.quantity).html(data.quantity);
+            $card.find('.cart_item_qty').val(data.quantity).html(data.product_qty);
         });
     },
 });
