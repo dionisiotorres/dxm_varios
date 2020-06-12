@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="product_pricelist_item_form_add_grade" model="ir.ui.view">
+        <field name="name">product.pricelist.item.form.add.grade</field>
+        <field name="model">product.pricelist.item</field>
+        <field name="inherit_id" ref="product.product_pricelist_item_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='pricelist_rule_limits']" position="after">
+                <group name="apply_to_grade">
+                    <field name="apply_grade_subgroup"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_pricelist_form_add_grade" model="ir.ui.view">
+        <field name="name">product.pricelist.form.add.grade</field>
+        <field name="model">product.pricelist</field>
+        <field name="inherit_id" ref="product.product_pricelist_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='name']" position="after">
+                <field name="apply_grade_subgroup"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

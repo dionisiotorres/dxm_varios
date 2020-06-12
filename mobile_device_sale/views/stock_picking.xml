@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_picking_line_specs_form" model="ir.ui.view">
+        <field name="name">view.picking.line.specs.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page/field[@name='move_ids_without_package']/tree/field[@name='product_uom']" position="after">
+                <field name="show_product_specs" invisible="1"/>
+                <button name="action_show_move_specs" string="Product Specifications" type="object"
+                        icon="fa-adjust" width="0.1"
+                        attrs='{"invisible": [("show_product_specs", "=", False)]}'
+                        options='{"warn": true}'/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stock_move_specs_form" model="ir.ui.view">
+        <field name="name">stock.move.specs.form</field>
+        <field name="model">stock.move</field>
+        <field name="arch" type="xml">
+            <form string="Product Specs">
+                <sheet>
+                    <group>
+                        <field name="product_id" readonly="1"/>
+                        <field name="company_id" readonly="1"/>
+                    </group>
+                    <group/>
+                    <group>
+                        <field name="move_line_specs_ids">
+                            <tree>
+                                <field name="quantity" string="Quantity"/>
+                                <field name="grade" readonly="1"/>
+                                <field name="color"/>
+                                <field name="lock_status"/>
+                                <field name="logo"/>
+                                <field name="charger"/>
+                                <field name="network_type"/>
+                                <field name="lang"/>
+                                <field name="applications"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>
