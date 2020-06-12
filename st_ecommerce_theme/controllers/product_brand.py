@@ -52,11 +52,14 @@ class WebsiteProductBrand(WebsiteSale):
 
         return domain, url
 
-    def get_product_brands(self, brand_ids):
+    def get_product_brands(self, brand_ids=None):
         brand_obj = request.env['product.brand']
-        product_brands = brand_obj.sudo().search(
-            [('id', 'in', brand_ids)],
-            order='name asc')
+        if brand_ids:
+            product_brands = brand_obj.sudo().search(
+                [('id', 'in', brand_ids)],
+                order='name asc')
+        else:
+            product_brands = brand_obj.sudo().search([], order='name asc')
         return product_brands
 
     @http.route()
@@ -102,6 +105,8 @@ class WebsiteProductBrand(WebsiteSale):
                                 category=category and int(category),
                                 search=search, brand=brands_list,
                                 attrib=attrib_list, order=post.get('order'))
+                all_published_products = request.env['product.template'].search([('website_published', '=', True)])
+                published_product_brands = self.get_product_brands(all_published_products.mapped('product_brand_id').ids)
 
                 values = {
                     'products': products,
@@ -109,7 +114,7 @@ class WebsiteProductBrand(WebsiteSale):
                     'pager': pager,
                     'search_count': product_count,
                     'search': search,
-                    'product_brands': brand_obj.sudo().search([], order='name asc'),
+                    'product_brands': published_product_brands,
                     'product_brand_set': set(brand_values),
                     'request_brands': brand,
                     'keep': keep,

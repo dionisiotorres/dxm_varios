@@ -783,7 +783,7 @@ section#product_full_spec h3.text-center.mb32, .s_wsale_products_recently_viewed
 	 line-height: 50px;
 	 z-index: 9;
 	 border-radius: 50%;
-	 box-shadow: 0 0 8px #ccc c;
+	 box-shadow: 0 0 8px #ccc;
 	 color: #fff;
 }
  .oe_website_login_container form label {
@@ -1087,7 +1087,7 @@ border-color: #0077b5;
 }
 @media (max-width: 1199px){
 span.o_wizard_has_extra_step.d-none + .progress-wizard .fill-line:after   {
-    width: 150%%;
+    width: 150%;
 }
  .fill-line:after   {
    width: 200%;

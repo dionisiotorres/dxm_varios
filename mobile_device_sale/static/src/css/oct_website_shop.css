@@ -1,0 +1,45 @@
+
+/* Product grid filter rules */
+.oct_hidden {
+    display: none;
+}
+
+.oct_hidden_important {
+    display: none !important;
+}
+
+.oct_stock_qty {
+    margin-top: 0.5rem;
+}
+
+.oct_filter_container {
+    border-bottom: 1px solid #cccccc;
+    border-top: 1px solid #cccccc;
+    padding: 5px;
+}
+
+.oct_filter_title > .oct_selector_icon > i {
+    float: right;
+    font-size: 1.2rem;
+}
+
+.oct_filter_title {
+    display: block;
+    width: 100%;
+}
+
+.oct_filters_list_mode {
+    margin: 1rem 0rem 1rem 1rem;
+}
+
+.oct_filters_grid_mode {
+    margin: 0 auto;
+}
+
+.oct_filters > select:first-child {
+    margin-top: 0.5rem;
+}
+
+.oct_filters > select {
+    margin-bottom: 0.5rem;
+}

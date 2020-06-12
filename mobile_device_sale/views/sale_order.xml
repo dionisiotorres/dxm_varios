@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_order_form_grade" model="ir.ui.view">
+        <field name="name">sale.order.form.grade</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page/field[@name='order_line']/tree/field[@name='product_uom_qty']" position="before">
+                <field name="product_grade"/>
+            </xpath>
+            <xpath expr="//page/field[@name='order_line']/tree/field[@name='price_subtotal']" position="after">
+                <button name="action_show_line_specs" string="Product Line Specifications"
+                        type="object" icon="fa-adjust" width="0.1"/> <!-- options='{"warn": true}' -->
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sale_order_line_specs_form" model="ir.ui.view">
+        <field name="name">sale.order.line.specs.form</field>
+        <field name="model">sale.order.line</field>
+        <field name="arch" type="xml">
+            <form string="Product Specs" create="0">
+                <sheet>
+                    <group>
+                        <field name="product_id" readonly="1"/>
+                        <field name="company_id" readonly="1"/>
+                        <field name="product_grade" readonly="1"/>
+                    </group>
+                    <group/>
+                        <field name="line_specs_ids" mode="tree" options="{'no_open': True}">
+                            <tree editable="bottom" options="{'no_open': True}"> <!-- editable="bottom" -->
+                                <field name="available_qty" readonly="1"/>
+                                <field name="quantity" string="Quantity"/>
+                                <field name="color"/>
+                                <field name="lock_status"/>
+                                <field name="logo"/>
+                                <field name="charger"/>
+                                <field name="network_type"/>
+                                <field name="lang"/>
+                                <field name="applications"/>
+                            </tree>
+                        </field>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+</odoo>

@@ -27,7 +27,8 @@
         <!-- Snippets assets -->
         <template id="st_ecommerce_theme_snippets_assets" name="ST Ecommerce Theme Snippets Assets"
                   inherit_id="website.assets_frontend">
-            <xpath expr="//link[last()]" position="after">
+<!--            <xpath expr="//link[last()]" position="after">-->
+            <xpath expr="." position="inside">
 
                 <!-- js section -->
                 <script src="/st_ecommerce_theme/static/src/js/st_ecommerce_theme_header.js"/>

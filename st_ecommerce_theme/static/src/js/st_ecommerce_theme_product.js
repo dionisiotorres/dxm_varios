@@ -10,44 +10,52 @@
 #       Software.
 #
 ##############################################################################*/
+/*
 odoo.define('st_ecommerce_theme.product_view', function(require) {
     "use strict";
     var ajax = require('web.ajax');
 
-    /**
+    /!**
      * for display product on list view
      * @param: {Event} event
-     */
+     *!/
     $('#list').click(function(event) {
+        console.log("GRID SELECTOR CHANGED");
         event.preventDefault();
         $('#grid').removeClass('active');
         $('#list').addClass('active');
         ajax.jsonRpc("/list_view", 'call', {}).then(function() {
-            $(document)[0].location.reload();
+            //$(document)[0].location.reload();
+            window.location.reload();
         });
     });
 
-    /**
+    /!**
      * for display product on grid view
      * @param: {Event} event
-     */
+     *!/
     $('#grid').click(function(event) {
+        console.log("GRID SELECTOR CHANGED");
         event.preventDefault();
         $('#list').removeClass('active');
         $('#grid').addClass('active');
         ajax.jsonRpc("/grid_view", 'call', {}).then(function() {
-            $(document)[0].location.reload();
+            //$(document)[0].location.reload();
+            window.location.reload();
         });
     });
 
-    $('form.js_product_brands input, form.js_product_brands select').on('change', function(event) {
+    // $('form.js_product_brands input, form.js_product_brands select').on('change', function(event) {
+    $(document).on('change', 'form.js_product_brands input form.js_product_brands select',
+        function(event) {
+        console.log("PRODUCT BRAND CHANGED");
         if (!event.isDefaultPrevented()) {
             event.preventDefault();
             $(this).closest("form").submit();
         }
     });
 
-});
+});*/
 
 $(document).ready(function() {
 

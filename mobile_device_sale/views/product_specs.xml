@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="line_specs_form" model="ir.ui.view">
+        <field name="name">line.specs.form</field>
+        <field name="model">product.line.specs</field>
+        <field name="arch" type="xml">
+            <form string="Product Line Specifications">
+                <sheet>
+                    <group style="width: 50%%;">
+<!--                        <field name="available_qty" readonly="1"/>-->
+                        <field name="quantity" string="Quantity"/>
+                        <field name="grade"/>
+                        <field name="color"/>
+                        <field name="lock_status"/>
+                        <field name="logo"/>
+                        <field name="charger"/>
+                        <field name="network_type"/>
+                        <field name="lang"/>
+                        <field name="applications"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>
