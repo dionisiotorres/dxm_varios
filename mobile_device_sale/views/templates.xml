@@ -9,8 +9,8 @@
 
     <template id="product_specs_grid" inherit_id="website_sale.products_item" name="Product Specifications Grid">
         <xpath expr="//*[hasclass('product_price')]" position="after">
-            <div class="oct_stock_qty"><i class="fa fa-cubes"/> Stock Quantity:
-                <span class="oct_product_qty"><t t-esc="product.qty_available"/></span></div>
+            <div class="oct_stock_qty"><i class="fa fa-cubes"/> Stock Available:
+                <span class="oct_product_qty"></span></div> <!-- <t t-esc="product.qty_available"/> -->
             <!-- <i class="fa fa-spinner fa-spin"/> Calculating Stock... -->
             <div class="row oct_grid_variant_selector mt16">
 
@@ -28,7 +28,7 @@
 
 <!--                        <label t-if="layout_mode != 'grid'" for="grade">Grade: </label>-->
                         <select class="w-auto o_input o_group_selector oct_grade" name="grade">
-                            <option value="0">All Grades</option>
+                            <option value="0">Select Grade</option>
                             <t t-foreach="grades" t-as="grade">
                                 <option t-att-value="grade.id"><t t-esc="grade.x_name"/></option>
                             </t>

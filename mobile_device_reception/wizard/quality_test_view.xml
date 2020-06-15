@@ -17,19 +17,20 @@
                     <group string="Lot Information">
                         <group>
                             <field name='product_id'/>
+                            <field name="device_condition"/>
                             <field name='company_id' widget='selection' context="{'search_default_company_id': company_id}"/>
                         </group>
                         <group name='extra_info'>
                             <field name='color'/>
                             <field name='lock_status'/>
                             <field name='logo' string="Welcome Logo"/>
-                            <field name='charger'/>
+                            <field name='charger' string="SPEC"/>
                             <field name='network_type'/>
                             <field name='lang'/>
                             <field name='applications'/>
                         </group>
                     </group>
-                    <group string="Grade">
+                    <group string="Grade" attrs='{"invisible": [("device_condition", "=", "new")]}'>
                         <group>
                             <field name="display_test"/>
                             <field name="case_test"/>
@@ -41,7 +42,7 @@
                             <field name="headset" attrs='{"invisible": ["|", ("display_test", "!=", "10"), ("case_test", "!=", "10")]}'/>
                         </group>
                     </group>
-                    <group string="Functional Test">
+                    <group string="Functional Test" attrs='{"invisible": [("device_condition", "=", "new")]}'>
                         <group>
                             <field name="power_on"/>
                             <field name="speaker"/>

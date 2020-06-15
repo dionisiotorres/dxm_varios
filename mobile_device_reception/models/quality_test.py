@@ -33,7 +33,7 @@ class EstheticQualityTest(models.Model):
     display_test = fields.Selection(selection='_get_grade_display_questions', string='Display Status', default='10')
     case_test = fields.Selection(selection='_get_grade_case_questions', string='Case Status', default='10')
     # Accessories Questions
-    device_case = fields.Boolean(string='Device Case', default=False)
+    device_case = fields.Boolean(string='Device Box', default=False)
     device_charger = fields.Boolean(string='Charger', default=False)
     cables = fields.Boolean(string='Cables', default=False)
     headset = fields.Boolean(string='Headset', default=False)
@@ -46,7 +46,7 @@ class EstheticQualityTest(models.Model):
     def get_esthetic_result(self):
         """
         Get esthetic test result
-        :return: A, B, C or 14 Días
+        :return: A, B, C, New or 14 Días
         """
         _logger.info("GETTING ESTHETIC TEST RESULT FOR: %r", self.id)
         esthetic_matrix = {}
@@ -56,6 +56,8 @@ class EstheticQualityTest(models.Model):
         _logger.info("Grade Matrix: %r", esthetic_matrix)
         display_result = int(self.display_test)
         case_result = int(self.case_test)
+        _logger.info('DISPLAY GRADE VALUE: %r', display_result)
+        _logger.info('CASE GRADE VALUE: %r', case_result)
         max_value = max(display_result, case_result)
         grade = esthetic_matrix.get(max_value)
         days = all(record for record in [self.device_case, self.device_charger, self.cables, self.headset])

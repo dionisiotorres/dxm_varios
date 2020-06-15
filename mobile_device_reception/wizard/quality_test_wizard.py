@@ -36,6 +36,8 @@ class FunctionalTest(models.TransientModel):
     lang = fields.Many2one(comodel_name='x_idioma_terminal', string="Language")
     applications = fields.Many2one(comodel_name='x_terminal_aplicaciones', string="Applications")
 
+    device_condition = fields.Selection(selection=[('new', 'New'), ('used', 'Used')], default='new')
+
     serial_file = fields.Binary(string="File")
     lot_id = fields.Char(string="Find Lot")
     new_lot_ids = fields.Many2many(comodel_name='stock.production.lot')
@@ -131,11 +133,44 @@ class FunctionalTest(models.TransientModel):
         esthetic_fields = [element for element in
                            esthetic_test_obj.fields_get_keys() if element not in exclude_fields]
 
-        functional_test_values = self.read(functional_fields)[0]
-        functional_test_values.pop('id')
+        if self.device_condition == 'new':
+            functional_test_values = {
+                'power_on': True,
+                'speaker': True,
+                'buttons': True,
+                'fingerprint_reader': True,
+                'torch': True,
+                'bluetooth': True,
+                'wifi': True,
+                'proximity_sensor': True,
+                'touch_screen': True,
+                'display_bright': True,
+                'call_test': True,
+                'ring_tone': True,
+                'camera': True,
+                'mobile_os': True,
+                'user_account': True,
+                'security_pattern': True,
+                'humidity': True
+            }
 
-        esthetic_test_values = self.read(esthetic_fields)[0]
-        esthetic_test_values.pop('id')
+            new_grade_id = self.env['ir.config_parameter'].sudo().get_param('mobile_device_reception.new_grade')
+            new_grade_obj = self.env['x_grado'].search([('id', '=', int(new_grade_id))])
+            grade_value = new_grade_obj.x_studio_test_value
+            esthetic_test_values = {
+                'display_test': str(grade_value),
+                'case_test': str(grade_value),
+                'device_case': True,
+                'device_charger': True,
+                'cables': True,
+                'headset': True
+            }
+        else:
+            functional_test_values = self.read(functional_fields)[0]
+            functional_test_values.pop('id')
+
+            esthetic_test_values = self.read(esthetic_fields)[0]
+            esthetic_test_values.pop('id')
 
         _logger.info(functional_test_values)
         _logger.info(esthetic_test_values)

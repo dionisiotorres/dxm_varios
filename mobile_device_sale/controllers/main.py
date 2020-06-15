@@ -178,7 +178,7 @@ class WebsiteSale(WebsiteSale):
                 layout_mode = 'list'
             else:
                 layout_mode = 'grid'
-        # Specs values
+
         grades = request.env['x_grado'].sudo().search([])
         device_colors = request.env['x_color'].sudo().search([])
         device_lock_status = request.env['x_bloqueo'].sudo().search([])
@@ -222,7 +222,8 @@ class WebsiteSale(WebsiteSale):
     @http.route(['''/shop/get_product_info'''], type='json', auth="user", website=True)
     def get_product_info(self, product_id=None, grade=None, color=0, lock_status=0, logo=0, charger=0,
                          network_type=0, lang=0, applications=0):
-        product_obj = request.env['product.template'].browse(int(product_id))
+        _logger.info("GET INFO PRODUCT ID: %r", product_id)
+        product_obj = request.env['product.product'].browse(int(product_id))
         pricelist = self._get_pricelist_context()[1].id
         pricelist_obj = request.env['product.pricelist'].browse(int(pricelist))
         partner_id = request.env.user.partner_id
@@ -246,9 +247,9 @@ class WebsiteSale(WebsiteSale):
 
     def get_product_quants(self, product_id, **kwargs):
         company_id = request.env.user.company_id
-        warehouse_id = request.env['stock.warehouse'].search([('company_id', '=', company_id.id)])
+        warehouse_id = request.env['stock.warehouse'].sudo().search([('company_id', '=', company_id.id)])
         stock_location = warehouse_id.lot_stock_id
-        all_product_quants = request.env['stock.quant']._gather(product_id, stock_location)
+        all_product_quants = request.env['stock.quant'].sudo()._gather(product_id, stock_location)
         lot_filter = ''
         operand = " and "
         # grade

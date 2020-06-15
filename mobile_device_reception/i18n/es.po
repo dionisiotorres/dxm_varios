@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-27 16:48+0000\n"
-"PO-Revision-Date: 2020-05-27 16:48+0000\n"
+"POT-Creation-Date: 2020-05-18 18:14+0000\n"
+"PO-Revision-Date: 2020-05-18 18:14+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -22,245 +22,6 @@ msgid "\tBluetooth"
 msgstr ""
 
 #. module: mobile_device_reception
-#: model_terms:ir.ui.view,arch_db:mobile_device_reception.label_document
-msgid ""
-"<br/>\n"
-"                        <strong>\n"
-"                            Grade:\n"
-"                        </strong>"
-msgstr ""
-"<br/>\n"
-"                        <strong>\n"
-"                            Grado:\n"
-"                        </strong>"
-#. module: mobile_device_reception
-#: model_terms:ir.ui.view,arch_db:mobile_device_reception.label_document
-msgid ""
-"<br/>\n"
-"                        <strong>Test Date:</strong>"
-msgstr ""
-"<br/>\n"
-"                        <strong>Fecha de Prueba:</strong>"
-#. module: mobile_device_reception
-#: model_terms:ir.ui.view,arch_db:mobile_device_reception.label_document
-msgid ""
-"<span>\n"
-"                                    Bluetooth\n"
-"                                </span>\n"
-"                                <br/>"
-msgstr ""
-
-#. module: mobile_device_reception
-#: model_terms:ir.ui.view,arch_db:mobile_device_reception.label_document
-msgid ""
-"<span>\n"
-"                                    Buttons\n"
-"                                </span>\n"
-"                                <br/>"
-msgstr ""
-"<span>\n"
-"                                    Botones\n"
-"                                </span>\n"
-"                                <br/>"
-#. module: mobile_device_reception
-#: model_terms:ir.ui.view,arch_db:mobile_device_reception.label_document
-msgid ""
-"<span>\n"
-"                                    Call Test\n"
-"                                </span>\n"
-"                                <br/>"
-msgstr ""
-"<span>\n"
-"                                    Llamada\n"
-"                                </span>\n"
-"                                <br/>"
-#. module: mobile_device_reception
-#: model_terms:ir.ui.view,arch_db:mobile_device_reception.label_document
-msgid ""
-"<span>\n"
-"                                    Display Bright\n"
-"                                </span>\n"
-"                                <br/>"
-msgstr ""
-"<span>\n"
-"                                    Brillo de Pantalla\n"
-"                                </span>\n"
-"                                <br/>"
-#. module: mobile_device_reception
-#: model_terms:ir.ui.view,arch_db:mobile_device_reception.label_document
-msgid ""
-"<span>\n"
-"                                    Fingerprint Reader\n"
-"                                </span>\n"
-"                                <br/>"
-msgstr ""
-"<span>\n"
-"                                    Lector de Huella\n"
-"                                </span>\n"
-"                                <br/>"
-#. module: mobile_device_reception
-#: model_terms:ir.ui.view,arch_db:mobile_device_reception.label_document
-msgid ""
-"<span>\n"
-"                                    Power On\n"
-"                                </span>\n"
-"                                <br/>"
-msgstr ""
-"<span>\n"
-"                                    Encendido\n"
-"                                </span>\n"
-"                                <br/>"
-#. module: mobile_device_reception
-#: model_terms:ir.ui.view,arch_db:mobile_device_reception.label_document
-msgid ""
-"<span>\n"
-"                                    Proximity Sensor\n"
-"                                </span>\n"
-"                                <br/>"
-msgstr ""
-"<span>\n"
-"                                    Sensor de Proximidad\n"
-"                                </span>\n"
-"                                <br/>"
-#. module: mobile_device_reception
-#: model_terms:ir.ui.view,arch_db:mobile_device_reception.label_document
-msgid ""
-"<span>\n"
-"                                    Speaker\n"
-"                                </span>\n"
-"                                <br/>"
-msgstr ""
-"<span>\n"
-"                                    Bocina\n"
-"                                </span>\n"
-"                                <br/>"
-#. module: mobile_device_reception
-#: model_terms:ir.ui.view,arch_db:mobile_device_reception.label_document
-msgid ""
-"<span>\n"
-"                                    Torch\n"
-"                                </span>\n"
-"                                <br/>"
-msgstr ""
-"<span>\n"
-"                                    Linterna\n"
-"                                </span>\n"
-"                                <br/>"
-#. module: mobile_device_reception
-#: model_terms:ir.ui.view,arch_db:mobile_device_reception.label_document
-msgid ""
-"<span>\n"
-"                                    Touch Screen\n"
-"                                </span>\n"
-"                                <br/>"
-msgstr ""
-"<span>\n"
-"                                    Pantalla Táctil\n"
-"                                </span>\n"
-"                                <br/>"
-#. module: mobile_device_reception
-#: model_terms:ir.ui.view,arch_db:mobile_device_reception.label_document
-msgid ""
-"<span>\n"
-"                                    WiFi\n"
-"                                </span>\n"
-"                                <br/>"
-msgstr ""
-"<span>\n"
-"                                    WiFi\n"
-"                                </span>\n"
-"                                <br/>"
-#. module: mobile_device_reception
-#: model_terms:ir.ui.view,arch_db:mobile_device_reception.label_document
-msgid ""
-"<span>\n"
-"                                   Camera\n"
-"                                </span>\n"
-"                                <br/>"
-msgstr ""
-"<span>\n"
-"                                   Cámara\n"
-"                                </span>\n"
-"                                <br/>"
-#. module: mobile_device_reception
-#: model_terms:ir.ui.view,arch_db:mobile_device_reception.label_document
-msgid ""
-"<span>\n"
-"                                   Humidity\n"
-"                                </span>\n"
-"                                <br/>"
-msgstr ""
-"<span>\n"
-"                                   Humedad\n"
-"                                </span>\n"
-"                                <br/>"
-#. module: mobile_device_reception
-#: model_terms:ir.ui.view,arch_db:mobile_device_reception.label_document
-msgid ""
-"<span>\n"
-"                                   Operating System\n"
-"                                </span>\n"
-"                                <br/>"
-msgstr ""
-"<span>\n"
-"                                   Sistema Operativo\n"
-"                                </span>\n"
-"                                <br/>"
-#. module: mobile_device_reception
-#: model_terms:ir.ui.view,arch_db:mobile_device_reception.label_document
-msgid ""
-"<span>\n"
-"                                   Ring Tone\n"
-"                                </span>\n"
-"                                <br/>"
-msgstr ""
-"<span>\n"
-"                                   Tono de LLamada\n"
-"                                </span>\n"
-"                                <br/>"
-#. module: mobile_device_reception
-#: model_terms:ir.ui.view,arch_db:mobile_device_reception.label_document
-msgid ""
-"<span>\n"
-"                                   Security Pattern\n"
-"                                </span>\n"
-"                                <br/>"
-msgstr ""
-"<span>\n"
-"                                   Patrón de Seguridad\n"
-"                                </span>\n"
-"                                <br/>"
-#. module: mobile_device_reception
-#: model_terms:ir.ui.view,arch_db:mobile_device_reception.label_document
-msgid ""
-"<span>\n"
-"                                   User Account\n"
-"                                </span>\n"
-"                                <br/>"
-msgstr ""
-"<span>\n"
-"                                   Cuenta de Usuario\n"
-"                                </span>\n"
-"                                <br/>"
-#. module: mobile_device_reception
-#: model_terms:ir.ui.view,arch_db:mobile_device_reception.label_document
-msgid ""
-"<strong>\n"
-"                            Functional:\n"
-"                        </strong>"
-msgstr ""
-"<strong>\n"
-"                            Funcional:\n"
-"                        </strong>"
-#. module: mobile_device_reception
-#: model_terms:ir.ui.view,arch_db:mobile_device_reception.label_document
-msgid ""
-"<strong>Fail Items:</strong>\n"
-"                            <br/>"
-msgstr ""
-"<strong>Fallas:</strong>\n"
-"                            <br/>"
-#. module: mobile_device_reception
 #: model_terms:ir.ui.view,arch_db:mobile_device_reception.view_id_name
 msgid "Adjust Inventory"
 msgstr "Ajustar Inventario"
@@ -268,7 +29,7 @@ msgstr "Ajustar Inventario"
 #. module: mobile_device_reception
 #: model:ir.model.fields,field_description:mobile_device_reception.field_stock_picking__quality_test_done
 msgid "All Quality Test Done"
-msgstr "Prueba de Calidad Hecha"
+msgstr ""
 
 #. module: mobile_device_reception
 #: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__applications
@@ -285,7 +46,7 @@ msgstr "Botones"
 #: model:ir.model.fields,field_description:mobile_device_reception.field_esthetic_quality_test__cables
 #: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__cables
 msgid "Cables"
-msgstr ""
+msgstr "Cables"
 
 #. module: mobile_device_reception
 #: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test__call_test
@@ -325,7 +86,7 @@ msgstr "Cargador"
 #. module: mobile_device_reception
 #: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__color
 msgid "Color"
-msgstr ""
+msgstr "Color"
 
 #. module: mobile_device_reception
 #: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__company_id
@@ -361,8 +122,8 @@ msgstr "Fecha de creación"
 #. module: mobile_device_reception
 #: model:ir.model.fields,field_description:mobile_device_reception.field_esthetic_quality_test__device_case
 #: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__device_case
-msgid "Device Case"
-msgstr "Carcasa del Equipo"
+msgid "Device Box"
+msgstr "Caja del Equipo"
 
 #. module: mobile_device_reception
 #: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test__display_bright
@@ -409,7 +170,7 @@ msgstr "Buscar Lote"
 #: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test__fingerprint_reader
 #: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__fingerprint_reader
 msgid "Fingerprint Reader"
-msgstr "Lector de Huella"
+msgstr "Lector de Huellas"
 
 #. module: mobile_device_reception
 #: model:ir.model.fields,field_description:mobile_device_reception.field_stock_production_lot__functional_test_id
@@ -457,7 +218,7 @@ msgstr "Humedad"
 #: model:ir.model.fields,field_description:mobile_device_reception.field_graduation_wizard__id
 #: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: mobile_device_reception
 #: model:ir.model.fields,help:mobile_device_reception.field_res_config_settings__graduation_op_type
@@ -516,7 +277,7 @@ msgstr "Bloqueo"
 #. module: mobile_device_reception
 #: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__logo
 msgid "Logo"
-msgstr ""
+msgstr "Logo"
 
 #. module: mobile_device_reception
 #: model:ir.model.fields,field_description:mobile_device_reception.field_esthetic_quality_test__lot_id
@@ -579,11 +340,6 @@ msgid "Power On"
 msgstr "Encendido"
 
 #. module: mobile_device_reception
-#: model:ir.actions.report,name:mobile_device_reception.action_print_product_label
-msgid "Print Labels"
-msgstr ""
-
-#. module: mobile_device_reception
 #: model_terms:ir.ui.view,arch_db:mobile_device_reception.graduation_wizard_form
 msgid "Process Lots"
 msgstr "Procesar Lotes"
@@ -599,19 +355,15 @@ msgid "Product"
 msgstr "Producto"
 
 #. module: mobile_device_reception
-#: model:ir.model,name:mobile_device_reception.model_functional_quality_test
-msgid "Product Fucntional Tests"
-msgstr "Prueba Funcional"
-
-#. module: mobile_device_reception
 #: model:ir.model,name:mobile_device_reception.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
 msgstr "Movimientos de Producto (Stock Move Line)"
 
 #. module: mobile_device_reception
 #: model:ir.model,name:mobile_device_reception.model_esthetic_quality_test
-msgid "Product Visual Tests"
-msgstr ""
+#: model:ir.model,name:mobile_device_reception.model_functional_quality_test
+msgid "Product Fucntional Tests"
+msgstr "Prueba Funcional"
 
 #. module: mobile_device_reception
 #: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test__proximity_sensor
@@ -758,14 +510,9 @@ msgstr "Tipo de operación para enviar equipos al taller"
 #: model:ir.model.fields,field_description:mobile_device_reception.field_functional_quality_test__wifi
 #: model:ir.model.fields,field_description:mobile_device_reception.field_mobile_quality_test_wizard__wifi
 msgid "WiFi"
-msgstr ""
+msgstr "WiFi"
 
 #. module: mobile_device_reception
 #: model:ir.model.fields,field_description:mobile_device_reception.field_res_config_settings__workshop_op_type
 msgid "Workshop Operation Type"
 msgstr "Tipo de Operación para el Taller"
-
-#. module: mobile_device_reception
-#: model:ir.actions.report,print_report_name:mobile_device_reception.action_print_product_label
-msgid "object.name"
-msgstr ""

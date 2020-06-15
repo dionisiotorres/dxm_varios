@@ -4,6 +4,20 @@ odoo.define('oct_website_sale.sale', function (require) {
 
     $(document).ready(function () {
 
+        /* Default price and stock hidden */
+        if ($('#products_grid').length > 0){
+            $(".oe_product").each(function () {
+                /*var selector = $(this).find('.oct_grade');
+                selector.find('option[value="5"]').attr("selected",true);
+                selector.trigger('change');*/
+                $(".product_price").addClass("oct_hidden");
+                $(".oct_stock_qty").addClass("oct_hidden");
+                $(".js_add_cart_update").addClass("oct_hidden");
+            });
+        } else {
+
+        }
+
         /* Handle layout list options */
         $(document).on('click', '.o_wsale_apply_list', function(event) {
             event.preventDefault();
@@ -61,10 +75,11 @@ odoo.define('oct_website_sale.sale', function (require) {
             let network_type = $(this).find("select[name='network_type']").children("option:selected").val();
             let lang = $(this).find("select[name='lang']").children("option:selected").val();
             let applications = $(this).find("select[name='applications']").children("option:selected").val();
+
             // vars on product grid
             if ($('#products_grid').length > 0){
                 var parent_container = $(this).parents('.o_wsale_product_information');
-                var product_id = parent_container.find('a').data('oe-id');
+                var product_id = parent_container.find("input[name='product_id']").val();   //parent_container.find('a').data('oe-id');
                 var price_container =  parent_container.find('.oe_currency_value');
                 var quant_container =  parent_container.find('.oct_product_qty');
                 var qty_input = parent_container.find('.input_add_qty');
@@ -78,6 +93,29 @@ odoo.define('oct_website_sale.sale', function (require) {
                 var add_to_cart_button = $('#add_to_cart_json');
             }
 
+            /*
+            * ||
+                color !== "0" ||
+                lock_status !== "0" ||
+                logo !== "0" ||
+                charger !== "0" ||
+                network_type !== "0" ||
+                lang !== "0" ||
+                applications !== "0"
+            * */
+
+            if (grade !== "0"){
+                parent_container.find(".product_price").removeClass("oct_hidden");
+                parent_container.find(".oct_stock_qty").removeClass("oct_hidden");
+                parent_container.find(".js_add_cart_update").removeClass("oct_hidden");
+            } else {
+                parent_container.find(".product_price").addClass("oct_hidden");
+                parent_container.find(".oct_stock_qty").addClass("oct_hidden");
+                parent_container.find(".js_add_cart_update").addClass("oct_hidden");
+            }
+
+            console.log(parent_container);
+            console.log("PRODUCT ID: " + product_id);
 
             let spinner = $("<i class=\"fa fa-spinner fa-spin\"/>");
 
@@ -194,6 +232,7 @@ odoo.define('oct_website_sale.sale', function (require) {
                 });
 
         })
+
 
     }) // END DOCUMENT READY
 
