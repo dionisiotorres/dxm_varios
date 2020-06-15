@@ -178,7 +178,7 @@ class WebsiteSale(WebsiteSale):
                 layout_mode = 'list'
             else:
                 layout_mode = 'grid'
-
+        # Specs values
         grades = request.env['x_grado'].sudo().search([])
         device_colors = request.env['x_color'].sudo().search([])
         device_lock_status = request.env['x_bloqueo'].sudo().search([])
