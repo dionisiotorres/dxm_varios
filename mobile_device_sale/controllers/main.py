@@ -179,14 +179,14 @@ class WebsiteSale(WebsiteSale):
             else:
                 layout_mode = 'grid'
 
-        grades = request.env['x_grado'].search([])
-        device_colors = request.env['x_color'].search([])
-        device_lock_status = request.env['x_bloqueo'].search([])
-        device_logo = request.env['x_logo'].search([])
-        device_charger = request.env['x_cargador'].search([])
-        device_network_type = request.env['x_red'].search([])
-        device_lang = request.env['x_idioma_terminal'].search([])
-        device_applications = request.env['x_terminal_aplicaciones'].search([])
+        grades = request.env['x_grado'].sudo().search([])
+        device_colors = request.env['x_color'].sudo().search([])
+        device_lock_status = request.env['x_bloqueo'].sudo().search([])
+        device_logo = request.env['x_logo'].sudo().search([])
+        device_charger = request.env['x_cargador'].sudo().search([])
+        device_network_type = request.env['x_red'].sudo().search([])
+        device_lang = request.env['x_idioma_terminal'].sudo().search([])
+        device_applications = request.env['x_terminal_aplicaciones'].sudo().search([])
 
         values = {
             'search': search,
