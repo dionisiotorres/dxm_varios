@@ -37,6 +37,8 @@ class FunctionalTest(models.TransientModel):
     applications = fields.Many2one(comodel_name='x_terminal_aplicaciones', string="Applications")
 
     device_condition = fields.Selection(selection=[('new', 'New'), ('used', 'Used')], default='new')
+    print_labels = fields.Boolean(string="Print Labels", default=True)
+    ean = fields.Char(string='EAN')
 
     serial_file = fields.Binary(string="File")
     lot_id = fields.Char(string="Find Lot")
@@ -182,6 +184,8 @@ class FunctionalTest(models.TransientModel):
         for lot in self.new_lot_ids:
 
             lot.write({
+                # EAN
+                'x_studio_lot_ean': self.ean,
                 # Specifications
                 'x_studio_color': self.color.id,
                 'x_studio_bloqueo': self.lock_status.id,
@@ -221,7 +225,19 @@ class FunctionalTest(models.TransientModel):
                     'lot_id': move_by_lot[0],
                     'qty_done': 1
                 })
+        if self.print_labels:
+            return self._print_labels()
 
         message = self.env['message.popup']
         text_message = '%s lots processed ' % len(self.new_lot_ids)
         return message.popup(message=text_message)
+
+    def _print_labels(self):
+        self.ensure_one()
+        action = self._action_print_labels()
+        action.update({'close_on_report_download': True})
+        return action
+
+    def _action_print_labels(self):
+        lots = self.new_lot_ids
+        return self.env.ref('mobile_device_reception.product_lots_label').report_action(lots)

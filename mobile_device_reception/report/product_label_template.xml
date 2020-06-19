@@ -1,5 +1,6 @@
 <odoo>
 
+    <!-- Common Layout -->
     <template id="label_layout">
         &lt;!DOCTYPE html&gt;
        <html t-att-lang="lang and lang.replace('_', '-')"
@@ -32,7 +33,7 @@
 
     </template>
 
-
+    <!-- Document to print from menu -->
     <template id="label_document">
         <t t-call="mobile_device_reception.label_layout">
 <!--        <t t-call="web.basic_layout">-->
@@ -203,7 +204,7 @@
         </t>
     </template>
 
-
+    <!-- Base document to print from menu -->
     <template id="product_label">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="doc">
@@ -211,5 +212,189 @@
             </t>
         </t>
     </template>
+
+    <!-- ################################### -->
+
+    <!-- Document to print from test view -->
+    <template id="lot_label_document">
+        <t t-call="mobile_device_reception.label_layout">
+<!--        <t t-call="web.basic_layout">-->
+            <t t-set="doc" t-value="doc.with_context(lang=doc.env.context.get('lang'))" />
+            <t t-foreach="doc" t-as="lot">
+                <div style="width: 100%; height: 120px; display: inline-block; font-size: 18px; clear: both;">
+
+                    <strong t-field="lot.product_id.name"
+                            style="text-align: center; width: 500px; margin-bottom: 5px; display: inline-block;
+                            border-bottom: 1px solid black; padding: 2px; margin-left: -10px;"/>
+
+                    <br/>
+                    <div style="width: 50%; float: left;">
+                        <!--<strong>
+                            S/N:
+                        </strong>
+                        <span t-field="line.lot_id.name"/>
+                        <br/>-->
+                        <strong>
+                            Functional:
+                        </strong>
+                        <span t-field="lot.x_studio_resultado"/>
+                        <br/>
+                        <strong>
+                            Grade:
+                        </strong>
+                        <span t-field="lot.x_studio_revision_grado.x_name"/>
+                        <br/>
+                        <strong>Test Date:</strong>
+                        <span t-field="lot.esthetic_test_id.create_date" t-options='{"format": "dd/MM/yyyy"}'/>
+                        <br/>
+                    </div>
+
+
+                    <div style="width: 40%; margin-left: 5px; float: left;">
+
+                        <t t-if="lot.x_studio_resultado == 'Con averia'">
+                            <strong>Fail Items:</strong>
+                            <br/>
+
+
+                            <t t-if="lot.functional_test_id.power_on == False">
+                                <span>
+                                    Power On
+                                </span>
+                                <br/>
+                            </t>
+                            <t t-if="lot.functional_test_id.speaker == False">
+                                <span>
+                                    Speaker
+                                </span>
+                                <br/>
+                            </t>
+                            <t t-if="lot.functional_test_id.buttons == False">
+                                <span>
+                                    Buttons
+                                </span>
+                                <br/>
+                            </t>
+                            <t t-if="lot.functional_test_id.fingerprint_reader == False">
+                                <span>
+                                    Fingerprint Reader
+                                </span>
+                                <br/>
+                            </t>
+                            <t t-if="lot.functional_test_id.torch == False">
+                                <span>
+                                    Torch
+                                </span>
+                                <br/>
+                            </t>
+                            <t t-if="lot.functional_test_id.bluetooth == False">
+                                <span>
+                                    Bluetooth
+                                </span>
+                                <br/>
+                            </t>
+                            <t t-if="lot.functional_test_id.wifi == False">
+                                <span>
+                                    WiFi
+                                </span>
+                                <br/>
+                            </t>
+
+                            <t t-if="lot.functional_test_id.proximity_sensor == False">
+                                <span>
+                                    Proximity Sensor
+                                </span>
+                                <br/>
+                            </t>
+
+                            <t t-if="lot.functional_test_id.touch_screen == False">
+                                <span>
+                                    Touch Screen
+                                </span>
+                                <br/>
+                            </t>
+
+                            <t t-if="lot.functional_test_id.display_bright == False">
+                                <span>
+                                    Display Bright
+                                </span>
+                                <br/>
+                            </t>
+
+                            <t t-if="lot.functional_test_id.call_test == False">
+                                <span>
+                                    Call Test
+                                </span>
+                                <br/>
+                            </t>
+
+                            <t t-if="lot.functional_test_id.ring_tone == False">
+                                <span>
+                                   Ring Tone
+                                </span>
+                                <br/>
+                            </t>
+
+                            <t t-if="lot.functional_test_id.camera == False">
+                                <span>
+                                   Camera
+                                </span>
+                                <br/>
+                            </t>
+
+                            <t t-if="lot.functional_test_id.mobile_os == False">
+                                <span>
+                                   Operating System
+                                </span>
+                                <br/>
+                            </t>
+
+                            <t t-if="lot.functional_test_id.user_account == False">
+                                <span>
+                                   User Account
+                                </span>
+                                <br/>
+                            </t>
+
+                            <t t-if="lot.functional_test_id.security_pattern == False">
+                                <span>
+                                   Security Pattern
+                                </span>
+                                <br/>
+                            </t>
+
+                            <t t-if="lot.functional_test_id.humidity == False">
+                                <span>
+                                   Humidity
+                                </span>
+                                <br/>
+                            </t>
+
+                        </t>
+
+                    </div>
+                    <div style="display: block; width: 100%; float: left; text-align: center; margin-top: 10px;">
+                        <img t-att-src="web_base_url + '/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' %
+                ('Code128', lot.name, 250, 50)" style="width: 250px; height: 50px;"/>
+                        <br/>
+                        <span t-field="lot.name"/>
+                    </div>
+
+                </div>
+
+            </t>
+        </t>
+    </template>
+
+    <!-- Base document to print from test view -->
+    <template id="product_lot_label">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="mobile_device_reception.lot_label_document" t-lang="doc.env.context.get('lang')"/>
+            </t>
+        </t>
+    </template>
+
+
 
 </odoo>

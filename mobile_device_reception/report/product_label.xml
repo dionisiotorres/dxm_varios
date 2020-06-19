@@ -11,5 +11,16 @@
             print_report_name="object.name"
             paperformat="mobile_device_reception.product_label_paper_format"
         />
+
+        <report
+            id="product_lots_label"
+            string="Print Lot Label"
+            model="stock.production.lot"
+            report_type="qweb-pdf"
+            file="mobile_device_reception.product_lot_label"
+            name="mobile_device_reception.product_lot_label"
+            print_report_name="object.name"
+            paperformat="mobile_device_reception.product_label_paper_format"
+        />
     </data>
 </odoo>

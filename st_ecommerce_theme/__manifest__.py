@@ -22,13 +22,13 @@
     'depends': ['website_sale', 'mass_mailing_sale', 'website_mass_mailing', 'website_sale_wishlist',
                 'website_sale_comparison'],
     'data': [
-        'security/product_brand_security.xml',
+        # 'security/product_brand_security.xml',
         'security/ir.model.access.csv',
         'data/ecommerce_mass_mailing_data.xml',
         'views/assets.xml',
         'views/templates.xml',
-        'views/product_brand_view.xml',
-        'views/product_template_view.xml',
+        # 'views/product_brand_view.xml',
+        # 'views/product_template_view.xml',
         'views/st_ecommerce_config.xml',
         'views/st_ecommerce_theme_snippets.xml'
     ],

@@ -12,10 +12,12 @@ odoo.define('oct_website_sale.sale', function (require) {
                 selector.trigger('change');*/
                 $(".product_price").addClass("oct_hidden");
                 $(".oct_stock_qty").addClass("oct_hidden");
-                $(".js_add_cart_update").addClass("oct_hidden");
+                $(".js_add_cart_update").addClass("oct_hidden_important");
             });
-        } else {
-
+        } else if ($("#product_detail").length > 0) {
+            $(this).find(".product_price").addClass("oct_hidden");
+            $(this).find(".oct_stock_qty").addClass("oct_hidden");
+            $(this).find(".js_add_cart_update").addClass("oct_hidden_important");
         }
 
         /* Handle layout list options */
@@ -86,7 +88,7 @@ odoo.define('oct_website_sale.sale', function (require) {
                 var add_to_cart_button = parent_container.find('.js_add_cart_update');
             } else { // vars on product detail
                 var parent_container = $(this).parents('#product_details');
-                var product_id = $("input[name='product_template_id']").val();
+                var product_id = $("input[name='product_id']").val();
                 var price_container =  parent_container.find('.oe_currency_value');
                 var quant_container =  parent_container.find('.oct_product_qty');
                 var qty_input = $("input[name='add_qty']");
@@ -107,11 +109,11 @@ odoo.define('oct_website_sale.sale', function (require) {
             if (grade !== "0"){
                 parent_container.find(".product_price").removeClass("oct_hidden");
                 parent_container.find(".oct_stock_qty").removeClass("oct_hidden");
-                parent_container.find(".js_add_cart_update").removeClass("oct_hidden");
+                parent_container.find(".js_add_cart_update").removeClass("oct_hidden_important");
             } else {
                 parent_container.find(".product_price").addClass("oct_hidden");
                 parent_container.find(".oct_stock_qty").addClass("oct_hidden");
-                parent_container.find(".js_add_cart_update").addClass("oct_hidden");
+                parent_container.find(".js_add_cart_update").addClass("oct_hidden_important");
             }
 
             console.log(parent_container);
@@ -140,7 +142,7 @@ odoo.define('oct_website_sale.sale', function (require) {
                 });
                 $(quant_container).html(data.product_quants);
 
-                if (data.product_quants > 0){
+                if (data.product_quants > 0 && grade !== "0"){
                     qty_input.prop( "disabled", false );
                     qty_input.attr({'max': data.product_quants});
                     add_to_cart_button.removeClass('oct_hidden_important');

@@ -476,7 +476,7 @@
     <field name="active" eval="True"/>
     <field name="arch" type="xml">
       <data>
-        <xpath expr="//form[@name='Product Template']/sheet[1]/notebook[1]/page[@name='general_information']/group[1]" position="after">
+        <xpath expr="//page[@name='general_information']/group[1]" position="after">
           <group name="studio_group_h14eS">
             <group name="studio_group_h14eS_left" string="Especificaciones">
               <field name="x_studio_modelo" string="Modelo"/>
@@ -494,7 +494,7 @@
     </field>
     <field name="field_parent" eval="False"/>
     <field name="groups_id" eval="[(6, 0, [])]"/>
-    <field name="inherit_id" ref="product.product_template_only_form_view"/>
+    <field name="inherit_id" ref="product.product_template_form_view"/>
     <field name="key" eval="False"/>
     <field name="mode">extension</field>
     <field name="model">product.template</field>
@@ -506,6 +506,9 @@
     <field name="active" eval="True"/>
     <field name="arch" type="xml">
       <data>
+        <xpath expr="//field[@name='product_id']" position="after">
+          <field name="x_studio_lot_ean" string="EAN"/>
+        </xpath>
         <xpath expr="//group[@name='main_group']" position="after">
           <group name="studio_group_AWwSo">
            <!-- <group name="studio_group_AWwSo_left" string="Especificaciones del producto">
@@ -699,10 +702,11 @@
         <xpath expr="//field[@name='company_id']" position="replace"/>
         <xpath expr="//field[@name='ref']" position="replace"/>
         <xpath expr="//field[@name='product_id']" position="after">
-          <field name="x_studio_grado_preliminar"/>
-          <field name="x_studio_revision_funcional"/>
+          <field name="x_studio_lot_ean"/>
+          <field name="x_studio_revision_grado"/>
+<!--          <field name="x_studio_revision_funcional"/>-->
           <field name="x_studio_resultado"/>
-          <field name="x_studio_revision_estetica"/>
+<!--          <field name="x_studio_revision_estetica"/>-->
           <field name="x_studio_color"/>
           <field name="x_studio_idioma"/>
           <field name="x_studio_cargador"/>
