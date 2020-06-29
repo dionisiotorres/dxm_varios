@@ -43,3 +43,64 @@
 .oct_filters > select {
     margin-bottom: 0.5rem;
 }
+
+/* New product grid rules */
+
+.oct_radio_selector {
+    background-color: #10305a;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    /* margin-right: 10px; */
+}
+
+.grade_stock, .grade_price {
+    font-size: 12px;
+    font-weight: 500;
+    margin-right: 5px;
+}
+
+.oct_grade_container {
+    margin-top: 1rem;
+}
+
+.oct_no_stock {
+    background-color: #9c8f8b !important;
+}
+
+/* Color selector */
+
+label.color_label {
+    font-weight: normal;
+}
+
+.colors {
+    margin-top: 1rem;
+}
+
+.colors ul{list-style:none; padding:0; margin: 0;}
+
+.colors li{margin: 0 20px 0 0; display: inline-block;}
+
+.colors label{cursor: pointer;}
+
+.colors input{display:none;}
+
+.colors input[type="radio"]:checked + .swatch{box-shadow: inset 0 0 0 2px #ffb600;}
+
+.swatch{
+    display:inline-block;
+    vertical-align: middle;
+    height: 25px;
+    width: 25px;
+    margin: 0 5px 0 0 ;
+    border: 1px solid #d4d4d4;
+    border-radius: 5px
+}
+
+/* Cart style rules */
+
+.oct_price_offered {
+    width: 40%;
+    margin: 0 auto;
+}

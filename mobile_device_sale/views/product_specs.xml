@@ -12,12 +12,12 @@
                         <field name="quantity" string="Quantity"/>
                         <field name="grade"/>
                         <field name="color"/>
-                        <field name="lock_status"/>
+                       <!-- <field name="lock_status"/>
                         <field name="logo"/>
                         <field name="charger"/>
                         <field name="network_type"/>
                         <field name="lang"/>
-                        <field name="applications"/>
+                        <field name="applications"/>-->
                     </group>
                 </sheet>
             </form>

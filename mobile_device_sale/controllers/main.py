@@ -12,6 +12,7 @@ from odoo.osv import expression
 from odoo.addons.website_sale.controllers.main import WebsiteSale
 from werkzeug.exceptions import Forbidden, NotFound
 import datetime
+import time
 import logging
 
 _logger = logging.getLogger(__name__)
@@ -181,12 +182,12 @@ class WebsiteSale(WebsiteSale):
 
         grades = request.env['x_grado'].sudo().search([])
         device_colors = request.env['x_color'].sudo().search([])
-        device_lock_status = request.env['x_bloqueo'].sudo().search([])
-        device_logo = request.env['x_logo'].sudo().search([])
-        device_charger = request.env['x_cargador'].sudo().search([])
-        device_network_type = request.env['x_red'].sudo().search([])
-        device_lang = request.env['x_idioma_terminal'].sudo().search([])
-        device_applications = request.env['x_terminal_aplicaciones'].sudo().search([])
+        # device_lock_status = request.env['x_bloqueo'].sudo().search([])
+        # device_logo = request.env['x_logo'].sudo().search([])
+        # device_charger = request.env['x_cargador'].sudo().search([])
+        # device_network_type = request.env['x_red'].sudo().search([])
+        # device_lang = request.env['x_idioma_terminal'].sudo().search([])
+        # device_applications = request.env['x_terminal_aplicaciones'].sudo().search([])
 
         values = {
             'search': search,
@@ -208,21 +209,47 @@ class WebsiteSale(WebsiteSale):
             'layout_mode': layout_mode,
             'grades': grades,
             'device_colors': device_colors,
-            'device_lock_status': device_lock_status,
-            'device_logo': device_logo,
-            'device_charger': device_charger,
-            'device_network_type': device_network_type,
-            'device_lang': device_lang,
-            'device_applications': device_applications
+            # 'device_lock_status': device_lock_status,
+            # 'device_logo': device_logo,
+            # 'device_charger': device_charger,
+            # 'device_network_type': device_network_type,
+            # 'device_lang': device_lang,
+            # 'device_applications': device_applications
         }
         if category:
             values['main_object'] = category
         return request.render("website_sale.products", values)
 
-    @http.route(['''/shop/get_product_info'''], type='json', auth="user", website=True)
-    def get_product_info(self, product_id=None, grade=None, color=0, lock_status=0, logo=0, charger=0,
-                         network_type=0, lang=0, applications=0):
+    # @http.route(['''/shop/get_product_info'''], type='json', auth="user", website=True)
+    # def get_product_info(self, product_id=None, grade=None, color=0, lock_status=0, logo=0, charger=0,
+    #                      network_type=0, lang=0, applications=0):
+    #     _logger.info("GET INFO PRODUCT ID: %r", product_id)
+    #     product_obj = request.env['product.product'].browse(int(product_id))
+    #     pricelist = self._get_pricelist_context()[1].id
+    #     pricelist_obj = request.env['product.pricelist'].browse(int(pricelist))
+    #     partner_id = request.env.user.partner_id
+    #     partner_price_list = partner_id.property_product_pricelist
+    #     if partner_price_list:
+    #         pricelist_obj = partner_price_list
+    #     today = datetime.date.today()
+    #     product_price = pricelist_obj.get_product_price(product_obj, 1, partner_id, grade=int(grade), date=today)
+    #     product_quants = self.get_product_quants(product_obj.product_variant_id,
+    #                                              grade=int(grade),
+    #                                              color=int(color),
+    #                                              lock_status=int(lock_status),
+    #                                              logo=int(logo),
+    #                                              charger=int(charger),
+    #                                              network_type=int(network_type),
+    #                                              lang=int(lang),
+    #                                              applications=int(applications))
+    #
+    #     return {'product_id': product_id, 'pricelist': pricelist_obj.id, 'product_price': product_price,
+    #             'product_quants': product_quants}
+
+    @http.route(['''/shop/get_product_info/grade'''], type='json', auth="user", website=True)
+    def get_product_info(self, product_id=None, grade=None):
         _logger.info("GET INFO PRODUCT ID: %r", product_id)
+
         product_obj = request.env['product.product'].browse(int(product_id))
         pricelist = self._get_pricelist_context()[1].id
         pricelist_obj = request.env['product.pricelist'].browse(int(pricelist))
@@ -231,81 +258,106 @@ class WebsiteSale(WebsiteSale):
         if partner_price_list:
             pricelist_obj = partner_price_list
         today = datetime.date.today()
-        product_price = pricelist_obj.get_product_price(product_obj, 1, partner_id, grade=int(grade), date=today)
-        product_quants = self.get_product_quants(product_obj.product_variant_id,
-                                                 grade=int(grade),
-                                                 color=int(color),
-                                                 lock_status=int(lock_status),
-                                                 logo=int(logo),
-                                                 charger=int(charger),
-                                                 network_type=int(network_type),
-                                                 lang=int(lang),
-                                                 applications=int(applications))
 
-        return {'product_id': product_id, 'pricelist': pricelist_obj.id, 'product_price': product_price,
-                'product_quants': product_quants}
+        result = {}
+        if not grade:
+
+            grades = request.env['x_grado'].sudo().search([])  # ('x_studio_is_grade_test', '=', True)
+            for grade in grades:
+                product_price = pricelist_obj.get_product_price(product_obj, 1, partner_id, grade=grade.id, date=today)
+                product_quants = self.get_product_quants(product_obj.product_variant_id, grade=grade.id)
+                result.update({grade.id: [product_price, product_quants]})
+
+            return {'product_id': product_id, 'pricelist': pricelist_obj.id, 'product_data': result}
+        else:
+            result.update({'product_id': product_obj.product_variant_id.id})
+            quant_colors = self.get_quant_colors(product_obj.product_variant_id, grade=grade)
+            color_data = []
+            for color in quant_colors:
+                color_quantity = product_quants = self.get_product_quants(product_obj.product_variant_id,
+                                                                          grade=int(grade),
+                                                                          color=color.id)
+                color_data.append((color.id, color.x_color_index, color.x_name, color_quantity))
+            result.update({'color_data': color_data})
+            return result
+
+    def get_quant_colors(self, product_id, grade):
+        company_id = request.env.user.company_id
+        warehouse_id = request.env['stock.warehouse'].sudo().search([('company_id', '=', company_id.id)])
+        stock_location = warehouse_id.lot_stock_id
+        all_product_quants = request.env['stock.quant'].sudo()._gather(product_id, stock_location)
+        lot_filter = 'q.lot_id.x_studio_revision_grado.id == %s' % grade
+        quants_filtered = all_product_quants.filtered(lambda q: eval(lot_filter))
+
+        return quants_filtered.mapped('lot_id').mapped('x_studio_color')
+
+
 
     def get_product_quants(self, product_id, **kwargs):
         company_id = request.env.user.company_id
         warehouse_id = request.env['stock.warehouse'].sudo().search([('company_id', '=', company_id.id)])
         stock_location = warehouse_id.lot_stock_id
+        _logger.info("PRODUCT_ID: %s, LOCATION: %s" % (product_id, stock_location))
         all_product_quants = request.env['stock.quant'].sudo()._gather(product_id, stock_location)
-        lot_filter = ''
+        # reserved_filter = 'q.reserved_quantity == 1'
+        lot_filter = 'q.reserved_quantity == 0 and q.quantity > 0'
         operand = " and "
         # grade
         if 'grade' in kwargs.keys():
             if kwargs.get('grade') != 0:
-                lot_filter = 'q.lot_id.x_studio_revision_grado.id == %s' % kwargs.get('grade')
+                lot_filter += operand + 'q.lot_id.x_studio_revision_grado.id == %s' % kwargs.get('grade')
         # Color
         if 'color' in kwargs.keys():
-            if len(lot_filter) > 0 and kwargs.get('color') != 0:
+            if kwargs.get('color') != 0:
                 lot_filter += operand + "q.lot_id.x_studio_color.id == %s" % kwargs.get('color')
-            elif kwargs.get('color') != 0:
-                lot_filter = "q.lot_id.x_studio_color.id == %s" % kwargs.get('color')
-        # Lock Status
-        if 'lock_status' in kwargs.keys():
-            if len(lot_filter) > 0 and kwargs.get('lock_status') != 0:
-                lot_filter += operand + "q.lot_id.x_studio_bloqueo.id == %s" % kwargs.get('lock_status')
-            elif kwargs.get('lock_status') != 0:
-                lot_filter = "q.lot_id.x_studio_bloqueo.id == %s" % kwargs.get('lock_status')
+        # # Lock Status
+        # if 'lock_status' in kwargs.keys():
+        #     if len(lot_filter) > 0 and kwargs.get('lock_status') != 0:
+        #         lot_filter += operand + "q.lot_id.x_studio_bloqueo.id == %s" % kwargs.get('lock_status')
+        #     elif kwargs.get('lock_status') != 0:
+        #         lot_filter = "q.lot_id.x_studio_bloqueo.id == %s" % kwargs.get('lock_status')
+        #
+        # # Logo
+        # if 'logo' in kwargs.keys():
+        #     if len(lot_filter) > 0 and kwargs.get('logo') != 0:
+        #         lot_filter += operand + "q.lot_id.x_studio_logo.id == %s" % kwargs.get('logo')
+        #     elif kwargs.get('logo') != 0:
+        #         lot_filter = "q.lot_id.x_studio_logo.id == %s" % kwargs.get('logo')
+        #
+        # # Charger
+        # if 'charger' in kwargs.keys():
+        #     if len(lot_filter) > 0 and kwargs.get('charger') != 0:
+        #         lot_filter += operand + "q.lot_id.x_studio_cargador.id == %s" % kwargs.get('charger')
+        #     elif kwargs.get('charger') != 0:
+        #         lot_filter = "q.lot_id.x_studio_cargador.id == %s" % kwargs.get('charger')
+        #
+        # # Network Type
+        # if 'network_type' in kwargs.keys():
+        #     if len(lot_filter) > 0 and kwargs.get('network_type') != 0:
+        #         lot_filter += operand + "q.lot_id.x_studio_red.id == %s" % kwargs.get('network_type')
+        #     elif kwargs.get('network_type') != 0:
+        #         lot_filter = "q.lot_id.x_studio_red.id == %s" % kwargs.get('network_type')
+        #
+        # # Lang
+        # if 'lang' in kwargs.keys():
+        #     if len(lot_filter) > 0 and kwargs.get('lang') != 0:
+        #         lot_filter += operand + "q.lot_id.x_studio_idioma.id == %s" % kwargs.get('lang')
+        #     elif kwargs.get('lang') != 0:
+        #         lot_filter = "q.lot_id.x_studio_idioma.id == %s" % kwargs.get('lang')
+        #
+        # # Applications
+        # if 'applications' in kwargs.keys():
+        #     if len(lot_filter) > 0 and kwargs.get('applications') != 0:
+        #         lot_filter += operand + "q.lot_id.x_studio_aplicaciones.id == %s" % kwargs.get('applications')
+        #     elif kwargs.get('applications') != 0:
+        #         lot_filter = "q.lot_id.x_studio_aplicaciones.id == %s" % kwargs.get('applications')
 
-        # Logo
-        if 'logo' in kwargs.keys():
-            if len(lot_filter) > 0 and kwargs.get('logo') != 0:
-                lot_filter += operand + "q.lot_id.x_studio_logo.id == %s" % kwargs.get('logo')
-            elif kwargs.get('logo') != 0:
-                lot_filter = "q.lot_id.x_studio_logo.id == %s" % kwargs.get('logo')
-
-        # Charger
-        if 'charger' in kwargs.keys():
-            if len(lot_filter) > 0 and kwargs.get('charger') != 0:
-                lot_filter += operand + "q.lot_id.x_studio_cargador.id == %s" % kwargs.get('charger')
-            elif kwargs.get('charger') != 0:
-                lot_filter = "q.lot_id.x_studio_cargador.id == %s" % kwargs.get('charger')
-
-        # Network Type
-        if 'network_type' in kwargs.keys():
-            if len(lot_filter) > 0 and kwargs.get('network_type') != 0:
-                lot_filter += operand + "q.lot_id.x_studio_red.id == %s" % kwargs.get('network_type')
-            elif kwargs.get('network_type') != 0:
-                lot_filter = "q.lot_id.x_studio_red.id == %s" % kwargs.get('network_type')
-
-        # Lang
-        if 'lang' in kwargs.keys():
-            if len(lot_filter) > 0 and kwargs.get('lang') != 0:
-                lot_filter += operand + "q.lot_id.x_studio_idioma.id == %s" % kwargs.get('lang')
-            elif kwargs.get('lang') != 0:
-                lot_filter = "q.lot_id.x_studio_idioma.id == %s" % kwargs.get('lang')
-
-        # Applications
-        if 'applications' in kwargs.keys():
-            if len(lot_filter) > 0 and kwargs.get('applications') != 0:
-                lot_filter += operand + "q.lot_id.x_studio_aplicaciones.id == %s" % kwargs.get('applications')
-            elif kwargs.get('applications') != 0:
-                lot_filter = "q.lot_id.x_studio_aplicaciones.id == %s" % kwargs.get('applications')
-
+        _logger.info("LOT FILTER: %r", lot_filter)
+        reserved_quants = 0
         if len(lot_filter) > 0:
+            # reserved_quants = len(all_product_quants.filtered(lambda  q: eval(reserved_filter)))
             quants_filtered = all_product_quants.filtered(lambda q: eval(lot_filter))
+            _logger.info("QUANTS FILTERED: %r", quants_filtered)
         else:
             quants_filtered = all_product_quants
 
@@ -431,3 +483,32 @@ class WebsiteSale(WebsiteSale):
             'success': 'true'
         }
         return result
+
+    @http.route(['''/shop/cart/update_price_offered'''], type='json', auth="user", website=True)
+    def set_order_line_price_offered(self, line_id=None, offer=None):
+        _logger.info("SET PRICE OFFERED FOR LINE ID: %r", line_id)
+        result = 'done'
+        partner_id = request.env.user.partner_id
+        order_line = request.env['sale.order.line'].sudo().search([('id', '=', int(line_id))])
+        order = order_line.order_id
+        # set partner as follower in this order if not following
+        if partner_id.id not in order.message_follower_ids.mapped('partner_id').ids:
+            order.message_subscribe(partner_ids=partner_id.ids)
+        try:
+            if offer:
+                order_line.write({'price_offered': float(offer)})
+            elif order_line.price_offered:
+                order_line.write({'price_offered': 0.0})
+            msg_body = "<p>New price offer from %s for product %s grade %s.<br/> Price offered: %s</p>" % (
+                partner_id.name,
+                order_line.product_id.name,
+                order_line.product_grade.x_name,
+                float(offer))
+            msg_values = {'body': msg_body, 'model': order._name, 'res_id': order.id,
+                          'message_type': 'comment', 'author_id': 2}
+            request.env['mail.message'].sudo().create(msg_values)
+
+        except Exception as e:
+            _logger.info("ERROR PROCESSING OFFER. ERROR: %r", e)
+            result = 'error'
+        return {'response': result}

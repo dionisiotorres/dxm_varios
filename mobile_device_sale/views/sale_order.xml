@@ -9,6 +9,9 @@
             <xpath expr="//page/field[@name='order_line']/tree/field[@name='product_uom_qty']" position="before">
                 <field name="product_grade"/>
             </xpath>
+            <xpath expr="//page/field[@name='order_line']/tree/field[@name='price_unit']" position="after">
+                <field name="price_offered"/>
+            </xpath>
             <xpath expr="//page/field[@name='order_line']/tree/field[@name='price_subtotal']" position="after">
                 <button name="action_show_line_specs" string="Product Line Specifications"
                         type="object" icon="fa-adjust" width="0.1"/> <!-- options='{"warn": true}' -->
@@ -33,12 +36,12 @@
                                 <field name="available_qty" readonly="1"/>
                                 <field name="quantity" string="Quantity"/>
                                 <field name="color"/>
-                                <field name="lock_status"/>
+                                <!--<field name="lock_status"/>
                                 <field name="logo"/>
                                 <field name="charger"/>
                                 <field name="network_type"/>
                                 <field name="lang"/>
-                                <field name="applications"/>
+                                <field name="applications"/>-->
                             </tree>
                         </field>
 

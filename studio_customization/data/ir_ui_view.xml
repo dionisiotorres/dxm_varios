@@ -55,7 +55,10 @@
             </h1>
           </div>
           <group name="studio_group_2be9c0">
-            <group name="studio_group_2be9c0_left"/>
+            <group name="studio_group_2be9c0_left">
+                <field name="x_color_index"/>
+                <field name="x_color_code"/>
+            </group>
             <group name="studio_group_2be9c0_right"/>
           </group>
         </sheet>

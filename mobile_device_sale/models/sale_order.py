@@ -270,12 +270,12 @@ class SaleOrder(models.Model):
                 'sale_order_line_id': order_line.id,
                 'quantity': process_qty,
                 'color': int(kwargs.get('color', 0)),
-                'lock_status': int(kwargs.get('lock_status', 0)),
-                'logo': int(kwargs.get('logo', 0)),
-                'charger': int(kwargs.get('charger', 0)),
-                'network_type': int(kwargs.get('network_type', 0)),
-                'lang': int(kwargs.get('lang', 0)),
-                'applications': int(kwargs.get('applications', 0))
+                # 'lock_status': int(kwargs.get('lock_status', 0)),
+                # 'logo': int(kwargs.get('logo', 0)),
+                # 'charger': int(kwargs.get('charger', 0)),
+                # 'network_type': int(kwargs.get('network_type', 0)),
+                # 'lang': int(kwargs.get('lang', 0)),
+                # 'applications': int(kwargs.get('applications', 0))
             }
             if not existing_specs:
                 _logger.info("NOT EXISTING SPECS. CREATING NEW ONE")
@@ -299,6 +299,7 @@ class SaleOrderLine(models.Model):
 
     product_grade = fields.Many2one(comodel_name='x_grado', string='Grade')
     line_specs_ids = fields.One2many(comodel_name='product.line.specs', inverse_name='sale_order_line_id')
+    price_offered = fields.Monetary(string="Price Offered")
 
     def match_product_specs(self, **kwargs):
         _logger.info("MATCH SPECS KW ARGS: %r", kwargs)
@@ -309,35 +310,35 @@ class SaleOrderLine(models.Model):
         else:
             domain += [('color', '=', False)]
 
-        if 'lock_status' in kwargs.keys():
-            domain += [('lock_status', '=', int(kwargs.get('lock_status')))]
-        else:
-            domain += [('lock_status', '=', False)]
-
-        if 'logo' in kwargs.keys():
-            domain += [('logo', '=', int(kwargs.get('logo')))]
-        else:
-            domain += [('logo', '=', False)]
-
-        if 'charger' in kwargs.keys():
-            domain += [('charger', '=', int(kwargs.get('charger')))]
-        else:
-            domain += [('charger', '=', False)]
-
-        if 'network_type' in kwargs.keys():
-            domain += [('network_type', '=', int(kwargs.get('network_type')))]
-        else:
-            domain += [('network_type', '=', False)]
-
-        if 'lang' in kwargs.keys():
-            domain += [('lang', '=', int(kwargs.get('lang')))]
-        else:
-            domain += [('lang', '=', False)]
-
-        if 'applications' in kwargs.keys():
-            domain += [('applications', '=', int(kwargs.get('applications')))]
-        else:
-            domain += [('applications', '=', False)]
+        # if 'lock_status' in kwargs.keys():
+        #     domain += [('lock_status', '=', int(kwargs.get('lock_status')))]
+        # else:
+        #     domain += [('lock_status', '=', False)]
+        #
+        # if 'logo' in kwargs.keys():
+        #     domain += [('logo', '=', int(kwargs.get('logo')))]
+        # else:
+        #     domain += [('logo', '=', False)]
+        #
+        # if 'charger' in kwargs.keys():
+        #     domain += [('charger', '=', int(kwargs.get('charger')))]
+        # else:
+        #     domain += [('charger', '=', False)]
+        #
+        # if 'network_type' in kwargs.keys():
+        #     domain += [('network_type', '=', int(kwargs.get('network_type')))]
+        # else:
+        #     domain += [('network_type', '=', False)]
+        #
+        # if 'lang' in kwargs.keys():
+        #     domain += [('lang', '=', int(kwargs.get('lang')))]
+        # else:
+        #     domain += [('lang', '=', False)]
+        #
+        # if 'applications' in kwargs.keys():
+        #     domain += [('applications', '=', int(kwargs.get('applications')))]
+        # else:
+        #     domain += [('applications', '=', False)]
         return self.env['product.line.specs'].search(domain)
 
     def _get_display_price(self, product):

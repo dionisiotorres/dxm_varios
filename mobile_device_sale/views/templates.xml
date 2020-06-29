@@ -8,11 +8,83 @@
     </template>
 
     <template id="product_specs_grid" inherit_id="website_sale.products_item" name="Product Specifications Grid">
-        <xpath expr="//*[hasclass('product_price')]" position="after">
-            <div class="oct_stock_qty"><i class="fa fa-cubes"/> Stock Available:
-                <span class="oct_product_qty"></span></div> <!-- <t t-esc="product.qty_available"/> -->
-            <!-- <i class="fa fa-spinner fa-spin"/> Calculating Stock... -->
-            <div class="row oct_grid_variant_selector mt16">
+        <xpath expr="//*[hasclass('product_price')]" position="replace">
+
+            <div class="oct_stock_qty"><i class="fa fa-cubes"/> Total Stock:
+                <span class="oct_product_qty"><t t-esc="int(product.virtual_available)"/></span>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12 col-md12 oct_grade_container">
+                    <t t-foreach="grades" t-as="grade">
+
+                        <label class="radio-inline oct_radio_selector" t-att-data-grade-id="grade.id">
+                          <input type="radio" name="optradio" t-att-value="grade.id"/>
+                            Grade <t t-esc="grade.x_name"/>
+                            <br/>
+                            <span class="grade_stock"><i class="fa fa-cubes"/> Stock:
+                                <span class="stock"><i class="fa fa-spinner fa-spin"/></span>
+                            </span>
+                            <br/>
+                            <span class="grade_price"><i class="fa fa-money"/> Price:
+                                <span itemprop="priceCurrency" t-esc="website.currency_id.symbol" />
+                                <span class="price"><i class="fa fa-spinner fa-spin"/></span>
+                                </span>
+                        </label>
+
+                    </t>
+
+                    <!--<label class="radio-inline oct_radio_selector">
+                      <input type="radio" name="optradio" value="a"/> Grade A
+                        <br/>
+                        <span class="grade_stock"><i class="fa fa-cubes"/> Stock: <span class="a_stock"/></span>
+                        <br/>
+                        <span class="grade_price"><i class="fa fa-money"/> Price: <span class="a_price"/></span>
+                    </label>
+
+                    <label class="radio-inline oct_radio_selector">
+                      <input type="radio" name="optradio" value="b"/> Grade B
+                        <br/>
+                        <span class="grade_stock"><i class="fa fa-cubes"/> Stock: <span class="b_stock"/></span>
+                        <br/>
+                        <span class="grade_price"><i class="fa fa-money"/> Price: <span class="b_price"/></span>
+                    </label>
+
+                    <label class="radio-inline oct_radio_selector">
+                      <input type="radio" name="optradio" value="c"/> Grade C
+                        <br/>
+                        <span class="grade_stock"><i class="fa fa-cubes"/> Stock: <span class="c_stock"/></span>
+                        <br/>
+                        <span class="grade_price"><i class="fa fa-money"/> Price: <span class="c_price"/></span>
+                    </label>
+
+                    <label class="radio-inline oct_radio_selector">
+                      <input type="radio" name="optradio" value="14"/> 14 Days
+                        <br/>
+                        <span class="grade_stock"><i class="fa fa-cubes"/> Stock: <span class="14_stock"/></span>
+                        <br/>
+                        <span class="grade_price"><i class="fa fa-money"/> Price: <span class="14_price"/></span>
+                    </label>-->
+
+                </div>
+            </div>
+
+
+            <div class="colors oct_hidden">
+              <ul>
+                <!--<li>
+                  <label>
+                    <input type="radio" name="color" value="black"/>
+                    <span class="swatch" style="background-color:#222"></span> Black
+                  </label>
+                </li>-->
+              </ul>
+            </div>
+
+
+
+
+         <!--<div class="row oct_grid_variant_selector mt16">
 
                 <div t-attf-class="oct_filter_wrapper col-xs-12 #{'col-lg-8 col-md-8' if layout_mode != 'grid' else 'col-lg-12 col-md-12'}">
 
@@ -26,7 +98,7 @@
 
                     <div t-attf-class="#{'oct_filters_list_mode' if layout_mode != 'grid' else 'oct_filters_grid_mode'} oct_hidden oct_filters">
 
-<!--                        <label t-if="layout_mode != 'grid'" for="grade">Grade: </label>-->
+&lt;!&ndash;                        <label t-if="layout_mode != 'grid'" for="grade">Grade: </label>&ndash;&gt;
                         <select class="w-auto o_input o_group_selector oct_grade" name="grade">
                             <option value="0">Select Grade</option>
                             <t t-foreach="grades" t-as="grade">
@@ -34,7 +106,7 @@
                             </t>
                         </select>
                         <br/>
-<!--                        <label t-if="layout_mode != 'grid'" for="color">Color: </label>-->
+&lt;!&ndash;                        <label t-if="layout_mode != 'grid'" for="color">Color: </label>&ndash;&gt;
                         <select class="w-auto o_input o_group_selector oct_color" name="color">
                             <option value="0">Select a Color</option>
                             <t t-foreach="device_colors" t-as="color">
@@ -42,7 +114,7 @@
                             </t>
                         </select>
                         <br/>
-<!--                        <label t-if="layout_mode != 'grid'" for="lock_status">Lock Status: </label>-->
+&lt;!&ndash;                        <label t-if="layout_mode != 'grid'" for="lock_status">Lock Status: </label>&ndash;&gt;
                         <select class="w-auto o_input o_group_selector oct_lock_status" name="lock_status">
                             <option value="0">Select a Lock Status</option>
                             <t t-foreach="device_lock_status" t-as="lock">
@@ -50,7 +122,7 @@
                             </t>
                         </select>
                         <br/>
-<!--                        <label t-if="layout_mode != 'grid'" for="logo">Logo Condition: </label>-->
+&lt;!&ndash;                        <label t-if="layout_mode != 'grid'" for="logo">Logo Condition: </label>&ndash;&gt;
                         <select class="w-auto o_input o_group_selector oct_logo" name="logo">
                             <option value="0">Select a Logo Condition</option>
                             <t t-foreach="device_logo" t-as="logo">
@@ -58,7 +130,7 @@
                             </t>
                         </select>
                         <br/>
-<!--                        <label t-if="layout_mode != 'grid'" for="charger">Charger: </label>-->
+&lt;!&ndash;                        <label t-if="layout_mode != 'grid'" for="charger">Charger: </label>&ndash;&gt;
                         <select class="w-auto o_input o_group_selector oct_charger" name="charger">
                             <option value="0">Select Charger</option>
                             <t t-foreach="device_charger" t-as="charger">
@@ -66,7 +138,7 @@
                             </t>
                         </select>
                         <br/>
-<!--                        <label t-if="layout_mode != 'grid'" for="charger">Charger: </label>-->
+&lt;!&ndash;                        <label t-if="layout_mode != 'grid'" for="charger">Charger: </label>&ndash;&gt;
                         <select class="w-auto o_input o_group_selector oct_network_type" name="network_type">
                             <option value="0">Select Network</option>
                             <t t-foreach="device_network_type" t-as="network_type">
@@ -74,7 +146,7 @@
                             </t>
                         </select>
                         <br/>
-<!--                        <label t-if="layout_mode != 'grid'" for="lang">Language: </label>-->
+&lt;!&ndash;                        <label t-if="layout_mode != 'grid'" for="lang">Language: </label>&ndash;&gt;
                         <select class="w-auto o_input o_group_selector oct_lang" name="lang">
                             <option value="0">Select Language</option>
                             <t t-foreach="device_lang" t-as="lang">
@@ -82,7 +154,7 @@
                             </t>
                         </select>
                         <br/>
-<!--                        <label t-if="layout_mode != 'grid'" for="applications">Applications: </label>-->
+&lt;!&ndash;                        <label t-if="layout_mode != 'grid'" for="applications">Applications: </label>&ndash;&gt;
                         <select class="w-auto o_input o_group_selector oct_applications" name="applications">
                             <option value="0">Select Applications</option>
                             <t t-foreach="device_applications" t-as="applications">
@@ -95,7 +167,9 @@
 
                 </div>
 
-            </div>
+            </div>-->
+
+
         </xpath>
     </template>
 
@@ -103,92 +177,76 @@
         <xpath expr="//*[hasclass('product_price')]" position="after">
 
             <div class="oct_stock_qty"><i class="fa fa-cubes"/> Stock Quantity:
-                <span class="oct_product_qty"><t t-esc="product.qty_available"/></span></div>
-            <!-- <i class="fa fa-spinner fa-spin"/> Calculating Stock... -->
-            <div class="row oct_grid_variant_selector mt16 mb16">
+                <span class="oct_product_qty"><t t-esc="int(product.virtual_available)"/></span>
+            </div>
 
-                <div t-attf-class="oct_filter_wrapper col-xs-12 #{'col-lg-8 col-md-8' if layout_mode != 'grid' else 'col-lg-12 col-md-12'}">
+            <div class="row">
+                <div class="col-lg-12 col-md12 oct_grade_container">
+                    <t t-foreach="grades" t-as="grade">
 
-                    <div class="oct_filter_container">
-                        <span class="oct_filter_title">Select device features
-                            <span class="oct_selector_icon">
-                                <i class="fa fa-caret-down"/>
+                        <label class="radio-inline oct_radio_selector" t-att-data-grade-id="grade.id">
+                          <input type="radio" name="optradio" t-att-value="grade.id"/>
+                            Grade <t t-esc="grade.x_name"/>
+                            <br/>
+                            <span class="grade_stock"><i class="fa fa-cubes"/> Stock:
+                                <span class="stock"><i class="fa fa-spinner fa-spin"/></span>
                             </span>
+                            <br/>
+                            <span class="grade_price"><i class="fa fa-money"/> Price:
+                                <span itemprop="priceCurrency" t-esc="website.currency_id.symbol" />
+                                <span class="price"><i class="fa fa-spinner fa-spin"/></span>
+                                </span>
+                        </label>
 
-                        </span>
+                    </t>
 
-                    <div t-attf-class="#{'oct_filters_list_mode' if layout_mode != 'grid' else 'oct_filters_grid_mode'} oct_hidden oct_filters">
+                    <!--<label class="radio-inline oct_radio_selector">
+                      <input type="radio" name="optradio" value="a"/> Grade A
+                        <br/>
+                        <span class="grade_stock"><i class="fa fa-cubes"/> Stock: <span class="a_stock"/></span>
+                        <br/>
+                        <span class="grade_price"><i class="fa fa-money"/> Price: <span class="a_price"/></span>
+                    </label>
 
-<!--                        <label t-if="layout_mode != 'grid'" for="grade">Grade: </label>-->
-                        <select class="w-auto o_input o_group_selector oct_grade" name="grade">
-                            <option value="0">All Grades</option>
-                            <t t-foreach="grades" t-as="grade">
-                                <option t-att-value="grade.id"><t t-esc="grade.x_name"/></option>
-                            </t>
-                        </select>
+                    <label class="radio-inline oct_radio_selector">
+                      <input type="radio" name="optradio" value="b"/> Grade B
                         <br/>
-<!--                        <label t-if="layout_mode != 'grid'" for="color">Color: </label>-->
-                        <select class="w-auto o_input o_group_selector oct_color" name="color">
-                            <option value="0">Select a Color</option>
-                            <t t-foreach="device_colors" t-as="color">
-                                <option t-att-value="color.id"><t t-esc="color.x_name"/></option>
-                            </t>
-                        </select>
+                        <span class="grade_stock"><i class="fa fa-cubes"/> Stock: <span class="b_stock"/></span>
                         <br/>
-<!--                        <label t-if="layout_mode != 'grid'" for="lock_status">Lock Status: </label>-->
-                        <select class="w-auto o_input o_group_selector oct_lock_status" name="lock_status">
-                            <option value="0">Select a Lock Status</option>
-                            <t t-foreach="device_lock_status" t-as="lock">
-                                <option t-att-value="lock.id"><t t-esc="lock.x_name"/></option>
-                            </t>
-                        </select>
-                        <br/>
-<!--                        <label t-if="layout_mode != 'grid'" for="logo">Logo Condition: </label>-->
-                        <select class="w-auto o_input o_group_selector oct_logo" name="logo">
-                            <option value="0">Select a Logo Condition</option>
-                            <t t-foreach="device_logo" t-as="logo">
-                                <option t-att-value="logo.id"><t t-esc="logo.x_name"/></option>
-                            </t>
-                        </select>
-                        <br/>
-<!--                        <label t-if="layout_mode != 'grid'" for="charger">Charger: </label>-->
-                        <select class="w-auto o_input o_group_selector oct_charger" name="charger">
-                            <option value="0">Select Charger</option>
-                            <t t-foreach="device_charger" t-as="charger">
-                                <option t-att-value="charger.id"><t t-esc="charger.x_name"/></option>
-                            </t>
-                        </select>
-                        <br/>
-<!--                        <label t-if="layout_mode != 'grid'" for="charger">Charger: </label>-->
-                        <select class="w-auto o_input o_group_selector oct_network_type" name="network_type">
-                            <option value="0">Select Network</option>
-                            <t t-foreach="device_network_type" t-as="network_type">
-                                <option t-att-value="network_type.id"><t t-esc="network_type.x_name"/></option>
-                            </t>
-                        </select>
-                        <br/>
-<!--                        <label t-if="layout_mode != 'grid'" for="lang">Language: </label>-->
-                        <select class="w-auto o_input o_group_selector oct_lang" name="lang">
-                            <option value="0">Select Language</option>
-                            <t t-foreach="device_lang" t-as="lang">
-                                <option t-att-value="lang.id"><t t-esc="lang.x_name"/></option>
-                            </t>
-                        </select>
-                        <br/>
-<!--                        <label t-if="layout_mode != 'grid'" for="applications">Applications: </label>-->
-                        <select class="w-auto o_input o_group_selector oct_applications" name="applications">
-                            <option value="0">Select Applications</option>
-                            <t t-foreach="device_applications" t-as="applications">
-                                <option t-att-value="applications.id"><t t-esc="applications.x_name"/></option>
-                            </t>
-                        </select>
-                    </div>
+                        <span class="grade_price"><i class="fa fa-money"/> Price: <span class="b_price"/></span>
+                    </label>
 
-                    </div>
+                    <label class="radio-inline oct_radio_selector">
+                      <input type="radio" name="optradio" value="c"/> Grade C
+                        <br/>
+                        <span class="grade_stock"><i class="fa fa-cubes"/> Stock: <span class="c_stock"/></span>
+                        <br/>
+                        <span class="grade_price"><i class="fa fa-money"/> Price: <span class="c_price"/></span>
+                    </label>
+
+                    <label class="radio-inline oct_radio_selector">
+                      <input type="radio" name="optradio" value="14"/> 14 Days
+                        <br/>
+                        <span class="grade_stock"><i class="fa fa-cubes"/> Stock: <span class="14_stock"/></span>
+                        <br/>
+                        <span class="grade_price"><i class="fa fa-money"/> Price: <span class="14_price"/></span>
+                    </label>-->
 
                 </div>
-
             </div>
+
+
+            <div class="colors oct_hidden">
+              <ul>
+                <!--<li>
+                  <label>
+                    <input type="radio" name="color" value="black"/>
+                    <span class="swatch" style="background-color:#222"></span> Black
+                  </label>
+                </li>-->
+              </ul>
+            </div>
+
 
         </xpath>
     </template>
@@ -214,13 +272,13 @@
                         <th></th>
                         <th class="text-center td-qty">Quantity</th>
                         <th class="text-center td-price">Price</th>
-                        <th class="text-center td-action"></th>
+                        <th class="text-center td-action">Price Offered</th>
                     </tr>
                 </thead>
                 <tbody>
                     <t t-foreach="website_sale_order.website_order_line" t-as="line">
 
-                        <tr t-attf-id="#{'product_line_row_' + str(line.product_id.id)}"
+                        <tr t-attf-id="#{'product_line_row_' + str(line.product_id.id) + '_' + line.product_grade.x_name}"
                             t-attf-class="product_order_line #{'optional_product info' if line.linked_line_id else None}">
 
                             <td colspan="2" t-if="not line.product_id.product_tmpl_id" class='td-img'></td>
@@ -268,6 +326,15 @@
                                 <span t-field="line.price_reduce_taxinc" style="white-space: nowrap;" t-options="{'widget': 'monetary', 'display_currency': website_sale_order.currency_id}" groups="account.group_show_line_subtotals_tax_included" />
                             </td>
                             <td class="td-action">
+
+
+                                        <input type="text" class="form-control oct_price_offered"
+                                               t-att-data-line-id="line.id"
+                                               t-att-data-product-id="line.product_id.id"
+                                                t-att-value="line.price_offered"/>
+
+
+
 <!--                                <a href='#' aria-label="Remove from cart" title="Remove from cart" class='js_delete_product no-decoration'> <small><i class='fa fa-trash-o'></i></small></a>-->
                             </td>
                         </tr>
@@ -280,12 +347,12 @@
                                                 <th>Quantity</th>
                                                 <th>Grade</th>
                                                 <th>Color</th>
-                                                <th>Lock Status</th>
+                                                <!--<th>Lock Status</th>
                                                 <th>Logo</th>
                                                 <th>Charger</th>
                                                 <th>Network</th>
                                                 <th>Language</th>
-                                                <th>Applications</th>
+                                                <th>Applications</th>-->
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -301,7 +368,7 @@
                                                     <td>
                                                         <t t-esc="specs.color.x_name"/>
                                                     </td>
-                                                    <td>
+                                                    <!--<td>
                                                         <t t-esc="specs.lock_status.x_name"/>
                                                     </td>
                                                     <td>
@@ -318,11 +385,11 @@
                                                     </td>
                                                     <td>
                                                         <t t-esc="specs.applications.x_name"/>
-                                                    </td>
+                                                    </td>-->
                                                     <td>
                                                         <a href='#' aria-label="Remove Specifications Line"
                                                            t-attf-data-specs-id="#{specs.id}"
-                                                           t-attf-data-product-row="#{'product_line_row_' + str(line.product_id.id)}"
+                                                           t-attf-data-product-row="#{'product_line_row_' + str(line.product_id.id) + '_' + line.product_grade.x_name}"
                                                            t-attf-data-specs-qty="#{specs.quantity}"
                                                            title="Remove Specifications Line"
                                                            class="remove_specs_line">

@@ -1,15 +1,18 @@
 odoo.define('oct_website_sale.sale', function (require) {
     'use strict';
     var ajax = require('web.ajax');
+    var Dialog = require('web.Dialog');
+    var core = require('web.core');
+    var _t = core._t;
 
     $(document).ready(function () {
 
         /* Default price and stock hidden */
-        if ($('#products_grid').length > 0){
+  /*      if ($('#products_grid').length > 0){
             $(".oe_product").each(function () {
-                /*var selector = $(this).find('.oct_grade');
+                /!*var selector = $(this).find('.oct_grade');
                 selector.find('option[value="5"]').attr("selected",true);
-                selector.trigger('change');*/
+                selector.trigger('change');*!/
                 $(".product_price").addClass("oct_hidden");
                 $(".oct_stock_qty").addClass("oct_hidden");
                 $(".js_add_cart_update").addClass("oct_hidden_important");
@@ -18,7 +21,107 @@ odoo.define('oct_website_sale.sale', function (require) {
             $(this).find(".product_price").addClass("oct_hidden");
             $(this).find(".oct_stock_qty").addClass("oct_hidden");
             $(this).find(".js_add_cart_update").addClass("oct_hidden_important");
-        }
+        }*/
+
+        /* Load products stock and price on grid */
+        if ($('#products_grid').length > 0){
+            console.log("GETTING PRODUCT GRID DATA");
+            $(".oe_product ").each(function () {
+                var product_container = $(this);
+                var product_id = $(this).find("input[name='product_id']").val();
+                // product_container.find(".o_wsale_product_btn").hide();
+                ajax.jsonRpc('/shop/get_product_info/grade', 'call', {
+                product_id: product_id
+                }).then(function (data) {
+
+                    if (data) {
+                        // console.log(data);
+
+                        // console.log(data.product_data);
+                        for (var product_grade_id in data.product_data){
+                            // console.log(data.product_data[product_grade_id]);
+                            var price = data.product_data[product_grade_id][0];
+                            var stock = data.product_data[product_grade_id][1];
+                            var label_selector = 'label[data-grade-id="'+ product_grade_id + '"]';
+                            var grade_label = product_container.find(label_selector);
+                            var price_container = grade_label.find('.price');
+                            price_container.html(price);
+                            var stock_container = grade_label.find('.stock');
+                            if (stock > 0){
+                                stock_container.html(stock);
+                            } else {
+                                stock_container.html(stock);
+                                grade_label.find('input').prop('disabled', true);
+                                grade_label.addClass("oct_no_stock");
+                            }
+
+                        }
+
+
+                    } else {
+
+                        var dialog = new Dialog(this, {
+                            size: 'medium',
+                            dialogClass: 'o_act_window',
+                            title: _t("Connection Error"),
+                            $content: $(_t("<span class='text-center' style='padding: 2rem;'>Error fetching products information. Please, try again later.</span>"))
+                        });
+                        dialog.open();
+
+                    }
+
+        }); // END then function
+
+
+
+            }); // End each
+
+        } else if ($("#product_detail").length > 0) {
+            console.log("GETTING PRODUCT DETAIL DATA");
+            var product_container = $("#product_detail");
+            var product_id = product_container.find("input[name='product_id']").val();
+            // product_container.find(".o_wsale_product_btn").hide();
+            ajax.jsonRpc('/shop/get_product_info/grade', 'call', {
+            product_id: product_id
+            }).then(function(data) {
+                if (data) {
+                    for (var product_grade_id in data.product_data){
+                        // console.log(data.product_data[product_grade_id]);
+                        var price = data.product_data[product_grade_id][0];
+                        var stock = data.product_data[product_grade_id][1];
+                        var label_selector = 'label[data-grade-id="'+ product_grade_id + '"]';
+                        var grade_label = product_container.find(label_selector);
+                        var price_container = grade_label.find('.price');
+                        price_container.html(price);
+                        var stock_container = grade_label.find('.stock');
+                        if (stock > 0){
+                            stock_container.html(stock);
+                        } else {
+                            stock_container.html(stock);
+                            grade_label.find('input').prop('disabled', true);
+                            grade_label.addClass("oct_no_stock");
+                        }
+
+                    }
+
+
+                } else {
+
+                    var dialog = new Dialog(this, {
+                        size: 'medium',
+                        dialogClass: 'o_act_window',
+                        title: _t("Connection Error"),
+                        $content: $(_t("<span class='text-center' style='padding: 2rem;'>Error fetching products information. Please, try again later.</span>"))
+                    });
+                    dialog.open();
+
+                }
+            }); // END then function
+
+
+        }  // END if
+
+
 
         /* Handle layout list options */
         $(document).on('click', '.o_wsale_apply_list', function(event) {
@@ -66,9 +169,92 @@ odoo.define('oct_website_sale.sale', function (require) {
             }
         }); // END FILTER PRODUCT BRANDS
 
-        /* Product specifications handler */
-        $(document).on('change', '.oct_grid_variant_selector',function (e) {
+
+        $(document).on('change', '.oct_grade_container',function (e) {
+            console.log("GRADE RADIO CHANGED");
             /* select filter values */
+            let grade = $(this).find("input:radio[name=optradio]:checked").val();
+            console.log(grade);
+
+            // vars on product grid or product detail
+            if ($('#products_grid').length > 0){
+                var parent_container = $(this).parents('.o_wsale_product_information');
+                var product_id = parent_container.find("input[name='product_id']").val();   //parent_container.find('a').data('oe-id');
+            } else { // vars on product detail
+                var parent_container = $(this).parents('#product_details');
+                var product_id = $("input[name='product_id']").val();
+            }
+
+            // parent_container.find(".js_add_cart_update").show();
+
+
+            // console.log(parent_container);
+            console.log("PRODUCT ID: " + product_id);
+
+            let load_color_spinner = $("<i class=\"fa fa-spinner fa-spin\"/> <span>Loading colors...</span>");
+
+           // $(quant_container).html(spinner);
+            var colors_container = parent_container.find(".colors");
+            var ul_container = colors_container.find("ul");
+            ul_container.html(load_color_spinner);
+            colors_container.removeClass('oct_hidden');
+
+            ajax.jsonRpc('/shop/get_product_info/grade', 'call', {
+                product_id: product_id,
+                grade: grade
+            }).then(function (data) {
+            if (data) {
+                console.log(data);
+                ul_container.html("");
+                for (var index in data.color_data){
+                    console.log(data.color_data[index][0]);
+                    console.log(data.color_data[index][1]);
+
+                    var color_id = data.color_data[index][0];
+                    var color_index = data.color_data[index][1];
+                    var color_name = data.color_data[index][2];
+                    var color_quantity = data.color_data[index][3];
+
+
+                    var html_list = '<li><label class="color_label"><input type="radio" data-qty="'+ color_quantity  +'" name="color" value="'+ color_id + '"/><span class="swatch" style="background-color:' + color_index + ';"></span>' + color_name + ' (' + color_quantity + ')' + '</label></li>'
+                    ul_container.append(html_list);
+                }
+
+
+
+            } else {
+
+            }
+        });
+
+        }); // END PRODUCT SPECIFICATIONS HANDLER
+
+        // Colors handler
+        $(document).on('change', '.colors', function () {
+
+            // vars on product grid or product detail
+            if ($('#products_grid').length > 0){
+                var parent_container = $(this).parents('.o_wsale_product_information');
+                var qty_input = parent_container.find('.input_add_qty');
+            } else { // vars on product detail
+                var parent_container = $(this).parents('#product_details');
+                var qty_input = parent_container.find('.quantity');
+            }
+
+            // parent_container.find(".js_add_cart_update").show();
+            // parent_container.find(".o_wsale_product_btn").show();
+
+            var max_color_qty = $(this).find("input:radio[name=color]:checked").data('qty');
+
+            console.log(max_color_qty);
+            qty_input.prop('max', max_color_qty)
+
+        }); // END Colors handler
+
+
+        /* OLD Product specifications handler */
+        /*$(document).on('change', '.oct_grid_variant_selector',function (e) {
+            /!* select filter values *!/
             let grade = $(this).find("select[name='grade']").children("option:selected").val();
             let color = $(this).find("select[name='color']").children("option:selected").val();
             let lock_status = $(this).find("select[name='lock_status']").children("option:selected").val();
@@ -95,7 +281,7 @@ odoo.define('oct_website_sale.sale', function (require) {
                 var add_to_cart_button = $('#add_to_cart_json');
             }
 
-            /*
+            /!*
             * ||
                 color !== "0" ||
                 lock_status !== "0" ||
@@ -104,9 +290,9 @@ odoo.define('oct_website_sale.sale', function (require) {
                 network_type !== "0" ||
                 lang !== "0" ||
                 applications !== "0"
-            * */
+            * *!/
 
-            if (grade !== "0"){
+            /!*if (grade !== "0"){
                 parent_container.find(".product_price").removeClass("oct_hidden");
                 parent_container.find(".oct_stock_qty").removeClass("oct_hidden");
                 parent_container.find(".js_add_cart_update").removeClass("oct_hidden_important");
@@ -114,7 +300,7 @@ odoo.define('oct_website_sale.sale', function (require) {
                 parent_container.find(".product_price").addClass("oct_hidden");
                 parent_container.find(".oct_stock_qty").addClass("oct_hidden");
                 parent_container.find(".js_add_cart_update").addClass("oct_hidden_important");
-            }
+            }*!/
 
             console.log(parent_container);
             console.log("PRODUCT ID: " + product_id);
@@ -156,7 +342,7 @@ odoo.define('oct_website_sale.sale', function (require) {
             }
         });
 
-        }); // END PRODUCT SPECIFICATIONS HANDLER
+        }); // END PRODUCT SPECIFICATIONS HANDLER*/
 
         /* Specifications filter toggle visualization handler */
         $(document).on('click', '.oct_filter_title', function(ev){
@@ -189,9 +375,9 @@ odoo.define('oct_website_sale.sale', function (require) {
             var order_line_specs_row =  $(this).closest('.order_line_specs_row');
             var cart_table = $("#cart_products");
 
-            // console.log(product_row);
+            console.log(product_row);
             // console.log(product_total_qty_container);
-            // console.log(product_total_qty);
+            console.log(product_total_qty);
             // console.log(order_line_specs_row);
             // console.log(cart_table);
 
@@ -234,6 +420,45 @@ odoo.define('oct_website_sale.sale', function (require) {
                 });
 
         })
+
+        $(document).on('change', '.oct_price_offered', function () {
+            console.log("PRICE OFFERED CHANGED");
+
+            var success_dialog = new Dialog(this, {
+                size: 'medium',
+                dialogClass: 'o_act_window',
+                title: _t("Offer sent"),
+                $content: $(_t("<span class='text-center' style='padding: 2rem;'>Price offer successfully updated. " +
+                    "<br/> Please complete your purchase process to review your offer.</span>"))
+            });
+
+            var error_dialog = new Dialog(this, {
+                size: 'medium',
+                dialogClass: 'o_act_window',
+                title: _t("Offer error"),
+                $content: $(_t("<span class='text-center' style='padding: 2rem;'> Your offer have not been processed. Please, try again later.</span>"))
+            });
+
+            // var container = $(this).parents('td');
+            var line_id = $(this).data('line-id');
+            var offer_value = $(this).val();
+            console.log(line_id);
+            // let spinner = $("<i class=\"fa fa-spinner fa-spin\"/>");
+            // container.append(spinner);
+
+            ajax.jsonRpc('/shop/cart/update_price_offered', 'call', {
+                line_id: line_id,
+                offer: offer_value
+            }).then(function (data) {
+                console.log(data);
+                if (data.response === 'done'){
+                    success_dialog.open();
+                } else {
+                    error_dialog.open();
+                }
+            }); // END AJAX call
+
+        });
 
 
     }) // END DOCUMENT READY

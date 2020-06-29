@@ -23,6 +23,7 @@
         'security/ir.model.access.csv',
         'data/group_data.xml',
         'data/report_paper_format.xml',
+        'views/backend_assets.xml',
         'views/stock_picking_view.xml',
         'views/stock_production_lot.xml',
         'views/res_config.xml',
