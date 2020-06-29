@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_backend" name="Oct assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/mobile_device_reception/static/src/js/oct_key_events.js"></script>
+        </xpath>
+    </template>
+</odoo>
