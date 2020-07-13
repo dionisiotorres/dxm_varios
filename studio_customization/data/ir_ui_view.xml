@@ -420,6 +420,7 @@
     <field name="arch" type="xml">
       <tree string="Grado">
         <field name="x_name" modifiers="{}"/>
+        <field name="x_studio_grade_sku"/>
       </tree>
     </field>
     <field name="field_parent" eval="False"/>
@@ -441,6 +442,7 @@
             <group name="studio_group_f0U3B_left">
               <field name="x_studio_test_value" string="Valor" attrs="{}" required="1"/>
               <field name="x_studio_is_grade_test" string="Disponible en Test de Grado"/>
+              <field name="x_studio_grade_sku"/>
               <field name="x_studio_descripcin_general" string="Descripción general"/>
             </group>
           </group>
@@ -483,6 +485,7 @@
           <group name="studio_group_h14eS">
             <group name="studio_group_h14eS_left" string="Especificaciones">
               <field name="x_studio_modelo" string="Modelo"/>
+              <field name="x_studio_model_code" string="Model Code"/>
               <field name="x_studio_part_number" string="Part Number"/>
               <field name="x_studio_capacidad_de_almacenamiento" options="{&quot;no_open&quot;:true,&quot;no_create&quot;:true}"/>
               <field name="x_studio_fecha_de_lanzamiento" string="Fecha de Lanzamiento"/>
@@ -511,6 +514,7 @@
       <data>
         <xpath expr="//field[@name='product_id']" position="after">
           <field name="x_studio_lot_ean" string="EAN"/>
+          <field name="x_studio_lot_sku" string="SKU Code"/>
         </xpath>
         <xpath expr="//group[@name='main_group']" position="after">
           <group name="studio_group_AWwSo">

@@ -55,7 +55,7 @@
     <field name="state">manual</field>
     <field name="store" eval="True"/>
     <field name="tracking" eval="False"/>
-    <field name="translate" eval="False"/>
+    <field name="translate" eval="True"/>
     <field name="ttype">char</field>
   </record>
 
@@ -119,7 +119,7 @@
     <field name="ttype">char</field>
   </record>
 
-  <record id="studio_customization.new_texto_color_25b23dab-1f7a-450e-bee0-172328c30741" model="ir.model.fields" context="{'studio': True}">
+ <!-- <record id="studio_customization.new_texto_color_25b23dab-1f7a-450e-bee0-172328c30741" model="ir.model.fields" context="{'studio': True}">
     <field name="complete_name" eval="False"/>
     <field name="compute" eval="False"/>
     <field name="copied" eval="False"/>
@@ -147,8 +147,9 @@
     <field name="tracking" eval="False"/>
     <field name="translate" eval="False"/>
     <field name="ttype">char</field>
-  </record>
-  <record id="studio_customization.new_seleccion_color_4c384d8e-ebcc-4054-ba37-96f0750fb900" model="ir.model.fields" context="{'studio': True}">
+  </record>-->
+
+  <!--<record id="studio_customization.new_seleccion_color_4c384d8e-ebcc-4054-ba37-96f0750fb900" model="ir.model.fields" context="{'studio': True}">
     <field name="complete_name" eval="False"/>
     <field name="compute" eval="False"/>
     <field name="copied" eval="False"/>
@@ -176,7 +177,8 @@
     <field name="tracking" eval="False"/>
     <field name="translate" eval="False"/>
     <field name="ttype">selection</field>
-  </record>
+  </record>-->
+
   <record id="studio_customization.name_bloqueo_f70e2151-d90d-4c58-a2e0-497fc357a4d4" model="ir.model.fields" context="{'studio': True}">
     <field name="complete_name" eval="False"/>
     <field name="compute" eval="False"/>
@@ -203,7 +205,7 @@
     <field name="state">manual</field>
     <field name="store" eval="True"/>
     <field name="tracking" eval="False"/>
-    <field name="translate" eval="False"/>
+    <field name="translate" eval="True"/>
     <field name="ttype">char</field>
   </record>
   <record id="studio_customization.name_red_a5b31895-e867-4bd3-b7db-c8545deae6e5" model="ir.model.fields" context="{'studio': True}">
@@ -261,7 +263,7 @@
     <field name="state">manual</field>
     <field name="store" eval="True"/>
     <field name="tracking" eval="False"/>
-    <field name="translate" eval="False"/>
+    <field name="translate" eval="True"/>
     <field name="ttype">char</field>
   </record>
   <record id="studio_customization.name_idioma_terminal_1c11b478-e023-4a47-bb1d-93df773fe110" model="ir.model.fields" context="{'studio': True}">
@@ -290,7 +292,7 @@
     <field name="state">manual</field>
     <field name="store" eval="True"/>
     <field name="tracking" eval="False"/>
-    <field name="translate" eval="False"/>
+    <field name="translate" eval="True"/>
     <field name="ttype">char</field>
   </record>
   <record id="studio_customization.name_cargador_b21200f1-bff1-4492-b2a7-ace644b5e38e" model="ir.model.fields" context="{'studio': True}">
@@ -319,7 +321,7 @@
     <field name="state">manual</field>
     <field name="store" eval="True"/>
     <field name="tracking" eval="False"/>
-    <field name="translate" eval="False"/>
+    <field name="translate" eval="True"/>
     <field name="ttype">char</field>
   </record>
   <record id="studio_customization.name_memoria_ram_896e9d36-6f82-4b32-a2dc-e96c3716e095" model="ir.model.fields" context="{'studio': True}">
@@ -377,7 +379,7 @@
     <field name="state">manual</field>
     <field name="store" eval="True"/>
     <field name="tracking" eval="False"/>
-    <field name="translate" eval="False"/>
+    <field name="translate" eval="True"/>
     <field name="ttype">char</field>
   </record>
   <record id="studio_customization.name_lanzamiento_ter_11d76d3e-de79-4546-9d7d-c63fa846e740" model="ir.model.fields" context="{'studio': True}">
@@ -473,13 +475,13 @@
     <field name="copied" eval="False"/>
     <field name="depends" eval="False"/>
     <field name="domain">[]</field>
-    <field name="field_description">X Studio Field Lbz9W</field>
+    <field name="field_description">Grade SKU Code</field>
     <field name="groups" eval="[(6, 0, [])]"/>
     <field name="help" eval="False"/>
     <field name="index" eval="False"/>
     <field name="model">x_grado</field>
     <field name="model_id" ref="studio_customization.grado_1b02b357-cd76-45e0-92de-273ccb1b85a2"/>
-    <field name="name">x_studio_field_lbZ9W</field>
+    <field name="name">x_studio_grade_sku</field>
     <field name="on_delete" eval="False"/>
     <field name="readonly" eval="False"/>
     <field name="related" eval="False"/>
@@ -728,6 +730,37 @@
     <field name="translate" eval="False"/>
     <field name="ttype">char</field>
   </record>
+
+  <record id="studio_customization.new_texto_product_mc_d10116ba-fe90-4fee-93bd-2571c929c7c9" model="ir.model.fields" context="{'studio': True}">
+    <field name="complete_name" eval="False"/>
+    <field name="compute" eval="False"/>
+    <field name="copied" eval="False"/>
+    <field name="depends" eval="False"/>
+    <field name="domain">[]</field>
+    <field name="field_description">Model Code</field>
+    <field name="groups" eval="[(6, 0, [])]"/>
+    <field name="help" eval="False"/>
+    <field name="index" eval="False"/>
+    <field name="model">product.template</field>
+    <field name="model_id" ref="product.model_product_template"/>
+    <field name="name">x_studio_model_code</field>
+    <field name="on_delete" eval="False"/>
+    <field name="readonly" eval="False"/>
+    <field name="related" eval="False"/>
+    <field name="relation" eval="False"/>
+    <field name="relation_field" eval="False"/>
+    <field name="relation_table" eval="False"/>
+    <field name="required" eval="False"/>
+    <field name="selectable" eval="True"/>
+    <field name="selection" eval="False"/>
+    <field name="size" eval="False"/>
+    <field name="state">manual</field>
+    <field name="store" eval="True"/>
+    <field name="tracking" eval="False"/>
+    <field name="translate" eval="False"/>
+    <field name="ttype">char</field>
+  </record>
+
   <record id="studio_customization.new_seleccion_produc_d57e6d59-ab8d-4324-99f8-7622d5025eb1" model="ir.model.fields" context="{'studio': True}">
     <field name="complete_name" eval="False"/>
     <field name="compute" eval="False"/>
@@ -815,7 +848,7 @@
     <field name="translate" eval="False"/>
     <field name="ttype">many2one</field>
   </record>
-  <record id="studio_customization.red_lot_serial_a5daceec-572f-42d1-94ca-3982190adbcc" model="ir.model.fields" context="{'studio': True}">
+  <!--<record id="studio_customization.red_lot_serial_a5daceec-572f-42d1-94ca-3982190adbcc" model="ir.model.fields" context="{'studio': True}">
     <field name="complete_name" eval="False"/>
     <field name="compute" eval="False"/>
     <field name="copied" eval="False"/>
@@ -843,7 +876,7 @@
     <field name="tracking" eval="False"/>
     <field name="translate" eval="False"/>
     <field name="ttype">many2one</field>
-  </record>
+  </record>-->
   <record id="studio_customization.logo_lot_serial_0ef550f7-56aa-4e8b-984a-68e7f5803e14" model="ir.model.fields" context="{'studio': True}">
     <field name="complete_name" eval="False"/>
     <field name="compute" eval="False"/>
@@ -1340,6 +1373,36 @@
     <field name="ttype">char</field>
   </record>
 
+  <record id="studio_customization.sku_lot_serial_bd3a34bc-fe02-41c8-a517-a012d461370z" model="ir.model.fields" context="{'studio': True}">
+    <field name="complete_name" eval="False"/>
+    <field name="compute" eval="False"/>
+    <field name="copied" eval="False"/>
+    <field name="depends" eval="False"/>
+    <field name="domain">[]</field>
+    <field name="field_description">SKU Code</field>
+    <field name="groups" eval="[(6, 0, [])]"/>
+    <field name="help" eval="False"/>
+    <field name="index" eval="False"/>
+    <field name="model">stock.production.lot</field>
+    <field name="model_id" ref="stock.model_stock_production_lot"/>
+    <field name="name">x_studio_lot_sku</field>
+    <field name="on_delete">set null</field>
+    <field name="readonly" eval="False"/>
+    <field name="related" eval="False"/>
+    <field name="relation" eval="False"/>
+    <field name="relation_field" eval="False"/>
+    <field name="relation_table" eval="False"/>
+    <field name="required" eval="False"/>
+    <field name="selectable" eval="False"/>
+    <field name="selection" eval="False"/>
+    <field name="size" eval="False"/>
+    <field name="state">manual</field>
+    <field name="store" eval="True"/>
+    <field name="tracking" eval="False"/>
+    <field name="translate" eval="False"/>
+    <field name="ttype">char</field>
+  </record>
+
 
   <record id="studio_customization.name_capacidad_f01c8d5d-a106-49bb-85e6-f4dbc461e0d4" model="ir.model.fields" context="{'studio': True}">
     <field name="complete_name" eval="False"/>
@@ -1594,7 +1657,7 @@
     <field name="relation_table" eval="False"/>
     <field name="required" eval="False"/>
     <field name="selectable" eval="True"/>
-    <field name="selection">[('Con averia', 'Con averia'), ('Sin averia', 'Sin averia')]</field>
+    <field name="selection">[('Con Avería', 'Con Avería'), ('Funcional', 'Funcional')]</field>
     <field name="size" eval="False"/>
     <field name="state">manual</field>
     <field name="store" eval="True"/>
