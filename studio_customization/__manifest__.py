@@ -18,7 +18,6 @@ It contains the apps created with Studio and the customizations of existing apps
         'stock',
         'purchase',
         'purchase_stock',
-        'web_studio',
     ],
     'data': [
         'data/ir_model.xml',

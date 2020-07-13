@@ -119,66 +119,6 @@
     <field name="ttype">char</field>
   </record>
 
- <!-- <record id="studio_customization.new_texto_color_25b23dab-1f7a-450e-bee0-172328c30741" model="ir.model.fields" context="{'studio': True}">
-    <field name="complete_name" eval="False"/>
-    <field name="compute" eval="False"/>
-    <field name="copied" eval="False"/>
-    <field name="depends" eval="False"/>
-    <field name="domain">[]</field>
-    <field name="field_description">New Texto</field>
-    <field name="groups" eval="[(6, 0, [])]"/>
-    <field name="help" eval="False"/>
-    <field name="index" eval="False"/>
-    <field name="model">x_color</field>
-    <field name="model_id" ref="studio_customization.color_158d5266-c9d7-4fca-8d00-b18d4a040f34"/>
-    <field name="name">x_studio_field_1baxw</field>
-    <field name="on_delete" eval="False"/>
-    <field name="readonly" eval="False"/>
-    <field name="related" eval="False"/>
-    <field name="relation" eval="False"/>
-    <field name="relation_field" eval="False"/>
-    <field name="relation_table" eval="False"/>
-    <field name="required" eval="False"/>
-    <field name="selectable" eval="True"/>
-    <field name="selection" eval="False"/>
-    <field name="size" eval="False"/>
-    <field name="state">manual</field>
-    <field name="store" eval="True"/>
-    <field name="tracking" eval="False"/>
-    <field name="translate" eval="False"/>
-    <field name="ttype">char</field>
-  </record>-->
-
-  <!--<record id="studio_customization.new_seleccion_color_4c384d8e-ebcc-4054-ba37-96f0750fb900" model="ir.model.fields" context="{'studio': True}">
-    <field name="complete_name" eval="False"/>
-    <field name="compute" eval="False"/>
-    <field name="copied" eval="False"/>
-    <field name="depends" eval="False"/>
-    <field name="domain">[]</field>
-    <field name="field_description">New Selección</field>
-    <field name="groups" eval="[(6, 0, [])]"/>
-    <field name="help" eval="False"/>
-    <field name="index" eval="False"/>
-    <field name="model">x_color</field>
-    <field name="model_id" ref="studio_customization.color_158d5266-c9d7-4fca-8d00-b18d4a040f34"/>
-    <field name="name">x_studio_field_iF7K1</field>
-    <field name="on_delete" eval="False"/>
-    <field name="readonly" eval="False"/>
-    <field name="related" eval="False"/>
-    <field name="relation" eval="False"/>
-    <field name="relation_field" eval="False"/>
-    <field name="relation_table" eval="False"/>
-    <field name="required" eval="False"/>
-    <field name="selectable" eval="True"/>
-    <field name="selection">[('Gold', 'Gold'), ('Silver', 'Silver'), ('Space Gray', 'Space Gray')]</field>
-    <field name="size" eval="False"/>
-    <field name="state">manual</field>
-    <field name="store" eval="True"/>
-    <field name="tracking" eval="False"/>
-    <field name="translate" eval="False"/>
-    <field name="ttype">selection</field>
-  </record>-->
-
   <record id="studio_customization.name_bloqueo_f70e2151-d90d-4c58-a2e0-497fc357a4d4" model="ir.model.fields" context="{'studio': True}">
     <field name="complete_name" eval="False"/>
     <field name="compute" eval="False"/>
@@ -761,122 +701,6 @@
     <field name="ttype">char</field>
   </record>
 
-  <record id="studio_customization.new_seleccion_produc_d57e6d59-ab8d-4324-99f8-7622d5025eb1" model="ir.model.fields" context="{'studio': True}">
-    <field name="complete_name" eval="False"/>
-    <field name="compute" eval="False"/>
-    <field name="copied" eval="False"/>
-    <field name="depends" eval="False"/>
-    <field name="domain">[]</field>
-    <field name="field_description">Grado Preliminar</field>
-    <field name="groups" eval="[(6, 0, [])]"/>
-    <field name="help" eval="False"/>
-    <field name="index" eval="False"/>
-    <field name="model">product.template</field>
-    <field name="model_id" ref="product.model_product_template"/>
-    <field name="name">x_studio_grado_preliminar</field>
-    <field name="on_delete" eval="False"/>
-    <field name="readonly" eval="False"/>
-    <field name="related" eval="False"/>
-    <field name="relation" eval="False"/>
-    <field name="relation_field" eval="False"/>
-    <field name="relation_table" eval="False"/>
-    <field name="required" eval="False"/>
-    <field name="selectable" eval="True"/>
-    <field name="selection">[('Grado A', 'Grado A'), ('Grado B', 'Grado B'), ('Grado C', 'Grado C'), ('Grado D', 'Grado D'), ('Grado E', 'Grado E'), ('Grado 14 Días', 'Grado 14 Días')]</field>
-    <field name="size" eval="False"/>
-    <field name="state">manual</field>
-    <field name="store" eval="True"/>
-    <field name="tracking" eval="False"/>
-    <field name="translate" eval="False"/>
-    <field name="ttype">selection</field>
-  </record>
-  <!--<record id="studio_customization.color_lot_serial_fc369bd2-cc2e-4121-9af2-cb96ffa4f9fd" model="ir.model.fields" context="{'studio': True}">
-    <field name="complete_name" eval="False"/>
-    <field name="compute" eval="False"/>
-    <field name="copied" eval="False"/>
-    <field name="depends" eval="False"/>
-    <field name="domain">[]</field>
-    <field name="field_description">Color</field>
-    <field name="groups" eval="[(6, 0, [])]"/>
-    <field name="help" eval="False"/>
-    <field name="index" eval="False"/>
-    <field name="model">stock.production.lot</field>
-    <field name="model_id" ref="stock.model_stock_production_lot"/>
-    <field name="name">x_studio_field_liJjZ</field>
-    <field name="on_delete">set null</field>
-    <field name="readonly" eval="False"/>
-    <field name="related" eval="False"/>
-    <field name="relation">x_color</field>
-    <field name="relation_field" eval="False"/>
-    <field name="relation_table" eval="False"/>
-    <field name="required" eval="False"/>
-    <field name="selectable" eval="True"/>
-    <field name="selection" eval="False"/>
-    <field name="size" eval="False"/>
-    <field name="state">manual</field>
-    <field name="store" eval="True"/>
-    <field name="tracking" eval="False"/>
-    <field name="translate" eval="False"/>
-    <field name="ttype">many2one</field>
-  </record>-->
-  <record id="studio_customization.bloqueo_lot_serial_bd3a34bc-fe02-41c8-a517-a011e461370d" model="ir.model.fields" context="{'studio': True}">
-    <field name="complete_name" eval="False"/>
-    <field name="compute" eval="False"/>
-    <field name="copied" eval="False"/>
-    <field name="depends" eval="False"/>
-    <field name="domain">[]</field>
-    <field name="field_description">Bloqueo</field>
-    <field name="groups" eval="[(6, 0, [])]"/>
-    <field name="help" eval="False"/>
-    <field name="index" eval="False"/>
-    <field name="model">stock.production.lot</field>
-    <field name="model_id" ref="stock.model_stock_production_lot"/>
-    <field name="name">x_studio_field_Jwrvk</field>
-    <field name="on_delete">set null</field>
-    <field name="readonly" eval="False"/>
-    <field name="related" eval="False"/>
-    <field name="relation">x_bloqueo</field>
-    <field name="relation_field" eval="False"/>
-    <field name="relation_table" eval="False"/>
-    <field name="required" eval="False"/>
-    <field name="selectable" eval="True"/>
-    <field name="selection" eval="False"/>
-    <field name="size" eval="False"/>
-    <field name="state">manual</field>
-    <field name="store" eval="True"/>
-    <field name="tracking" eval="False"/>
-    <field name="translate" eval="False"/>
-    <field name="ttype">many2one</field>
-  </record>
-  <!--<record id="studio_customization.red_lot_serial_a5daceec-572f-42d1-94ca-3982190adbcc" model="ir.model.fields" context="{'studio': True}">
-    <field name="complete_name" eval="False"/>
-    <field name="compute" eval="False"/>
-    <field name="copied" eval="False"/>
-    <field name="depends" eval="False"/>
-    <field name="domain">[]</field>
-    <field name="field_description">Red</field>
-    <field name="groups" eval="[(6, 0, [])]"/>
-    <field name="help" eval="False"/>
-    <field name="index" eval="False"/>
-    <field name="model">stock.production.lot</field>
-    <field name="model_id" ref="stock.model_stock_production_lot"/>
-    <field name="name">x_studio_field_6lzFQ</field>
-    <field name="on_delete">set null</field>
-    <field name="readonly" eval="False"/>
-    <field name="related" eval="False"/>
-    <field name="relation">x_red</field>
-    <field name="relation_field" eval="False"/>
-    <field name="relation_table" eval="False"/>
-    <field name="required" eval="False"/>
-    <field name="selectable" eval="True"/>
-    <field name="selection" eval="False"/>
-    <field name="size" eval="False"/>
-    <field name="state">manual</field>
-    <field name="store" eval="True"/>
-    <field name="tracking" eval="False"/>
-    <field name="translate" eval="False"/>
-    <field name="ttype">many2one</field>
-  </record>-->
   <record id="studio_customization.logo_lot_serial_0ef550f7-56aa-4e8b-984a-68e7f5803e14" model="ir.model.fields" context="{'studio': True}">
     <field name="complete_name" eval="False"/>
     <field name="compute" eval="False"/>
@@ -935,210 +759,8 @@
     <field name="translate" eval="False"/>
     <field name="ttype">many2one</field>
   </record>
-  <record id="studio_customization.cargador_lot_serial_e5b73447-5e70-4265-b98e-ff34877e17a0" model="ir.model.fields" context="{'studio': True}">
-    <field name="complete_name" eval="False"/>
-    <field name="compute" eval="False"/>
-    <field name="copied" eval="False"/>
-    <field name="depends" eval="False"/>
-    <field name="domain">[]</field>
-    <field name="field_description">Cargador</field>
-    <field name="groups" eval="[(6, 0, [])]"/>
-    <field name="help" eval="False"/>
-    <field name="index" eval="False"/>
-    <field name="model">stock.production.lot</field>
-    <field name="model_id" ref="stock.model_stock_production_lot"/>
-    <field name="name">x_studio_field_WPACd</field>
-    <field name="on_delete">set null</field>
-    <field name="readonly" eval="False"/>
-    <field name="related" eval="False"/>
-    <field name="relation">x_cargador</field>
-    <field name="relation_field" eval="False"/>
-    <field name="relation_table" eval="False"/>
-    <field name="required" eval="False"/>
-    <field name="selectable" eval="True"/>
-    <field name="selection" eval="False"/>
-    <field name="size" eval="False"/>
-    <field name="state">manual</field>
-    <field name="store" eval="True"/>
-    <field name="tracking" eval="False"/>
-    <field name="translate" eval="False"/>
-    <field name="ttype">many2one</field>
-  </record>
- <!-- <record id="studio_customization.memoria_ram_lot_seri_63ad3e6d-d4b6-4409-a07e-b3a411014d31" model="ir.model.fields" context="{'studio': True}">
-    <field name="complete_name" eval="False"/>
-    <field name="compute" eval="False"/>
-    <field name="copied" eval="False"/>
-    <field name="depends" eval="False"/>
-    <field name="domain">[]</field>
-    <field name="field_description">Memoria RAM</field>
-    <field name="groups" eval="[(6, 0, [])]"/>
-    <field name="help" eval="False"/>
-    <field name="index" eval="False"/>
-    <field name="model">stock.production.lot</field>
-    <field name="model_id" ref="stock.model_stock_production_lot"/>
-    <field name="name">x_studio_memoria_ram</field>
-    <field name="on_delete">set null</field>
-    <field name="readonly" eval="False"/>
-    <field name="related" eval="False"/>
-    <field name="relation">x_memoria.ram</field>
-    <field name="relation_field" eval="False"/>
-    <field name="relation_table" eval="False"/>
-    <field name="required" eval="False"/>
-    <field name="selectable" eval="True"/>
-    <field name="selection" eval="False"/>
-    <field name="size" eval="False"/>
-    <field name="state">manual</field>
-    <field name="store" eval="True"/>
-    <field name="tracking" eval="False"/>
-    <field name="translate" eval="False"/>
-    <field name="ttype">many2one</field>
-  </record>-->
- <!-- <record id="studio_customization.sim_lot_serial_39286760-40fd-463d-bf25-8efbca13fdb9" model="ir.model.fields" context="{'studio': True}">
-    <field name="complete_name" eval="False"/>
-    <field name="compute" eval="False"/>
-    <field name="copied" eval="False"/>
-    <field name="depends" eval="False"/>
-    <field name="domain">[]</field>
-    <field name="field_description">Tipo de SIM</field>
-    <field name="groups" eval="[(6, 0, [])]"/>
-    <field name="help" eval="False"/>
-    <field name="index" eval="False"/>
-    <field name="model">stock.production.lot</field>
-    <field name="model_id" ref="stock.model_stock_production_lot"/>
-    <field name="name">x_studio_tipo_de_sim</field>
-    <field name="on_delete">set null</field>
-    <field name="readonly" eval="False"/>
-    <field name="related" eval="False"/>
-    <field name="relation">x_sim</field>
-    <field name="relation_field" eval="False"/>
-    <field name="relation_table" eval="False"/>
-    <field name="required" eval="False"/>
-    <field name="selectable" eval="True"/>
-    <field name="selection" eval="False"/>
-    <field name="size" eval="False"/>
-    <field name="state">manual</field>
-    <field name="store" eval="True"/>
-    <field name="tracking" eval="False"/>
-    <field name="translate" eval="False"/>
-    <field name="ttype">many2one</field>
-  </record>-->
-  <!--<record id="studio_customization.lanzamiento_terminal_e259af1c-1f58-4db1-a196-04ff8b0b514a" model="ir.model.fields" context="{'studio': True}">
-    <field name="complete_name" eval="False"/>
-    <field name="compute" eval="False"/>
-    <field name="copied" eval="False"/>
-    <field name="depends" eval="False"/>
-    <field name="domain">[]</field>
-    <field name="field_description">Fecha de lanzamiento</field>
-    <field name="groups" eval="[(6, 0, [])]"/>
-    <field name="help" eval="False"/>
-    <field name="index" eval="False"/>
-    <field name="model">stock.production.lot</field>
-    <field name="model_id" ref="stock.model_stock_production_lot"/>
-    <field name="name">x_studio_fecha_de_lanzamiento</field>
-    <field name="on_delete">set null</field>
-    <field name="readonly" eval="False"/>
-    <field name="related" eval="False"/>
-    <field name="relation">x_lanzamiento.terminal</field>
-    <field name="relation_field" eval="False"/>
-    <field name="relation_table" eval="False"/>
-    <field name="required" eval="False"/>
-    <field name="selectable" eval="True"/>
-    <field name="selection" eval="False"/>
-    <field name="size" eval="False"/>
-    <field name="state">manual</field>
-    <field name="store" eval="True"/>
-    <field name="tracking" eval="False"/>
-    <field name="translate" eval="False"/>
-    <field name="ttype">many2one</field>
-  </record>-->
-  <!--<record id="studio_customization.pantalla_lot_serial_70f92bef-90fe-4e40-a7c1-7b0e362e786e" model="ir.model.fields" context="{'studio': True}">
-    <field name="complete_name" eval="False"/>
-    <field name="compute" eval="False"/>
-    <field name="copied" eval="False"/>
-    <field name="depends" eval="False"/>
-    <field name="domain">[]</field>
-    <field name="field_description">Tamaño de pantalla</field>
-    <field name="groups" eval="[(6, 0, [])]"/>
-    <field name="help" eval="False"/>
-    <field name="index" eval="False"/>
-    <field name="model">stock.production.lot</field>
-    <field name="model_id" ref="stock.model_stock_production_lot"/>
-    <field name="name">x_studio_tamao_de_pantalla</field>
-    <field name="on_delete">set null</field>
-    <field name="readonly" eval="False"/>
-    <field name="related" eval="False"/>
-    <field name="relation">x_pantalla</field>
-    <field name="relation_field" eval="False"/>
-    <field name="relation_table" eval="False"/>
-    <field name="required" eval="False"/>
-    <field name="selectable" eval="True"/>
-    <field name="selection" eval="False"/>
-    <field name="size" eval="False"/>
-    <field name="state">manual</field>
-    <field name="store" eval="True"/>
-    <field name="tracking" eval="False"/>
-    <field name="translate" eval="False"/>
-    <field name="ttype">many2one</field>
-  </record>-->
-  <!--<record id="studio_customization.new_campo_relacionad_753a33a7-7ea9-46f5-b489-bf5461044111" model="ir.model.fields" context="{'studio': True}">
-    <field name="complete_name" eval="False"/>
-    <field name="compute" eval="False"/>
-    <field name="copied" eval="False"/>
-    <field name="depends" eval="False"/>
-    <field name="domain">[]</field>
-    <field name="field_description">Capacidad</field>
-    <field name="groups" eval="[(6, 0, [])]"/>
-    <field name="help" eval="False"/>
-    <field name="index" eval="False"/>
-    <field name="model">stock.production.lot</field>
-    <field name="model_id" ref="stock.model_stock_production_lot"/>
-    <field name="name">x_studio_capacidad</field>
-    <field name="on_delete" eval="False"/>
-    <field name="readonly" eval="True"/>
-    <field name="related">product_id.x_studio_capacidad</field>
-    <field name="relation" eval="False"/>
-    <field name="relation_field" eval="False"/>
-    <field name="relation_table" eval="False"/>
-    <field name="required" eval="False"/>
-    <field name="selectable" eval="True"/>
-    <field name="selection" eval="False"/>
-    <field name="size" eval="False"/>
-    <field name="state">manual</field>
-    <field name="store" eval="False"/>
-    <field name="tracking" eval="False"/>
-    <field name="translate" eval="False"/>
-    <field name="ttype">char</field>
-  </record>-->
- <!-- <record id="studio_customization.new_campo_relacionad_bf39a164-642b-48d2-8a61-01ca74ba9619" model="ir.model.fields" context="{'studio': True}">
-    <field name="complete_name" eval="False"/>
-    <field name="compute" eval="False"/>
-    <field name="copied" eval="False"/>
-    <field name="depends" eval="False"/>
-    <field name="domain">[]</field>
-    <field name="field_description">Part Number</field>
-    <field name="groups" eval="[(6, 0, [])]"/>
-    <field name="help" eval="False"/>
-    <field name="index" eval="False"/>
-    <field name="model">stock.production.lot</field>
-    <field name="model_id" ref="stock.model_stock_production_lot"/>
-    <field name="name">x_studio_part_number</field>
-    <field name="on_delete" eval="False"/>
-    <field name="readonly" eval="True"/>
-    <field name="related">product_id.x_studio_part_number</field>
-    <field name="relation" eval="False"/>
-    <field name="relation_field" eval="False"/>
-    <field name="relation_table" eval="False"/>
-    <field name="required" eval="False"/>
-    <field name="selectable" eval="True"/>
-    <field name="selection" eval="False"/>
-    <field name="size" eval="False"/>
-    <field name="state">manual</field>
-    <field name="store" eval="False"/>
-    <field name="tracking" eval="False"/>
-    <field name="translate" eval="False"/>
-    <field name="ttype">char</field>
-  </record>-->
-  <record id="studio_customization.new_campo_relacionad_7229fb29-d9d3-4922-b145-a3cf73284550" model="ir.model.fields" context="{'studio': True}">
+
+ <!-- <record id="studio_customization.new_campo_relacionad_7229fb29-d9d3-4922-b145-a3cf73284550" model="ir.model.fields" context="{'studio': True}">
     <field name="complete_name" eval="False"/>
     <field name="compute" eval="False"/>
     <field name="copied" eval="False"/>
@@ -1166,36 +788,8 @@
     <field name="tracking" eval="False"/>
     <field name="translate" eval="False"/>
     <field name="ttype">selection</field>
-  </record>
-  <!--<record id="studio_customization.grado_lot_serial_4057a931-fab8-4cee-9a62-db15e7cb6f2f" model="ir.model.fields" context="{'studio': True}">
-    <field name="complete_name" eval="False"/>
-    <field name="compute" eval="False"/>
-    <field name="copied" eval="False"/>
-    <field name="depends" eval="False"/>
-    <field name="domain">[]</field>
-    <field name="field_description">Grado</field>
-    <field name="groups" eval="[(6, 0, [])]"/>
-    <field name="help" eval="False"/>
-    <field name="index" eval="False"/>
-    <field name="model">stock.production.lot</field>
-    <field name="model_id" ref="stock.model_stock_production_lot"/>
-    <field name="name">x_studio_field_kfZxb</field>
-    <field name="on_delete">set null</field>
-    <field name="readonly" eval="False"/>
-    <field name="related" eval="False"/>
-    <field name="relation">x_grado</field>
-    <field name="relation_field" eval="False"/>
-    <field name="relation_table" eval="False"/>
-    <field name="required" eval="False"/>
-    <field name="selectable" eval="True"/>
-    <field name="selection" eval="False"/>
-    <field name="size" eval="False"/>
-    <field name="state">manual</field>
-    <field name="store" eval="True"/>
-    <field name="tracking" eval="False"/>
-    <field name="translate" eval="False"/>
-    <field name="ttype">many2one</field>
   </record>-->
+
   <record id="studio_customization.color_lot_serial_6bc9ccef-f6a0-4912-b875-8da8bc477b10" model="ir.model.fields" context="{'studio': True}">
     <field name="complete_name" eval="False"/>
     <field name="compute" eval="False"/>
@@ -1433,64 +1027,7 @@
     <field name="translate" eval="False"/>
     <field name="ttype">char</field>
   </record>
-  <record id="studio_customization.capacidad_product_te_19c41954-7828-41c2-b2d3-5911c996ceeb" model="ir.model.fields" context="{'studio': True}">
-    <field name="complete_name" eval="False"/>
-    <field name="compute" eval="False"/>
-    <field name="copied" eval="False"/>
-    <field name="depends" eval="False"/>
-    <field name="domain">[]</field>
-    <field name="field_description">Capacidad</field>
-    <field name="groups" eval="[(6, 0, [])]"/>
-    <field name="help" eval="False"/>
-    <field name="index" eval="False"/>
-    <field name="model">product.template</field>
-    <field name="model_id" ref="product.model_product_template"/>
-    <field name="name">x_studio_field_7Zr1r</field>
-    <field name="on_delete">set null</field>
-    <field name="readonly" eval="False"/>
-    <field name="related" eval="False"/>
-    <field name="relation">x_capacidad</field>
-    <field name="relation_field" eval="False"/>
-    <field name="relation_table" eval="False"/>
-    <field name="required" eval="False"/>
-    <field name="selectable" eval="True"/>
-    <field name="selection" eval="False"/>
-    <field name="size" eval="False"/>
-    <field name="state">manual</field>
-    <field name="store" eval="True"/>
-    <field name="tracking" eval="False"/>
-    <field name="translate" eval="False"/>
-    <field name="ttype">many2one</field>
-  </record>
-  <record id="studio_customization.capacidad_product_te_aeb0e19a-ac4e-4e2c-b8cd-c51a13c0adce" model="ir.model.fields" context="{'studio': True}">
-    <field name="complete_name" eval="False"/>
-    <field name="compute" eval="False"/>
-    <field name="copied" eval="False"/>
-    <field name="depends" eval="False"/>
-    <field name="domain">[]</field>
-    <field name="field_description">Capacidad</field>
-    <field name="groups" eval="[(6, 0, [])]"/>
-    <field name="help" eval="False"/>
-    <field name="index" eval="False"/>
-    <field name="model">product.template</field>
-    <field name="model_id" ref="product.model_product_template"/>
-    <field name="name">x_studio_field_F3cRR</field>
-    <field name="on_delete">set null</field>
-    <field name="readonly" eval="False"/>
-    <field name="related" eval="False"/>
-    <field name="relation">x_capacidad</field>
-    <field name="relation_field" eval="False"/>
-    <field name="relation_table" eval="False"/>
-    <field name="required" eval="False"/>
-    <field name="selectable" eval="True"/>
-    <field name="selection" eval="False"/>
-    <field name="size" eval="False"/>
-    <field name="state">manual</field>
-    <field name="store" eval="True"/>
-    <field name="tracking" eval="False"/>
-    <field name="translate" eval="False"/>
-    <field name="ttype">many2one</field>
-  </record>
+
   <record id="studio_customization.capacidad_product_te_a295f597-1474-461b-aa56-56ac0e9739e5" model="ir.model.fields" context="{'studio': True}">
     <field name="complete_name" eval="False"/>
     <field name="compute" eval="False"/>
@@ -1665,64 +1202,6 @@
     <field name="translate" eval="False"/>
     <field name="ttype">selection</field>
   </record>
-  <record id="studio_customization.new_campo_relacionad_ca25a556-977a-4e28-9ee7-7af191296716" model="ir.model.fields" context="{'studio': True}">
-    <field name="complete_name" eval="False"/>
-    <field name="compute" eval="False"/>
-    <field name="copied" eval="False"/>
-    <field name="depends" eval="False"/>
-    <field name="domain">[]</field>
-    <field name="field_description">New Campo relacionado</field>
-    <field name="groups" eval="[(6, 0, [])]"/>
-    <field name="help" eval="False"/>
-    <field name="index" eval="False"/>
-    <field name="model">stock.move.line</field>
-    <field name="model_id" ref="stock.model_stock_move_line"/>
-    <field name="name">x_studio_field_Pc7va</field>
-    <field name="on_delete" eval="False"/>
-    <field name="readonly" eval="True"/>
-    <field name="related">lot_id.x_studio_revision_grado.x_name</field>
-    <field name="relation" eval="False"/>
-    <field name="relation_field" eval="False"/>
-    <field name="relation_table" eval="False"/>
-    <field name="required" eval="False"/>
-    <field name="selectable" eval="True"/>
-    <field name="selection" eval="False"/>
-    <field name="size" eval="False"/>
-    <field name="state">manual</field>
-    <field name="store" eval="True"/>
-    <field name="tracking" eval="False"/>
-    <field name="translate" eval="False"/>
-    <field name="ttype">char</field>
-  </record>
- <!-- <record id="studio_customization.new_campo_relacionad_2ac774b9-d4d0-4d05-b565-9a0e54ce1425" model="ir.model.fields" context="{'studio': True}">
-    <field name="complete_name" eval="False"/>
-    <field name="compute" eval="False"/>
-    <field name="copied" eval="False"/>
-    <field name="depends" eval="False"/>
-    <field name="domain">[]</field>
-    <field name="field_description">Grado</field>
-    <field name="groups" eval="[(6, 0, [])]"/>
-    <field name="help" eval="False"/>
-    <field name="index" eval="False"/>
-    <field name="model">stock.move.line</field>
-    <field name="model_id" ref="stock.model_stock_move_line"/>
-    <field name="name">x_studio_field_hB5Rq</field>
-    <field name="on_delete" eval="False"/>
-    <field name="readonly" eval="True"/>
-    <field name="related">lot_id.x_studio_revision_grado.x_name</field>
-    <field name="relation" eval="False"/>
-    <field name="relation_field" eval="False"/>
-    <field name="relation_table" eval="False"/>
-    <field name="required" eval="False"/>
-    <field name="selectable" eval="True"/>
-    <field name="selection" eval="False"/>
-    <field name="size" eval="False"/>
-    <field name="state">manual</field>
-    <field name="store" eval="True"/>
-    <field name="tracking" eval="False"/>
-    <field name="translate" eval="False"/>
-    <field name="ttype">char</field>
-  </record>-->
 
   <!-- Update -->
 
@@ -1871,36 +1350,8 @@
     <field name="translate" eval="False"/>
     <field name="ttype">integer</field>
   </record>
-  <!--<record id="studio_customization.lote_numero_de_serie_cbb1091e-c779-4c86-8fb8-1a98156d9afb" model="ir.model.fields" context="{'studio': True}">
-    <field name="complete_name" eval="False"/>
-    <field name="compute" eval="False"/>
-    <field name="copied" eval="False"/>
-    <field name="depends" eval="False"/>
-    <field name="domain">[]</field>
-    <field name="field_description">Lote/Número de serie</field>
-    <field name="groups" eval="[(6, 0, [])]"/>
-    <field name="help" eval="False"/>
-    <field name="index" eval="False"/>
-    <field name="model">stock.move.line</field>
-    <field name="model_id" ref="stock.model_stock_move_line"/>
-    <field name="name">x_studio_field_yp9Q0</field>
-    <field name="on_delete">set null</field>
-    <field name="readonly" eval="False"/>
-    <field name="related" eval="False"/>
-    <field name="relation">stock.production.lot</field>
-    <field name="relation_field" eval="False"/>
-    <field name="relation_table" eval="False"/>
-    <field name="required" eval="False"/>
-    <field name="selectable" eval="True"/>
-    <field name="selection" eval="False"/>
-    <field name="size" eval="False"/>
-    <field name="state">manual</field>
-    <field name="store" eval="True"/>
-    <field name="tracking" eval="False"/>
-    <field name="translate" eval="False"/>
-    <field name="ttype">many2one</field>
-  </record>-->
-  <record id="studio_customization.new_campo_relacionad_8de63d91-950b-44d4-8bad-592bc01f144b" model="ir.model.fields" context="{'studio': True}">
+
+  <!--<record id="studio_customization.new_campo_relacionad_8de63d91-950b-44d4-8bad-592bc01f144b" model="ir.model.fields" context="{'studio': True}">
     <field name="complete_name" eval="False"/>
     <field name="compute" eval="False"/>
     <field name="copied" eval="False"/>
@@ -1928,7 +1379,7 @@
     <field name="tracking" eval="False"/>
     <field name="translate" eval="False"/>
     <field name="ttype">char</field>
-  </record>
+  </record>-->
   <record id="studio_customization.new_campo_relacionad_6c87afec-ce97-45f4-9202-10f6f6cfaddb" model="ir.model.fields" context="{'studio': True}">
     <field name="complete_name" eval="False"/>
     <field name="compute" eval="False"/>
@@ -2049,7 +1500,7 @@
     <field name="translate" eval="False"/>
     <field name="ttype">char</field>
   </record>
-  <record id="studio_customization.new_firma_lead_oppor_bd7926d2-8d2e-4143-8b75-3de2b0ad23cd" model="ir.model.fields" context="{'studio': True}">
+ <!-- <record id="studio_customization.new_firma_lead_oppor_bd7926d2-8d2e-4143-8b75-3de2b0ad23cd" model="ir.model.fields" context="{'studio': True}">
     <field name="complete_name" eval="False"/>
     <field name="compute" eval="False"/>
     <field name="copied" eval="False"/>
@@ -2077,7 +1528,7 @@
     <field name="tracking" eval="False"/>
     <field name="translate" eval="False"/>
     <field name="ttype">binary</field>
-  </record>
+  </record>-->
   <record id="studio_customization.new_archivo_lead_opp_4c97e753-e8d7-441d-bc61-d3f795a6dee9" model="ir.model.fields" context="{'studio': True}">
     <field name="complete_name" eval="False"/>
     <field name="compute" eval="False"/>
