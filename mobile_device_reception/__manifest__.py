@@ -26,6 +26,7 @@
         'views/backend_assets.xml',
         'views/stock_picking_view.xml',
         'views/stock_production_lot.xml',
+        'views/product_template.xml',
         'views/res_config.xml',
         'views/functional_quality_test_view.xml',
         'views/esthetic_quality_test_view.xml',

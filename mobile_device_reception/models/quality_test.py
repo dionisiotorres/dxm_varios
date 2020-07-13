@@ -127,7 +127,7 @@ class FunctionalQualityTest(models.Model):
         res = []
         for test in self:
             if test.test_pass:
-                res.append((test.id, "Sin Avería"))
+                res.append((test.id, "Funcional"))
             else:
                 res.append((test.id, "Con Avería"))
         return res

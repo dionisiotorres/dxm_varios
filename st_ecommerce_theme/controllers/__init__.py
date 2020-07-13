@@ -10,5 +10,5 @@
 #       Software.
 #
 ##############################################################################
-from . import product_brand
-from . import product_slider
+# from . import product_brand
+# from . import product_slider

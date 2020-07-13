@@ -2,22 +2,28 @@
 
     <template id="oct_assets_frontend" name="oct sale assets" inherit_id="web.assets_frontend">
         <xpath expr="." position="inside">
-            <script type="text/javascript" src="/mobile_device_sale/static/src/js/oct_website_shop.js"/>
-            <link rel="stylesheet" href="/mobile_device_sale/static/src/css/oct_website_shop.css"/>
+
+                <script type="text/javascript" src="/mobile_device_sale/static/src/js/oct_website_shop.js"/>
+                <link rel="stylesheet" href="/mobile_device_sale/static/src/css/oct_website_shop.css"/>
+
         </xpath>
     </template>
 
     <template id="product_specs_grid" inherit_id="website_sale.products_item" name="Product Specifications Grid">
         <xpath expr="//*[hasclass('product_price')]" position="replace">
 
-            <div class="oct_stock_qty"><i class="fa fa-cubes"/> Total Stock:
+            <t t-if="website_for_sell">
+
+
+
+                <div class="oct_stock_qty"><i class="fa fa-cubes"/> Total Stock:
                 <span class="oct_product_qty"><t t-esc="int(product.virtual_available)"/></span>
             </div>
 
             <div class="row">
                 <div class="col-lg-12 col-md12 oct_grade_container">
                     <t t-foreach="grades" t-as="grade">
-
+                        <t t-if="grade.id == int(specs_post.get('device_grades')) or int(specs_post.get('device_grades')) == 0">
                         <label class="radio-inline oct_radio_selector" t-att-data-grade-id="grade.id">
                           <input type="radio" name="optradio" t-att-value="grade.id"/>
                             Grade <t t-esc="grade.x_name"/>
@@ -31,6 +37,7 @@
                                 <span class="price"><i class="fa fa-spinner fa-spin"/></span>
                                 </span>
                         </label>
+                            </t>
 
                     </t>
 
@@ -80,6 +87,50 @@
                 </li>-->
               </ul>
             </div>
+                <div class="row">
+
+                    <div class="specs_selected col-lg-12 col-md-12" t-att-data-specs="specs_post">
+                        <t t-foreach="specs_post" t-as="specs">
+                            <t t-if="specs_post.get(specs) != '0'">
+                                <span>
+
+                                    <t t-if="specs == 'device_network_type'">
+                                        <strong>Network:</strong>
+                                        <t t-esc="device_network_type.browse(int(specs_post.get(specs))).x_name"/>
+                                    </t>
+
+                                    <t t-if="specs == 'device_lang'">
+                                        <strong>Language:</strong>
+                                        <t t-esc="device_lang.browse(int(specs_post.get(specs))).x_name"/>
+                                    </t>
+
+                                    <t t-if="specs == 'device_charger'">
+                                        <strong>Charger:</strong>
+                                        <t t-esc="device_charger.browse(int(specs_post.get(specs))).x_name"/>
+                                    </t>
+
+                                    <t t-if="specs == 'device_logo'">
+                                        <strong>Welcome Logo:</strong>
+                                        <t t-esc="device_logo.browse(int(specs_post.get(specs))).x_name"/>
+                                    </t>
+
+                                    <t t-if="specs == 'lock_status'">
+                                        <strong>Lock Status:</strong>
+                                        <t t-esc="device_lock_status.browse(int(specs_post.get(specs))).x_name"/>
+                                    </t>
+
+                                    <t t-if="specs == 'device_applications'">
+                                        <strong>Applications:</strong>
+                                        <t t-esc="device_applications.browse(int(specs_post.get(specs))).x_name"/>
+                                    </t>
+
+                                </span>
+                                <br/>
+                            </t>
+                        </t>
+                    </div>
+
+                </div>
 
 
 
@@ -170,83 +221,102 @@
             </div>-->
 
 
+
+            </t>
+            <t t-else="">
+
+                <div class="product_price" itemprop="offers" itemscope="itemscope" itemtype="http://schema.org/Offer">
+                        <del t-attf-class="text-danger mr-2 {{'' if combination_info['has_discounted_price'] else 'd-none'}}" style="white-space: nowrap;" t-esc="combination_info['list_price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
+                        <span t-if="combination_info['price']" t-esc="combination_info['price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                        <span itemprop="price" style="display:none;" t-esc="combination_info['price']" />
+                        <span itemprop="priceCurrency" style="display:none;" t-esc="website.currency_id.name" />
+                    </div>
+
+            </t>
+
+
         </xpath>
     </template>
 
     <template id="product_specs_details" inherit_id="website_sale.product_price" name="Product Specifications Detail">
         <xpath expr="//*[hasclass('product_price')]" position="after">
 
-            <div class="oct_stock_qty"><i class="fa fa-cubes"/> Stock Quantity:
-                <span class="oct_product_qty"><t t-esc="int(product.virtual_available)"/></span>
-            </div>
+            <t t-if="mobile_sale">
 
-            <div class="row">
-                <div class="col-lg-12 col-md12 oct_grade_container">
-                    <t t-foreach="grades" t-as="grade">
+                <div class="oct_stock_qty"><i class="fa fa-cubes"/> Stock Quantity:
+                    <span class="oct_product_qty"><t t-esc="int(product.virtual_available)"/></span>
+                </div>
 
-                        <label class="radio-inline oct_radio_selector" t-att-data-grade-id="grade.id">
-                          <input type="radio" name="optradio" t-att-value="grade.id"/>
-                            Grade <t t-esc="grade.x_name"/>
-                            <br/>
-                            <span class="grade_stock"><i class="fa fa-cubes"/> Stock:
-                                <span class="stock"><i class="fa fa-spinner fa-spin"/></span>
-                            </span>
-                            <br/>
-                            <span class="grade_price"><i class="fa fa-money"/> Price:
-                                <span itemprop="priceCurrency" t-esc="website.currency_id.symbol" />
-                                <span class="price"><i class="fa fa-spinner fa-spin"/></span>
+                <div class="row">
+                    <div class="col-lg-12 col-md12 oct_grade_container">
+                        <t t-foreach="grades" t-as="grade">
+
+                            <label class="radio-inline oct_radio_selector" t-att-data-grade-id="grade.id">
+                              <input type="radio" name="optradio" t-att-value="grade.id"/>
+                                Grade <t t-esc="grade.x_name"/>
+                                <br/>
+                                <span class="grade_stock"><i class="fa fa-cubes"/> Stock:
+                                    <span class="stock"><i class="fa fa-spinner fa-spin"/></span>
                                 </span>
+                                <br/>
+                                <span class="grade_price"><i class="fa fa-money"/> Price:
+                                    <span itemprop="priceCurrency" t-esc="website.currency_id.symbol" />
+                                    <span class="price"><i class="fa fa-spinner fa-spin"/></span>
+                                    </span>
+                            </label>
+
+                        </t>
+
+                        <!--<label class="radio-inline oct_radio_selector">
+                          <input type="radio" name="optradio" value="a"/> Grade A
+                            <br/>
+                            <span class="grade_stock"><i class="fa fa-cubes"/> Stock: <span class="a_stock"/></span>
+                            <br/>
+                            <span class="grade_price"><i class="fa fa-money"/> Price: <span class="a_price"/></span>
                         </label>
 
-                    </t>
+                        <label class="radio-inline oct_radio_selector">
+                          <input type="radio" name="optradio" value="b"/> Grade B
+                            <br/>
+                            <span class="grade_stock"><i class="fa fa-cubes"/> Stock: <span class="b_stock"/></span>
+                            <br/>
+                            <span class="grade_price"><i class="fa fa-money"/> Price: <span class="b_price"/></span>
+                        </label>
 
-                    <!--<label class="radio-inline oct_radio_selector">
-                      <input type="radio" name="optradio" value="a"/> Grade A
-                        <br/>
-                        <span class="grade_stock"><i class="fa fa-cubes"/> Stock: <span class="a_stock"/></span>
-                        <br/>
-                        <span class="grade_price"><i class="fa fa-money"/> Price: <span class="a_price"/></span>
-                    </label>
+                        <label class="radio-inline oct_radio_selector">
+                          <input type="radio" name="optradio" value="c"/> Grade C
+                            <br/>
+                            <span class="grade_stock"><i class="fa fa-cubes"/> Stock: <span class="c_stock"/></span>
+                            <br/>
+                            <span class="grade_price"><i class="fa fa-money"/> Price: <span class="c_price"/></span>
+                        </label>
 
-                    <label class="radio-inline oct_radio_selector">
-                      <input type="radio" name="optradio" value="b"/> Grade B
-                        <br/>
-                        <span class="grade_stock"><i class="fa fa-cubes"/> Stock: <span class="b_stock"/></span>
-                        <br/>
-                        <span class="grade_price"><i class="fa fa-money"/> Price: <span class="b_price"/></span>
-                    </label>
+                        <label class="radio-inline oct_radio_selector">
+                          <input type="radio" name="optradio" value="14"/> 14 Days
+                            <br/>
+                            <span class="grade_stock"><i class="fa fa-cubes"/> Stock: <span class="14_stock"/></span>
+                            <br/>
+                            <span class="grade_price"><i class="fa fa-money"/> Price: <span class="14_price"/></span>
+                        </label>-->
 
-                    <label class="radio-inline oct_radio_selector">
-                      <input type="radio" name="optradio" value="c"/> Grade C
-                        <br/>
-                        <span class="grade_stock"><i class="fa fa-cubes"/> Stock: <span class="c_stock"/></span>
-                        <br/>
-                        <span class="grade_price"><i class="fa fa-money"/> Price: <span class="c_price"/></span>
-                    </label>
-
-                    <label class="radio-inline oct_radio_selector">
-                      <input type="radio" name="optradio" value="14"/> 14 Days
-                        <br/>
-                        <span class="grade_stock"><i class="fa fa-cubes"/> Stock: <span class="14_stock"/></span>
-                        <br/>
-                        <span class="grade_price"><i class="fa fa-money"/> Price: <span class="14_price"/></span>
-                    </label>-->
-
+                    </div>
                 </div>
-            </div>
 
 
-            <div class="colors oct_hidden">
-              <ul>
-                <!--<li>
-                  <label>
-                    <input type="radio" name="color" value="black"/>
-                    <span class="swatch" style="background-color:#222"></span> Black
-                  </label>
-                </li>-->
-              </ul>
-            </div>
+                <div class="colors oct_hidden">
+                  <ul>
+                    <!--<li>
+                      <label>
+                        <input type="radio" name="color" value="black"/>
+                        <span class="swatch" style="background-color:#222"></span> Black
+                      </label>
+                    </li>-->
+                  </ul>
+                </div>
 
+
+
+            </t>
 
         </xpath>
     </template>
@@ -265,7 +335,10 @@
 
     <template id="cart_lines_specs" inherit_id="website_sale.cart_lines">
         <xpath expr="//table" position="replace">
-            <table class="mb16 table table-striped table-sm js_cart_lines" id="cart_products" t-if="website_sale_order and website_sale_order.website_order_line">
+            <t t-if="mobile_sale">
+
+
+                <table class="mb16 table table-striped table-sm js_cart_lines" id="cart_products" t-if="website_sale_order and website_sale_order.website_order_line">
                 <thead>
                     <tr>
                         <th class="td-img">Product</th>
@@ -273,6 +346,7 @@
                         <th class="text-center td-qty">Quantity</th>
                         <th class="text-center td-price">Price</th>
                         <th class="text-center td-action">Price Offered</th>
+                        <th/>
                     </tr>
                 </thead>
                 <tbody>
@@ -337,22 +411,24 @@
 
 <!--                                <a href='#' aria-label="Remove from cart" title="Remove from cart" class='js_delete_product no-decoration'> <small><i class='fa fa-trash-o'></i></small></a>-->
                             </td>
+                            <td class="spinner_container"/>
+
                         </tr>
                         <t t-if="line.line_specs_ids">
                             <tr class="order_line_specs_row">
-                                <td colspan="5">
+                                <td colspan="6">
                                     <table class="table table-striped table-sm">
                                         <thead>
                                             <tr>
                                                 <th>Quantity</th>
                                                 <th>Grade</th>
                                                 <th>Color</th>
-                                                <!--<th>Lock Status</th>
+                                                <th>Lock Status</th>
                                                 <th>Logo</th>
                                                 <th>Charger</th>
                                                 <th>Network</th>
                                                 <th>Language</th>
-                                                <th>Applications</th>-->
+                                                <th>Applications</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -368,7 +444,7 @@
                                                     <td>
                                                         <t t-esc="specs.color.x_name"/>
                                                     </td>
-                                                    <!--<td>
+                                                    <td>
                                                         <t t-esc="specs.lock_status.x_name"/>
                                                     </td>
                                                     <td>
@@ -385,7 +461,7 @@
                                                     </td>
                                                     <td>
                                                         <t t-esc="specs.applications.x_name"/>
-                                                    </td>-->
+                                                    </td>
                                                     <td>
                                                         <a href='#' aria-label="Remove Specifications Line"
                                                            t-attf-data-specs-id="#{specs.id}"
@@ -410,8 +486,312 @@
                 </tbody>
             </table>
 
+
+            </t>
+            <t t-else="">
+
+                 <table class="mb16 table table-striped table-sm js_cart_lines" id="cart_products" t-if="website_sale_order and website_sale_order.website_order_line">
+            <thead>
+                <tr>
+                    <th class="td-img">Product</th>
+                    <th></th>
+                    <th class="text-center td-qty">Quantity</th>
+                    <th class="text-center td-price">Price</th>
+                    <th class="text-center td-action"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="website_sale_order.website_order_line" t-as="line">
+                    <tr t-att-class="'optional_product info' if line.linked_line_id else None">
+                        <td colspan="2" t-if="not line.product_id.product_tmpl_id" class='td-img'></td>
+                        <td align="center" t-if="line.product_id.product_tmpl_id" class='td-img'>
+                            <span t-field="line.product_id.image_128" t-options="{'widget': 'image', 'qweb_img_responsive': False, 'class': 'rounded o_image_64_max'}" />
+                        </td>
+                        <td t-if="line.product_id.product_tmpl_id" class='td-product_name'>
+                            <div>
+                                <t t-call="website_sale.cart_line_product_link">
+                                    <strong t-field="line.name_short" />
+                                </t>
+                            </div>
+                            <t t-call="website_sale.cart_line_description_following_lines">
+                                <t t-set="div_class" t-value="'d-none d-md-block'"/>
+                            </t>
+                        </td>
+                        <td class="text-center td-qty">
+                            <div class="css_quantity input-group mx-auto">
+                                <div class="input-group-prepend">
+                                    <a t-attf-href="#" class="btn btn-link js_add_cart_json d-none d-md-inline-block" aria-label="Remove one" title="Remove one">
+                                        <i class="fa fa-minus"></i>
+                                    </a>
+                                </div>
+                                <input type="text" class="js_quantity form-control quantity" t-att-data-line-id="line.id" t-att-data-product-id="line.product_id.id" t-att-value="int(line.product_uom_qty) == line.product_uom_qty and int(line.product_uom_qty) or line.product_uom_qty" />
+                                <div class="input-group-append">
+                                    <a t-attf-href="#" class="btn btn-link float_left js_add_cart_json d-none d-md-inline-block" aria-label="Add one" title="Add one">
+                                        <i class="fa fa-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="text-center td-price" name="price">
+                            <t t-set="combination" t-value="line.product_id.product_template_attribute_value_ids + line.product_no_variant_attribute_value_ids"/>
+                            <t t-set="combination_info" t-value="line.product_id.product_tmpl_id._get_combination_info(combination)"/>
+
+                            <t t-set="list_price_converted" t-value="website.currency_id._convert(combination_info['list_price'], website_sale_order.currency_id, website_sale_order.company_id, date)"/>
+                            <t groups="account.group_show_line_subtotals_tax_excluded" t-if="(website_sale_order.pricelist_id.discount_policy == 'without_discount' and website_sale_order.currency_id.compare_amounts(list_price_converted, line.price_reduce_taxexcl) == 1) or website_sale_order.currency_id.compare_amounts(line.price_unit, line.price_reduce) == 1" name="order_line_discount">
+                                <del t-attf-class="#{'text-danger mr8'}" style="white-space: nowrap;" t-esc="list_price_converted" t-options="{'widget': 'monetary', 'display_currency': website_sale_order.currency_id}" />
+                            </t>
+                            <span t-field="line.price_reduce_taxexcl" style="white-space: nowrap;" t-options="{'widget': 'monetary', 'display_currency': website_sale_order.currency_id}" groups="account.group_show_line_subtotals_tax_excluded" />
+                            <t groups="account.group_show_line_subtotals_tax_included" t-if="(website_sale_order.pricelist_id.discount_policy == 'without_discount' and website_sale_order.currency_id.compare_amounts(list_price_converted, line.price_reduce_taxinc) == 1) or website_sale_order.currency_id.compare_amounts(line.price_unit, line.price_reduce) == 1" name="order_line_discount">
+                                <del t-attf-class="#{'text-danger mr8'}" style="white-space: nowrap;" t-esc="list_price_converted" t-options="{'widget': 'monetary', 'display_currency': website_sale_order.currency_id}" />
+                            </t>
+                            <span t-field="line.price_reduce_taxinc" style="white-space: nowrap;" t-options="{'widget': 'monetary', 'display_currency': website_sale_order.currency_id}" groups="account.group_show_line_subtotals_tax_included" />
+                        </td>
+                        <td class="td-action">
+                            <a href='#' aria-label="Remove from cart" title="Remove from cart" class='js_delete_product no-decoration'> <small><i class='fa fa-trash-o'></i></small></a>
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
+        </table>
+
+
+            </t>
+
         </xpath>
     </template>
 
+    <template id="products_attributes_inherited" inherit_id="website_sale.products_attributes">
+        <xpath expr="//div[@id='wsale_products_attributes_collapse']" position="replace">
+            <t t-if="mobile_sale">
+                <div class="collapse d-lg-block" id="wsale_products_attributes_collapse">
+                    <button t-if="active_filter" id="reset_specs_filter" type="button" class="btn btn-block btn-primary">
+                        <i class="fa fa-times-circle-o"/> Reset Filter
+                    </button>
+                    <form class="js_attributes mb-2" method="get">
+                    <input t-if="category" type="hidden" name="category" t-att-value="category.id" />
+                    <input type="hidden" name="search" t-att-value="search" />
+                    <ul class="nav nav-pills flex-column">
+
+                        <li class="nav-item">
+                            <div>
+                                <strong>Brand</strong>
+                            </div>
+                            <ul class="nav nav-pills flex-column">
+                                <t t-foreach="product_brands" t-as="brand">
+                                    <li class="nav-item">
+                                        <label style="margin: 0 20px;" t-attf-class="nav-link#{' active' if brand.id in attrib_set else ''}">
+                                            <input type="checkbox" name="brand"
+                                                   t-att-value="brand.id"
+                                                   t-att-checked="'checked' if brand.id in brand_set else None" />
+                                            <span style="font-weight: normal"><t t-esc="brand.name"/></span>
+                                        </label>
+                                    </li>
+                                </t>
+                            </ul>
+
+                        </li>
+
+                        <li class="nav-item">
+                            <div>
+                                <strong>Model</strong>
+                            </div>
+                            <select class="form-control" name="device_model">
+                                <option value="0" />
+                                <t t-foreach="product_models" t-as="model">
+                                    <option t-att-value="model"
+                                            t-att-selected="model == specs_post.get('device_model')">
+                                        <t t-esc="model"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </li>
+
+                        <li class="nav-item">
+                            <div>
+                                <strong>Capacity</strong>
+                            </div>
+                            <select class="form-control" name="device_capacity">
+                                <option value="0" />
+                                <t t-foreach="device_capacity" t-as="capacity">
+                                    <option t-att-value="capacity.id"
+                                            t-att-selected="capacity.id == int(specs_post.get('device_capacity'))">
+                                        <t t-esc="capacity.x_name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </li>
+
+                        <li class="nav-item">
+                            <div>
+                                <strong>Grade</strong>
+                            </div>
+                            <select class="form-control" name="device_grades">
+                                <option value="0" />
+                                <t t-foreach="grades" t-as="d_grade">
+                                    <option t-att-value="d_grade.id"
+                                            t-att-selected="d_grade.id == int(specs_post.get('device_grades'))">
+                                        <t t-esc="d_grade.x_name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </li>
+
+                        <li class="nav-item">
+                            <div>
+                                <strong>Color</strong>
+                            </div>
+                            <select class="form-control" name="device_color">
+                                <option value="0" />
+                                <t t-foreach="device_colors" t-as="color">
+                                    <option t-att-value="color.id"
+                                            t-att-selected="color.id == int(specs_post.get('device_color'))">
+                                        <t t-esc="color.x_name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </li>
+
+                        <li class="nav-item">
+                            <div>
+                                <strong>Device Network</strong>
+                            </div>
+                            <select class="form-control" name="device_network_type">
+                                <option value="0" />
+                                <t t-foreach="device_network_type" t-as="network_type">
+                                    <option t-att-value="network_type.id"
+                                            t-att-selected="network_type.id == int(specs_post.get('device_network_type'))">
+                                        <t t-esc="network_type.x_name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </li>
+
+                        <li class="nav-item">
+                            <div>
+                                <strong>Device language</strong>
+                            </div>
+                            <select class="form-control" name="device_lang">
+                                <option value="0" />
+                                <t t-foreach="device_lang" t-as="x_lang">
+                                    <option t-att-value="x_lang.id"
+                                        t-att-selected="x_lang.id == int(specs_post.get('device_lang'))">
+                                        <t t-esc="x_lang.x_name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </li>
+
+                        <li class="nav-item">
+                            <div>
+                                <strong>Device Charger</strong>
+                            </div>
+                            <select class="form-control" name="device_charger">
+                                <option value="0" />
+                                <t t-foreach="device_charger" t-as="charger">
+                                    <option t-att-value="charger.id"
+                                        t-att-selected="charger.id == int(specs_post.get('device_charger'))">
+                                        <t t-esc="charger.x_name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </li>
+
+                        <li class="nav-item">
+                            <div>
+                                <strong>Welcome Logo</strong>
+                            </div>
+                            <select class="form-control" name="device_logo">
+                                <option value="0" />
+                                <t t-foreach="device_logo" t-as="logo">
+                                    <option t-att-value="logo.id"
+                                        t-att-selected="logo.id == int(specs_post.get('device_logo'))">
+                                        <t t-esc="logo.x_name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </li>
+
+                        <li class="nav-item">
+                            <div>
+                                <strong>Lock Status</strong>
+                            </div>
+                            <select class="form-control" name="lock_status">
+                                <option value="0" />
+                                <t t-foreach="device_lock_status" t-as="lock_status">
+                                    <option t-att-value="lock_status.id"
+                                        t-att-selected="lock_status.id == int(specs_post.get('lock_status'))">
+                                        <t t-esc="lock_status.x_name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </li>
+
+                        <li class="nav-item">
+                            <div>
+                                <strong>Applications</strong>
+                            </div>
+                            <select class="form-control" name="device_applications">
+                                <option value="0" />
+                                <t t-foreach="device_applications" t-as="applications">
+                                    <option t-att-value="applications.id"
+                                        t-att-selected="applications.id == int(specs_post.get('device_applications'))">
+                                        <t t-esc="applications.x_name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </li>
+
+
+                    </ul>
+
+                </form>
+                </div>
+            </t>
+            <t t-else="">
+                 <div class="collapse d-lg-block" id="wsale_products_attributes_collapse">
+                <form class="js_attributes mb-2" method="get">
+                    <input t-if="category" type="hidden" name="category" t-att-value="category.id" />
+                    <input type="hidden" name="search" t-att-value="search" />
+                    <ul class="nav nav-pills flex-column">
+                        <t t-foreach="attributes" t-as="a">
+                            <li t-if="a.value_ids and len(a.value_ids) &gt; 1" class="nav-item">
+                                <div>
+                                    <strong t-field="a.name" />
+                                </div>
+                                <t t-if="a.display_type == 'select'">
+                                    <select class="form-control" name="attrib">
+                                        <option value="" />
+                                        <t t-foreach="a.value_ids" t-as="v">
+                                            <option t-att-value="'%s-%s' % (a.id,v.id)" t-esc="v.name" t-att-selected="v.id in attrib_set" />
+                                        </t>
+                                    </select>
+                                </t>
+                                <t t-if="a.display_type == 'radio'">
+                                    <ul class="nav nav-pills flex-column">
+                                        <t t-foreach="a.value_ids" t-as="v">
+                                            <li class="nav-item">
+                                                <label style="margin: 0 20px;" t-attf-class="nav-link#{' active' if v.id in attrib_set else ''}">
+                                                    <input type="checkbox" name="attrib" t-att-value="'%s-%s' % (a.id,v.id)" t-att-checked="'checked' if v.id in attrib_set else None" />
+                                                    <span style="font-weight: normal" t-field="v.name" />
+                                                </label>
+                                            </li>
+                                        </t>
+                                    </ul>
+                                </t>
+                                <t t-if="a.display_type == 'color'">
+                                    <t t-foreach="a.value_ids" t-as="v">
+                                        <label t-attf-style="background-color:#{v.html_color or v.name}" t-attf-class="css_attribute_color #{'active' if v.id in attrib_set else ''}">
+                                            <input type="checkbox" name="attrib" t-att-value="'%s-%s' % (a.id,v.id)" t-att-checked="'checked' if v.id in attrib_set else None" t-att-title="v.name" />
+                                        </label>
+                                    </t>
+                                </t>
+                            </li>
+                        </t>
+                    </ul>
+                </form>
+            </div>
+            </t>
+        </xpath>
+    </template>
 
 </odoo>

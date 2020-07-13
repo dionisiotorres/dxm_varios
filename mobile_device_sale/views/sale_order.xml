@@ -33,15 +33,15 @@
                     <group/>
                         <field name="line_specs_ids" mode="tree" options="{'no_open': True}">
                             <tree editable="bottom" options="{'no_open': True}"> <!-- editable="bottom" -->
-                                <field name="available_qty" readonly="1"/>
+<!--                                <field name="available_qty" readonly="1"/>-->
                                 <field name="quantity" string="Quantity"/>
                                 <field name="color"/>
-                                <!--<field name="lock_status"/>
+                                <field name="lock_status"/>
                                 <field name="logo"/>
                                 <field name="charger"/>
                                 <field name="network_type"/>
                                 <field name="lang"/>
-                                <field name="applications"/>-->
+                                <field name="applications"/>
                             </tree>
                         </field>
 

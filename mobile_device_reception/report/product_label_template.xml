@@ -70,7 +70,7 @@
 
                     <div style="width: 40%; margin-left: 5px; float: left;">
 
-                        <t t-if="line.x_studio_funcional_result == 'Con averia'">
+                        <t t-if="line.x_studio_funcional_result == 'Con Avería'">
                             <strong>Fail Items:</strong>
                             <br/>
 
@@ -252,7 +252,7 @@
 
                     <div style="width: 40%; margin-left: 5px; float: left;">
 
-                        <t t-if="lot.x_studio_resultado == 'Con averia'">
+                        <t t-if="lot.x_studio_resultado == 'Con Avería'">
                             <strong>Fail Items:</strong>
                             <br/>
 

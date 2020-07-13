@@ -31,3 +31,67 @@ class ProductTemplate(models.Model):
             if condition:
                 name += ' / ' + condition
             self['name'] = name
+
+    @api.model
+    def create(self, vals):
+        # _logger.info("PRODUCT CREATE VALS: %r", vals)
+        phone_cat_id = self.env['product.category'].search([('name', '=', 'Teléfonos')]).id
+        # Concatenated name
+        if vals['categ_id'] == phone_cat_id:
+            name = 'Teléfono'
+            if vals['product_brand_id']:
+                brand_name = self.env['product.brand'].browse(vals['product_brand_id']).name
+                name += ' ' + brand_name
+            if vals['x_studio_modelo']:
+                name += ' ' + vals['x_studio_modelo']
+            if vals['x_studio_part_number']:
+                name += ' / ' + vals['x_studio_part_number']
+            if vals['x_studio_capacidad_de_almacenamiento']:
+                capacity = self.env['x_capacidad'].browse(vals['x_studio_capacidad_de_almacenamiento']).x_name
+                name += ' / ' + capacity
+            if vals['x_studio_condition']:
+                name += ' / ' + vals['x_studio_condition']
+            vals['name'] = name
+
+        res = super(ProductTemplate, self).create(vals)
+        return res
+
+    def write(self, vals):
+        _logger.info("PRODUCT WRITE VALS: %r", vals)
+        phone_cat_id = self.env['product.category'].search([('name', '=', 'Teléfonos')]).id
+        # Concatenated name
+        if ('categ_id' in vals.keys() and vals['categ_id'] == phone_cat_id) or self.categ_id.id == phone_cat_id:
+            name = 'Teléfono'
+
+            if 'product_brand_id' in vals.keys() and vals['product_brand_id']:
+                brand_name = self.env['product.brand'].browse(vals['product_brand_id']).name
+                name += ' ' + brand_name
+            elif self.product_brand_id.name:
+                brand_name = self.product_brand_id.name
+                name += ' ' + brand_name
+
+            if 'x_studio_modelo' in vals.keys() and vals['x_studio_modelo']:
+                name += ' ' + vals['x_studio_modelo']
+            elif self.x_studio_modelo:
+                name += ' ' + self.x_studio_modelo
+
+            if 'x_studio_part_number' in vals.keys() and vals['x_studio_part_number']:
+                name += ' / ' + vals['x_studio_part_number']
+            elif self.x_studio_part_number:
+                name += ' / ' + self.x_studio_part_number
+
+            if 'x_studio_capacidad_de_almacenamiento' in vals.keys() and vals['x_studio_capacidad_de_almacenamiento']:
+                capacity = self.env['x_capacidad'].browse(vals['x_studio_capacidad_de_almacenamiento']).x_name
+                name += ' / ' + capacity
+            elif self.x_studio_capacidad_de_almacenamiento:
+                name += ' / ' + self.x_studio_capacidad_de_almacenamiento.x_name
+
+            if 'x_studio_condition' in vals.keys() and vals['x_studio_condition']:
+                name += ' / ' + vals['x_studio_condition']
+            elif self.x_studio_condition:
+                name += ' / ' + self.x_studio_condition
+
+            vals['name'] = name
+
+        res = super(ProductTemplate, self).write(vals)
+        return res

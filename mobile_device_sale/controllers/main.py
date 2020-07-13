@@ -100,6 +100,68 @@ class WebsiteSale(WebsiteSale):
             if not qs or qs.lower() in loc:
                 yield {'loc': loc}
 
+    def get_product_brands(self, products):
+        return products.mapped('product_brand_id')
+
+    def generate_lot_filter(self, **kwargs):
+        operand = ' and '
+        specs_filter = ''
+        if kwargs['device_grades'] != '0':
+            specs_filter = 'l.x_studio_revision_grado.id == %s' % int(kwargs['device_grades'])
+        if kwargs['device_color'] != '0':
+            if len(specs_filter) > 0:
+                specs_filter += operand + 'l.x_studio_color.id == %s' % int(kwargs['device_color'])
+            else:
+                specs_filter += 'l.x_studio_color.id == %s' % int(kwargs['device_color'])
+        if kwargs['device_network_type'] != '0':
+            if len(specs_filter) > 0:
+                specs_filter += operand + 'l.x_studio_red.id == %s' % int(kwargs['device_network_type'])
+            else:
+                specs_filter += 'l.x_studio_red.id == %s' % int(kwargs['device_network_type'])
+        if kwargs['device_lang'] != '0':
+            if len(specs_filter) > 0:
+                specs_filter += operand + 'l.x_studio_idioma.id == %s' % int(kwargs['device_lang'])
+            else:
+                specs_filter += 'l.x_studio_idioma.id == %s' % int(kwargs['device_lang'])
+        if kwargs['device_charger'] != '0':
+            if len(specs_filter) > 0:
+                specs_filter += operand + 'l.x_studio_cargador.id == %s' % int(kwargs['device_charger'])
+            else:
+                specs_filter += 'l.x_studio_cargador.id == %s' % int(kwargs['device_charger'])
+        if kwargs['device_logo'] != '0':
+            if len(specs_filter) > 0:
+                specs_filter += operand + 'l.x_studio_logo.id == %s' % int(kwargs['device_logo'])
+            else:
+                specs_filter += 'l.x_studio_logo.id == %s' % int(kwargs['device_logo'])
+        if kwargs['lock_status'] != '0':
+            if len(specs_filter) > 0:
+                specs_filter += operand + 'l.x_studio_bloqueo.id == %s' % int(kwargs['lock_status'])
+            else:
+                specs_filter += 'l.x_studio_bloqueo.id == %s' % int(kwargs['lock_status'])
+        if kwargs['device_applications'] != '0':
+            if len(specs_filter) > 0:
+                specs_filter += operand + 'l.x_studio_aplicaciones.id == %s' % int(kwargs['device_applications'])
+            else:
+                specs_filter += 'l.x_studio_aplicaciones.id == %s' % int(kwargs['device_applications'])
+        return specs_filter
+
+    def filter_product_by_specs(self, products, **kwargs):
+        product_variants = products.mapped('product_variant_id')
+        lots = request.env['stock.production.lot'].search([('product_id', 'in', product_variants.ids)])
+        lots = lots.filtered(lambda l: l.product_qty > 0)
+        _logger.info("ALL LOTS: %r", lots)
+        lot_filter = self.generate_lot_filter(**kwargs)
+        _logger.info("SPEC FILTER: %r", lot_filter)
+        if len(lot_filter) > 0:
+            _logger.info("FILTERING PRODUCTS BY SPECS.....")
+            lots_filtered = lots.filtered(lambda l: eval(lot_filter))
+            _logger.info("LOTS FILTERED: %r", lots_filtered)
+            product_ids = lots_filtered.mapped('product_id').mapped('product_tmpl_id').ids
+            _logger.info("PRODUCTS IDS: %r", product_ids)
+            return products.filtered(lambda p: p.id in product_ids)
+        else:
+            return products
+
     @http.route([
         '''/shop''',
         '''/shop/page/<int:page>''',
@@ -108,117 +170,188 @@ class WebsiteSale(WebsiteSale):
     ], type='http', auth="public", website=True, sitemap=sitemap_shop)
     def shop(self, page=0, category=None, search='', ppg=False, **post):
         _logger.info("ON SHOP INHERITED CONTROLLER")
-        add_qty = int(post.get('add_qty', 1))
-        Category = request.env['product.public.category']
-        if category:
-            category = Category.search([('id', '=', int(category))], limit=1)
-            if not category or not category.can_access_from_current_website():
-                raise NotFound()
-        else:
-            category = Category
+        _logger.info("POST ARGS: %r", post)
+        active_filter = False
+        website_for_sell = request.env['ir.config_parameter'].sudo().get_param('mobile_device_sale.website_for_sell')
+        current_website = request.env['website'].get_current_website().id
+        if int(website_for_sell) == current_website:
+            mobile_sale = True
+            default_specs = {'device_network_type': '0',
+                             'device_lang': '0',
+                             'device_charger': '0',
+                             'device_logo': '0',
+                             'lock_status': '0',
+                             'device_applications': '0',
+                             'device_model': '0',
+                             'device_grades': '0',
+                             'device_color': '0',
+                             'device_capacity': '0'}
 
-        if ppg:
-            try:
-                ppg = int(ppg)
-                post['ppg'] = ppg
-            except ValueError:
-                ppg = False
-        if not ppg:
-            ppg = request.env['website'].get_current_website().shop_ppg or 20
-
-        ppr = request.env['website'].get_current_website().shop_ppr or 4
-
-        attrib_list = request.httprequest.args.getlist('attrib')
-        attrib_values = [[int(x) for x in v.split("-")] for v in attrib_list if v]
-        attributes_ids = {v[0] for v in attrib_values}
-        attrib_set = {v[1] for v in attrib_values}
-
-        domain = self._get_search_domain(search, category, attrib_values)
-
-        keep = QueryURL('/shop', category=category and int(category), search=search, attrib=attrib_list, order=post.get('order'))
-
-        pricelist_context, pricelist = self._get_pricelist_context()
-
-        request.context = dict(request.context, pricelist=pricelist.id, partner=request.env.user.partner_id)
-
-        url = "/shop"
-        if search:
-            post["search"] = search
-        if attrib_list:
-            post['attrib'] = attrib_list
-
-        Product = request.env['product.template'].with_context(bin_size=True)
-
-        search_product = Product.search(domain)
-        website_domain = request.website.website_domain()
-        categs_domain = [('parent_id', '=', False)] + website_domain
-        if search:
-            search_categories = Category.search([('product_tmpl_ids', 'in', search_product.ids)] + website_domain).parents_and_self
-            categs_domain.append(('id', 'in', search_categories.ids))
-        else:
-            search_categories = Category
-        categs = Category.search(categs_domain)
-
-        if category:
-            url = "/shop/category/%s" % slug(category)
-
-        product_count = len(search_product)
-        pager = request.website.pager(url=url, total=product_count, page=page, step=ppg, scope=7, url_args=post)
-        products = Product.search(domain, limit=ppg, offset=pager['offset'], order=self._get_search_order(post))
-
-        ProductAttribute = request.env['product.attribute']
-        if products:
-            # get all products without limit
-            attributes = ProductAttribute.search([('product_tmpl_ids', 'in', search_product.ids)])
-        else:
-            attributes = ProductAttribute.browse(attributes_ids)
-
-        layout_mode = request.session.get('website_sale_shop_layout_mode')
-        if not layout_mode:
-            if request.website.viewref('website_sale.products_list_view').active:
-                layout_mode = 'list'
+            if len(post):
+                specs_post = post
+                if 'fw' in post.keys() and len(post) == 1:
+                    specs_post.update(default_specs)
+                for key in post:
+                    if post[key] != '0' and key not in ['fw', 'search']:
+                        active_filter = True
             else:
-                layout_mode = 'grid'
+                specs_post = default_specs
+            brand_list = request.httprequest.args.getlist('brand')
+            if brand_list:
+                brand_set = [int(x) for x in brand_list]
+            else:
+                brand_set = []
+            add_qty = int(post.get('add_qty', 1))
+            Category = request.env['product.public.category']
+            if category:
+                category = Category.search([('id', '=', int(category))], limit=1)
+                if not category or not category.can_access_from_current_website():
+                    raise NotFound()
+            else:
+                category = Category
 
-        grades = request.env['x_grado'].sudo().search([])
-        device_colors = request.env['x_color'].sudo().search([])
-        # device_lock_status = request.env['x_bloqueo'].sudo().search([])
-        # device_logo = request.env['x_logo'].sudo().search([])
-        # device_charger = request.env['x_cargador'].sudo().search([])
-        # device_network_type = request.env['x_red'].sudo().search([])
-        # device_lang = request.env['x_idioma_terminal'].sudo().search([])
-        # device_applications = request.env['x_terminal_aplicaciones'].sudo().search([])
+            if ppg:
+                try:
+                    ppg = int(ppg)
+                    post['ppg'] = ppg
+                except ValueError:
+                    ppg = False
+            if not ppg:
+                ppg = request.env['website'].get_current_website().shop_ppg or 20
 
-        values = {
-            'search': search,
-            'category': category,
-            'attrib_values': attrib_values,
-            'attrib_set': attrib_set,
-            'pager': pager,
-            'pricelist': pricelist,
-            'add_qty': add_qty,
-            'products': products,
-            'search_count': product_count,  # common for all searchbox
-            'bins': TableCompute().process(products, ppg, ppr),
-            'ppg': ppg,
-            'ppr': ppr,
-            'categories': categs,
-            'attributes': attributes,
-            'keep': keep,
-            'search_categories_ids': search_categories.ids,
-            'layout_mode': layout_mode,
-            'grades': grades,
-            'device_colors': device_colors,
-            # 'device_lock_status': device_lock_status,
-            # 'device_logo': device_logo,
-            # 'device_charger': device_charger,
-            # 'device_network_type': device_network_type,
-            # 'device_lang': device_lang,
-            # 'device_applications': device_applications
-        }
-        if category:
-            values['main_object'] = category
-        return request.render("website_sale.products", values)
+            ppr = request.env['website'].get_current_website().shop_ppr or 4
+            _logger.info("CURRENT WEBSITE %r", request.env['website'].get_current_website())
+            attrib_list = request.httprequest.args.getlist('attrib')
+            _logger.info("ATTRIB LIST: %r", attrib_list)
+            attrib_values = [[int(x) for x in v.split("-")] for v in attrib_list if v]
+            attributes_ids = {v[0] for v in attrib_values}
+            attrib_set = {v[1] for v in attrib_values}
+
+
+            domain = self._get_search_domain(search, category, attrib_values)
+            product_models = []
+
+            if brand_list:
+                domain += [('product_brand_id', 'in', brand_set)]
+                product_models = request.env['product.template'].search([
+                    ('product_brand_id', 'in', brand_set),
+                    ('virtual_available', '!=', 0)]).mapped('x_studio_modelo')
+
+            if specs_post['device_model'] != '0':
+                domain += [('x_studio_modelo', '=', specs_post['device_model'])]
+
+            if specs_post['device_capacity'] != '0':
+                domain += [('x_studio_capacidad_de_almacenamiento', '=', int(specs_post['device_capacity']))]
+
+            _logger.info("DOMAIN: %r", domain)
+
+            keep = QueryURL('/shop', category=category and int(category), search=search, attrib=attrib_list, order=post.get('order'))
+
+            pricelist_context, pricelist = self._get_pricelist_context()
+
+            request.context = dict(request.context, pricelist=pricelist.id, partner=request.env.user.partner_id)
+
+            url = "/shop"
+            if search:
+                post["search"] = search
+            if attrib_list:
+                post['attrib'] = attrib_list
+
+            Product = request.env['product.template'].with_context(bin_size=True)
+
+            all_products_with_stock = Product.search([('website_published', '=', True),
+                                                      ('website_id', '=', int(website_for_sell)),
+                                                      ('virtual_available', '!=', 0)])
+            product_brands = self.get_product_brands(all_products_with_stock)
+            search_product = Product.search(domain)
+            website_domain = request.website.website_domain()
+            categs_domain = [('parent_id', '=', False)] + website_domain
+            if search:
+                search_categories = Category.search([('product_tmpl_ids', 'in', search_product.ids)] + website_domain).parents_and_self
+                categs_domain.append(('id', 'in', search_categories.ids))
+            else:
+                search_categories = Category
+            categs = Category.search(categs_domain)
+
+            if category:
+                url = "/shop/category/%s" % slug(category)
+
+            product_count = len(search_product)
+            pager = request.website.pager(url=url, total=product_count, page=page, step=ppg, scope=7, url_args=post)
+            products = Product.search(domain, limit=ppg, offset=pager['offset'], order=self._get_search_order(post))
+
+            ProductAttribute = request.env['product.attribute']
+            if products:
+                # get all products without limit
+                _logger.info("GETTING ATTRIBUTES WITH PRODUCT LIST: %r", search_product.ids)
+                attributes = ProductAttribute.search([('product_tmpl_ids', 'in', search_product.ids)])
+            else:
+                attributes = ProductAttribute.browse(attributes_ids)
+
+            layout_mode = request.session.get('website_sale_shop_layout_mode')
+            if not layout_mode:
+                if request.website.viewref('website_sale.products_list_view').active:
+                    layout_mode = 'list'
+                else:
+                    layout_mode = 'grid'
+
+            grades = request.env['x_grado'].sudo().search([])
+            device_colors = request.env['x_color'].sudo().search([])
+            device_lock_status = request.env['x_bloqueo'].sudo().search([])
+            device_logo = request.env['x_logo'].sudo().search([])
+            device_charger = request.env['x_cargador'].sudo().search([])
+            device_network_type = request.env['x_red'].sudo().search([])
+            device_lang = request.env['x_idioma_terminal'].sudo().search([])
+            device_applications = request.env['x_terminal_aplicaciones'].sudo().search([])
+
+            products = products.filtered(lambda p: p.virtual_available > 0)
+            device_capacity = products.mapped('x_studio_capacidad_de_almacenamiento')
+            _logger.info("CAPACITIES: %r", device_capacity)
+            if not brand_list:
+                product_models = products.mapped('x_studio_modelo')
+            products = self.filter_product_by_specs(products, **specs_post)
+
+
+            values = {
+                'search': search,
+                'category': category,
+                'attrib_values': attrib_values,
+                'attrib_set': attrib_set,
+                'pager': pager,
+                'pricelist': pricelist,
+                'add_qty': add_qty,
+                'products': products,
+                'search_count': product_count,  # common for all searchbox
+                'bins': TableCompute().process(products, ppg, ppr),
+                'ppg': ppg,
+                'ppr': ppr,
+                'categories': categs,
+                'attributes': attributes,
+                'keep': keep,
+                'search_categories_ids': search_categories.ids,
+                'layout_mode': layout_mode,
+                'grades': grades,
+                'device_colors': device_colors,
+                'website_for_sell': int(website_for_sell),
+                'device_lock_status': device_lock_status,
+                'device_logo': device_logo,
+                'device_charger': device_charger,
+                'device_network_type': device_network_type,
+                'device_lang': device_lang,
+                'device_applications': device_applications,
+                'specs_post': specs_post,
+                'product_models': product_models,
+                'mobile_sale': mobile_sale,
+                'product_brands': product_brands,
+                'device_capacity': device_capacity,
+                'brand_set': brand_set,
+                'active_filter': active_filter
+            }
+            if category:
+                values['main_object'] = category
+            return request.render("website_sale.products", values)
+        else:
+            return super(WebsiteSale, self).shop(page=page, category=category, search=search, ppg=ppg, **post)
 
     # @http.route(['''/shop/get_product_info'''], type='json', auth="user", website=True)
     # def get_product_info(self, product_id=None, grade=None, color=0, lock_status=0, logo=0, charger=0,
@@ -403,6 +536,13 @@ class WebsiteSale(WebsiteSale):
         return value
 
     def _prepare_product_values(self, product, category, search, **kwargs):
+        website_for_sell = request.env['ir.config_parameter'].sudo().get_param('mobile_device_sale.website_for_sell')
+        current_website = request.env['website'].get_current_website().id
+        if int(website_for_sell) == current_website:
+            mobile_sale = True
+        else:
+            mobile_sale = False
+
         add_qty = int(kwargs.get('add_qty', 1))
 
         product_context = dict(request.env.context, quantity=add_qty,
@@ -439,6 +579,7 @@ class WebsiteSale(WebsiteSale):
         device_lang = request.env['x_idioma_terminal'].search([])
         device_applications = request.env['x_terminal_aplicaciones'].search([])
 
+        _logger.info("LOCK STATUS ELEMENTS: %r", device_lock_status)
         return {
             'search': search,
             'category': category,
@@ -458,8 +599,10 @@ class WebsiteSale(WebsiteSale):
             'device_charger': device_charger,
             'device_network_type': device_network_type,
             'device_lang': device_lang,
-            'device_applications': device_applications
+            'device_applications': device_applications,
+            'mobile_sale': mobile_sale
         }
+
 
     @http.route(['/shop/cart/delete_specs'], type='json', auth="user", methods=['POST'], website=True, csrf=False)
     def cart_update_specs(self, specs_id, **kwargs):
@@ -512,3 +655,58 @@ class WebsiteSale(WebsiteSale):
             _logger.info("ERROR PROCESSING OFFER. ERROR: %r", e)
             result = 'error'
         return {'response': result}
+
+    @http.route(['''/shop/get_mobile_device_sell_website'''], type='json', auth="user", website=True)
+    def get_sell_website_id(self):
+        website_for_sell = request.env['ir.config_parameter'].sudo().get_param('mobile_device_sale.website_for_sell')
+        return {'website_mobile_sell': int(website_for_sell)}
+
+    @http.route(['/shop/cart'], type='http', auth="public", website=True, sitemap=False)
+    def cart(self, access_token=None, revive='', **post):
+        website_for_sell = request.env['ir.config_parameter'].sudo().get_param('mobile_device_sale.website_for_sell')
+        current_website = request.env['website'].get_current_website().id
+        if int(website_for_sell) == current_website:
+            mobile_sale = True
+        else:
+            mobile_sale = False
+        order = request.website.sale_get_order()
+        _logger.info("ORDER FOR THIS CART: %r", order)
+        if order and order.state != 'draft':
+            request.session['sale_order_id'] = None
+            order = request.website.sale_get_order()
+        values = {}
+        if access_token:
+            abandoned_order = request.env['sale.order'].sudo().search([('access_token', '=', access_token)], limit=1)
+            if not abandoned_order:  # wrong token (or SO has been deleted)
+                raise NotFound()
+            if abandoned_order.state != 'draft':  # abandoned cart already finished
+                values.update({'abandoned_proceed': True})
+            elif revive == 'squash' or (revive == 'merge' and not request.session.get(
+                    'sale_order_id')):  # restore old cart or merge with unexistant
+                request.session['sale_order_id'] = abandoned_order.id
+                return request.redirect('/shop/cart')
+            elif revive == 'merge':
+                abandoned_order.order_line.write({'order_id': request.session['sale_order_id']})
+                abandoned_order.action_cancel()
+            elif abandoned_order.id != request.session.get(
+                    'sale_order_id'):  # abandoned cart found, user have to choose what to do
+                values.update({'access_token': abandoned_order.access_token})
+
+        values.update({
+            'website_sale_order': order,
+            'date': fields.Date.today(),
+            'suggested_products': [],
+            'mobile_sale': mobile_sale
+        })
+        if order:
+            order.order_line.filtered(lambda l: not l.product_id.active).unlink()
+            _order = order
+            if not request.env.context.get('pricelist'):
+                _order = order.with_context(pricelist=order.pricelist_id.id)
+            values['suggested_products'] = _order._cart_accessories()
+
+        if post.get('type') == 'popover':
+            # force no-cache so IE11 doesn't cache this XHR
+            return request.render("website_sale.cart_popover", values, headers={'Cache-Control': 'no-cache'})
+
+        return request.render("website_sale.cart", values)

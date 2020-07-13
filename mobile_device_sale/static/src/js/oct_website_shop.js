@@ -6,25 +6,30 @@ odoo.define('oct_website_sale.sale', function (require) {
     var _t = core._t;
 
     $(document).ready(function () {
+        console.log("DOCUMENT READY.....")
+        var website_id = $("html").data('website-id') | 0;
+        ajax.jsonRpc('/shop/get_mobile_device_sell_website', 'call', {}).then(function (data) {
+            console.log(data);
+            var website_for_sell = data.website_mobile_sell;
+            if (website_for_sell === website_id) {
 
-        /* Default price and stock hidden */
-  /*      if ($('#products_grid').length > 0){
-            $(".oe_product").each(function () {
-                /!*var selector = $(this).find('.oct_grade');
-                selector.find('option[value="5"]').attr("selected",true);
-                selector.trigger('change');*!/
-                $(".product_price").addClass("oct_hidden");
-                $(".oct_stock_qty").addClass("oct_hidden");
-                $(".js_add_cart_update").addClass("oct_hidden_important");
-            });
-        } else if ($("#product_detail").length > 0) {
-            $(this).find(".product_price").addClass("oct_hidden");
-            $(this).find(".oct_stock_qty").addClass("oct_hidden");
-            $(this).find(".js_add_cart_update").addClass("oct_hidden_important");
-        }*/
+                console.log("WEBSITE TO SELL MOBILE DEVICES.....");
 
-        /* Load products stock and price on grid */
+                var layout = '<t t-esc="layout_mode"/>';
+                console.log("LAYOUT MODE");
+                console.log(layout);
+
+
+
+                /* Load products stock and price on grid */
         if ($('#products_grid').length > 0){
+
+            $(document).on('click', '#reset_specs_filter', function (ev) {
+                let url = window.location.href;
+                window.location.href = url.split('?')[0];
+            })
+
+
             console.log("GETTING PRODUCT GRID DATA");
             $(".oe_product ").each(function () {
                 var product_container = $(this);
@@ -424,14 +429,6 @@ odoo.define('oct_website_sale.sale', function (require) {
         $(document).on('change', '.oct_price_offered', function () {
             console.log("PRICE OFFERED CHANGED");
 
-            var success_dialog = new Dialog(this, {
-                size: 'medium',
-                dialogClass: 'o_act_window',
-                title: _t("Offer sent"),
-                $content: $(_t("<span class='text-center' style='padding: 2rem;'>Price offer successfully updated. " +
-                    "<br/> Please complete your purchase process to review your offer.</span>"))
-            });
-
             var error_dialog = new Dialog(this, {
                 size: 'medium',
                 dialogClass: 'o_act_window',
@@ -439,12 +436,12 @@ odoo.define('oct_website_sale.sale', function (require) {
                 $content: $(_t("<span class='text-center' style='padding: 2rem;'> Your offer have not been processed. Please, try again later.</span>"))
             });
 
-            // var container = $(this).parents('td');
+            var spinner_container = $(this).parents('tr').find('.spinner_container');
             var line_id = $(this).data('line-id');
             var offer_value = $(this).val();
-            console.log(line_id);
-            // let spinner = $("<i class=\"fa fa-spinner fa-spin\"/>");
-            // container.append(spinner);
+
+            let spinner = $("<i class=\"fa fa-spinner fa-spin\"/>");
+            spinner_container.html(spinner);
 
             ajax.jsonRpc('/shop/cart/update_price_offered', 'call', {
                 line_id: line_id,
@@ -452,14 +449,56 @@ odoo.define('oct_website_sale.sale', function (require) {
             }).then(function (data) {
                 console.log(data);
                 if (data.response === 'done'){
-                    success_dialog.open();
+                    console.log("OFFER SENT.....")
+                    spinner_container.html('')
                 } else {
+                    spinner_container.html('')
                     error_dialog.open();
                 }
             }); // END AJAX call
 
         });
 
+
+
+
+
+
+
+
+
+
+
+            } else {  // END GET WEBSITE FOR SELL
+
+                console.log("OTHER WEBSITE.....")
+
+
+            } // END OTHERS WEBSITES
+
+
+
+
+
+
+
+        });
+
+        /* Default price and stock hidden */
+  /*      if ($('#products_grid').length > 0){
+            $(".oe_product").each(function () {
+                /!*var selector = $(this).find('.oct_grade');
+                selector.find('option[value="5"]').attr("selected",true);
+                selector.trigger('change');*!/
+                $(".product_price").addClass("oct_hidden");
+                $(".oct_stock_qty").addClass("oct_hidden");
+                $(".js_add_cart_update").addClass("oct_hidden_important");
+            });
+        } else if ($("#product_detail").length > 0) {
+            $(this).find(".product_price").addClass("oct_hidden");
+            $(this).find(".oct_stock_qty").addClass("oct_hidden");
+            $(this).find(".js_add_cart_update").addClass("oct_hidden_important");
+        }*/
 
     }) // END DOCUMENT READY
 

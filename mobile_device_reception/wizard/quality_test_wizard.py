@@ -28,6 +28,9 @@ class FunctionalTest(models.TransientModel):
 
     company_id = fields.Many2one(comodel_name='res.company', string="Company", default=_get_current_company)
     product_id = fields.Many2one(comodel_name='product.product', string='Product', domain=_get_product_domain)
+    rebu_sale_regime = fields.Boolean(string='REBU Sale Regime')
+    product_sku = fields.Char(string="Product SKU", readonly=True)
+
     color = fields.Many2one(comodel_name='x_color', string="Color")
     lock_status = fields.Many2one(comodel_name='x_bloqueo', string="Lock Status")
     logo = fields.Many2one(comodel_name='x_logo', string="Logo")
@@ -43,6 +46,17 @@ class FunctionalTest(models.TransientModel):
     serial_file = fields.Binary(string="File")
     lot_id = fields.Char(string="Find Lot")
     new_lot_ids = fields.Many2many(comodel_name='stock.production.lot')
+
+    @api.onchange('product_id')
+    def product_change(self):
+        _logger.info("PRODUCT CHANGED")
+        if self.product_id:
+            _logger.info("PRODUCT ID: %r", self.product_id.id)
+            _logger.info("PRODUCT SKU: %r", self.product_id.product_tmpl_id.product_sku)
+            if self.product_id.product_tmpl_id.product_sku:
+                self['product_sku'] = self.product_id.product_tmpl_id.product_sku
+            else:
+                raise ValidationError("SKU code is missing for this product")
 
     @api.depends('product_id', 'company_id')
     @api.onchange('lot_id')
@@ -181,11 +195,26 @@ class FunctionalTest(models.TransientModel):
         _logger.info("FUNCTIONAL RESULT ON WIZARD: %r", functional_obj.test_pass)
         esthetic_obj = esthetic_test_obj.create(esthetic_test_values)
         grade_object = self.env['x_grado'].search([('x_name', '=', esthetic_obj.test_result)])
+
+        # SKU code
+        product_sku = self.product_id.product_tmpl_id.product_sku
+        grade_sku = grade_object.x_studio_grade_sku
+        color_sku = self.color.x_color_code
+        if self.rebu_sale_regime:
+            sale_regime_sku = 'R'
+        else:
+            sale_regime_sku = 'N'
+        lot_sku = product_sku + sale_regime_sku + grade_sku + color_sku
+
+        _logger.info("LOTS SKU: %r", lot_sku)
+
         for lot in self.new_lot_ids:
 
             lot.write({
                 # EAN
                 'x_studio_lot_ean': self.ean,
+                # SKU
+                'x_studio_lot_sku': lot_sku,
                 # Specifications
                 'x_studio_color': self.color.id,
                 'x_studio_bloqueo': self.lock_status.id,
@@ -200,7 +229,7 @@ class FunctionalTest(models.TransientModel):
                 'x_studio_revision_estetica': True,
                 'x_studio_revision_grado': grade_object.id,
                 'x_studio_revision_funcional': True,
-                'x_studio_resultado': 'Sin averia' if functional_obj.test_pass else 'Con averia',
+                'x_studio_resultado': 'Funcional' if functional_obj.test_pass else 'Con avería',
             })
 
         piking_id = self.env.context.get('active_id')

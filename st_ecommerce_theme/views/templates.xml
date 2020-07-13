@@ -361,7 +361,7 @@
         </template>
 
         <!--Add brand parameter in '/shop' url to filter products by brands-->
-        <template id="ecommerce_product_brand_attributes"
+        <!--<template id="ecommerce_product_brand_attributes"
                   inherit_id="website_sale.products_attributes">
             <xpath expr="//form[hasclass('js_attributes')]" position="inside">
                 <t t-if="request_brands">
@@ -404,7 +404,7 @@
                     </t>
                 </form>
             </xpath>
-        </template>
+        </template>-->
 
         <template id="ecommerce_products_item" inherit_id="website_sale.products_item">
             <xpath expr="//div[hasclass('oe_product_image')]" position="inside">

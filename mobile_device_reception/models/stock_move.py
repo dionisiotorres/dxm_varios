@@ -13,7 +13,7 @@ class StockMove(models.Model):
         if self.product_uom_qty >= qty:
             move_obj = self.env['stock.move'].browse(self.id)
             move_lines = move_obj.move_line_ids.filtered(
-                lambda l: l.lot_id.x_studio_resultado == 'Con averia'
+                lambda l: l.lot_id.x_studio_resultado == 'Con Avería'
             )
             new_move = self.env['stock.move'].create({
                 'name': self.product_id.display_name,

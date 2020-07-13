@@ -64,7 +64,7 @@ class Picking(models.Model):
                     if workshop_move:
                         # Check if still qty to move
                         still_to_move = self.move_line_ids.filtered(
-                            lambda move_line: move_line.lot_id.x_studio_resultado == 'Sin averia'
+                            lambda move_line: move_line.lot_id.x_studio_resultado == 'Funcional'
                         )
                         if still_to_move:
                             return super(Picking, self).button_validate()
@@ -78,7 +78,7 @@ class Picking(models.Model):
 
     def _check_workshop_lines(self):
         workshop_lines = self.move_line_ids.filtered(
-            lambda move_line: move_line.lot_id.x_studio_resultado == 'Con averia'
+            lambda move_line: move_line.lot_id.x_studio_resultado == 'Con Avería'
         )
         if workshop_lines:
             return True
@@ -93,7 +93,7 @@ class Picking(models.Model):
         workshop_picking = self.env['stock.picking']
         for picking in self:
             move_lines_to_workshop = picking.move_line_ids.filtered(
-                lambda l: l.lot_id.x_studio_resultado == 'Con averia'
+                lambda l: l.lot_id.x_studio_resultado == 'Con Avería'
             )
             _logger.info("MOVE LINES TO WORKSHOP: %r", move_lines_to_workshop)
             if move_lines_to_workshop:

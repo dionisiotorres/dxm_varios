@@ -21,6 +21,8 @@
                             <field name='company_id' widget='selection' context="{'search_default_company_id': company_id}"/>
                             <field name="print_labels"/>
                             <field name="ean"/>
+                            <field name="rebu_sale_regime"/>
+                            <field name="product_sku"/>
                         </group>
                         <group name='extra_info'>
                             <field name='color'/>
