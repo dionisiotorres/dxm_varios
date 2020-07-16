@@ -273,6 +273,8 @@ class SaleOrder(models.Model):
                 _logger.info("SPECS DICT: %r", kwargs.get('specs'))
                 specs = ast.literal_eval(kwargs.get('specs'))
                 for key in specs:
+                    if key == 'device_color':
+                        color = int(specs[key]) if specs[key] != '0' else 0
                     if key == 'device_network_type':
                         network = int(specs[key]) if specs[key] != '0' else 0
                     if key == 'device_lang':
@@ -289,7 +291,7 @@ class SaleOrder(models.Model):
             specs_values = {
                 'sale_order_line_id': order_line.id,
                 'quantity': process_qty,
-                'color': int(kwargs.get('color', 0)),
+                'color': color,
                 'lock_status': lock_status,
                 'logo': logo,
                 'charger': charger,

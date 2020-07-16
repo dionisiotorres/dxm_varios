@@ -510,11 +510,11 @@
             <xpath expr="//thead/tr/th[2]" position="replace">
                 <th class="text-center description">Description</th>
             </xpath>
-            <xpath expr="//thead/tr/th[hasclass('text-center','td-price')]" position="after">
+ <!--           <xpath expr="//thead/tr/th[hasclass('text-center','td-price')]" position="after">
                 <th class="text-center td-line-delete" style="width: 50px;"/>
-            </xpath>
+            </xpath>-->
             <xpath expr="//a[hasclass('js_delete_product')]" position="replace"/>
-            <xpath expr="//tbody/t/tr/td[hasclass('text-center','td-price')]" position="after">
+            <!--<xpath expr="//tbody/t/tr/td[hasclass('text-center','td-price')]" position="after">
                 <td class="text-center td-line-delete" name="delete line">
                     <a href='#' class='js_delete_product hidden-xs no-decoration'>
                         <small>
@@ -522,7 +522,7 @@
                         </small>
                     </a>
                 </td>
-            </xpath>
+            </xpath>-->
         </template>
 
     </data>

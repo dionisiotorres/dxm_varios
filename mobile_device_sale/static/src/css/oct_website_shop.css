@@ -44,6 +44,45 @@
     margin-bottom: 0.5rem;
 }
 
+.specs_selected {
+    padding: 1rem;
+    border: 1px solid #dfdfdf;
+    margin: 1rem;
+    border-radius: 4px;
+}
+.specs_paragraph {
+    /*margin-top: 10px;*/
+    text-align: center;
+    position: absolute;
+    bottom: -27px;
+    background-color: white;
+    padding: 0 10px 0 10px;
+    color: #10305aa6;
+}
+.color_square {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    border-radius: 4px;
+    margin-right: 5px;
+    border: 1px solid black;
+}
+.color_line {
+    display: flex;
+}
+.specs_title {
+    display: block;
+    position: absolute;
+    top: -11px;
+    right: 39%;
+    background-color: white;
+    padding: 0px 15px 0px 15px;
+    color: #10305aa6;
+}
+.no_specs {
+    color: #f59f9f;
+}
+
 /* New product grid rules */
 
 .oct_radio_selector {
@@ -52,6 +91,11 @@
     border-radius: 5px;
     color: white;
     /* margin-right: 10px; */
+}
+
+.o_wsale_product_btn {
+    width: 180px;
+    margin-left: 10px;
 }
 
 .grade_stock, .grade_price {

@@ -23,7 +23,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md12 oct_grade_container">
                     <t t-foreach="grades" t-as="grade">
-                        <t t-if="grade.id == int(specs_post.get('device_grades')) or int(specs_post.get('device_grades')) == 0">
+                        <t t-if="grade.id == int(specs_post.get('device_grade')) or int(specs_post.get('device_grade')) == 0">
                         <label class="radio-inline oct_radio_selector" t-att-data-grade-id="grade.id">
                           <input type="radio" name="optradio" t-att-value="grade.id"/>
                             Grade <t t-esc="grade.x_name"/>
@@ -41,38 +41,6 @@
 
                     </t>
 
-                    <!--<label class="radio-inline oct_radio_selector">
-                      <input type="radio" name="optradio" value="a"/> Grade A
-                        <br/>
-                        <span class="grade_stock"><i class="fa fa-cubes"/> Stock: <span class="a_stock"/></span>
-                        <br/>
-                        <span class="grade_price"><i class="fa fa-money"/> Price: <span class="a_price"/></span>
-                    </label>
-
-                    <label class="radio-inline oct_radio_selector">
-                      <input type="radio" name="optradio" value="b"/> Grade B
-                        <br/>
-                        <span class="grade_stock"><i class="fa fa-cubes"/> Stock: <span class="b_stock"/></span>
-                        <br/>
-                        <span class="grade_price"><i class="fa fa-money"/> Price: <span class="b_price"/></span>
-                    </label>
-
-                    <label class="radio-inline oct_radio_selector">
-                      <input type="radio" name="optradio" value="c"/> Grade C
-                        <br/>
-                        <span class="grade_stock"><i class="fa fa-cubes"/> Stock: <span class="c_stock"/></span>
-                        <br/>
-                        <span class="grade_price"><i class="fa fa-money"/> Price: <span class="c_price"/></span>
-                    </label>
-
-                    <label class="radio-inline oct_radio_selector">
-                      <input type="radio" name="optradio" value="14"/> 14 Days
-                        <br/>
-                        <span class="grade_stock"><i class="fa fa-cubes"/> Stock: <span class="14_stock"/></span>
-                        <br/>
-                        <span class="grade_price"><i class="fa fa-money"/> Price: <span class="14_price"/></span>
-                    </label>-->
-
                 </div>
             </div>
 
@@ -89,10 +57,18 @@
             </div>
                 <div class="row">
 
-                    <div class="specs_selected col-lg-12 col-md-12" t-att-data-specs="specs_post">
-                        <t t-foreach="specs_post" t-as="specs">
+                    <div class="specs_selected col-lg-10 col-md-10" t-att-data-specs="specs_post">
+                        <span class="specs_title">Product Specifications</span>
+                        <t t-if="active_specs">
+                            <t t-foreach="specs_post" t-as="specs">
                             <t t-if="specs_post.get(specs) != '0'">
-                                <span>
+                                <span t-att-class="'color_line' if specs == 'device_color' else None">
+
+                                    <t t-if="specs == 'device_color'">
+                                        <span class="color_square"
+                                              t-att-style="'background-color:' + device_colors.browse(int(specs_post.get(specs))).x_color_index + ';'"/>
+                                        <t t-esc="device_colors.browse(int(specs_post.get(specs))).x_name"/>
+                                    </t>
 
                                     <t t-if="specs == 'device_network_type'">
                                         <strong>Network:</strong>
@@ -127,7 +103,17 @@
                                 </span>
                                 <br/>
                             </t>
+
                         </t>
+                            <p t-if="active_specs" class="oct_hidden specs_paragraph">
+                            <i class="fa fa-cubes"/> Stock for selected specifications:
+                                    <span class="specs_quant"/>
+                        </p>
+                        </t>
+                        <t t-else="">
+                            <span class="no_specs">No product specifications selected</span>
+                        </t>
+
                     </div>
 
                 </div>
@@ -243,12 +229,29 @@
 
             <t t-if="mobile_sale">
 
-                <div class="oct_stock_qty"><i class="fa fa-cubes"/> Stock Quantity:
-                    <span class="oct_product_qty"><t t-esc="int(product.virtual_available)"/></span>
+                <div class="oct_stock_qty"><i class="fa fa-cubes"/> Total Stock:
+                    <span class="oct_product_total_qty"><t t-esc="int(product.virtual_available)"/></span>
                 </div>
 
-                <div class="row">
-                    <div class="col-lg-12 col-md12 oct_grade_container">
+
+
+
+                <!--<div class="colors oct_hidden">
+                  <ul>
+                    &lt;!&ndash;<li>
+                      <label>
+                        <input type="radio" name="color" value="black"/>
+                        <span class="swatch" style="background-color:#222"></span> Black
+                      </label>
+                    </li>&ndash;&gt;
+                  </ul>
+                </div>-->
+
+                <div class="row oct_grid_variant_selector mt16 product_detail_specs_selected">
+
+
+                    <div class="row">
+                    <div class="col-lg-12 col-md12 oct_grade_container_detail">
                         <t t-foreach="grades" t-as="grade">
 
                             <label class="radio-inline oct_radio_selector" t-att-data-grade-id="grade.id">
@@ -267,52 +270,89 @@
 
                         </t>
 
-                        <!--<label class="radio-inline oct_radio_selector">
-                          <input type="radio" name="optradio" value="a"/> Grade A
-                            <br/>
-                            <span class="grade_stock"><i class="fa fa-cubes"/> Stock: <span class="a_stock"/></span>
-                            <br/>
-                            <span class="grade_price"><i class="fa fa-money"/> Price: <span class="a_price"/></span>
-                        </label>
-
-                        <label class="radio-inline oct_radio_selector">
-                          <input type="radio" name="optradio" value="b"/> Grade B
-                            <br/>
-                            <span class="grade_stock"><i class="fa fa-cubes"/> Stock: <span class="b_stock"/></span>
-                            <br/>
-                            <span class="grade_price"><i class="fa fa-money"/> Price: <span class="b_price"/></span>
-                        </label>
-
-                        <label class="radio-inline oct_radio_selector">
-                          <input type="radio" name="optradio" value="c"/> Grade C
-                            <br/>
-                            <span class="grade_stock"><i class="fa fa-cubes"/> Stock: <span class="c_stock"/></span>
-                            <br/>
-                            <span class="grade_price"><i class="fa fa-money"/> Price: <span class="c_price"/></span>
-                        </label>
-
-                        <label class="radio-inline oct_radio_selector">
-                          <input type="radio" name="optradio" value="14"/> 14 Days
-                            <br/>
-                            <span class="grade_stock"><i class="fa fa-cubes"/> Stock: <span class="14_stock"/></span>
-                            <br/>
-                            <span class="grade_price"><i class="fa fa-money"/> Price: <span class="14_price"/></span>
-                        </label>-->
-
                     </div>
                 </div>
 
 
-                <div class="colors oct_hidden">
-                  <ul>
-                    <!--<li>
-                      <label>
-                        <input type="radio" name="color" value="black"/>
-                        <span class="swatch" style="background-color:#222"></span> Black
-                      </label>
-                    </li>-->
-                  </ul>
+                <div t-attf-class="oct_filter_wrapper col-xs-12 #{'col-lg-8 col-md-8' if layout_mode != 'grid' else 'col-lg-12 col-md-12'}">
+
+                    <div class="oct_filter_container">
+                        <span class="oct_filter_title">Select device specifications
+                            <span class="oct_selector_icon">
+                                <i class="fa fa-caret-down"/>
+                            </span>
+
+                        </span>
+
+                    <div t-attf-class="#{'oct_filters_list_mode' if layout_mode != 'grid' else 'oct_filters_grid_mode'} oct_hidden oct_filters">
+
+<!--                        <label t-if="layout_mode != 'grid'" for="color">Color: </label>-->
+                        <select class="w-auto o_input o_group_selector oct_color" name="color">
+                            <option value="0">Select a Color</option>
+                            <t t-foreach="device_colors" t-as="color">
+                                <option t-att-value="color.id"><t t-esc="color.x_name"/></option>
+                            </t>
+                        </select>
+                        <br/>
+<!--                        <label t-if="layout_mode != 'grid'" for="lock_status">Lock Status: </label>-->
+                        <select class="w-auto o_input o_group_selector oct_lock_status" name="lock_status">
+                            <option value="0">Select a Lock Status</option>
+                            <t t-foreach="device_lock_status" t-as="lock">
+                                <option t-att-value="lock.id"><t t-esc="lock.x_name"/></option>
+                            </t>
+                        </select>
+                        <br/>
+<!--                        <label t-if="layout_mode != 'grid'" for="logo">Logo Condition: </label>-->
+                        <select class="w-auto o_input o_group_selector oct_logo" name="logo">
+                            <option value="0">Select a Logo Condition</option>
+                            <t t-foreach="device_logo" t-as="logo">
+                                <option t-att-value="logo.id"><t t-esc="logo.x_name"/></option>
+                            </t>
+                        </select>
+                        <br/>
+<!--                        <label t-if="layout_mode != 'grid'" for="charger">Charger: </label>-->
+                        <select class="w-auto o_input o_group_selector oct_charger" name="charger">
+                            <option value="0">Select Charger</option>
+                            <t t-foreach="device_charger" t-as="charger">
+                                <option t-att-value="charger.id"><t t-esc="charger.x_name"/></option>
+                            </t>
+                        </select>
+                        <br/>
+<!--                        <label t-if="layout_mode != 'grid'" for="charger">Charger: </label>-->
+                        <select class="w-auto o_input o_group_selector oct_network_type" name="network_type">
+                            <option value="0">Select Network</option>
+                            <t t-foreach="device_network_type" t-as="network_type">
+                                <option t-att-value="network_type.id"><t t-esc="network_type.x_name"/></option>
+                            </t>
+                        </select>
+                        <br/>
+<!--                        <label t-if="layout_mode != 'grid'" for="lang">Language: </label>-->
+                        <select class="w-auto o_input o_group_selector oct_lang" name="lang">
+                            <option value="0">Select Language</option>
+                            <t t-foreach="device_lang" t-as="lang">
+                                <option t-att-value="lang.id"><t t-esc="lang.x_name"/></option>
+                            </t>
+                        </select>
+                        <br/>
+<!--                        <label t-if="layout_mode != 'grid'" for="applications">Applications: </label>-->
+                        <select class="w-auto o_input o_group_selector oct_applications" name="applications">
+                            <option value="0">Select Applications</option>
+                            <t t-foreach="device_applications" t-as="applications">
+                                <option t-att-value="applications.id"><t t-esc="applications.x_name"/></option>
+                            </t>
+                        </select>
+                    </div>
+
+                    </div>
+
                 </div>
+
+                    <p class="quant_specs_paragraph oct_hidden">
+                        <i class="fa fa-cubes"/> Stock available for selected specifications:
+                        <span class="oct_product_qty"/>
+                    </p>
+
+            </div>
 
 
 
@@ -321,7 +361,7 @@
         </xpath>
     </template>
 
-    <template id="add_to_cart_json" inherit_id="website_sale.product" name="Add to Cart JSON">
+    <!--<template id="add_to_cart_json" inherit_id="website_sale.product" name="Add to Cart JSON">
         <xpath expr="//a[@id='add_to_cart']" position="replace">
 
             <a role="button" id="add_to_cart_json"
@@ -331,7 +371,7 @@
             </a>
 
         </xpath>
-    </template>
+    </template>-->
 
     <template id="cart_lines_specs" inherit_id="website_sale.cart_lines">
         <xpath expr="//table" position="replace">
@@ -625,11 +665,11 @@
                             <div>
                                 <strong>Grade</strong>
                             </div>
-                            <select class="form-control" name="device_grades">
+                            <select class="form-control" name="device_grade">
                                 <option value="0" />
                                 <t t-foreach="grades" t-as="d_grade">
                                     <option t-att-value="d_grade.id"
-                                            t-att-selected="d_grade.id == int(specs_post.get('device_grades'))">
+                                            t-att-selected="d_grade.id == int(specs_post.get('device_grade'))">
                                         <t t-esc="d_grade.x_name"/>
                                     </option>
                                 </t>
@@ -791,6 +831,114 @@
                 </form>
             </div>
             </t>
+        </xpath>
+    </template>
+
+    <template id="product_detail_inherited" inherit_id="website_sale.product">
+        <xpath expr="//section[@id='product_detail']" position="replace">
+
+
+            <section t-attf-class="container py-2 oe_website_sale #{'discount' if combination_info['has_discounted_price'] else ''}" id="product_detail" t-att-data-view-track="view_track and '1' or '0'">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a t-att-href="keep(category=0)">Products</a>
+                                </li>
+                                <li t-if="category" class="breadcrumb-item">
+                                    <a t-att-href="keep('/shop/category/%s' % slug(category), category=0)" t-field="category.name" />
+                                </li>
+                                <li class="breadcrumb-item active">
+                                    <span t-field="product.name" />
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-inline justify-content-end">
+                                <t t-call="website_sale.search">
+                                    <t t-set="search" t-value="False"/>
+                                </t>
+                                <t t-call="website_sale.pricelist_list">
+                                    <t t-set="_classes">ml-2</t>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-xl-5">
+                            <t t-call="website_sale.shop_product_carousel"/>
+                        </div>
+                        <div class="col-md-6 col-xl-7" id="product_details">
+                            <h1 itemprop="name" t-field="product.name">Product Name</h1>
+                            <span itemprop="url" style="display:none;" t-esc="product.website_url"/>
+                            <form t-if="product._is_add_to_cart_possible()" action="/shop/cart/update" method="POST">
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+                                <div class="js_product js_main_product">
+                                    <t t-placeholder="select">
+                                        <input type="hidden" class="product_id" name="product_id" t-att-value="product_variant.id" />
+                                        <input type="hidden" class="product_template_id" name="product_template_id" t-att-value="product.id" />
+                                        <t t-if="combination" t-call="sale.variants">
+                                            <t t-set="ul_class" t-value="'flex-column'" />
+                                            <t t-set="parent_combination" t-value="None" />
+                                        </t>
+                                        <t t-else="">
+                                            <ul class="d-none js_add_cart_variants" t-att-data-attribute_exclusions="{'exclusions: []'}"/>
+                                        </t>
+                                    </t>
+                                    <t t-call="website_sale.product_price" />
+                                    <p t-if="True" class="css_not_available_msg alert alert-warning">This combination does not exist.</p>
+
+
+                                    <div class="css_quantity input-group" contenteditable="false">
+                                        <div class="input-group-prepend">
+                                            <a t-attf-href="#" class="btn btn-secondary js_add_cart_json" aria-label="Remove one" title="Remove one">
+                                                <i class="fa fa-minus"></i>
+                                            </a>
+                                        </div>
+                                        <input type="text" class="form-control quantity" data-min="1" name="add_qty" t-att-value="add_qty or 1"/>
+                                        <div class="input-group-append">
+                                            <a t-attf-href="#" class="btn btn-secondary float_left js_add_cart_json" aria-label="Add one" title="Add one">
+                                                <i class="fa fa-plus"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+
+                                    <a role="button" id="add_to_cart_json" class="btn btn-primary btn-lg mt16 js_check_product js_add_cart_update d-block d-sm-inline-block" href="#"><i class="fa fa-shopping-cart"/> Add to Cart</a>
+                                    <div id="product_option_block"/>
+                                </div>
+                            </form>
+                            <p t-elif="not product.active" class="alert alert-warning">This product is no longer available.</p>
+                            <p t-else="" class="alert alert-warning">This product has no valid combination.</p>
+                            <hr t-if="product.description_sale" />
+                            <div>
+                                <p t-field="product.description_sale" class="text-muted mt-3" placeholder="A short description that will also appear on documents." />
+                                <div id="product_attributes_simple">
+                                    <hr t-if="sum([(1 if len(l.value_ids)==1 else 0) for l in product.attribute_line_ids])"/>
+                                    <p class="text-muted">
+                                        <t t-set="single_value_attributes" t-value="product.valid_product_template_attribute_line_ids._prepare_single_value_for_display()"/>
+                                        <t t-foreach="single_value_attributes" t-as="attribute">
+                                            <span t-field="attribute.name"/>:
+                                            <t t-foreach="single_value_attributes[attribute]" t-as="ptal">
+                                                <span t-field="ptal.product_template_value_ids._only_active().name"/><t t-if="not ptal_last">, </t>
+                                            </t>
+                                            <br/>
+                                        </t>
+                                    </p>
+                                </div>
+                            </div>
+                            <hr />
+                            <p class="text-muted">
+                              30-day money-back guarantee<br />
+                              Free Shipping in U.S.<br />
+                              Buy now, get in 2 days
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+
+
         </xpath>
     </template>
 

@@ -13,6 +13,7 @@ class ProductTemplate(models.Model):
 
     def _generate_sku(self):
         for record in self:
+            sku_completed = False
             if record.product_brand_id:
                 brand_sku_part = record.product_brand_id.name[0:2].upper()
                 if record.x_studio_model_code or record.x_studio_modelo:
@@ -22,4 +23,8 @@ class ProductTemplate(models.Model):
                         part_number_sku_part = record.x_studio_part_number[0:4].upper()
                         if record.x_studio_capacidad_de_almacenamiento:
                             capacity_sku_part = record.x_studio_capacidad_de_almacenamiento.x_name.replace(' ', '')[0:3]
-                            record['product_sku'] = brand_sku_part + model_sku_part + part_number_sku_part + capacity_sku_part
+                            record[
+                                'product_sku'] = brand_sku_part + model_sku_part + part_number_sku_part + capacity_sku_part
+                            sku_completed = True
+            if not sku_completed:
+                record['product_sku'] = False

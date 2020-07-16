@@ -45,14 +45,26 @@ publicWidget.registry.WebsiteSale.include({
 
 
                 let grade = parent.find("input:radio[name=optradio]:checked").val();
-                let color = parent.find("input:radio[name=color]:checked").val();
-                let specs = parent.find('.specs_selected').data('specs');
-                /*let lock_status = parent.find("select[name='lock_status']").children("option:selected").val();
-                let logo = parent.find("select[name='logo']").children("option:selected").val();
-                let charger = parent.find("select[name='charger']").children("option:selected").val();
-                let network_type = parent.find("select[name='network_type']").children("option:selected").val();
-                let lang = parent.find("select[name='lang']").children("option:selected").val();
-                let applications = parent.find("select[name='applications']").children("option:selected").val();*/
+                // let color = parent.find("input:radio[name=color]:checked").val();
+
+                if ($('#products_grid').length > 0){
+                    var specs = parent.find('.specs_selected').data('specs');
+                } else {
+                    let color = parent.find("select[name='color']").children("option:selected").val();
+                    let lock_status = parent.find("select[name='lock_status']").children("option:selected").val();
+                    let logo = parent.find("select[name='logo']").children("option:selected").val();
+                    let charger = parent.find("select[name='charger']").children("option:selected").val();
+                    let network_type = parent.find("select[name='network_type']").children("option:selected").val();
+                    let lang = parent.find("select[name='lang']").children("option:selected").val();
+                    let applications = parent.find("select[name='applications']").children("option:selected").val();
+                    var specs = "{'device_color': " + color + ", 'lock_status': " + lock_status +
+                        ", 'device_logo': " + logo + ", 'device_charger': " + charger +
+                        ", 'device_network_type': " + network_type + ", 'device_lang': " + lang +
+                        ", 'device_applications': " + applications + "}";
+                }
+
+
+
                 console.log("grade: " + grade);
                 // console.log($(ev.currentTarget));
 
@@ -61,14 +73,14 @@ publicWidget.registry.WebsiteSale.include({
 
                 //var $card = $(ev.currentTarget).closest('.card');
 
-                if (grade && color){
+                if (grade){
 
                     if (qty_input <= max_qty_input){
                         ajax.jsonRpc("/shop/cart/update_json", 'call', {
                                 product_id: parseInt(parent.find('input[name="product_id"]').val()),
                                 add_qty: qty_input,
                                 grade: grade,
-                                color: color,
+                                // color: color,
                                 specs: specs
                             }).then(function (data) {
                                 wSaleUtils.updateCartNavBar(data);
@@ -93,7 +105,7 @@ publicWidget.registry.WebsiteSale.include({
                         size: 'medium',
                         dialogClass: 'o_act_window',
                         title: _t("Missing Requirements"),
-                        $content: $(_t("<span class='text-center' style='padding: 2rem;'>Please, select grade and color to add this product to your cart.</span>"))
+                        $content: $(_t("<span class='text-center' style='padding: 2rem;'>Please, select grade to add this product to your cart. <br/> </span>"))
                     });
                     dialog.open();
                     link_button.html(link_button_content);

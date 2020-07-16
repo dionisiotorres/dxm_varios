@@ -1351,7 +1351,7 @@
     <field name="ttype">integer</field>
   </record>
 
-  <!--<record id="studio_customization.new_campo_relacionad_8de63d91-950b-44d4-8bad-592bc01f144b" model="ir.model.fields" context="{'studio': True}">
+  <record id="studio_customization.new_campo_relacionad_8de63d91-950b-44d4-8bad-592bc01f144b" model="ir.model.fields" context="{'studio': True}">
     <field name="complete_name" eval="False"/>
     <field name="compute" eval="False"/>
     <field name="copied" eval="False"/>
@@ -1379,7 +1379,7 @@
     <field name="tracking" eval="False"/>
     <field name="translate" eval="False"/>
     <field name="ttype">char</field>
-  </record>-->
+  </record>
   <record id="studio_customization.new_campo_relacionad_6c87afec-ce97-45f4-9202-10f6f6cfaddb" model="ir.model.fields" context="{'studio': True}">
     <field name="complete_name" eval="False"/>
     <field name="compute" eval="False"/>
@@ -1500,7 +1500,7 @@
     <field name="translate" eval="False"/>
     <field name="ttype">char</field>
   </record>
- <!-- <record id="studio_customization.new_firma_lead_oppor_bd7926d2-8d2e-4143-8b75-3de2b0ad23cd" model="ir.model.fields" context="{'studio': True}">
+ <record id="studio_customization.new_firma_lead_oppor_bd7926d2-8d2e-4143-8b75-3de2b0ad23cd" model="ir.model.fields" context="{'studio': True}">
     <field name="complete_name" eval="False"/>
     <field name="compute" eval="False"/>
     <field name="copied" eval="False"/>
@@ -1528,7 +1528,7 @@
     <field name="tracking" eval="False"/>
     <field name="translate" eval="False"/>
     <field name="ttype">binary</field>
-  </record>-->
+  </record>
   <record id="studio_customization.new_archivo_lead_opp_4c97e753-e8d7-441d-bc61-d3f795a6dee9" model="ir.model.fields" context="{'studio': True}">
     <field name="complete_name" eval="False"/>
     <field name="compute" eval="False"/>
@@ -2641,7 +2641,7 @@
     <field name="state">manual</field>
     <field name="store" eval="True"/>
     <field name="tracking" eval="False"/>
-    <field name="translate" eval="False"/>
+    <field name="translate" eval="True"/>
     <field name="ttype">char</field>
   </record>
 
@@ -2671,7 +2671,7 @@
     <field name="state">manual</field>
     <field name="store" eval="True"/>
     <field name="tracking" eval="False"/>
-    <field name="translate" eval="False"/>
+    <field name="translate" eval="True"/>
     <field name="ttype">many2one</field>
   </record>
 
