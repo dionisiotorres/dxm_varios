@@ -94,7 +94,7 @@
 }
 
 .o_wsale_product_btn {
-    width: 180px;
+    width: 220px;
     margin-left: 10px;
 }
 
@@ -110,6 +110,22 @@
 
 .oct_no_stock {
     background-color: #9c8f8b !important;
+}
+
+
+/* Product Detail */
+
+.quant_specs_paragraph {
+    padding: 15px;
+}
+
+.oct_grade_container_detail {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+div > div.css_quantity {
+    margin-top: 15px;
 }
 
 /* Color selector */

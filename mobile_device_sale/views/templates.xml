@@ -17,7 +17,7 @@
 
 
                 <div class="oct_stock_qty"><i class="fa fa-cubes"/> Total Stock:
-                <span class="oct_product_qty"><t t-esc="int(product.virtual_available)"/></span>
+                <span class="oct_product_qty"><t t-esc="int(product.qty_available)"/></span>
             </div>
 
             <div class="row">
@@ -230,7 +230,7 @@
             <t t-if="mobile_sale">
 
                 <div class="oct_stock_qty"><i class="fa fa-cubes"/> Total Stock:
-                    <span class="oct_product_total_qty"><t t-esc="int(product.virtual_available)"/></span>
+                    <span class="oct_product_total_qty"><t t-esc="int(product.qty_available)"/></span>
                 </div>
 
 

@@ -243,13 +243,13 @@ class WebsiteSale(WebsiteSale):
             domain = self._get_search_domain(search, category, attrib_values)
             product_models = []
 
-            domain += [('virtual_available', '>', 0)]
+            domain += [('qty_available', '>', 0)]
 
             if brand_list:
                 domain += [('product_brand_id', 'in', brand_set)]
                 product_models = request.env['product.template'].search([
                     ('product_brand_id', 'in', brand_set),
-                    ('virtual_available', '!=', 0)]).mapped('x_studio_modelo')
+                    ('qty_available', '!=', 0)]).mapped('x_studio_modelo')
 
             if specs_post['device_model'] != '0':
                 domain += [('x_studio_modelo', '=', specs_post['device_model'])]
@@ -276,7 +276,7 @@ class WebsiteSale(WebsiteSale):
 
             all_products_with_stock = Product.search([('website_published', '=', True),
                                                       ('website_id', '=', int(website_for_sell)),
-                                                      ('virtual_available', '>', 0)])
+                                                      ('qty_available', '>', 0)])  # before virtual_available
             product_brands = self.get_product_brands(all_products_with_stock)
             search_product = Product.search(domain)
             website_domain = request.website.website_domain()
@@ -403,6 +403,10 @@ class WebsiteSale(WebsiteSale):
         _logger.info("KWARGS: %r", kwargs)
         if 'fw' in kwargs.keys():
             kwargs.pop('fw')
+        if 'device_model' in kwargs.keys():
+            kwargs.pop('device_model')
+        if 'device_capacity' in kwargs.keys():
+            kwargs.pop('device_capacity')
         return {x.split('_')[1]: int(kwargs[x]) for x in kwargs}
 
     @http.route(['''/shop/get_product_info/detail'''], type='json', auth="user", website=True)
