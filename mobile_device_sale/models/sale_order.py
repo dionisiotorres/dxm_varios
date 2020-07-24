@@ -96,7 +96,7 @@ class SaleOrder(models.Model):
 
     def _cart_update(self, product_id=None, line_id=None, add_qty=0, set_qty=0, **kwargs):
         """ Add or set product quantity, add_qty can be negative """
-        _logger.info("ON _CART_UPDATE() AT SALE ORDER MODEL")
+        _logger.info("CART UPDATE KWARG: %r", kwargs)
         self.ensure_one()
         product_context = dict(self.env.context)
         _logger.info("PRODUCT CONTEXT AT FIRST: %r", product_context)
@@ -283,7 +283,7 @@ class SaleOrder(models.Model):
                         charger = int(specs[key]) if specs[key] != '0' else 0
                     if key == 'device_logo':
                         logo = int(specs[key]) if specs[key] != '0' else 0
-                    if key == 'lock_status':
+                    if key == 'device_lock_status':
                         lock_status = int(specs[key]) if specs[key] != '0' else 0
                     if key == 'device_applications':
                         apps = int(specs[key]) if specs[key] != '0' else 0
@@ -326,41 +326,137 @@ class SaleOrderLine(models.Model):
     def match_product_specs(self, **kwargs):
         _logger.info("MATCH SPECS KW ARGS: %r", kwargs)
 
+        if 'specs' in kwargs.keys():
+            specs_dict = ast.literal_eval(kwargs['specs'])
+            kwargs['color'] = specs_dict['device_color']
+            kwargs['lock_status'] = specs_dict['device_lock_status']
+            kwargs['logo'] = specs_dict['device_logo']
+            kwargs['charger'] = specs_dict['device_charger']
+            # kwargs['network_type'] = specs_dict['device_network_type']
+            # kwargs['lang'] = specs_dict['device_lang']
+            kwargs['applications'] = specs_dict['device_applications']
+
         domain = [('sale_order_line_id', '=', self.id)]
+
+        if 'grade' in kwargs.keys():
+            domain += [('grade', '=', int(kwargs.get('grade')) or False)]
+
         if 'color' in kwargs.keys():
-            domain += [('color', '=', int(kwargs.get('color')))]
+            domain += [('color', '=', int(kwargs.get('color')) or False)]
         else:
             domain += [('color', '=', False)]
 
         if 'lock_status' in kwargs.keys():
-            domain += [('lock_status', '=', int(kwargs.get('lock_status')))]
+            domain += [('lock_status', '=', int(kwargs.get('lock_status')) or False)]
         else:
             domain += [('lock_status', '=', False)]
 
         if 'logo' in kwargs.keys():
-            domain += [('logo', '=', int(kwargs.get('logo')))]
+            domain += [('logo', '=', int(kwargs.get('logo')) or False)]
         else:
             domain += [('logo', '=', False)]
 
         if 'charger' in kwargs.keys():
-            domain += [('charger', '=', int(kwargs.get('charger')))]
+            domain += [('charger', '=', int(kwargs.get('charger')) or False)]
         else:
             domain += [('charger', '=', False)]
 
         if 'network_type' in kwargs.keys():
-            domain += [('network_type', '=', int(kwargs.get('network_type')))]
+            domain += [('network_type', '=', int(kwargs.get('network_type')) or False)]
         else:
             domain += [('network_type', '=', False)]
 
         if 'lang' in kwargs.keys():
-            domain += [('lang', '=', int(kwargs.get('lang')))]
+            domain += [('lang', '=', int(kwargs.get('lang')) or False)]
         else:
             domain += [('lang', '=', False)]
 
         if 'applications' in kwargs.keys():
-            domain += [('applications', '=', int(kwargs.get('applications')))]
+            domain += [('applications', '=', int(kwargs.get('applications')) or False)]
         else:
             domain += [('applications', '=', False)]
+        return self.env['product.line.specs'].search(domain)
+
+    def match_product_any_specs(self, **kwargs):
+        _logger.info("MATCH ANY SPECS KW ARGS: %r", kwargs)
+
+        if 'specs' in kwargs.keys():
+            specs_dict = ast.literal_eval(kwargs['specs'])
+            kwargs['color'] = specs_dict['device_color']
+            kwargs['lock_status'] = specs_dict['device_lock_status']
+            kwargs['logo'] = specs_dict['device_logo']
+            kwargs['charger'] = specs_dict['device_charger']
+            # kwargs['network_type'] = specs_dict['device_network_type']
+            # kwargs['lang'] = specs_dict['device_lang']
+            kwargs['applications'] = specs_dict['device_applications']
+
+        domain = [('sale_order_line_id', '=', self.id)]
+
+        if 'grade' in kwargs.keys() and int(kwargs.get('grade')) != 0:
+            domain += [('grade', '=', int(kwargs.get('grade')))]
+
+        if 'color' in kwargs.keys() and int(kwargs.get('color')) != 0:
+            domain += [('color', '=', int(kwargs.get('color')))]
+
+        if 'lock_status' in kwargs.keys() and int(kwargs.get('lock_status')) != 0:
+            domain += [('lock_status', '=', int(kwargs.get('lock_status')))]
+
+        if 'logo' in kwargs.keys() and int(kwargs.get('logo')) != 0:
+            domain += [('logo', '=', int(kwargs.get('logo')))]
+
+        if 'charger' in kwargs.keys() and int(kwargs.get('charger')):
+            domain += [('charger', '=', int(kwargs.get('charger')))]
+
+        if 'network_type' in kwargs.keys() and int(kwargs.get('network_type')) != 0:
+            domain += [('network_type', '=', int(kwargs.get('network_type')))]
+
+        if 'lang' in kwargs.keys() and int(kwargs.get('lang')) != 0:
+            domain += [('lang', '=', int(kwargs.get('lang')))]
+
+        if 'applications' in kwargs.keys() and int(kwargs.get('applications')) != 0:
+            domain += [('applications', '=', int(kwargs.get('applications')))]
+
+        return self.env['product.line.specs'].search(domain)
+
+    def match_product_partial_specs(self, **kwargs):
+        _logger.info("MATCH PARTIAL SPECS KW ARGS: %r", kwargs)
+
+        if 'specs' in kwargs.keys():
+            specs_dict = ast.literal_eval(kwargs['specs'])
+            kwargs['color'] = specs_dict['device_color']
+            kwargs['lock_status'] = specs_dict['device_lock_status']
+            kwargs['logo'] = specs_dict['device_logo']
+            kwargs['charger'] = specs_dict['device_charger']
+            # kwargs['network_type'] = specs_dict['device_network_type']
+            # kwargs['lang'] = specs_dict['device_lang']
+            kwargs['applications'] = specs_dict['device_applications']
+
+        domain = [('sale_order_line_id', '=', self.id)]
+
+        if 'grade' in kwargs.keys() and int(kwargs.get('grade')) != 0:
+            domain += [('grade', '=', int(kwargs.get('grade')))]
+
+        if 'color' in kwargs.keys() and int(kwargs.get('color')) != 0:
+            domain += [('color', 'in', [int(kwargs.get('color')), False])]
+
+        if 'lock_status' in kwargs.keys() and int(kwargs.get('lock_status')) != 0:
+            domain += [('lock_status', 'in', [int(kwargs.get('lock_status')), False])]
+
+        if 'logo' in kwargs.keys() and int(kwargs.get('logo')) != 0:
+            domain += [('logo', 'in', [int(kwargs.get('logo')), False])]
+
+        if 'charger' in kwargs.keys() and int(kwargs.get('charger')):
+            domain += [('charger', 'in', [int(kwargs.get('charger')), False])]
+
+        if 'network_type' in kwargs.keys() and int(kwargs.get('network_type')) != 0:
+            domain += [('network_type', 'in', [int(kwargs.get('network_type')), False])]
+
+        if 'lang' in kwargs.keys() and int(kwargs.get('lang')) != 0:
+            domain += [('lang', 'in', [int(kwargs.get('lang')), False])]
+
+        if 'applications' in kwargs.keys() and int(kwargs.get('applications')) != 0:
+            domain += [('applications', 'in', [int(kwargs.get('applications')), False])]
+
         return self.env['product.line.specs'].search(domain)
 
     def _get_display_price(self, product):

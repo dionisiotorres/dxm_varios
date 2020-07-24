@@ -9,3 +9,4 @@ from . import product_specs
 from . import res_config
 from . import product_product
 from . import website
+from . import stock_picking

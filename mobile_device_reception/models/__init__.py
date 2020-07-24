@@ -7,3 +7,4 @@ from . import res_config
 from . import stock_production_lot
 from . import stock_move
 from . import product_template
+from . import purchase_order

@@ -14,7 +14,6 @@ odoo.define('oct_website_sale.sale', function (require) {
             if (website_for_sell === website_id) {
 
                 console.log("WEBSITE TO SELL MOBILE DEVICES.....");
-
                 /* Load products stock and price on grid */
             if ($('#products_grid').length > 0){
 
@@ -29,6 +28,7 @@ odoo.define('oct_website_sale.sale', function (require) {
                     var product_container = $(this);
                     var product_id = $(this).find("input[name='product_id']").val();
                     var specs = product_container.find('.specs_selected').data('specs');
+                    var inventory_policy = product_container.find('.oct_stock_qty').data('inventory-policy');
                     // product_container.find(".o_wsale_product_btn").hide();
                     ajax.jsonRpc('/shop/get_product_info/grid', 'call', {
                         product_id: product_id,
@@ -41,7 +41,7 @@ odoo.define('oct_website_sale.sale', function (require) {
                             var specs_quant_container = product_container.find('.specs_quant');
                             var specs_paragraph = product_container.find('.specs_paragraph');
                             specs_quant_container.html(specs_quant);
-                            specs_paragraph.removeClass('oct_hidden');
+                            // specs_paragraph.removeClass('oct_hidden');
                             // console.log(data.product_data);
                             for (var product_grade_id in data.product_data){
                                 // console.log(data.product_data[product_grade_id]);
@@ -56,8 +56,11 @@ odoo.define('oct_website_sale.sale', function (require) {
                                     stock_container.html(stock);
                                 } else {
                                     stock_container.html(stock);
-                                    grade_label.find('input').prop('disabled', true);
-                                    grade_label.addClass("oct_no_stock");
+                                    if (inventory_policy === 'never'){
+                                        grade_label.find('input').prop('disabled', true);
+                                        grade_label.addClass("oct_no_stock");
+                                    }
+
                                 }
 
                             }
@@ -81,7 +84,7 @@ odoo.define('oct_website_sale.sale', function (require) {
 
                 }); // End each
 
-        } else if ($("#product_detail").length > 0) {
+            } else if ($("#product_detail").length > 0) {
 
             console.log("GETTING PRODUCT DETAIL DATA");
             var product_container = $("#product_detail");
@@ -234,22 +237,9 @@ odoo.define('oct_website_sale.sale', function (require) {
                 var parent_container = $(this).parents('#product_details');
                 var product_id = $("input[name='product_id']").val();
             }
-
-            // parent_container.find(".js_add_cart_update").show();
-
-
-            // console.log(parent_container);
-            // console.log("PRODUCT ID: " + product_id);
-
-            // let load_color_spinner = $("<i class=\"fa fa-spinner fa-spin\"/> <span>Loading colors...</span>");
-
-            // $(quant_container).html(spinner);
-            // var colors_container = parent_container.find(".colors");
-            // var ul_container = colors_container.find("ul");
-            // ul_container.html(load_color_spinner);
-            // colors_container.removeClass('oct_hidden');
-
+            var inventory_police = parent_container.find('.oct_stock_qty').data('inventory-policy')
             var specs = parent_container.find('.specs_selected').data('specs');
+            var quant_paragraph =  parent_container.find('.specs_paragraph');
 
             ajax.jsonRpc('/shop/get_product_info/grid', 'call', {
                 product_id: product_id,
@@ -259,26 +249,36 @@ odoo.define('oct_website_sale.sale', function (require) {
             if (data) {
                 console.log(data);
                 // ul_container.html("");
-                console.log("Product ID: " + product_id + ', Grade: ' + grade)
-                for (var index in data.color.color_data){
-                    // var color_id = data.color_data[index][0];
-                    // var color_index = data.color_data[index][1];
-                    var color_name = data.color.color_data[index][2];
-                    var color_quantity = data.color.color_data[index][3];
-
-                    console.log("Color name: " + color_name + " Color quantity: " + color_quantity)
-
-                    var grade_quant = data.grade_quant;
-                    var specs_quant_container = parent_container.find('.specs_quant');
-                    specs_quant_container.html(grade_quant);
-                    qty_input.prop('max', grade_quant)
-
-
-                    // var html_list = '<li><label class="color_label"><input type="radio" data-qty="'+ color_quantity  +'" name="color" value="'+ color_id + '"/><span class="swatch" style="background-color:' + color_index + ';"></span>' + color_name + ' (' + color_quantity + ')' + '</label></li>'
-                   // ul_container.append(html_list);
+                console.log("Product ID: " + product_id + ', Grade: ' + grade + ', Cart QTY: ' + data.cart_qty)
+                var grade_quant = data.grade_quant;
+                var available_quant = grade_quant - data.cart_qty
+                var specs_quant_container = parent_container.find('.specs_quant');
+                specs_quant_container.html(grade_quant);
+                quant_paragraph.removeClass('oct_hidden');
+                console.log("AVAILABLE QUANT.....")
+                console.log(available_quant)
+                var specs_cart_container = quant_paragraph.find('.specs_cart_qty_container');
+                var specs_cart_qty = specs_cart_container.find('.specs_cart_qty');
+                if (data.cart_qty > 0){
+                    specs_cart_qty.html(data.cart_qty);
+                    specs_cart_container.removeClass('oct_hidden');
+                } else {
+                    specs_cart_qty.html(data.cart_qty);
+                    specs_cart_container.addClass('oct_hidden');
                 }
 
+                if (inventory_police === 'always'){
+                    qty_input.prop('max', 1000)
+                    if (available_quant === 0){
+                        quant_paragraph.find('.specs_quant').html('Sale on demand')
+                    } else {
+                        quant_paragraph.find('.specs_quant').html(available_quant)
+                    }
 
+                } else if (inventory_police === 'never'){
+                    qty_input.prop('max', available_quant)
+                    quant_paragraph.find('.specs_quant').html(available_quant)
+                }
 
             } else {
 
@@ -318,8 +318,8 @@ odoo.define('oct_website_sale.sale', function (require) {
             let lock_status = $(this).find("select[name='lock_status']").children("option:selected").val();
             let logo = $(this).find("select[name='logo']").children("option:selected").val();
             let charger = $(this).find("select[name='charger']").children("option:selected").val();
-            let network_type = $(this).find("select[name='network_type']").children("option:selected").val();
-            let lang = $(this).find("select[name='lang']").children("option:selected").val();
+            // let network_type = $(this).find("select[name='network_type']").children("option:selected").val();
+            // let lang = $(this).find("select[name='lang']").children("option:selected").val();
             let applications = $(this).find("select[name='applications']").children("option:selected").val();
 
             // vars on product detail
@@ -350,14 +350,29 @@ odoo.define('oct_website_sale.sale', function (require) {
                 lock_status: lock_status,
                 logo: logo,
                 charger: charger,
-                network_type: network_type,
-                lang: lang,
+                // network_type: network_type,
+                // lang: lang,
                 applications: applications
             }).then(function (data) {
             if (data) {
+
+                console.log("DATA FROM CONTROLLER")
                 console.log(data);
-                $(quant_container).html(data.product_quants);
-                qty_input.attr({'max': data.product_quants});
+                var available_quant = data.product_quants - data.cart_qty
+
+                $(quant_container).html(available_quant);
+                qty_input.attr({'max': available_quant});
+
+                var specs_cart_container = quant_paragraph.find('.specs_cart_qty_container');
+                var specs_cart_qty = specs_cart_container.find('.specs_cart_qty');
+                if (data.cart_qty > 0){
+                    specs_cart_qty.html(data.cart_qty);
+                    specs_cart_container.removeClass('oct_hidden');
+                } else {
+                    specs_cart_qty.html(data.cart_qty);
+                    specs_cart_container.addClass('oct_hidden');
+                }
+
                 /*var new_price = data.product_price;
                 $(price_container).each(function () {
                     $(this).text(new_price);

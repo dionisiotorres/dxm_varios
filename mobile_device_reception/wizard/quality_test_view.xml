@@ -72,7 +72,7 @@
                     </group>
                     <notebook>
                         <page string="Lots">
-                            <label for="lot_id" string="Create New Lot"/>
+                            <label for="lot_id" string="Enter New IMEI"/>
                              <field name="lot_id" style="width: 30%%"/>
                              <field name="serial_file" style="width: 30%%; margin-left: 20px;"/>
                             <field name="new_lot_ids" create="0">

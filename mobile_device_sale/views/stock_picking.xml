@@ -35,9 +35,9 @@
                                 <field name="color"/>
                                 <field name="lock_status"/>
                                 <field name="logo"/>
-                                <field name="charger"/>
-                                <field name="network_type"/>
-                                <field name="lang"/>
+                                <field name="charger" string="SPEC"/>
+                                <!--<field name="network_type"/>
+                                <field name="lang"/>-->
                                 <field name="applications"/>
                             </tree>
                         </field>
