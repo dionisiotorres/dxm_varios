@@ -114,16 +114,16 @@ class WebsiteSale(WebsiteSale):
                 specs_filter += operand + 'l.x_studio_color.id == %s' % int(kwargs['device_color'])
             else:
                 specs_filter += 'l.x_studio_color.id == %s' % int(kwargs['device_color'])
-        if kwargs['device_network_type'] != '0':
-            if len(specs_filter) > 0:
-                specs_filter += operand + 'l.x_studio_red.id == %s' % int(kwargs['device_network_type'])
-            else:
-                specs_filter += 'l.x_studio_red.id == %s' % int(kwargs['device_network_type'])
-        if kwargs['device_lang'] != '0':
-            if len(specs_filter) > 0:
-                specs_filter += operand + 'l.x_studio_idioma.id == %s' % int(kwargs['device_lang'])
-            else:
-                specs_filter += 'l.x_studio_idioma.id == %s' % int(kwargs['device_lang'])
+        # if kwargs['device_network_type'] != '0':
+        #     if len(specs_filter) > 0:
+        #         specs_filter += operand + 'l.x_studio_red.id == %s' % int(kwargs['device_network_type'])
+        #     else:
+        #         specs_filter += 'l.x_studio_red.id == %s' % int(kwargs['device_network_type'])
+        # if kwargs['device_lang'] != '0':
+        #     if len(specs_filter) > 0:
+        #         specs_filter += operand + 'l.x_studio_idioma.id == %s' % int(kwargs['device_lang'])
+        #     else:
+        #         specs_filter += 'l.x_studio_idioma.id == %s' % int(kwargs['device_lang'])
         if kwargs['device_charger'] != '0':
             if len(specs_filter) > 0:
                 specs_filter += operand + 'l.x_studio_cargador.id == %s' % int(kwargs['device_charger'])
@@ -134,11 +134,11 @@ class WebsiteSale(WebsiteSale):
                 specs_filter += operand + 'l.x_studio_logo.id == %s' % int(kwargs['device_logo'])
             else:
                 specs_filter += 'l.x_studio_logo.id == %s' % int(kwargs['device_logo'])
-        if kwargs['lock_status'] != '0':
+        if kwargs['device_lock_status'] != '0':
             if len(specs_filter) > 0:
-                specs_filter += operand + 'l.x_studio_bloqueo.id == %s' % int(kwargs['lock_status'])
+                specs_filter += operand + 'l.x_studio_bloqueo.id == %s' % int(kwargs['device_lock_status'])
             else:
-                specs_filter += 'l.x_studio_bloqueo.id == %s' % int(kwargs['lock_status'])
+                specs_filter += 'l.x_studio_bloqueo.id == %s' % int(kwargs['device_lock_status'])
         if kwargs['device_applications'] != '0':
             if len(specs_filter) > 0:
                 specs_filter += operand + 'l.x_studio_aplicaciones.id == %s' % int(kwargs['device_applications'])
@@ -168,7 +168,7 @@ class WebsiteSale(WebsiteSale):
         '''/shop/page/<int:page>''',
         '''/shop/category/<model("product.public.category"):category>''',
         '''/shop/category/<model("product.public.category"):category>/page/<int:page>'''
-    ], type='http', auth="public", website=True, sitemap=sitemap_shop)
+    ], type='http', auth="user", website=True, sitemap=sitemap_shop)
     def shop(self, page=0, category=None, search='', ppg=False, **post):
         _logger.info("ON SHOP INHERITED CONTROLLER")
         _logger.info("POST ARGS: %r", post)
@@ -177,16 +177,18 @@ class WebsiteSale(WebsiteSale):
         current_website = request.env['website'].get_current_website().id
         if int(website_for_sell) == current_website:
             mobile_sale = True
-            default_specs = {'device_network_type': '0',
-                             'device_lang': '0',
-                             'device_charger': '0',
-                             'device_logo': '0',
-                             'lock_status': '0',
-                             'device_applications': '0',
-                             'device_model': '0',
-                             'device_grade': '0',
-                             'device_color': '0',
-                             'device_capacity': '0'}
+            default_specs = {
+                # 'device_network_type': '0',
+                # 'device_lang': '0',
+                'device_charger': '0',
+                'device_logo': '0',
+                'device_lock_status': '0',
+                'device_applications': '0',
+                'device_model': '0',
+                'device_grade': '0',
+                'device_color': '0',
+                'device_capacity': '0'
+            }
             active_specs = False
             if len(post):
                 specs_post = post
@@ -196,11 +198,11 @@ class WebsiteSale(WebsiteSale):
                     if post[key] != '0' and key not in ['fw', 'search']:
                         active_filter = True
                         if key in [
-                            'device_network_type',
-                            'device_lang',
+                            # 'device_network_type',
+                            # 'device_lang',
                             'device_charger',
                             'device_logo',
-                            'lock_status',
+                            'device_lock_status',
                             'device_applications',
                             'device_grade',
                             'device_color'
@@ -316,8 +318,8 @@ class WebsiteSale(WebsiteSale):
             device_lock_status = request.env['x_bloqueo'].sudo().search([])
             device_logo = request.env['x_logo'].sudo().search([])
             device_charger = request.env['x_cargador'].sudo().search([])
-            device_network_type = request.env['x_red'].sudo().search([])
-            device_lang = request.env['x_idioma_terminal'].sudo().search([])
+            # device_network_type = request.env['x_red'].sudo().search([])
+            # device_lang = request.env['x_idioma_terminal'].sudo().search([])
             device_applications = request.env['x_terminal_aplicaciones'].sudo().search([])
 
             # products = products.filtered(lambda p: p.virtual_available > 0)
@@ -356,8 +358,8 @@ class WebsiteSale(WebsiteSale):
                 'device_lock_status': device_lock_status,
                 'device_logo': device_logo,
                 'device_charger': device_charger,
-                'device_network_type': device_network_type,
-                'device_lang': device_lang,
+                # 'device_network_type': device_network_type,
+                # 'device_lang': device_lang,
                 'device_applications': device_applications,
                 'specs_post': specs_post,
                 'product_models': product_models,
@@ -397,9 +399,21 @@ class WebsiteSale(WebsiteSale):
                                                  lang=int(lang),
                                                  applications=int(applications))
 
-        return {'product_id': product_id, 'product_quants': product_quants}
+        sale_order = request.website.sale_get_order()
+        cart_qty = 0
+        if sale_order:
+            _logger.info("SALE ORDER IN GET PRODUCT INFO: %r", sale_order)
+            cart_qty = self.get_quant_in_cart(sale_order, product_obj, grade=grade, color=color,
+                                              lock_status=lock_status, logo=logo, charger=charger, applications=0)
+                                                # network_type=network_type, lang=0
+
+        if product_quants < cart_qty:
+            cart_qty = product_quants
+
+        return {'product_id': product_id, 'product_quants': product_quants, 'cart_qty': cart_qty}
 
     def normalize_filter_specs_names(self, **kwargs):
+
         _logger.info("KWARGS: %r", kwargs)
         if 'fw' in kwargs.keys():
             kwargs.pop('fw')
@@ -407,7 +421,11 @@ class WebsiteSale(WebsiteSale):
             kwargs.pop('device_model')
         if 'device_capacity' in kwargs.keys():
             kwargs.pop('device_capacity')
-        return {x.split('_')[1]: int(kwargs[x]) for x in kwargs}
+        if 'brand' in kwargs.keys():
+            kwargs.pop('brand')
+        normalized_specs_filter = {x.split('_')[1] if len(x.split('_')) == 2 else '_'.join([x.split('_')[1], x.split('_')[2]]): int(kwargs[x]) for x in kwargs}
+        _logger.info("NORMALIZED SPECS FILTER: %r", normalized_specs_filter)
+        return normalized_specs_filter
 
     @http.route(['''/shop/get_product_info/detail'''], type='json', auth="user", website=True)
     def get_product_info_detail(self, product_id, grade=None, specs=None):
@@ -441,7 +459,27 @@ class WebsiteSale(WebsiteSale):
 
             return {'product_id': product_id, 'specs_quant': specs_quant, 'product_data': result}
 
-        return {}
+        else:
+            # Check if there are quantities in cart
+            sale_order = request.website.sale_get_order()
+            specs_filter.update({'grade': int(grade)})
+            if sale_order:
+                _logger.info("SALE ORDER IN GET PRODUCT INFO: %r", sale_order)
+                cart_qty = self.get_quant_in_cart(sale_order, product_obj, **specs_filter)
+            specs_filter.pop('grade')
+            result.update({'product_id': product_obj.product_variant_id.id})
+            quant_colors = self.get_quant_colors(product_obj.product_variant_id, grade=grade)
+            grade_quant = self.get_product_quants(product_obj.product_variant_id, grade=grade, **specs_filter)
+            color_data = []
+            for color in quant_colors:
+                color_quantity = self.get_product_quants(product_obj.product_variant_id,
+                                                         grade=int(grade),
+                                                         color=color.id)
+                color_data.append((color.id, color.x_color_index, color.x_name, color_quantity))
+            result.update({'color_data': color_data})
+            if grade_quant < cart_qty:
+                cart_qty = grade_quant
+            return {'product_id': product_id, 'grade_quant': grade_quant, 'cart_qty': cart_qty, 'color': result}
 
     @http.route(['''/shop/get_product_info/grid'''], type='json', auth="user", website=True)
     def get_product_info_grid(self, product_id=None, grade=None, specs=None):
@@ -462,6 +500,7 @@ class WebsiteSale(WebsiteSale):
         today = datetime.date.today()
 
         result = {}
+        cart_qty = 0
 
         # get product price and quants by grade in the grid.
         if not grade:
@@ -478,6 +517,12 @@ class WebsiteSale(WebsiteSale):
 
             return {'product_id': product_id, 'specs_quant': specs_quant, 'product_data': result}
         else:
+            # Check if there are quantities in cart
+            sale_order = request.website.sale_get_order()
+            specs_filter.update({'grade': int(grade)})
+            if sale_order:
+                _logger.info("SALE ORDER IN GET PRODUCT INFO: %r", sale_order)
+                cart_qty = self.get_quant_in_cart(sale_order, product_obj, **specs_filter)
             specs_filter.pop('grade')
             result.update({'product_id': product_obj.product_variant_id.id})
             quant_colors = self.get_quant_colors(product_obj.product_variant_id, grade=grade)
@@ -489,7 +534,54 @@ class WebsiteSale(WebsiteSale):
                                                          color=color.id)
                 color_data.append((color.id, color.x_color_index, color.x_name, color_quantity))
             result.update({'color_data': color_data})
-            return {'product_id': product_id, 'grade_quant': grade_quant, 'color': result}
+            if grade_quant < cart_qty:
+                cart_qty = grade_quant
+            return {'product_id': product_id, 'grade_quant': grade_quant, 'cart_qty': cart_qty, 'color': result}
+
+    def get_quant_in_cart(self, order, product, **kwargs):
+        _logger.info("ANALYZING CART QTY.....")
+        _logger.info("KWARGS: %r", kwargs)
+        cart_qty = 0
+        available_for_sale = 0
+        for line in order.order_line:
+            if line.product_id.id == product.id and line.product_grade.id == int(kwargs.get('grade')):
+                _logger.info("FINDING PRODUCT SPECS IN LINE: %s, PRODUCT: %s" % (line.id, line.product_id.id))
+                # Find if there is a line with no more specs than grade
+                line_grade = line.match_product_specs(grade=int(kwargs.get('grade')))
+                # get total grade quants
+                grade_quants = self.get_product_quants(product, grade=int(kwargs.get('grade')))
+                _logger.info("GRADE QUANTS: %r", grade_quants)
+                _logger.info("LINE GRADE MATCH: %r", line_grade)
+                line_match = line.match_product_partial_specs(**kwargs)  # grade=int(kwargs.get('grade'))
+                if line_grade:
+                    line_match = line_match - line_grade
+                if line_match:
+                    _logger.info("LINE MATCH EXIST: %r", line_match)
+                    if line_grade:
+                        cart_qty = sum(line_match.mapped('quantity')) + sum(line_grade.mapped('quantity'))
+                    else:
+                        cart_qty = sum(line_match.mapped('quantity'))
+                else:
+                    available_for_sale = self.get_product_quants(product, **kwargs)
+                    _logger.info("AVAILABLE FOR SALE: %r", available_for_sale)
+                if line_grade and not line_match:
+                    total_grade_in_cart = sum(line_grade.mapped('quantity'))
+                    _logger.info("TOTAL GRADE IN CART: %r", total_grade_in_cart)
+                    if total_grade_in_cart == grade_quants:
+                        _logger.info("TOTAL GRADE IN CART == GRADE QUANTS")
+                        cart_qty = grade_quants
+                    elif total_grade_in_cart < grade_quants:
+                        cart_qty = available_for_sale - (available_for_sale - total_grade_in_cart)
+                    else:
+                        _logger.info("TOTAL GRADE IN CART != GRADE QUANTS")
+                        cart_qty = available_for_sale - (grade_quants - total_grade_in_cart)
+                        _logger.info("CART_QTY AFTER REST: %r", cart_qty)
+                    if cart_qty < 0:
+                        _logger.info("CART QTY < 0")
+                        cart_qty = 0
+        _logger.info("CART QUANTS: %r", cart_qty)
+
+        return cart_qty
 
     def get_quant_colors(self, product_id, grade):
         company_id = request.env.user.company_id
@@ -744,7 +836,7 @@ class WebsiteSale(WebsiteSale):
         website_for_sell = request.env['ir.config_parameter'].sudo().get_param('mobile_device_sale.website_for_sell')
         return {'website_mobile_sell': int(website_for_sell)}
 
-    @http.route(['/shop/cart'], type='http', auth="public", website=True, sitemap=False)
+    @http.route(['/shop/cart'], type='http', auth="user", website=True, sitemap=False)
     def cart(self, access_token=None, revive='', **post):
         website_for_sell = request.env['ir.config_parameter'].sudo().get_param('mobile_device_sale.website_for_sell')
         current_website = request.env['website'].get_current_website().id
