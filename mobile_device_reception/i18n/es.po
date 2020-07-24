@@ -100,8 +100,8 @@ msgstr "Opciones de Configuración"
 
 #. module: mobile_device_reception
 #: model_terms:ir.ui.view,arch_db:mobile_device_reception.mobile_functional_test_wizard
-msgid "Create New Lot"
-msgstr "Crear Nuevo Lote"
+msgid "Enter New IMEI"
+msgstr "Introducir Nuevo IMEI"
 
 #. module: mobile_device_reception
 #: model:ir.model.fields,field_description:mobile_device_reception.field_esthetic_quality_test__create_uid

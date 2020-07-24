@@ -1143,7 +1143,7 @@ span.o_wizard_has_extra_step.d-none + .progress-wizard .fill-line:after   {
 		 top: 134px;
 		 position: absolute;
 		 right: 0;
-		 z-index: 9;
+		 z-index: 10;
 	}
 	 .custom_header .header-top-t .header-right ul#ecommerce_cart li a i {
 		 font-size: 24px;

@@ -112,6 +112,11 @@
     background-color: #9c8f8b !important;
 }
 
+.specs_cart_qty_container {
+    margin-left: 15px;
+    color: #f59f9f;
+}
+
 
 /* Product Detail */
 
@@ -163,4 +168,13 @@ label.color_label {
 .oct_price_offered {
     width: 40%;
     margin: 0 auto;
+}
+
+/* Responsive */
+
+@media (max-width: 766px) {
+    .specs_selected {
+        min-height: 90px;
+    }
+
 }

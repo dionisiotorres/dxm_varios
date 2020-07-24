@@ -17,7 +17,7 @@
     'category': 'productivity',
     'version': '0.1',
 
-    'depends': ['base', 'stock'],
+    'depends': ['base', 'stock', 'purchase'],
 
     'data': [
         'security/ir.model.access.csv',
@@ -27,6 +27,7 @@
         'views/stock_picking_view.xml',
         'views/stock_production_lot.xml',
         'views/product_template.xml',
+        'views/purchase_order.xml',
         'views/res_config.xml',
         'views/functional_quality_test_view.xml',
         'views/esthetic_quality_test_view.xml',

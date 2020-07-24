@@ -12,8 +12,16 @@ var _t = core._t;
 
 publicWidget.registry.WebsiteSale.include({
     events: _.extend({}, publicWidget.registry.WebsiteSale.prototype.events, {
-        'click a.js_add_cart_update': '_onClickAddCartUpdate'
+        'click a.js_add_cart_update': '_onClickAddCartUpdate',
+        'keydown input.input_add_qty': '_onkeydownAddCart'
     }),
+
+    _onkeydownAddCart: function(ev){
+        if(ev.keyCode === 13)
+            {
+                ev.preventDefault();
+            }
+    },
 
     _onClickAddCartUpdate: function (ev) {
         console.log("ON CART UPDATE");
@@ -31,6 +39,7 @@ publicWidget.registry.WebsiteSale.include({
             var spinner_icon = $("<i class=\"fa fa-spinner fa-spin\"/>");
             var link_button = $(ev.currentTarget);
             var link_button_content = $(ev.currentTarget).html();
+            var qty_input_container = parent.find('input[name="add_qty"]');
             var max_qty_input = parseInt(parent.find('input[name="add_qty"]').prop('max'));
             var qty_input = parseInt(parent.find('input[name="add_qty"]').val());
 
@@ -54,12 +63,11 @@ publicWidget.registry.WebsiteSale.include({
                     let lock_status = parent.find("select[name='lock_status']").children("option:selected").val();
                     let logo = parent.find("select[name='logo']").children("option:selected").val();
                     let charger = parent.find("select[name='charger']").children("option:selected").val();
-                    let network_type = parent.find("select[name='network_type']").children("option:selected").val();
-                    let lang = parent.find("select[name='lang']").children("option:selected").val();
+                    // let network_type = parent.find("select[name='network_type']").children("option:selected").val();
+                    // let lang = parent.find("select[name='lang']").children("option:selected").val();
                     let applications = parent.find("select[name='applications']").children("option:selected").val();
-                    var specs = "{'device_color': " + color + ", 'lock_status': " + lock_status +
+                    var specs = "{'device_color': " + color + ", 'device_lock_status': " + lock_status +
                         ", 'device_logo': " + logo + ", 'device_charger': " + charger +
-                        ", 'device_network_type': " + network_type + ", 'device_lang': " + lang +
                         ", 'device_applications': " + applications + "}";
                 }
 
@@ -86,6 +94,7 @@ publicWidget.registry.WebsiteSale.include({
                                 wSaleUtils.updateCartNavBar(data);
                                 link_button.html(link_button_content);
                                 parent.find('.cart_item_qty').val(data.quantity).html(data.quantity);
+                                qty_input_container.prop('max', max_qty_input - qty_input)
                             });
 
                     } else {
