@@ -99,7 +99,7 @@
 }
 
 .grade_stock, .grade_price {
-    font-size: 12px;
+    font-size: 0.66rem;
     font-weight: 500;
     margin-right: 5px;
 }
