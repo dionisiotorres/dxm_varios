@@ -20,7 +20,8 @@
 
 
                 <div class="oct_stock_qty"
-                     t-attf-data-inventory-policy="#{product.inventory_availability}">
+                     t-attf-data-inventory-policy="#{product.inventory_availability}"
+                     t-attf-data-inventory-threshold="#{product.available_threshold}">
                     <i class="fa fa-cubes"/>
                     Total Stock:
                     <span class="oct_product_qty">
@@ -157,7 +158,8 @@
             <t t-if="mobile_sale">
 
                 <div class="oct_stock_qty"
-                     t-attf-data-inventory-policy="#{product.inventory_availability}">
+                     t-attf-data-inventory-policy="#{product.inventory_availability}"
+                     t-attf-data-inventory-threshold="#{product.available_threshold}">
                     <i class="fa fa-cubes"/>
                     Total Stock:
                     <span class="oct_product_total_qty">
