@@ -28,8 +28,10 @@ publicWidget.registry.WebsiteSale.include({
         // Add product specification options
         if ($('#products_grid').length > 0){
             var parent = $(ev.currentTarget).parents('.o_wsale_product_information');
+            var specs_qty_container = parent.find('.specs_quant');
         } else {
             var parent = $(ev.currentTarget).parents('#product_details');
+            var specs_qty_container = parent.find('.oct_product_qty');
         }
 
         var website_id = $("html").data('website-id') | 0;
@@ -42,6 +44,14 @@ publicWidget.registry.WebsiteSale.include({
             var qty_input_container = parent.find('input[name="add_qty"]');
             var max_qty_input = parseInt(parent.find('input[name="add_qty"]').prop('max'));
             var qty_input = parseInt(parent.find('input[name="add_qty"]').val());
+
+            var specs_cart_qty = parent.find('.specs_cart_qty');
+
+            var specs_cart_qty_container = parent.find('.specs_cart_qty_container');
+
+            var current_cart_qty = parseInt(specs_cart_qty.text());
+            var current_available_qty = parseInt(specs_qty_container.text());
+            console.log(current_cart_qty, current_available_qty)
 
             var self = this;
 
@@ -93,8 +103,13 @@ publicWidget.registry.WebsiteSale.include({
                             }).then(function (data) {
                                 wSaleUtils.updateCartNavBar(data);
                                 link_button.html(link_button_content);
+
                                 parent.find('.cart_item_qty').val(data.quantity).html(data.quantity);
                                 qty_input_container.prop('max', max_qty_input - qty_input)
+                                specs_cart_qty.html(current_cart_qty + qty_input)
+                                specs_qty_container.html(current_available_qty - qty_input)
+                                specs_cart_qty_container.removeClass('oct_hidden')
+
                             });
 
                     } else {

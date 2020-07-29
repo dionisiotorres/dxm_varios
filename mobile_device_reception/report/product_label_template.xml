@@ -42,8 +42,8 @@
                 <div style="width: 100%; height: 120px; display: inline-block; font-size: 18px; clear: both;">
 
                     <strong t-field="line.product_id.name"
-                            style="text-align: center; width: 500px; margin-bottom: 5px; display: inline-block;
-                            border-bottom: 1px solid black; padding: 2px; margin-left: -10px;"/>
+                            style="text-align: left; width: 600px; margin: 5px; display: inline-block;
+                            border-bottom: 1px solid black; padding: 2px; margin-left: -5px; font-size: 14px;"/>
 
                     <br/>
                     <div style="width: 50%; float: left;">
@@ -191,14 +191,35 @@
                         </t>
 
                     </div>
-                    <div style="display: block; width: 100%; float: left; text-align: center; margin-top: 10px;">
+
+
+                </div>
+
+
+
+                <div style="display: block; width: 95%; float: left; text-align: center;">
+
+                    <div style="display: block; width: 50%; float: left; text-align: center; margin-top: 5px;">
                         <img t-att-src="web_base_url + '/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' %
-                ('Code128', line.lot_id.name, 250, 50)" style="width: 250px; height: 50px;"/>
+                        ('Code128', line.lot_id.name, 200, 50)" style="width: 200px; height: 50px;"/>
                         <br/>
-                        <span t-field="line.lot_id.name"/>
+                        <div style="width: 100%; display: block; text-align: center; margin-top: 5px;">
+                            <span t-field="line.lot_id.name"/>
+                        </div>
+                    </div>
+
+                    <div style="display: block; width: 50%; float: left; text-align: center; margin-top: 5px;">
+                        <img t-att-src="web_base_url + '/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' %
+                        ('Code128', line.lot_id.x_studio_lot_sku, 200, 50)" style="width: 200px; height: 50px;"/>
+                        <br/>
+                        <div style="width: 100%; display: block; text-align: center; margin-top: 5px;">
+                            <span t-field="line.lot_id.x_studio_lot_sku"/>
+                        </div>
                     </div>
 
                 </div>
+
+
 
             </t>
         </t>
@@ -221,11 +242,14 @@
 <!--        <t t-call="web.basic_layout">-->
             <t t-set="doc" t-value="doc.with_context(lang=doc.env.context.get('lang'))" />
             <t t-foreach="doc" t-as="lot">
+
+
+
                 <div style="width: 100%; height: 120px; display: inline-block; font-size: 18px; clear: both;">
 
                     <strong t-field="lot.product_id.name"
-                            style="text-align: center; width: 500px; margin-bottom: 5px; display: inline-block;
-                            border-bottom: 1px solid black; padding: 2px; margin-left: -10px;"/>
+                            style="text-align: left; width: 600px; margin: 5px; display: inline-block;
+                            border-bottom: 1px solid black; padding: 2px; margin-left: -5px; font-size: 14px;"/>
 
                     <br/>
                     <div style="width: 50%; float: left;">
@@ -373,11 +397,30 @@
                         </t>
 
                     </div>
-                    <div style="display: block; width: 100%; float: left; text-align: center; margin-top: 10px;">
+
+
+                </div>
+
+
+
+                <div style="display: block; width: 95%; float: left; text-align: center;">
+
+                    <div style="display: block; width: 50%; float: left; text-align: center; margin-top: 5px;">
                         <img t-att-src="web_base_url + '/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' %
-                ('Code128', lot.name, 250, 50)" style="width: 250px; height: 50px;"/>
+                        ('Code128', lot.name, 200, 50)" style="width: 200px; height: 50px;"/>
                         <br/>
-                        <span t-field="lot.name"/>
+                        <div style="width: 100%; display: block; text-align: center; margin-top: 5px;">
+                            <span t-field="lot.name"/>
+                        </div>
+                    </div>
+
+                    <div style="display: block; width: 50%; float: left; text-align: center; margin-top: 5px;">
+                        <img t-att-src="web_base_url + '/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' %
+                        ('Code128', lot.x_studio_lot_sku, 200, 50)" style="width: 200px; height: 50px;"/>
+                        <br/>
+                        <div style="width: 100%; display: block; text-align: center; margin-top: 5px;">
+                            <span t-field="lot.x_studio_lot_sku"/>
+                        </div>
                     </div>
 
                 </div>
