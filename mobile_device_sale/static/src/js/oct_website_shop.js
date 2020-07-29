@@ -353,18 +353,11 @@ odoo.define('oct_website_sale.sale', function (require) {
 
 
                 if (inventory_police === 'always'){
-                    qty_input.prop('max', 1000)
-                    if (available_quant === 0){
-                        quant_paragraph.find('.specs_quant').html('On Demand')
-                    } else {
-                        quant_paragraph.find('.specs_quant').html(available_quant)
-                    }
-
-
-
+                    qty_input.prop('max', available_quant)
+                    quant_paragraph.find('.specs_quant').html(available_quant)
                 } else if (inventory_police === 'never'){
 
-                    qty_input.prop('max', available_quant)
+                    qty_input.prop('max', 1000)
                     if (available_quant !== 0){
                         quant_paragraph.find('.specs_quant').html(available_quant)
                     } else {
