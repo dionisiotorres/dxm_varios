@@ -267,7 +267,7 @@ class SaleOrder(models.Model):
         option_lines = self.order_line.filtered(lambda l: l.linked_line_id.id == order_line.id)
         # Specs handler
         if len(kwargs) > 1:
-            network = lang = charger = logo = lock_status = apps = 0
+            color = network = lang = charger = logo = lock_status = apps = 0
             existing_specs = order_line.line_specs_ids
             if 'specs' in kwargs.keys():
                 _logger.info("SPECS DICT: %r", kwargs.get('specs'))
@@ -287,6 +287,8 @@ class SaleOrder(models.Model):
                         lock_status = int(specs[key]) if specs[key] != '0' else 0
                     if key == 'device_applications':
                         apps = int(specs[key]) if specs[key] != '0' else 0
+            if 'color' in kwargs.keys():
+                color = int(kwargs.get('color'))
 
             specs_values = {
                 'sale_order_line_id': order_line.id,

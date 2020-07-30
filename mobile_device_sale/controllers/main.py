@@ -109,11 +109,11 @@ class WebsiteSale(WebsiteSale):
         specs_filter = ''
         if kwargs['device_grade'] != '0':
             specs_filter = 'l.x_studio_revision_grado.id == %s' % int(kwargs['device_grade'])
-        if kwargs['device_color'] != '0':
-            if len(specs_filter) > 0:
-                specs_filter += operand + 'l.x_studio_color.id == %s' % int(kwargs['device_color'])
-            else:
-                specs_filter += 'l.x_studio_color.id == %s' % int(kwargs['device_color'])
+        # if kwargs['device_color'] != '0':
+        #     if len(specs_filter) > 0:
+        #         specs_filter += operand + 'l.x_studio_color.id == %s' % int(kwargs['device_color'])
+        #     else:
+        #         specs_filter += 'l.x_studio_color.id == %s' % int(kwargs['device_color'])
         # if kwargs['device_network_type'] != '0':
         #     if len(specs_filter) > 0:
         #         specs_filter += operand + 'l.x_studio_red.id == %s' % int(kwargs['device_network_type'])
@@ -404,13 +404,28 @@ class WebsiteSale(WebsiteSale):
         if sale_order:
             _logger.info("SALE ORDER IN GET PRODUCT INFO: %r", sale_order)
             cart_qty = self.get_quant_in_cart(sale_order, product_obj, grade=grade, color=color,
-                                              lock_status=lock_status, logo=logo, charger=charger, applications=0)
+                                              lock_status=lock_status, logo=logo, charger=charger,
+                                              applications=applications)
                                                 # network_type=network_type, lang=0
+
+        quant_colors = self.get_quant_colors(product_obj.product_variant_id, grade=grade)
+        result = {}
+        color_data = []
+        for color_id in quant_colors:
+            color_quantity = self.get_product_quants(product_obj.product_variant_id,
+                                                     grade=int(grade),
+                                                     color=color_id.id,
+                                                     lock_status=int(lock_status),
+                                                     logo=int(logo),
+                                                     charger=int(charger),
+                                                     applications=int(applications))
+            color_data.append((color_id.id, color_id.x_color_index, color_id.x_name, color_quantity))
+        result.update({'color_data': color_data})
 
         if product_quants < cart_qty:
             cart_qty = product_quants
 
-        return {'product_id': product_id, 'product_quants': product_quants, 'cart_qty': cart_qty}
+        return {'product_id': product_id, 'product_quants': product_quants, 'cart_qty': cart_qty, 'color': result}
 
     def normalize_filter_specs_names(self, **kwargs):
 
@@ -484,6 +499,7 @@ class WebsiteSale(WebsiteSale):
     @http.route(['''/shop/get_product_info/grid'''], type='json', auth="user", website=True)
     def get_product_info_grid(self, product_id=None, grade=None, specs=None):
         _logger.info("GET INFO PRODUCT ID: %r", product_id)
+        _logger.info("SPECS FILTER VALUES: %r", specs)
         if specs:
             specs_dict = ast.literal_eval(specs)
         else:
@@ -528,10 +544,12 @@ class WebsiteSale(WebsiteSale):
             quant_colors = self.get_quant_colors(product_obj.product_variant_id, grade=grade)
             grade_quant = self.get_product_quants(product_obj.product_variant_id, grade=grade, **specs_filter)
             color_data = []
+            if 'color' in specs_filter.keys():
+                specs_filter.pop('color')
             for color in quant_colors:
                 color_quantity = self.get_product_quants(product_obj.product_variant_id,
                                                          grade=int(grade),
-                                                         color=color.id)
+                                                         color=color.id, **specs_filter)
                 color_data.append((color.id, color.x_color_index, color.x_name, color_quantity))
             result.update({'color_data': color_data})
             if grade_quant < cart_qty:
@@ -599,6 +617,7 @@ class WebsiteSale(WebsiteSale):
         stock_location = warehouse_id.lot_stock_id
         _logger.info("PRODUCT_ID: %s, LOCATION: %s" % (product_id, stock_location))
         all_product_quants = request.env['stock.quant'].sudo()._gather(product_id, stock_location)
+        _logger.info("ALL QUANTS: %r", all_product_quants)
         # reserved_filter = 'q.reserved_quantity == 1'
         lot_filter = 'q.reserved_quantity == 0 and q.quantity > 0'
         operand = " and "
