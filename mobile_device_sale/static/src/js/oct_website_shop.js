@@ -166,7 +166,7 @@ odoo.define('oct_website_sale.sale', function (require) {
 
                                 if (parseInt(stock) > available_threshold) {
                                     console.log("STOCK > AVAILABLE")
-                                    stock_container.html("Stock Available");
+                                    stock_container.html("Available");
                                 }
                                 grade_label.find('input').prop('max', stock);
                                 if (stock === 0){
@@ -315,7 +315,7 @@ odoo.define('oct_website_sale.sale', function (require) {
                 var parent_container = $(this).parents('#product_details');
                 var product_id = $("input[name='product_id']").val();
             }
-            var inventory_police = parent_container.find('.oct_stock_qty').data('inventory-policy')
+            var inventory_policy = parent_container.find('.oct_stock_qty').data('inventory-policy')
 
             var available_threshold = parseInt(parent_container.find('.oct_stock_qty').data('inventory-threshold'));
             var specs = parent_container.find('.specs_selected').data('specs');
@@ -363,6 +363,13 @@ odoo.define('oct_website_sale.sale', function (require) {
                     var color_name = data.color.color_data[index][2];
                     var color_quantity = data.color.color_data[index][3];
 
+                    if (inventory_policy === 'threshold'){
+                        if (color_quantity > available_threshold){
+                            color_quantity = 'Available'
+                        }
+
+                    }
+
                     var html_list = '<li><label class="color_label"><input type="radio" data-qty="'+ color_quantity  +'" name="color" value="'+ color_id + '"/><span class="swatch" style="background-color:' + color_index + ';"></span>' + color_name + ' (' + color_quantity + ')' + '</label></li>'
                     ul_container.append(html_list);
                 }
@@ -381,10 +388,12 @@ odoo.define('oct_website_sale.sale', function (require) {
 
 
 
-                if (inventory_police === 'always'){
+                if (inventory_policy === 'always'){
+
                     qty_input.prop('max', available_quant)
                     quant_paragraph.find('.specs_quant').html(available_quant)
-                } else if (inventory_police === 'never'){
+
+                } else if (inventory_policy === 'never'){
 
                     qty_input.prop('max', 1000)
                     if (available_quant !== 0){
@@ -394,15 +403,13 @@ odoo.define('oct_website_sale.sale', function (require) {
                     }
 
 
-
-
-                } else if (inventory_police === 'threshold'){
+                } else if (inventory_policy === 'threshold'){
                     console.log("THRESHOLD")
 
                     qty_input.prop('max', available_quant)
 
                     if (available_quant > available_threshold){
-                        quant_paragraph.find('.specs_quant').html("Stock Available")
+                        quant_paragraph.find('.specs_quant').html("Available")
 
                     } else  if (available_quant < available_threshold){
                         quant_paragraph.find('.specs_quant').html(available_quant)
@@ -462,6 +469,8 @@ odoo.define('oct_website_sale.sale', function (require) {
             console.log("COLOR: " + color)
 
             var product_id = parent_container.find("input[name='product_id']").val();
+            var inventory_policy = parent_container.find('.oct_stock_qty').data('inventory-policy')
+            var available_threshold = parseInt(parent_container.find('.oct_stock_qty').data('inventory-threshold'));
 
 
 
@@ -481,7 +490,18 @@ odoo.define('oct_website_sale.sale', function (require) {
 
                     var available_quant = data.product_quants - cart_qty
 
-                    specs_quant_container.html(available_quant);
+
+                    if (inventory_policy === 'threshold'){
+                        if (available_quant <= available_threshold){
+                            specs_quant_container.html(available_quant);
+                        } else {
+                            specs_quant_container.html("Available");
+                        }
+
+                    } else {
+                        specs_quant_container.html(available_quant);
+                    }
+
                     // quant_paragraph.removeClass('oct_hidden');
                     console.log("AVAILABLE QUANT.....")
                     console.log(available_quant)
@@ -573,6 +593,13 @@ odoo.define('oct_website_sale.sale', function (require) {
                     var color_name = data.color.color_data[index][2];
                     var color_quantity = data.color.color_data[index][3];
 
+                    if (inventory_policy === 'threshold'){
+                        if (color_quantity > available_threshold){
+                            color_quantity = 'Available'
+                        }
+
+                    }
+
                     var html_list = '<li><label class="color_label"><input type="radio" data-qty="'+ color_quantity  +'" name="color" value="'+ color_id + '"/><span class="swatch" style="background-color:' + color_index + ';"></span>' + color_name + ' (' + color_quantity + ')' + '</label></li>'
                     ul_container.append(html_list);
                 }
@@ -604,7 +631,7 @@ odoo.define('oct_website_sale.sale', function (require) {
                 } else if (inventory_policy === 'threshold') {
 
                     if (available_quant > available_threshold){
-                        $(quant_container).html("Stock Available");
+                        $(quant_container).html("Available");
                     } else if (available_quant < available_threshold) {
                         $(quant_container).html(available_quant);
                     }
