@@ -330,7 +330,7 @@ class SaleOrderLine(models.Model):
 
         if 'specs' in kwargs.keys():
             specs_dict = ast.literal_eval(kwargs['specs'])
-            kwargs['color'] = specs_dict['device_color']
+            # kwargs['color'] = specs_dict['device_color']
             kwargs['lock_status'] = specs_dict['device_lock_status']
             kwargs['logo'] = specs_dict['device_logo']
             kwargs['charger'] = specs_dict['device_charger']

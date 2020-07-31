@@ -146,7 +146,7 @@ publicWidget.registry.WebsiteSale.include({
 
 
 
-                // if (qty_input <= max_qty_input){
+                if (qty_input <= max_qty_input){
                     ajax.jsonRpc("/shop/cart/update_json", 'call', {
                             product_id: parseInt(parent.find('input[name="product_id"]').val()),
                             add_qty: qty_input
@@ -154,9 +154,11 @@ publicWidget.registry.WebsiteSale.include({
                             wSaleUtils.updateCartNavBar(data);
                             link_button.html(link_button_content);
                             parent.find('.cart_item_qty').val(data.quantity).html(data.quantity);
+                            qty_input_container.prop('max', max_qty_input - qty_input)
+                            qty_input_container.prop('max', max_qty_input - qty_input)
                         });
 
-                /*} else {
+                } else {
                     var dialog = new Dialog(this, {
                     size: 'medium',
                     dialogClass: 'o_act_window',
@@ -166,7 +168,7 @@ publicWidget.registry.WebsiteSale.include({
                     dialog.open();
                     link_button.html(link_button_content);
                 }
-*/
+
 
 
 

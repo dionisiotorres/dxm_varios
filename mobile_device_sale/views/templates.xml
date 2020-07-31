@@ -179,6 +179,40 @@
                     <span itemprop="priceCurrency" style="display:none;" t-esc="website.currency_id.name"/>
                 </div>
 
+                <div class="oct_stock_qty"
+                     t-attf-data-inventory-policy="#{product.inventory_availability}"
+                     t-attf-data-inventory-threshold="#{product.available_threshold}">
+                    <i class="fa fa-cubes"/>
+                    Stock:
+                    <span class="oct_product_qty">
+
+                        <t t-if="product.inventory_availability == 'threshold'">
+                            <t t-if="product.qty_available &gt; product.available_threshold">
+                                Available
+                            </t>
+                            <t t-if="product.qty_available &lt;= product.available_threshold">
+                                <t t-esc="int(product.qty_available)"/>
+                            </t>
+                        </t>
+                        <t t-if="product.inventory_availability == 'never'">
+
+                            <t t-if="product.qty_available &gt; 0">
+                                <t t-esc="int(product.qty_available)"/>
+                            </t>
+                            <t t-if="product.qty_available &lt;= 0">
+                                On Demand
+                            </t>
+
+                        </t>
+                        <t t-if="product.inventory_availability == 'always'">
+
+                            <t t-esc="int(product.qty_available)"/>
+
+                        </t>
+
+                    </span>
+                </div>
+
             </t>
 
 
@@ -365,6 +399,41 @@
                 </div>
 
 
+            </t>
+            <t t-else="">
+                <div class="oct_stock_qty"
+                     t-attf-data-inventory-policy="#{product.inventory_availability}"
+                     t-attf-data-inventory-threshold="#{product.available_threshold}">
+                    <i class="fa fa-cubes"/>
+                    Stock:
+                    <span class="oct_product_qty">
+
+                        <t t-if="product.inventory_availability == 'threshold'">
+                            <t t-if="product.qty_available &gt; product.available_threshold">
+                                Available
+                            </t>
+                            <t t-if="product.qty_available &lt;= product.available_threshold">
+                                <t t-esc="int(product.qty_available)"/>
+                            </t>
+                        </t>
+                        <t t-if="product.inventory_availability == 'never'">
+
+                            <t t-if="product.qty_available &gt; 0">
+                                <t t-esc="int(product.qty_available)"/>
+                            </t>
+                            <t t-if="product.qty_available &lt;= 0">
+                                On Demand
+                            </t>
+
+                        </t>
+                        <t t-if="product.inventory_availability == 'always'">
+
+                            <t t-esc="int(product.qty_available)"/>
+
+                        </t>
+
+                    </span>
+                </div>
             </t>
 
         </xpath>
@@ -947,6 +1016,8 @@
                                     </t>
                                 </t>
                                 <t t-call="website_sale.product_price"/>
+
+
                                 <p t-if="True" class="css_not_available_msg alert alert-warning">This combination does
                                     not exist.
                                 </p>
@@ -960,7 +1031,8 @@
                                         </a>
                                     </div>
                                     <input type="text" class="form-control quantity" data-min="1" name="add_qty"
-                                           t-att-value="add_qty or 1"/>
+                                           t-att-value="add_qty or 1"
+                                           t-attf-max="#{(product.qty_available - product.product_variant_id.cart_qty) if product.inventory_availability != 'never' else 1000}"/>
                                     <div class="input-group-append">
                                         <a t-attf-href="#" class="btn btn-secondary float_left js_add_cart_json"
                                            aria-label="Add one" title="Add one">
