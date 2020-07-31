@@ -141,6 +141,7 @@ label.color_label {
 
 .colors {
     margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 .colors ul{list-style:none; padding:0; margin: 0;}

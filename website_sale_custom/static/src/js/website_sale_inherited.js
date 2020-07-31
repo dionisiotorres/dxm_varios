@@ -28,8 +28,10 @@ publicWidget.registry.WebsiteSale.include({
         // Add product specification options
         if ($('#products_grid').length > 0){
             var parent = $(ev.currentTarget).parents('.o_wsale_product_information');
+            var specs_qty_container = parent.find('.specs_quant');
         } else {
             var parent = $(ev.currentTarget).parents('#product_details');
+            var specs_qty_container = parent.find('.oct_product_qty');
         }
 
         var website_id = $("html").data('website-id') | 0;
@@ -43,6 +45,14 @@ publicWidget.registry.WebsiteSale.include({
             var max_qty_input = parseInt(parent.find('input[name="add_qty"]').prop('max'));
             var qty_input = parseInt(parent.find('input[name="add_qty"]').val());
 
+            var specs_cart_qty = parent.find('.specs_cart_qty');
+
+            var specs_cart_qty_container = parent.find('.specs_cart_qty_container');
+
+            var current_cart_qty = parseInt(specs_cart_qty.text());
+            var current_available_qty = parseInt(specs_qty_container.text());
+            console.log(current_cart_qty, current_available_qty)
+
             var self = this;
 
             var website_for_sell = data.website_mobile_sell;
@@ -53,16 +63,16 @@ publicWidget.registry.WebsiteSale.include({
 
 
 
-                let grade = parent.find("input:radio[name=optradio]:checked").val();
-                // let color = parent.find("input:radio[name=color]:checked").val();
+                var grade = parent.find("input:radio[name=optradio]:checked").val();
+                var color = parent.find("input:radio[name=color]:checked").val();
 
                 if ($('#products_grid').length > 0){
                     var specs = parent.find('.specs_selected').data('specs');
                 } else {
-                    let color = parent.find("select[name='color']").children("option:selected").val();
-                    let lock_status = parent.find("select[name='lock_status']").children("option:selected").val();
-                    let logo = parent.find("select[name='logo']").children("option:selected").val();
-                    let charger = parent.find("select[name='charger']").children("option:selected").val();
+                    //var color = parent.find("select[name='color']").children("option:selected").val();
+                    var lock_status = parent.find("select[name='lock_status']").children("option:selected").val();
+                    var logo = parent.find("select[name='logo']").children("option:selected").val();
+                    var charger = parent.find("select[name='charger']").children("option:selected").val();
                     // let network_type = parent.find("select[name='network_type']").children("option:selected").val();
                     // let lang = parent.find("select[name='lang']").children("option:selected").val();
                     let applications = parent.find("select[name='applications']").children("option:selected").val();
@@ -81,20 +91,28 @@ publicWidget.registry.WebsiteSale.include({
 
                 //var $card = $(ev.currentTarget).closest('.card');
 
-                if (grade){
+                if (grade && color){
 
                     if (qty_input <= max_qty_input){
+
+
+
                         ajax.jsonRpc("/shop/cart/update_json", 'call', {
                                 product_id: parseInt(parent.find('input[name="product_id"]').val()),
                                 add_qty: qty_input,
                                 grade: grade,
-                                // color: color,
+                                color: color,
                                 specs: specs
                             }).then(function (data) {
                                 wSaleUtils.updateCartNavBar(data);
                                 link_button.html(link_button_content);
+
                                 parent.find('.cart_item_qty').val(data.quantity).html(data.quantity);
                                 qty_input_container.prop('max', max_qty_input - qty_input)
+                                specs_cart_qty.html(current_cart_qty + qty_input)
+                                specs_qty_container.html(current_available_qty - qty_input)
+                                specs_cart_qty_container.removeClass('oct_hidden')
+
                             });
 
                     } else {
@@ -114,7 +132,7 @@ publicWidget.registry.WebsiteSale.include({
                         size: 'medium',
                         dialogClass: 'o_act_window',
                         title: _t("Missing Requirements"),
-                        $content: $(_t("<span class='text-center' style='padding: 2rem;'>Please, select grade to add this product to your cart. <br/> </span>"))
+                        $content: $(_t("<span class='text-center' style='padding: 2rem;'>Please, select grade and color to add this product to your cart. <br/> </span>"))
                     });
                     dialog.open();
                     link_button.html(link_button_content);

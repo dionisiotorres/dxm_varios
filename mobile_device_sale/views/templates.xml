@@ -25,7 +25,22 @@
                     <i class="fa fa-cubes"/>
                     Total Stock:
                     <span class="oct_product_qty">
-                        <t t-esc="int(product.qty_available)"/>
+
+                        <t t-if="product.inventory_availability == 'threshold'">
+                            <t t-if="product.stock_qty &gt; product.available_threshold">
+                                Stock Available
+                            </t>
+                            <t t-if="product.stock_qty &lt;= product.available_threshold">
+                                <t t-esc="int(product.stock_qty)"/>
+                            </t>
+                        </t>
+                        <t t-if="product.inventory_availability == 'never'">
+                            <t t-esc="int(product.stock_qty)"/>
+                        </t>
+                        <t t-if="product.inventory_availability == 'always'">
+                            <t t-esc="int(product.stock_qty)"/>
+                        </t>
+
                     </span>
                 </div>
 
@@ -67,16 +82,34 @@
 
                     <div class="specs_selected col-lg-10 col-md-10" t-att-data-specs="specs_post">
                         <span class="specs_title">Product Specifications</span>
+
+
+                        <span class="attr_line">
+
+                            <div class="colors oct_hidden">
+                              <ul>
+                                <!--<li>
+                                  <label>
+                                    <input type="radio" name="color" value="black"/>
+                                    <span class="swatch" style="background-color:#222"></span> Black
+                                  </label>
+                                </li>-->
+                              </ul>
+                            </div>
+
+                        </span>
+
+
                         <t t-if="active_specs">
                             <t t-foreach="specs_post" t-as="specs">
                                 <t t-if="specs_post.get(specs) != '0' and specs not in ['brand', 'device_capacity', 'device_model']">
                                     <span t-att-class="'color_line' if specs == 'device_color' else 'attr_line'">
 
-                                        <t t-if="specs == 'device_color' and specs_post.get(specs) != '0'">
+                                       <!-- <t t-if="specs == 'device_color' and specs_post.get(specs) != '0'">
                                             <span class="color_square"
                                                   t-att-style="'background-color:' + device_colors.browse(int(specs_post.get(specs))).x_color_index + ';'"/>
                                             <t t-esc="device_colors.browse(int(specs_post.get(specs))).x_name"/>
-                                        </t>
+                                        </t>-->
 
                                         <!--<t t-if="specs == 'device_network_type' and specs_post.get(specs) != '0'">
                                             <strong>Network:</strong>
@@ -163,7 +196,23 @@
                     <i class="fa fa-cubes"/>
                     Total Stock:
                     <span class="oct_product_total_qty">
-                        <t t-esc="int(product.qty_available)"/>
+
+                        <t t-if="product.inventory_availability == 'threshold'">
+                            <t t-if="product.stock_qty &gt; product.available_threshold">
+                                Stock Available
+                            </t>
+                            <t t-if="product.stock_qty &lt;= product.available_threshold">
+                                <t t-esc="int(product.stock_qty)"/>
+                            </t>
+                        </t>
+                        <t t-if="product.inventory_availability == 'never'">
+                            <t t-if="product.stock_qty &gt; product.available_threshold">
+                                On Demand
+                            </t>
+                        </t>
+                        <t t-if="product.inventory_availability == 'always'">
+                            <t t-esc="int(product.stock_qty)"/>
+                        </t>
                     </span>
                 </div>
 
@@ -205,6 +254,21 @@
 
                     <div t-attf-class="oct_filter_wrapper col-xs-12 #{'col-lg-8 col-md-8' if layout_mode != 'grid' else 'col-lg-12 col-md-12'}">
 
+                        <span class="attr_line">
+
+                            <div class="colors oct_hidden">
+                              <ul>
+                                <!--<li>
+                                  <label>
+                                    <input type="radio" name="color" value="black"/>
+                                    <span class="swatch" style="background-color:#222"></span> Black
+                                  </label>
+                                </li>-->
+                              </ul>
+                            </div>
+
+                        </span>
+
                         <div class="oct_filter_container">
                             <span class="oct_filter_title">Select device specifications
                                 <span class="oct_selector_icon">
@@ -215,7 +279,7 @@
 
                             <div t-attf-class="#{'oct_filters_list_mode' if layout_mode != 'grid' else 'oct_filters_grid_mode'} oct_hidden oct_filters">
 
-                                <select class="w-auto o_input o_group_selector oct_color" name="color">
+                                <!--<select class="w-auto o_input o_group_selector oct_color" name="color">
                                     <option value="0">Select a Color</option>
                                     <t t-foreach="device_colors" t-as="color">
                                         <option t-att-value="color.id">
@@ -223,7 +287,7 @@
                                         </option>
                                     </t>
                                 </select>
-                                <br/>
+                                <br/>-->
 
                                 <select class="w-auto o_input o_group_selector oct_lock_status" name="lock_status">
                                     <option value="0">Select a Lock Status</option>
@@ -660,7 +724,7 @@
                                 </select>
                             </li>
 
-                            <li class="nav-item">
+                            <!--<li class="nav-item">
                                 <div>
                                     <strong>Color</strong>
                                 </div>
@@ -673,7 +737,7 @@
                                         </option>
                                     </t>
                                 </select>
-                            </li>
+                            </li>-->
 
                             <!--<li class="nav-item">
                                 <div>
