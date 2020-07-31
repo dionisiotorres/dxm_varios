@@ -166,7 +166,7 @@ odoo.define('oct_website_sale.sale', function (require) {
 
                                 if (parseInt(stock) > available_threshold) {
                                     console.log("STOCK > AVAILABLE")
-                                    stock_container.html("Stock Available");
+                                    stock_container.html("Available");
                                 }
                                 grade_label.find('input').prop('max', stock);
                                 if (stock === 0){
@@ -315,11 +315,21 @@ odoo.define('oct_website_sale.sale', function (require) {
                 var parent_container = $(this).parents('#product_details');
                 var product_id = $("input[name='product_id']").val();
             }
-            var inventory_police = parent_container.find('.oct_stock_qty').data('inventory-policy')
+            var inventory_policy = parent_container.find('.oct_stock_qty').data('inventory-policy')
 
             var available_threshold = parseInt(parent_container.find('.oct_stock_qty').data('inventory-threshold'));
             var specs = parent_container.find('.specs_selected').data('specs');
             var quant_paragraph =  parent_container.find('.specs_paragraph');
+
+            // Color selector grid
+            var load_color_spinner = $("<i class=\"fa fa-spinner fa-spin\"/> <span>Loading colors...</span>");
+            var colors_container = parent_container.find(".colors");
+            var ul_container = colors_container.find("ul");
+            ul_container.html(load_color_spinner);
+            colors_container.removeClass('oct_hidden');
+
+            var no_specs_selected_msg = parent_container.find('.no_specs');
+
 
             ajax.jsonRpc('/shop/get_product_info/grid', 'call', {
                 product_id: product_id,
@@ -341,6 +351,32 @@ odoo.define('oct_website_sale.sale', function (require) {
                 var specs_cart_qty = specs_cart_container.find('.specs_cart_qty');
 
 
+                // Color selector grid
+                ul_container.html("");
+                for (var index in data.color.color_data){
+
+                    console.log(data.color.color_data[index][0]);
+                    console.log(data.color.color_data[index][1]);
+
+                    var color_id = data.color.color_data[index][0];
+                    var color_index = data.color.color_data[index][1];
+                    var color_name = data.color.color_data[index][2];
+                    var color_quantity = data.color.color_data[index][3];
+
+                    if (inventory_policy === 'threshold'){
+                        if (color_quantity > available_threshold){
+                            color_quantity = 'Available'
+                        }
+
+                    }
+
+                    var html_list = '<li><label class="color_label"><input type="radio" data-qty="'+ color_quantity  +'" name="color" value="'+ color_id + '"/><span class="swatch" style="background-color:' + color_index + ';"></span>' + color_name + ' (' + color_quantity + ')' + '</label></li>'
+                    ul_container.append(html_list);
+                }
+
+                no_specs_selected_msg.hide();
+
+
 
                 if (data.cart_qty > 0){
                     specs_cart_qty.html(data.cart_qty);
@@ -352,10 +388,12 @@ odoo.define('oct_website_sale.sale', function (require) {
 
 
 
-                if (inventory_police === 'always'){
+                if (inventory_policy === 'always'){
+
                     qty_input.prop('max', available_quant)
                     quant_paragraph.find('.specs_quant').html(available_quant)
-                } else if (inventory_police === 'never'){
+
+                } else if (inventory_policy === 'never'){
 
                     qty_input.prop('max', 1000)
                     if (available_quant !== 0){
@@ -365,15 +403,13 @@ odoo.define('oct_website_sale.sale', function (require) {
                     }
 
 
-
-
-                } else if (inventory_police === 'threshold'){
+                } else if (inventory_policy === 'threshold'){
                     console.log("THRESHOLD")
 
                     qty_input.prop('max', available_quant)
 
                     if (available_quant > available_threshold){
-                        quant_paragraph.find('.specs_quant').html("Stock Available")
+                        quant_paragraph.find('.specs_quant').html("Available")
 
                     } else  if (available_quant < available_threshold){
                         quant_paragraph.find('.specs_quant').html(available_quant)
@@ -389,34 +425,109 @@ odoo.define('oct_website_sale.sale', function (require) {
 
         }); // END PRODUCT SPECIFICATIONS HANDLER
 
-        // Colors handler
-        /*$(document).on('change', '.colors', function () {
-
+        // Colors handler grid
+        $(document).on('change', '.colors', function (ev) {
+            ev.stopPropagation();
             // vars on product grid or product detail
             if ($('#products_grid').length > 0){
                 var parent_container = $(this).parents('.o_wsale_product_information');
                 var qty_input = parent_container.find('.input_add_qty');
+                var specs = parent_container.find('.specs_selected').data('specs');
+                var specs_data = process_specs(specs);
+                var specs_quant_container = parent_container.find('.specs_quant');
+                var quant_paragraph =  parent_container.find('.specs_paragraph');
             } else { // vars on product detail
                 var parent_container = $(this).parents('#product_details');
                 var qty_input = parent_container.find('.quantity');
+
+                var lock_status = parent_container.find("select[name='lock_status']").children("option:selected").val();
+                var logo = parent_container.find("select[name='logo']").children("option:selected").val();
+                var charger = parent_container.find("select[name='charger']").children("option:selected").val();
+                var applications = parent_container.find("select[name='applications']").children("option:selected").val();
+                var specs_data = {
+                    lock_status: lock_status,
+                    logo: logo,
+                    charger: charger,
+                    applications: applications}
+                var specs_quant_container = parent_container.find('.oct_product_qty');
+                var quant_paragraph =  parent_container.find('.quant_specs_paragraph');
+
             }
 
             // parent_container.find(".js_add_cart_update").show();
             // parent_container.find(".o_wsale_product_btn").show();
 
-            var max_color_qty = $(this).find("input:radio[name=color]:checked").data('qty');
+            // var max_color_qty = $(this).find("input:radio[name=color]:checked").data('qty');
+            //
+            // console.log(max_color_qty);
+            // qty_input.prop('max', max_color_qty)
 
-            console.log(max_color_qty);
-            qty_input.prop('max', max_color_qty)
+            console.log("COLOR CHANGED.....")
+            var grade = parent_container.find("input:radio[name=optradio]:checked").val();
+            console.log("GRADE: " + grade);
+            var color = parent_container.find("input:radio[name=color]:checked").val();
+            console.log("COLOR: " + color)
 
-        }); // END Colors handler*/
+            var product_id = parent_container.find("input[name='product_id']").val();
+            var inventory_policy = parent_container.find('.oct_stock_qty').data('inventory-policy')
+            var available_threshold = parseInt(parent_container.find('.oct_stock_qty').data('inventory-threshold'));
+
+
+
+            ajax.jsonRpc('/shop/get_product_info', 'call', {
+                product_id: product_id,
+                grade: grade,
+                color: color,
+                lock_status: specs_data.device_lock_status,
+                logo: specs_data.device_logo,
+                charger: specs_data.device_charger,
+                applications: specs_data.device_applications
+
+            }).then(function (data) {
+                if (data) {
+                    console.log(data);
+                    var cart_qty = data.cart_qty;
+
+                    var available_quant = data.product_quants - cart_qty
+
+
+                    if (inventory_policy === 'threshold'){
+                        if (available_quant <= available_threshold){
+                            specs_quant_container.html(available_quant);
+                        } else {
+                            specs_quant_container.html("Available");
+                        }
+
+                    } else {
+                        specs_quant_container.html(available_quant);
+                    }
+
+                    // quant_paragraph.removeClass('oct_hidden');
+                    console.log("AVAILABLE QUANT.....")
+                    console.log(available_quant)
+                    var specs_cart_container = quant_paragraph.find('.specs_cart_qty_container');
+                    var specs_cart_qty = specs_cart_container.find('.specs_cart_qty');
+
+                    if (data.cart_qty > 0){
+                        specs_cart_qty.html(data.cart_qty);
+                        specs_cart_container.removeClass('oct_hidden');
+                    } else {
+                        specs_cart_qty.html(data.cart_qty);
+                        specs_cart_container.addClass('oct_hidden');
+                    }
+
+                    qty_input.prop('max', available_quant)
+                }
+            });
+
+        }); // END Colors handler
 
 
         /* Product Detail specifications handler */
         $(document).on('change', '.oct_grid_variant_selector',function (e) {
             /* select filter values */
             // let grade = $(this).find("select[name='grade']").children("option:selected").val();
-            let color = $(this).find("select[name='color']").children("option:selected").val();
+            // let color = $(this).find("select[name='color']").children("option:selected").val();
             let lock_status = $(this).find("select[name='lock_status']").children("option:selected").val();
             let logo = $(this).find("select[name='logo']").children("option:selected").val();
             let charger = $(this).find("select[name='charger']").children("option:selected").val();
@@ -441,14 +552,22 @@ odoo.define('oct_website_sale.sale', function (require) {
             let grade = parent_container.find("input:radio[name=optradio]:checked").val();
             console.log("GRADE: " + grade)
 
-
-            console.log(parent_container);
             console.log("PRODUCT ID: " + product_id);
 
             let spinner = $("<i class=\"fa fa-spinner fa-spin\"/>");
 
             $(quant_container).html(spinner);
             $(quant_paragraph).removeClass('oct_hidden');
+
+
+            var load_color_spinner = $("<i class=\"fa fa-spinner fa-spin\"/> <span>Loading colors...</span>");
+            var colors_container = parent_container.find(".colors");
+            var ul_container = colors_container.find("ul");
+            ul_container.html(load_color_spinner);
+            colors_container.removeClass('oct_hidden');
+
+            var color = 0;
+
 
             ajax.jsonRpc('/shop/get_product_info', 'call', {
                 product_id: product_id,
@@ -462,6 +581,28 @@ odoo.define('oct_website_sale.sale', function (require) {
                 applications: applications
             }).then(function (data) {
             if (data) {
+
+                ul_container.html("");
+                for (var index in data.color.color_data){
+
+                    console.log(data.color.color_data[index][0]);
+                    console.log(data.color.color_data[index][1]);
+
+                    var color_id = data.color.color_data[index][0];
+                    var color_index = data.color.color_data[index][1];
+                    var color_name = data.color.color_data[index][2];
+                    var color_quantity = data.color.color_data[index][3];
+
+                    if (inventory_policy === 'threshold'){
+                        if (color_quantity > available_threshold){
+                            color_quantity = 'Available'
+                        }
+
+                    }
+
+                    var html_list = '<li><label class="color_label"><input type="radio" data-qty="'+ color_quantity  +'" name="color" value="'+ color_id + '"/><span class="swatch" style="background-color:' + color_index + ';"></span>' + color_name + ' (' + color_quantity + ')' + '</label></li>'
+                    ul_container.append(html_list);
+                }
 
                 console.log("DATA FROM CONTROLLER")
                 console.log(data);
@@ -490,7 +631,7 @@ odoo.define('oct_website_sale.sale', function (require) {
                 } else if (inventory_policy === 'threshold') {
 
                     if (available_quant > available_threshold){
-                        $(quant_container).html("Stock Available");
+                        $(quant_container).html("Available");
                     } else if (available_quant < available_threshold) {
                         $(quant_container).html(available_quant);
                     }
@@ -680,6 +821,10 @@ odoo.define('oct_website_sale.sale', function (require) {
             $(this).find(".oct_stock_qty").addClass("oct_hidden");
             $(this).find(".js_add_cart_update").addClass("oct_hidden_important");
         }*/
+
+        function process_specs(specs_string) {
+            return JSON.parse(specs_string.replace(/'/g,"\""))
+        }
 
     }) // END DOCUMENT READY
 
