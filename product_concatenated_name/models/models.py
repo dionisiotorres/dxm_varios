@@ -10,7 +10,7 @@ class ProductTemplate(models.Model):
     _inherit = "product.template"
 
     @api.onchange('product_brand_id', 'x_studio_capacidad_de_almacenamiento', 'x_studio_modelo',
-                  'x_studio_part_number', 'categ_id', 'x_studio_condition')
+                  'x_studio_part_number', 'categ_id', 'x_studio_condition','x_studio_memoria_ram')
     def change_product_name(self):
         _logger.info("CHANGED PARAMETER")
         if self.categ_id.name == 'Teléfonos':
@@ -30,6 +30,12 @@ class ProductTemplate(models.Model):
             condition = self.x_studio_condition or ''
             if condition:
                 name += ' / ' + condition
+
+            ram = self.x_studio_memoria_ram
+            if ram:
+                name += ' / ' + ram
+
+
             self['name'] = name
 
     @api.model
@@ -51,6 +57,8 @@ class ProductTemplate(models.Model):
                 name += ' / ' + capacity
             if vals['x_studio_condition']:
                 name += ' / ' + vals['x_studio_condition']
+            if vals.get('x_studio_memoria_ram',False):
+                name += ' / ' + vals['x_studio_memoria_ram']
             vals['name'] = name
 
         res = super(ProductTemplate, self).create(vals)
@@ -90,6 +98,13 @@ class ProductTemplate(models.Model):
                     name += ' / ' + vals['x_studio_condition']
                 elif self.x_studio_condition:
                     name += ' / ' + self.x_studio_condition
+
+
+                if 'x_studio_memoria_ram' in vals.keys() and vals['x_studio_memoria_ram']:
+                    name += ' / ' + vals['x_studio_memoria_ram']
+                elif self.x_studio_memoria_ram:
+                    name += ' / ' + self.x_studio_memoria_ram
+
 
                 vals['name'] = name
 
