@@ -58,7 +58,8 @@ class ProductTemplate(models.Model):
             if vals['x_studio_condition']:
                 name += ' / ' + vals['x_studio_condition']
             if vals.get('x_studio_memoria_ram',False):
-                name += ' / ' + vals['x_studio_memoria_ram']
+                x_studio_memoria_ram = self.env['x_memoria.ram'].browse(vals['x_studio_memoria_ram']).name
+                name += ' / ' + x_studio_memoria_ram
             vals['name'] = name
 
         res = super(ProductTemplate, self).create(vals)
@@ -101,9 +102,10 @@ class ProductTemplate(models.Model):
 
 
                 if 'x_studio_memoria_ram' in vals.keys() and vals['x_studio_memoria_ram']:
-                    name += ' / ' + vals['x_studio_memoria_ram']
+                    x_studio_memoria_ram = self.env['x_memoria.ram'].browse(vals['x_studio_memoria_ram']).name
+                    name += ' / ' + x_studio_memoria_ram
                 elif self.x_studio_memoria_ram:
-                    name += ' / ' + self.x_studio_memoria_ram
+                    name += ' / ' + self.x_studio_memoria_ram.name
 
 
                 vals['name'] = name
