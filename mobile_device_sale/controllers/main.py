@@ -603,7 +603,7 @@ class WebsiteSale(WebsiteSale):
 
     def get_quant_colors(self, product_id, grade):
         company_id = request.env.user.company_id
-        warehouse_id = request.env['stock.warehouse'].sudo().search([('company_id', '=', company_id.id)])
+        warehouse_id = request.env['stock.warehouse'].sudo().search([('company_id', '=', company_id.id)],limit=1)
         stock_location = warehouse_id.lot_stock_id
         all_product_quants = request.env['stock.quant'].sudo()._gather(product_id, stock_location)
         lot_filter = 'q.lot_id.x_studio_revision_grado.id == %s' % grade
@@ -613,7 +613,7 @@ class WebsiteSale(WebsiteSale):
 
     def get_product_quants(self, product_id, **kwargs):
         company_id = request.env.user.company_id
-        warehouse_id = request.env['stock.warehouse'].sudo().search([('company_id', '=', company_id.id)])
+        warehouse_id = request.env['stock.warehouse'].sudo().search([('company_id', '=', company_id.id)],limit=1)
         stock_location = warehouse_id.lot_stock_id
         _logger.info("PRODUCT_ID: %s, LOCATION: %s" % (product_id, stock_location))
         all_product_quants = request.env['stock.quant'].sudo()._gather(product_id, stock_location)
@@ -752,7 +752,7 @@ class WebsiteSale(WebsiteSale):
 
         # get quants to filter available specs
         company_id = request.env.user.company_id
-        warehouse_id = request.env['stock.warehouse'].sudo().search([('company_id', '=', company_id.id)])
+        warehouse_id = request.env['stock.warehouse'].sudo().search([('company_id', '=', company_id.id)],limit=1)
         stock_location = warehouse_id.lot_stock_id
         all_product_quants = request.env['stock.quant'].sudo()._gather(product.product_variant_id, stock_location)
         all_product_quants = all_product_quants.filtered(lambda q: q.reserved_quantity == 0 and q.quantity > 0)

@@ -13,7 +13,7 @@ class ProductTemplate(models.Model):
 
     def _get_product_stock(self):
         company_id = self.env.user.company_id
-        warehouse_id = self.env['stock.warehouse'].sudo().search([('company_id', '=', company_id.id)])
+        warehouse_id = self.env['stock.warehouse'].sudo().search([('company_id', '=', company_id.id)],limit = 1)
         stock_location = warehouse_id.lot_stock_id
 
         for template in self:
