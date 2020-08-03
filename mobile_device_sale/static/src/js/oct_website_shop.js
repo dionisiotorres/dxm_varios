@@ -202,8 +202,8 @@ odoo.define('oct_website_sale.sale', function (require) {
                         });
                         dialog.open();
 
-                }
-            }); // END then function
+                    }
+                }); // END then function
 
 
         }  // END if

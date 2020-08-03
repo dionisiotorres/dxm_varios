@@ -13,13 +13,18 @@ class ResConfigSettings(models.TransientModel):
                                        string='Website For Sell',
                                        help='Website for sell mobile devices')
 
+    mobile_stock_location = fields.Many2one(comodel_name='stock.location',
+                                            string='Default Sale Location',
+                                            help='Default website location for sale')
+
     @api.model
     def get_values(self):
         res = super(ResConfigSettings, self).get_values()
         get_param = self.env['ir.config_parameter'].sudo().get_param
         res.update(
             delivery_op_type=int(get_param('mobile_device_sale.delivery_op_type')),
-            website_for_sell=int(get_param('mobile_device_sale.website_for_sell'))
+            website_for_sell=int(get_param('mobile_device_sale.website_for_sell')),
+            mobile_stock_location=int(get_param('mobile_device_sale.mobile_stock_location'))
         )
         return res
 
@@ -29,6 +34,8 @@ class ResConfigSettings(models.TransientModel):
 
         delivery_op_type = self.delivery_op_type and self.delivery_op_type.id or False
         website_for_sell = self.website_for_sell and self.website_for_sell.id or False
+        mobile_stock_location = self.mobile_stock_location and self.mobile_stock_location.id or False
 
         set_param('mobile_device_sale.delivery_op_type', delivery_op_type)
         set_param('mobile_device_sale.website_for_sell', website_for_sell)
+        set_param('mobile_device_sale.mobile_stock_location', mobile_stock_location)

@@ -9,6 +9,7 @@
     <template id="oct_assets_frontend" name="oct sale assets" inherit_id="web.assets_frontend">
         <xpath expr="." position="inside">
             <script type="text/javascript" src="/mobile_device_sale/static/src/js/oct_website_shop.js"/>
+            <script type="text/javascript" src="/mobile_device_sale/static/src/js/variant_mixing_inherited.js"/>
             <link rel="stylesheet" href="/mobile_device_sale/static/src/css/oct_website_shop.css"/>
         </xpath>
     </template>
@@ -653,6 +654,9 @@
                                             </a>
                                         </div>
                                         <input type="text" class="js_quantity form-control quantity"
+                                               t-attf-max="#{line.product_id.qty_available - line.product_id.cart_qty}"
+                                               t-attf-data-max="#{line.product_id.qty_available}"
+                                               min="1"
                                                t-att-data-line-id="line.id" t-att-data-product-id="line.product_id.id"
                                                t-att-value="int(line.product_uom_qty) == line.product_uom_qty and int(line.product_uom_qty) or line.product_uom_qty"/>
                                         <div class="input-group-append">

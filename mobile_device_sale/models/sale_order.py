@@ -97,6 +97,8 @@ class SaleOrder(models.Model):
     def _cart_update(self, product_id=None, line_id=None, add_qty=0, set_qty=0, **kwargs):
         """ Add or set product quantity, add_qty can be negative """
         _logger.info("CART UPDATE KWARG: %r", kwargs)
+        _logger.info("CART UPDATE ADD QTY: %r", add_qty)
+        _logger.info("CART UPDATE SET QTY: %r", set_qty)
         self.ensure_one()
         product_context = dict(self.env.context)
         _logger.info("PRODUCT CONTEXT AT FIRST: %r", product_context)

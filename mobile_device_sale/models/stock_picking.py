@@ -12,9 +12,9 @@ class StockPicking(models.Model):
     def get_similar_barcode(self):
         picking = self
         lots = []
-        company_id = self.env.user.company_id
-        warehouse_id = self.env['stock.warehouse'].sudo().search([('company_id', '=', company_id.id)])
-        stock_location = warehouse_id.lot_stock_id
+        default_location_id = self.env['ir.config_parameter'].sudo().get_param(
+            'mobile_device_sale.mobile_stock_location')
+        stock_location = self.env['stock.location'].browse(int(default_location_id))
         _logger.info("PICKING: %r", picking)
         for line in picking.move_lines:
             product_quants = self.env['stock.quant'].sudo()._gather(line.product_id, stock_location)
