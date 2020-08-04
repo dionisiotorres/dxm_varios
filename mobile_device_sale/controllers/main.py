@@ -752,8 +752,9 @@ class WebsiteSale(WebsiteSale):
 
         # get quants to filter available specs
         company_id = request.env.user.company_id
-        warehouse_id = request.env['stock.warehouse'].sudo().search([('company_id', '=', company_id.id)])
-        stock_location = warehouse_id.lot_stock_id
+        default_location_id = request.env['ir.config_parameter'].sudo().get_param(
+            'mobile_device_sale.mobile_stock_location')
+        stock_location = default_location_id
         all_product_quants = request.env['stock.quant'].sudo()._gather(product.product_variant_id, stock_location)
         all_product_quants = all_product_quants.filtered(lambda q: q.reserved_quantity == 0 and q.quantity > 0)
         product_lots = all_product_quants.mapped('lot_id')
