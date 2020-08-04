@@ -754,7 +754,7 @@ class WebsiteSale(WebsiteSale):
         company_id = request.env.user.company_id
         default_location_id = request.env['ir.config_parameter'].sudo().get_param(
             'mobile_device_sale.mobile_stock_location')
-        stock_location = default_location_id
+        stock_location = self.env['stock.location'].browse(int(default_location_id))
         all_product_quants = request.env['stock.quant'].sudo()._gather(product.product_variant_id, stock_location)
         all_product_quants = all_product_quants.filtered(lambda q: q.reserved_quantity == 0 and q.quantity > 0)
         product_lots = all_product_quants.mapped('lot_id')
